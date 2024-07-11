@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgb(188, 188, 221);
+    border-radius: 9px;
+    box-shadow: 1 1 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid rgb(202, 53, 53);
+    border-radius: 4px;
+    margin-right: 10px;
+    flex: 1;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #13be3b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    padding: 10px;
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.todo-item.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-item input[type="checkbox"] {
+    margin-right: 10px;
+}

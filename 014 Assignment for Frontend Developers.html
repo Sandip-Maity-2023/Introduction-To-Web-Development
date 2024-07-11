@@ -1,0 +1,30 @@
+<!--Requirements:
+
+1)Use React components to represent to-do items and the overall list.
+2)Display all to-do items retrieved from a (simulated) backend API (using 
+sample data or hardcoded values for this beginner assignment).
+3)Allow users to add new to-do items with an input field and a button.
+4)Implement basic styling using CSS for a visually appealing interface.
+5)Optionally, allow users to mark items as completed with a 
+checkbox or a button-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a simple to-do list application(frontend only) using React.js</title>
+    <link rel="stylesheet" href="014 CSS file.css">
+</head>
+<body>
+    <div class="app">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="new-todo" placeholder="Add a new task">
+            <button id="add-todo">Add</button>
+        </div>
+        <ul id="todo-list" class="todo-list"></ul>
+    </div>   
+</body>
+<script src="014 JavaScript file.js"></script>
+</html>
