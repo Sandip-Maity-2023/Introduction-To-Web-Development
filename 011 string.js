@@ -28,5 +28,35 @@
  console.log("Apna\tcollege");
  console.log(str.length);
 
- 3.22
- 
+ //let str="Apna College";
+str=str.toUpperCase();
+console.log(str);
+
+ str=str.toLowerCase();
+ console.log(str);
+
+ let str1 ="    Apna College JS  ";
+console.log(str1.trim());
+
+//let str2="a b c d e f g hijklmnopqrstuvwxyz";
+  let str2="012345678";
+//console.log(str.slice(start,end?)); //return the part of the string
+console.log(str2.slice(3,5));
+console.log(str2.slice(4));
+
+str1.concat(str2);
+let res=str1.concat(str2);  // or  let res ="hello" + str1 + str2;
+console.log(res);
+
+let str3="hellololo";
+console.log(str3.replace("h"));
+console.log(str3.replace("h","y"));
+
+console.log(str3.replace("lo","p"));
+console.log(str3.replaceAll("lo","p"));
+
+let str4="ILoveJs";
+console.log(str4.charAt(0));
+console.log(str4[0]);
+str4=str4.replace("I","S");
+console.log(str4);
