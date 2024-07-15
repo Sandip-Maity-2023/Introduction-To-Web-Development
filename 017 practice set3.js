@@ -93,7 +93,38 @@ const output1=arr3.reduce((prev,curr)=>{
 console.log(output); //10
 console.log(output1);
 
-5.32
+/*
+we are given array of students.Filter out of the marks of students that scored 90+
+ QS. Take a number n as input from the UserActivation.create an array of numbers from 1 to n.
+ use the reduce method to calculate sum of all numbers in the array.
+ use the reduce method to calculate product of all numbers in the array.
+*/
+let marks=[97,64,32,49,99,96,86];
+let toppers =marks.filter((val)=>{
+    return val>90;
+})
+console.log(toppers);
+
+let n=prompt("enter a number:");
+let arr4=[];
+for(let i=1;i<=n;i++){
+    arr4[i-1]=i;
+}
+console.log(arr4);
+
+
+
+let sum=arr4.reduce((res,curr)=>{
+    return res+curr;
+});
+console.log(sum);
+
+
+
+let factorial=arr4.reduce((res,curr)=>{
+    return res*curr;
+});
+console.log("factorial=",factorial);
 
 
 
