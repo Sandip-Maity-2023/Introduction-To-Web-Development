@@ -22,24 +22,28 @@ div.style.fontSize="26px";
 div.innerText="Hello!";
  */
 
-let newBtn=document.createElement("button");
-newBtn.innerText="click me!";
-console.log(newBtn);
 
-//let div=document.querySelector("div");
-//div.append(newBtn);
-//div.prepend(newBtn);
-//div.after(newBtn);
-//div.before(newBtn);
 
-let p=document.querySelector("p");
-p.after(newBtn);
-//p.before(newBtn);
 
-let newHeading=document.createElement("h1");
-newHeading.innerHTML="<i>Hi, I am new!</i>";
 
-document.querySelector("body").prepend(newHeading);
+// let newBtn=document.createElement("button");
+// newBtn.innerText="click me!";
+// console.log(newBtn);
+
+// let div=document.querySelector("div");
+// div.append(newBtn);
+// div.prepend(newBtn);
+// div.after(newBtn);
+// div.before(newBtn);
+
+// let p=document.querySelector("p");
+// p.after(newBtn);
+// p.before(newBtn);
+
+// let newHeading=document.createElement("h1");
+// newHeading.innerHTML="<i>Hi, I am new!</i>";
+
+// document.querySelector("body").prepend(newHeading);
 
 /*
 let para=document.querySelector("p");
@@ -52,6 +56,12 @@ newHeading.remove();
 //        removeChild()
 
 /*
+
+
+
+
+
+
 Qs. Create a new button Element. Give it a text "click me",background color of red & text color of white.
  insert the button as the first element inside the body tag.
 
@@ -63,6 +73,15 @@ Did you notice ,how you overwrite the class name when you add a new element
 solve this problem using classList.
 */
 
+let newBtn=document.createElement("button");
+newBtn.innerText="click me!";
 
+newBtn.style.color="white";
+newBtn.style.background="red";
+
+document.querySelector("body").prepend(newBtn);
+
+//Q2.
+let para=document.querySelector("p");
 
 
