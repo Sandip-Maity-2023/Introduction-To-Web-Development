@@ -55,6 +55,7 @@ console.log("!(6<5)=",!(6<5)); //true
 //Conditional statements
 
 let age=16;
+
 if(age>18){
     console.log("you can vote");
 }
@@ -62,8 +63,10 @@ if(age<18){
     console.log("you can't vote");
 }
 
+
 let mode="dark";
 let color;
+
  if(mode==="dark"){
     color="black";
  }else
@@ -89,6 +92,7 @@ let color;
     console.log("middle");
  }
 
+
  let Mode="dark";
  let Color;
  if(Mode==="dark"){
@@ -101,11 +105,16 @@ let color;
     Color="white";
  }
  console.log(color);
+
+
  //TERNARY OPERATOR
+
  let Age=25;
  let result= Age>=18 ? console.log("adult"): console.log("not adult");
 
  //MDN Docs for theory of html,css,javaScript
+
+
 
  //Qs1. Get user to input a number using prompt("Enter a number:").Check if  the number is a multiple of 5 or not.
  alert("what are you doing ?"); //one time popup
@@ -118,6 +127,7 @@ let color;
     console.log(num,"is not multiple of 5");
   }
   
+
   /* Qs2. write a code which can give grades to students according to their scores:
   80-100,A
   70-89,B 
@@ -129,13 +139,13 @@ let color;
 
   if(score>=90 && score<=100){
     grade="A";
-  }else if(score>=89 && score<=70){
+  }else if(score>=70 && score<=89){
     grade="B";
-  }else if( score>=69 && score>=50){
+  }else if( score>=50 && score<=69){
     grade="C";
-  }else if(score>=59 && score>=40){
+  }else if(score>=40 && score<=59){
     gade="D";
-  }else(score>=49 && score>=0)
+  }else(score>=0 && score<=49)
     grade="F";
   
   console.log("According to your scores,your grade is: ",grade);
