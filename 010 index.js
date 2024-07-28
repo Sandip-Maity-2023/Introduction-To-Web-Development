@@ -40,7 +40,7 @@ console.log(age); */
 }
 const student={
     fullName:"Rahul Kumar",
-    age:20,
+    age:22,
     sgpa:7.60,
     isPass:true,
 };

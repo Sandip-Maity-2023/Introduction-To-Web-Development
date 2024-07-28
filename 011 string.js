@@ -1,34 +1,39 @@
 //Strings
- let str="Apna College";
-// let str2='Apna College';
-// console.log(str);
-// console.log(str2);
+/*
 
-// console.log(str.length);  //length string
-// console.log(str[1]);  //string indices
-//  let specialString='this is a template literal';
-//  console.log(specialString);
+ let str="Apna College";  //with space included no of strings 12
+let str2='Apna College';
+console.log(str);
+console.log(str2);
 
-//  let obj={
-//     item:"pen",
-//     price:10,
-//  };
-//  console.log("the cost of",obj.item,"is",obj.price,"rupees"); //another way is below
-//  console.log('the cost of ${obj.item} is ${obj.price} rupees');
-//  console.log(output);
+console.log(str.length);  //length string 12
+console.log(str[10]);  //string indices --------------------- A p n a   c o l l e g e
+ let specialString='this is a template literal';       //    0 1 2 3 4 5 6 7 8 9 10 11
+ console.log(specialString);
+
+ let obj={
+    item:"pen",
+    price:10,
+ };
+ console.log("the cost of",obj.item,"is",obj.price,"rupees");     //another way is below
+ console.log(`the cost of ${obj.item} is ${obj.price} rupees`);   //comma is under the ESC button
+ console.log("output");
+
+*/
 
  //template literals
+
  let SpecialString ='this is a template string';
- console.log(typeof specialString);
+ console.log(typeof SpecialString);
  
  let SpecialString1="This is a template literal ${1+2+3}";
  console.log(SpecialString1);
 
  console.log("Apna\ncollege"); //t is single character
  console.log("Apna\tcollege");
- console.log(str.length);
+ console.log(SpecialString.length);  //length is 25 included space
 
- //let str="Apna College";
+let str="Apna College";
 str=str.toUpperCase();
 console.log(str);
 
@@ -60,3 +65,6 @@ console.log(str4.charAt(0));
 console.log(str4[0]);
 str4=str4.replace("I","S");
 console.log(str4);
+
+
+
