@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AGRI-MARKET</title>
+  <style>
+    /* Reset and basic styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ddd;
+    }
+
+    /* Sections */
+    section {
+      padding: 40px 20px;
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    /* Products and Farmers */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 300px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .card h3 {
+      margin: 15px 0 10px;
+    }
+
+    .card p {
+      color: #555;
+    }
+
+    /* Dashboard */
+    .dashboard {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .dashboard h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .dashboard form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard form label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .dashboard form input,
+    .dashboard form textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .dashboard form button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .dashboard form button:hover {
+      background-color: #45a049;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      footer {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Agri-Market</h1>
+    <nav>
+      <ul>
+        <li><a href="#" data-section="home">Home</a></li>
+        <li><a href="#" data-section="farmers">Farmers</a></li>
+        <li><a href="#" data-section="products">Products</a></li>
+        <li><a href="#" data-section="dashboard">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="active">
+    <h2>Welcome to Agri-Market</h2>
+    <p>
+      Agri-Market offers farmers a platform to sell their products directly to consumers. By eliminating middlemen, farmers can retain more profit, and consumers can enjoy fresh, clean, and affordable produce.Agri-Market offers farmers a platform to sell their products directly to the consumers. Consumers can log in & see a variety of options.<br><br> They can search by product, or they can search by farmers. They can click on farmers & see their profiles where they'll see the farmers history & their whole list of products. Farmers can set their rates, update their stock, see their analytics, & manage everything through a dashboard. Users can purchase products straight on the app as well. <br><br>This way, the farmers skip the middlemen & keep more of the profit, while users pay less overall as they avoid the inflation tactics of middlemen & are ensured that their food is fresh & clean.
+    </p>
+    <img src="veggies.jpg" alt="LocalHarvest Banner" style="width:100%; margin-top:20px; border-radius:8px;">
+  </section>
+
+  <!-- Farmers Section -->
+  <section id="farmers">
+    <h2>Our Farmers</h2>
+    <div class="cards" id="farmers-list">
+      <!-- Farmer Cards will be injected here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products">
+    <h2>Our Products</h2>
+    <div class="cards" id="products-list">
+      <!-- Product Cards will be injected here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard">
+    <div class="dashboard">
+      <h2>Farmer Dashboard</h2>
+      <form id="dashboard-form">
+        <label for="product-name">Product Name</label>
+        <input type="text" id="product-name" name="product-name" required>
+
+        <label for="price">Price ($)</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" name="stock" required>
+
+        <button type="submit">Add Product</button>
+      </form>
+      <h3>My Products</h3>
+      <ul id="my-products">
+        <!-- Farmer's products will be listed here -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 LocalHarvest. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Sample Data
+    const farmers = [
+      {
+        id: 1,
+        name: 'Sounak Ghosh',
+        history: 'Farming for 20 years, specializing in organic vegetables.',
+        image: 'vooffa38.png'
+      },
+      {
+        id: 2,
+        name: 'Prathama Biswas',
+        history: 'Organic farming for 10 years, focusing on fruits.',
+        image: 'zfpydpt4.png'
+      },
+      {
+        id: 3,
+        name: 'Suman Mondal',
+        history: 'Organic farming for 13 years, focusing on fruits.',
+        image: 'jnbz7aus.png'
+      },
+      {
+        id: 4,
+        name: 'Sandip Maity',
+        history: 'Organic farming for 12 years, focusing on fruits.',
+        image: 'e7w194wl.png'
+      },
+      
+      // Add more farmers as needed
+    ];
+
+    const products = [
+      {
+        id: 1,
+        name: 'Apples',
+        price: 2.5,
+        farmerId: 2,
+        image: 'occckg6q.png'
+      },
+      {
+        id: 2,
+        name: 'Tomatoes',
+        price: 1.5,
+        farmerId: 1,
+        image: '6dpdzbcz.png'
+      },
+      {
+        id: 3,
+        name: 'Vegetables',
+        price: 1.5,
+        farmerId: 3,
+        image: 'R.jpeg'
+      },
+      {
+        id: 4,
+        name: 'Vegetables',
+        price: 1.5,
+        farmerId: 4,
+        image: 'veggies.jpg'
+      },
+      
+      // Add more products as needed
+    ];
+
+    // Navigation
+    const navLinks = document.querySelectorAll('nav ul li a');
+    const sections = document.querySelectorAll('section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('data-section');
+
+        sections.forEach(section => {
+          if (section.id === target) {
+            section.classList.add('active');
+          } else {
+            section.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Populate Farmers
+    const farmersList = document.getElementById('farmers-list');
+
+    farmers.forEach(farmer => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      card.innerHTML = `
+        <img src="${farmer.image}" alt="${farmer.name}">
+        <h3>${farmer.name}</h3>
+        <p>${farmer.history}</p>
+      `;
+
+      farmersList.appendChild(card);
+    });
+
+    // Populate Products
+    const productsList = document.getElementById('products-list');
+
+    products.forEach(product => {
+      const farmer = farmers.find(f => f.id === product.farmerId);
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>Price: $${product.price.toFixed(2)}</p>
+        <p>Farmer: ${farmer ? farmer.name : 'Unknown'}</p>
+      `;
+
+      productsList.appendChild(card);
+    });
+
+    // Dashboard Functionality (Mock)
+    const dashboardForm = document.getElementById('dashboard-form');
+    const myProductsList = document.getElementById('my-products');
+
+    dashboardForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const productName = document.getElementById('product-name').value.trim();
+      const price = parseFloat(document.getElementById('price').value);
+      const stock = parseInt(document.getElementById('stock').value);
+
+      if (productName && price > 0 && stock >= 0) {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${productName} - $${price.toFixed(2)} (Stock: ${stock})`;
+        myProductsList.appendChild(listItem);
+
+        // Reset form
+        dashboardForm.reset();
+        alert('Product added successfully!');
+      } else {
+        alert('Please enter valid product details.');
+      }
+    });
+
+// Function to display products
+function displayProducts() {
+  const productList = document.getElementById('product-list');
+  productList.innerHTML = '';  // Clear the list before re-rendering
+  products.forEach((product, index) => {
+    const productDiv = document.createElement('div');
+    productDiv.classList.add('product');
+    productDiv.innerHTML = `
+      <h3>${product.name}</h3>
+      <p>Price: ${product.price}</p>
+      <p>Farmer: ${product.farmer}</p>
+      <button onclick="deleteProduct(${index})">Delete</button>
+    `;
+    productList.appendChild(productDiv);
+  });
+}
+
+// Function to display farmers
+function displayFarmers() {
+  const farmerList = document.getElementById('farmer-list');
+  farmerList.innerHTML = '';  // Clear the list before re-rendering
+  farmers.forEach(farmer => {
+    const farmerDiv = document.createElement('div');
+    farmerDiv.classList.add('farmer');
+    farmerDiv.innerHTML = `<h3>${farmer.name}</h3><p>${farmer.history}</p>`;
+    farmerList.appendChild(farmerDiv);
+  });
+}
+
+// Function to manage the dashboard
+function manageProducts() {
+  const dashboardSection = document.getElementById('dashboard-section');
+  dashboardSection.innerHTML = `
+    <h3>Manage Products</h3>
+    <ul id="product-list-dashboard">
+      ${products.map((product, index) => `
+        <li>
+          <strong>Product:</strong> ${product.name}, <strong>Price:</strong> ${product.price}, <strong>Farmer:</strong> ${product.farmer}
+          <button onclick="deleteProduct(${index})">Delete</button>
+        </li>`).join('')}
+    </ul>
+    <h4>Add New Product</h4>
+    <input type="text" id="newProductName" placeholder="Product Name">
+    <input type="text" id="newProductPrice" placeholder="Price">
+    <input type="text" id="newProductFarmer" placeholder="Farmer Name">
+    <button onclick="addProduct()">Add Product</button>
+  `;
+}
+
+// Function to add a new product
+function addProduct() {
+  const name = document.getElementById('newProductName').value;
+  const price = document.getElementById('newProductPrice').value;
+  const farmer = document.getElementById('newProductFarmer').value;
+
+  if (name && price && farmer) {
+    products.push({ name, price, farmer });
+    manageProducts();
+    displayProducts();  // Update the product list in the main section as well
+  } else {
+    alert('Please fill in all fields.');
+  }
+}
+
+// Function to delete a product
+function deleteProduct(index) {
+  products.splice(index, 1);
+  manageProducts();
+  displayProducts();  // Update the product list in the main section as well
+}
+
+// Initialize the page by displaying products and farmers
+window.onload = function() {
+  displayProducts();
+  displayFarmers();
+};
+  </script>
+
+</body>
+</html>

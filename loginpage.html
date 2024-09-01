@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri-Market - Login</title>
+    <style>
+        /* Embedded CSS */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF4081, #81D4FA);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header h2 {
+            margin: 0;
+            font-size: 2em;
+            color: #333;
+        }
+
+        .login-header p {
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-size: 1em;
+            color: #777;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #FF4081;
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #FF4081, #81D4FA);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #81D4FA, #FF4081);
+        }
+
+        .error-message {
+            color: #FF4081;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Welcome to Agri-Market</h2>
+            <p>Your gateway to fresh, locally sourced products</p>
+        </div>
+        <form id="loginForm" onsubmit="return validateLogin()">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p id="errorMessage" class="error-message"></p>
+        </form>
+    </div>
+
+    <script>
+        // Embedded JavaScript
+
+        // Dummy credentials for demonstration purposes
+        const validUsername = 'farmer123';
+        const validPassword = 'password123';
+
+        // Function to validate the login
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (username === validUsername && password === validPassword) {
+                // If credentials are correct, redirect to the dashboard
+                window.location.href = 'agri-market.html';
+            } else {
+                // If credentials are incorrect, show an error message
+                errorMessage.textContent = 'Invalid username or password. Please try again.';
+            }
+
+            // Prevent form submission (as this is just a demonstration)
+            return false;
+        }
+    </script>
+</body>
+</html>
