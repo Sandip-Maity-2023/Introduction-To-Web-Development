@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(100, 211, 100, 0.829);
+}
+
+header {
+    background-color: black;
+    color: rgb(83, 227, 83);
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color:rgb(17, 59, 149);
+    text-decoration: rgb(13, 255, 0);
+}
+
+section {
+    padding: 2rem;
+}
+
+.feature {
+    background-color: yellow;
+    border: 1px solid #ccc;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 1;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 0.5rem 0 0.2rem;
+}
+
+form input, form textarea {
+    padding: 0.9rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 0.5rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#foodListings, #realTimeUpdates, #searchResults {
+    display: flex;
+    flex-direction: column;
+}
+
+.food-item {
+    background-color: #e7ffe7;
+    border: 1px solid #b2ffb2;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+}
+
+.search-result {
+    background-color: #e0f7fa;
+    border: 1px solid #80deea;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+}
+.rights{
+    background-color: #333;
+}
