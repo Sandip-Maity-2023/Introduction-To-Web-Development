@@ -38,6 +38,6 @@ export default App
 import React from "react";
 
 function App(){
-  return <div className="text-xl font-semibold bg-red-700 cour">hello dev</div>
+  return <div className="text-xl font-semibold bg-red-700 cour">hello dev</div>   //className="text-3xl font-bold underline
 }
 export default App;
