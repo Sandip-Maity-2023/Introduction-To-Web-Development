@@ -51,19 +51,16 @@
             border-radius: 5px;
         }
 
-        .section-title {
-            margin-top: 2rem;
-            color: #ff6f61;
+        .text-below-images {
+            margin: 30px auto;
+            text-align: center;
+            font-size: 1.5rem;
             font-weight: bold;
+            color: #ff6f61;
         }
-
-        .story-card {
-            border: 1px solid #f5c6cb;
-            padding: 1.5rem;
-            border-radius: 10px;
-            background-color: #ffe9e6;
-        }
-
+.nav-link{
+   bg-color:#ff6f61;
+}
         footer {
             background-color: #ff6f61;
             color: white;
@@ -88,13 +85,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="navigateTo('information.html')">Information</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('a4.html')">Information</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="navigateTo('stories.html')">Beautiful Stories</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('all.html')">Cancer Detection by image</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#group-members">Group Members</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('detect.html')">Cancer Detection by information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="navigateTo('donation.html')">Donation</a>
                     </li>
                 </ul>
             </div>
@@ -113,15 +113,16 @@
             </div>
         </div>
     </section>
-    <div>
-        <p>
-            hello 
-        </p>
-    </div>
 
+    <!-- Text below images -->
+    <div class="text-below-images">
+        Empowering Early Detection: Your Journey to Health Starts Here.Feel free to use or modify this as per your needs! If you have any other requirements or need further assistance, let me know!
+    </div>
+    
     <!-- Footer -->
     <footer>
         <p>Made with ❤️ to spread awareness and hope. &copy; 2024</p>
+        
     </footer>
 
     <!-- Bootstrap JavaScript -->

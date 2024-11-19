@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Detector</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="project_cancer.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .upload-label {
+            display: block;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-label:hover {
+            background-color: #0056b3;
+        }
+
+        #imageUpload {
+            display: none;
+        }
+
+        .btn-lg {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .image-section {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .img-preview {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+        }
+
+        footer {
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #009999;
+        }
+
+        footer a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="nav-link text-white" href="a5.html">Back to Home</a>
+            <span class="navbar-brand">Breast Cancer Detector</span>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Breast Cancer Detector</h2>
+        <form id="upload-file" method="post" enctype="multipart/form-data" class="text-center mt-4">
+            <label for="imageUpload" class="upload-label">Upload the Histopathology Film</label>
+            <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+        </form>
+
+        <div class="image-section">
+            <div class="img-preview">
+                <div id="imagePreview">
+                    <img src="#" alt="Uploaded Image" style="max-width: 100%; max-height: 300px;">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-lg" id="btn-predict">Predict!</button>
+        </div>
+
+        <div class="loader">
+            <p>Loading...</p>
+        </div>
+
+        <h3 id="result" class="text-center mt-3">
+            <span></span>
+        </h3>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <p class="display-4 text-center" id="about">About</p>
+                <hr>
+                <p class="lead text-center">
+                    This is a Breast Cancer Detector Web App.<br>Our model is based on genetic programming and
+                    machine learning algorithms aimed at building a system that accurately distinguishes between benign
+                    and malignant breast tumors.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="fixed-bottom navbar-light bg-dark text-white text-center">
+        <p>Thanks for using our web app!</p>
+        <p>Code with ❤  </p>
+        
+    </footer>
+
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function () {
+            const preview = document.getElementById('imagePreview');
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image" style="max-width: 100%; max-height: 300px;">`;
+                }
+                reader.readAsDataURL(file);
+                document.querySelector('.image-section').style.display = 'block';
+            }
+        });
+
+        document.getElementById('btn-predict').addEventListener('click', function () {
+            const result = document.getElementById('result');
+            result.innerHTML = '<span>Predicting...</span>';
+            // Simulate an API call
+            setTimeout(() => {
+                result.innerHTML = '<span>Result: Benign</span>'; // Example result
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

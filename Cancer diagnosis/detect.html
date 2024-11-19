@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Risk Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6f61;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #ff6f61;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #e55a4f;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .low-risk {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .moderate-risk {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .high-risk {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .malignant {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .benign {
+            background-color: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+
+<body>
+    <div><a class="nav-link" href="a5.html">Back to Home</a></div>
+    <div class="container">
+        <h1>Breast Cancer Risk Assessment</h1>
+        <form id="riskForm">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" placeholder="Enter your age" required>
+            </div>
+            <div class="form-group">
+                <label for="tumorSize">Tumor Size (in mm):</label>
+                <input type="number" id="tumorSize" placeholder="Enter tumor size" required>
+            </div>
+            <div class="form-group">
+                <label for="lymphNode">Lymph Node Involvement:</label>
+                <select id="lymphNode" required>
+                    <option value="">Select an option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="hormoneReceptor">Hormone Receptor Status:</label>
+                <select id="hormoneReceptor" required>
+                    <option value="">Select an option</option>
+                    <option value="positive">Positive</option>
+                    <option value="negative">Negative</option>
+                </select>
+            </div>
+            <button type="button" onclick="calculateRisk()">Calculate Risk & Check Tumor Type</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function calculateRisk() {
+            // Collect input values
+            const age = parseInt(document.getElementById('age').value, 10);
+            const tumorSize = parseInt(document.getElementById('tumorSize').value, 10);
+            const lymphNode = document.getElementById('lymphNode').value;
+            const hormoneReceptor = document.getElementById('hormoneReceptor').value;
+
+            // Validate input
+            if (isNaN(age) || isNaN(tumorSize) || !lymphNode || !hormoneReceptor) {
+                alert("Please fill out all fields correctly.");
+                return;
+            }
+
+            // Initialize risk score
+            let riskScore = 0;
+
+            // Age-based points
+            if (age < 40) {
+                riskScore += 3;
+            } else if (age <= 60) {
+                riskScore += 2;
+            } else {
+                riskScore += 1;
+            }
+
+            // Tumor size points
+            if (tumorSize < 20) {
+                riskScore += 1;
+            } else if (tumorSize <= 50) {
+                riskScore += 2;
+            } else {
+                riskScore += 3;
+            }
+
+            // Lymph node points
+            if (lymphNode === "yes") {
+                riskScore += 2;
+            }
+
+            // Hormone receptor points
+            if (hormoneReceptor === "negative") {
+                riskScore += 1;
+            }
+
+            // Determine risk level and tumor type
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = "result"; // Reset classes
+
+            let tumorType;
+            if (tumorSize > 50 || lymphNode === "yes") {
+                tumorType = "Malignant";
+                resultDiv.classList.add("malignant");
+            } else {
+                tumorType = "Benign";
+                resultDiv.classList.add("benign");
+            }
+
+            if (riskScore <= 3) {
+                resultDiv.textContent = `Low Risk: You have a low risk of cancer. Tumor Type: ${tumorType}. Please consult a doctor for confirmation.`;
+            } else if (riskScore <= 6) {
+                resultDiv.textContent = `Moderate Risk: You have a moderate risk of cancer. Tumor Type: ${tumorType}. Visit a specialist for evaluation.`;
+            } else {
+                resultDiv.textContent = `High Risk: You have a high risk of cancer. Tumor Type: ${tumorType}. Immediate consultation with a doctor is recommended.`;
+            }
+        }
+    </script>
+</body>
+
+</html>

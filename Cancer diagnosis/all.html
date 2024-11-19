@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Detector</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .upload-label {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #39D2B4;
+            color: #fff;
+            font-size: 1em;
+            transition: all .4s;
+            cursor: pointer;
+        }
+
+        .upload-label:hover {
+            background: #34495E;
+            color: #39D2B4;
+        }
+
+        .btn-lg {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .image-section {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .img-preview {
+            width: 256px;
+            height: 256px;
+            position: relative;
+            border: 5px solid #F8F8F8;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+            margin-top: 1em;
+            margin-bottom: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-preview img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .loader {
+            display: none;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        footer {
+            padding: 10px 0;
+            font-size: 14px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #39D2B4;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="nav-link text-white" href="a5.html">Back to Home</a>
+            <span class="navbar-brand">Breast Cancer Detector</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h2 class="text-center">Breast Cancer Detector</h2>
+        <form id="upload-file" method="post" enctype="multipart/form-data" class="text-center mt-4">
+            <label for="imageUpload" class="upload-label">Upload the Histopathology Film</label>
+            <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+        </form>
+
+        <div class="image-section">
+            <div class="img-preview" id="imagePreview"></div>
+            <button type="button" class="btn btn-primary btn-lg" id="btn-predict">Predict!</button>
+        </div>
+
+        <div class="loader"></div>
+
+        <h3 id="result" class="text-center mt-3">
+            <span></span>
+        </h3>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <p class="display-4 text-center" id="about">About</p>
+                <hr>
+                <p class="lead text-center">
+                    This is a Breast Cancer Detector Web App.<br>Our model is based on genetic programming and
+                    machine learning algorithms aimed at building a system that accurately distinguishes between benign
+                    and malignant breast tumors.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Thanks for using our web app!</p>
+        <p>Code with ❤</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Upload Preview
+        document.getElementById('imageUpload').addEventListener('change', function () {
+            const preview = document.getElementById('imagePreview');
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image">`;
+                };
+                reader.readAsDataURL(file);
+                document.querySelector('.image-section').style.display = 'block';
+            }
+        });
+
+        // Predict Button
+        document.getElementById('btn-predict').addEventListener('click', function () {
+            const result = document.getElementById('result');
+            result.innerHTML = '<span>Predicting...</span>';
+            document.querySelector('.loader').style.display = 'block';
+
+            // Simulate a prediction (mock API call)
+            setTimeout(() => {
+                document.querySelector('.loader').style.display = 'none';
+                result.innerHTML = '<span>Result: Benign</span>'; // Example result
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

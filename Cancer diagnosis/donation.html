@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Now</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6f61;
+        }
+
+        p {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e55a4f;
+        }
+
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .bank-details {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #ff6f61;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a class="nav-link" href="a5.html">Back to Home</a><h1>Donate Now</h1>
+        <p>Your contribution makes a difference. Choose a method to donate.</p>
+        
+
+        <!-- Donation via Phone Number -->
+        <div class="form-group">
+            <label for="phone">Donate via Phone Number:</label>
+            <input type="tel" id="phone" placeholder="9002838296">
+        </div>
+
+        <!-- Donation via UPI -->
+        <div class="form-group">
+            <label for="upi">Donate via UPI ID:</label>
+            <input type="text" id="upi" placeholder="9002838296@axl">
+        </div>
+
+        <!-- Donation via QR Code -->
+        <div class="qr-code">
+            <h3>Scan QR Code to Donate:</h3>
+            <img src="WhatsApp Image 2024-11-19 at 14.27.31_7a3f77c9.jpg" alt="QR Code">
+        </div>
+
+        <!-- Donation via Bank Account -->
+        <div class="form-group">
+            <h3>Donate via Bank Transfer:</h3>
+            <div class="bank-details">
+                <p><strong>Account Number:</strong> 1234567890</p>
+                <p><strong>IFSC Code:</strong> ABCD0123456</p>
+                <p><strong>Bank Name:</strong> State Bank Of India</p>
+                <p><strong>Account Holder:</strong> Donation Fund</p>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button onclick="submitDonation()">Donation Complete</button>
+    </div>
+
+    <footer>
+        <p>Thank you for your generosity! ❤️</p>
+    </footer>
+
+    <script>
+        function submitDonation() {
+            alert("Thank you for your donation! Your contribution is greatly appreciated.");
+        }
+    </script>
+</body>
+
+</html>
