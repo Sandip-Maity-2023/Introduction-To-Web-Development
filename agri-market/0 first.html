@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri-Market - Sign Up/Login</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FF4081, #81D4FA);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 2em;
+            color: #333;
+        }
+
+        p {
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-size: 1em;
+            color: #777;
+        }
+
+        .role-selection button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        #farmerBtn {
+            background-color: #FF4081;
+            color: white;
+        }
+
+        #consumerBtn {
+            background-color: #81D4FA;
+            color: white;
+        }
+
+        .role-selection button:hover {
+            background-color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #FF4081;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, #FF4081, #81D4FA);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 7px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #81D4FA, #FF4081);
+        }
+
+        .error-message {
+            color: #FF4081;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        button:hover {
+            animation: bounce 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Agri-Market</h2>
+            <p>Select your role:</p>
+            <div class="role-selection">
+                <button id="farmerBtn">Farmer</button>
+                <button id="consumerBtn">Consumer</button>
+            </div>
+            <form id="signUpForm">
+                <div class="input-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="input-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Sign Up / Login</button>
+                <p id="errorMessage" class="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const signUpForm = document.getElementById('signUpForm');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Handle role selection
+            document.getElementById('farmerBtn').addEventListener('click', () => {
+                signUpForm.setAttribute('data-role', 'farmer');
+            });
+
+            document.getElementById('consumerBtn').addEventListener('click', () => {
+                signUpForm.setAttribute('data-role', 'consumer');
+            });
+
+            // Handle form submission
+            signUpForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const role = signUpForm.getAttribute('data-role');
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
+
+                // Mock login validation and redirection
+                if (role === 'farmer') {
+                    window.location.href = 'ex2.html';
+                } else if (role === 'consumer') {
+                    window.location.href = 'ex3.html';
+                } else {
+                    errorMessage.textContent = 'Please select a role to continue.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

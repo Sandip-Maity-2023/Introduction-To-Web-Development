@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard</title>
+    <link rel="stylesheet" href="ex3.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: orange;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            background-color: yellow;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        /* Farmer Image */
+        .farmer-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 20px auto;
+            border: 3px solid #27ae60;
+        }
+
+        /* Dashboard Options */
+        .dashboard-options {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #2ecc71;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                width: 80%;
+                padding: 15px;
+            }
+        }
+
+        /* Add any more custom CSS you need */
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>AGRI-MARKET</h1>
+        <h2>Farmer Dashboard</h2>
+        <p>Welcome, USER</p>
+        <!-- Farmer Image -->
+        <img src="z.jpg" alt="Farmer Photo" class="farmer-image">
+        <div class="dashboard-options">
+            <button>Orders</button>
+            <button>Experience</button>
+            <button>Rating</button>
+            <button>Delivered Quantity</button>
+            <button>Add New Product</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agri-Market</title>
+  <link rel="stylesheet" href="02 AGRI-MARKET.css">
+
+  
+  
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Agri-Market</h1>
+    <nav>
+      <ul>
+        <li><a href="#" data-section="home">Home</a></li>
+        <li><a href="#" data-section="farmers">Farmers</a></li>
+        <li><a href="#" data-section="products">Products</a></li>
+        <li><a href="#" data-section="dashboard">Farmer Dashboard</a></li>
+        <li><a href="#" data-section="consumer-dashboard">Consumer Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="active">
+    <h2>Welcome to Agri-Market</h2>
+    <p>
+      Agri-Market offers farmers a platform to sell their products directly to consumers. By eliminating middlemen, farmers can retain more profit, and consumers can enjoy fresh, clean, and affordable produce.Agri-Market offers farmers a platform to sell their products directly to the consumers. Consumers can log in & see a variety of options.<br><br> They can search by product, or they can search by farmers. They can click on farmers & see their profiles where they'll see the farmers history & their whole list of products. Farmers can set their rates, update their stock, see their analytics, & manage everything through a dashboard. Users can purchase products straight on the app as well. <br><br>This way, the farmers skip the middlemen & keep more of the profit, while users pay less overall as they avoid the inflation tactics of middlemen & are ensured that their food is fresh & clean.
+    </p>
+    <img src="veggies.jpg" alt="LocalHarvest Banner" class="banner-img">
+  </section>
+
+  <!-- Farmers Section -->
+  <section id="farmers">
+    <h2>Our Farmers</h2>
+    <div class="cards" id="farmers-list">
+      <!-- Farmer Cards will be injected here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products">
+    <h2>Our Products</h2>
+    <div class="cards" id="products-list">
+      <!-- Product Cards will be injected here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Farmer Dashboard Section -->
+  <section id="dashboard">
+    <div class="dashboard">
+      <h2>Farmer 1 Dashboard</h2>
+      <form id="dashboard-form"><div class="profile-section">
+        <img src="zfpydpt4.png" alt="Farmer Photo" class="profile-img"></div>
+        <label for="product-name">Product Name</label>
+        <input type="text" id="product-name" name="product-name" required>
+
+        <label for="price">Price ($)</label>
+        <input type="number" id="price" name="price" required>
+
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" name="stock" required>
+
+        <button type="submit">Add Product</button>
+      </form>
+      <h3>My Products</h3>
+      <ul id="my-products">
+        <!-- Farmer's products will be listed here -->
+      </ul>
+    </div>
+  </section>
+
+ <!-- Consumer Dashboard Section -->
+<section id="consumer-dashboard">
+  <div class="dashboard">
+      <h2>Consumer Dashboard</h2>
+      <div class="profile-section">
+          <img src="images.jpeg" alt="Consumer Photo" class="profile-img">
+          <div>
+              <h3>Your Details</h3>
+              <p><strong>Name:</strong> Sounak Ghosh</p>
+              <p><strong>Email:</strong> sounak@example.com</p>
+              <p><strong>Phone:</strong> 123-456-7890</p>
+          </div>
+      </div>
+      <div class="cart-section">
+          <h3>Cart List <img src="cart.jpeg" alt="Cart Icon" class="icon"></h3>
+          <ul id="cart-list">
+              <!-- Items in the cart will be listed here -->
+          </ul>
+      </div>
+      <div class="wishlist-section">
+          <h3>Wishlist <img src="wi.png" alt="Wishlist Icon" class="icon"></h3>
+          <ul id="wishlist">
+              <!-- Wishlist items will be listed here -->
+          </ul>
+      </div><br><br>
+      <div class="order-section">
+          <h3>Total Order Amount</h3>
+          <p><strong>Total:</strong> $150.00</p>
+      </div>
+      <div class="products-section">
+          <h3>Available Products <img src="c.jpg" alt="Products Icon" class="icon"></h3>
+          <ul id="available-products">
+              <!-- Available products will be listed here -->
+          </ul>
+      </div>
+  </div>
+</section>
+
+<!-- Farmer Dashboard Section -->
+<section id="dashboard">
+  <div class="dashboard">
+      <h2>Farmer 2 Dashboard</h2>
+      <div class="profile-section">
+          <img src="z.jpg" alt="Farmer Photo" class="profile-img">
+          <form id="dashboard-form">
+              <label for="product-name">Product Name</label>
+              <input type="text" id="product-name" name="product-name" required>
+
+              <label for="price">Price ($)</label>
+              <input type="number" id="price" name="price" required>
+
+              <label for="stock">Stock</label>
+              <input type="number" id="stock" name="stock" required>
+
+              <button type="submit">Add Product</button>
+          </form>
+          <h3>My Products</h3>
+          <ul id="my-products">
+              <!-- Farmer's products will be listed here -->
+          </ul>
+      </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 AgriMarket. All rights reserved.</p>
+  </footer>
+
+  <script src="03 AGRI-MARKET.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri-Market - Login</title>
+    <link rel="stylesheet" href="05 loginpage.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Welcome to Agri-Market</h2>
+            <p>Your gateway to fresh, locally sourced products</p>
+        </div>
+        <form id="loginForm" onsubmit="return validateLogin()">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p id="errorMessage" class="error-message"></p>
+        </form>
+    </div>
+
+    <script src="06 loginpage.js"></script>
+</body>
+</html>
