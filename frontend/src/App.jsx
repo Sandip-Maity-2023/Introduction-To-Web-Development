@@ -36,8 +36,19 @@ function App() {
 export default App
 */
 import React from "react";
+import Navbar from "./components/Navbar";
 
 function App(){
-  return <div className="text-xl font-semibold bg-red-700 cour">hello dev</div>   //className="text-3xl font-bold underline
+  return (
+  <>
+
+  {/* <div className="text-xl font-semibold bg-red-700 cour">hello sandip */}
+  <Navbar/>
+  </> 
+  ); 
 }
 export default App;
+
+
+{/* className="text-3xl font-bold underline 
+*/}

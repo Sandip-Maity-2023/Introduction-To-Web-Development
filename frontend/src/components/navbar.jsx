@@ -1,9 +1,21 @@
 import React from 'react';
 
-const App = () => {
+function Navbar(){
+const navItems=(
+<>
+<li>
+                <a href="#home">Home</a></li>
+                <li>
+                <a href="#home">course</a></li>
+                <li>
+                <a href="#home">Contact</a></li>
+                <li>
+                <a href="#home">About</a></li>
+</>
+);
   return (
     <>
-      <div>
+    <div className=" max-w-screen-2xl container mx-auto md:px-20 px-4">
         <div className="navbar bg-base-100">
           <div className="navbar-start">
             <div className="dropdown">
@@ -27,23 +39,18 @@ const App = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
-                <li><a href="#item1">Item 1</a></li>
-                <li>
-                  <a href="#parent">Parent</a>
-                  <ul className="p-2">
-                    <li><a href="#submenu1">Submenu 1</a></li>
-                    <li><a href="#submenu2">Submenu 2</a></li>
-                  </ul>
-                </li>
-                <li><a href="#item3">Item 3</a></li>
+                {navItems}
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl" href="#daisyUI">daisyUI</a>
+            <a className="text-2xl font-bold cursor-pointer">BOOK STORE</a>
           </div>
+          <div className="navbar-end">
+
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              <li><a href="#item1">Item 1</a></li>
-              <li>
+            <ul className="menu menu-horizontal px-1">{navItems}</ul>
+              
+
+              {/* <li>
                 <details>
                   <summary>Parent</summary>
                   <ul className="p-2">
@@ -52,16 +59,18 @@ const App = () => {
                   </ul>
                 </details>
               </li>
-              <li><a href="#item3">Item 3</a></li>
-            </ul>
+              <li><a href="#item3">Item 3</a></li> */}
+
+
           </div>
           <div className="navbar-end">
-            <a className="btn" href="#button">Button</a>
+            <a className="btn" href="#button">Login</a>
           </div>
         </div>
       </div>
+      </div>
     </>
   );
-};
+}
 
-export default App;
+export default Navbar;
