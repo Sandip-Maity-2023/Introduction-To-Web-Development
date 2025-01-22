@@ -44,7 +44,7 @@ for(let i=1;i<=100;i++){
 //Qs2. create a game where you start with any random game Number.Ask the user to keep guessing the game until the user enters correct Value.
 let gameNum=25;
 let userNum=prompt("Guess the game number: ");
- while(userNum !=gameNum){
+ while(userNum != gameNum){
     prompt("you entered wrong number.Guess again");
  }
  console.log("congratulations,you entered the right number");
