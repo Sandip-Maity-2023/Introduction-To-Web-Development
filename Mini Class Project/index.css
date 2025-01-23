@@ -1,0 +1,9 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: skyblue;
+    margin:0px;
+    padding: 10px;
+}
+header{
+    background-color: chartreuse;
+}
