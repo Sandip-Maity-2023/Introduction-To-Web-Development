@@ -1,9 +1,56 @@
 body{
     font-family: 'Times New Roman', Times, serif;
-    background-color: skyblue;
+    background-color: rgb(232, 236, 237);
     margin:0px;
     padding: 10px;
+    color: rgb(0, 47, 255);
 }
 header{
-    background-color: chartreuse;
+    background-color: rgb(99, 172, 224);
+    color: rgb(103, 242, 131);
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    top:0px;
+    z-index:1000;
 }
+header h1{
+    margin-bottom: 5px;
+}
+
+nav ul{
+    display: flex;
+    flex-wrap:nowrap;
+    justify-content: space-evenly;
+}
+nav ul li{
+    color:cadetblue
+}
+
+section{
+    padding: 40px 20px;
+    display: block;
+}
+footer{
+    background-color: rgb(6, 6, 78);
+    color:aqua;
+    text-align: center;
+    padding: auto;
+    width:100%;
+    bottom: 0;
+}
+
+@media (max-width: 700px){
+    nav ul{
+        display: block;
+        color: rgb(128, 9, 240);
+        background-color: rgb(216, 38, 38);
+    }
+    nav ul li{
+        margin: 5px;
+    }
+    footer{
+        color:blueviolet;
+    } 
+}
+
