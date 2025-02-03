@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "flask": "^0.2.10",
     "react": "^19.0.0"
   }
 }

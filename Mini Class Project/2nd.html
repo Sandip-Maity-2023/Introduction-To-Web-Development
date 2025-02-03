@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Priority Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Disease Priority Score Checker</h2>
+    <input type="text" id="diseaseInput" placeholder="Enter Disease Name"><br>
+
+    <label for="emergency">Is this an Emergency?</label>
+    <select id="emergency">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+    </select><br>
+
+    <button onclick="checkPriority()">Check Priority</button>
+    <p id="result"></p>
+
+    <script src="2nd.js"></script>  <!-- Linking JavaScript File -->
+</body>
+</html>
