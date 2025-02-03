@@ -1,0 +1,38 @@
+body{
+    height:100%;
+    width:100%;
+    font-family:'Roboto',sans-serif;
+}
+.button{
+    width:65px;
+    height:60px;
+    padding:25px;
+    margin:5px 3px;
+    border:3px solid black;
+    border-radius: 9px;
+    cursor:pointer;
+}
+.row input{
+    width: 289px;
+    font-size: 20px;
+    margin:5px 3px;
+    padding:10px 0px;
+    border:3px solid black;
+    border-radius: 9px;
+}
+.button:hover{
+    background-color: #df1414;
+}
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+.flex{
+    display: flex;
+}
+.flex-col{
+    flex-direction: column;
+}
+.items-center{
+    align-items: center;
+}
