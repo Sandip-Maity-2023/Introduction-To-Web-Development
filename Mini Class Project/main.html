@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Triage System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="main2.js"></script>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Priority Triage Using Integrated Health Data</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <button class="button" onclick="navigate()">Go to Next Page</button>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>Welcome to the Future of Healthcare</h2>
+        <p>Streamlining patient triage with integrated health data and automated priority scoring.</p>
+    </section>
+    
+    <section id="triage-form">
+        <h2>Enter Patient Details</h2>
+        <form id="patientForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" required>
+            
+            <label for="symptoms">Symptoms:</label>
+            <textarea id="symptoms" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+        <button id="colabButton">Run in Google Colab</button>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Priority Triage System | Healthcare Innovation</p>
+    </footer>
+    
+    <script>
+        const diseasePriority = {
+            "heart attack": 10,
+            "stroke": 90,
+            "cancer": 80,
+            "severe infection": 70,
+            "diabetes": 50,
+            "asthma": 60,
+            "fracture": 70,
+            "migraine": 30,
+            "flu": 20,
+            "cold": 10,
+            "pneumonia": 70,
+            "tuberculosis": 60,
+            "kidney failure": 90,
+            "liver disease": 70,
+            "appendicitis": 80,
+            "unknown": 40
+        };
+        
+        function getPriorityScore(disease) {
+            return diseasePriority[disease.toLowerCase().trim()] || diseasePriority["unknown"];
+        }
+        
+        document.getElementById("patientForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let symptoms = document.getElementById("symptoms").value;
+            let priorityScore = getPriorityScore(symptoms);
+            
+            if(name === "" || age === "" || symptoms === "") {
+                alert("Please fill in all fields");
+                return;
+            }
+            
+            alert(`Priority Score for "${symptoms}": ${priorityScore}`);
+        });
+        
+        document.getElementById("colabButton").addEventListener("click", function() {
+            window.open("https://colab.research.google.com/drive/1FUdwYW-6SmxIS9lNEJKgeKqvsOGsTNwa", "_blank");
+        });
+    
+         
+
+
+    function navigate() {
+        window.location.href = 'main2.html';
+    }
+    
+    </script>
+</body>
+</html>

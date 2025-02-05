@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rotating Image Gallery</title>
+    <link rel="stylesheet" href="main2.css">
+</head>
+<body>
+    <div class="wrapper">
+        <button id="prev">❮</button>
+        <div class="container">
+            <span style="--i:1"><img src="one.webp" alt="Image 1"></span>
+            <span style="--i:2"><img src="two.jpg" alt="Image 2"></span>
+            <span style="--i:3"><img src="three.jpeg" alt="Image 3"></span>
+            <span style="--i:4"><img src="four.jpg" alt="Image 4"></span>
+            <span style="--i:5"><img src="five.jpg" alt="Image 5"></span>
+        </div>
+        <button id="next">❯</button>
+    </div>
+    <svg style="display: none;">
+        <filter id="wave">
+            <feTurbulence type="fractalNoise" baseFrequency="0.005,0.005" numOctaves="2" result="turbulence" />
+            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" />
+        </filter>
+    </svg>
+    
+    <script src="main2.js"></script>
+</body>
+</html>
