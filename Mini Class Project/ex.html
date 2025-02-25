@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Triage System</title>
+    <link rel="stylesheet" href="ex.css">
+</head>
+<body>
+    <div id="login-page" class="page">
+        <h1>Login</h1>
+        <form id="login-form">
+            <input type="text" id="login-username" placeholder="Username" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" id="signup-link">Sign up</a></p>
+    </div>
+
+    <div id="signup-page" class="page" style="display: none;">
+        <h1>Sign Up</h1>
+        <form id="signup-form">
+            <input type="text" id="signup-username" placeholder="Username" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+    </div>
+
+    <div id="main-page" class="page" style="display: none;">
+        <h1>Priority Triage Using ABHA ID and Integrated Health Data</h1>
+        <p>Category: Healthcare</p>
+        <p>Description: In overcrowded Indian public hospitals, doctors struggle to quickly identify which patients need immediate attention. Many patients wait hours because there’s no efficient way to assess urgency at the start. By using a patient’s ABHA ID, we can pull basic medical details and lab reports - possibly stored in emails or hospital portals - and combine this with a quick symptom check (via voice or text in multiple Indian languages). The goal is to produce a clear “priority score” so hospital staff know who should be seen first. This system ensures the seriously ill aren’t stuck in long queues and allows medical teams to act faster and smarter.</p>
+        <p>Expected Outcome: A multilingual, voice-enabled prototype (mobile/web) that:</p>
+        <ul>
+            <li>Pulls patient data using their ABHA ID and, where possible, retrieves relevant lab results or reports directly from their Gmail or hospital systems.</li>
+            <li>Asks a few brief questions about symptoms in the patient’s preferred language and accepts voice inputs.</li>
+            <li>Instantly generates a priority score and a short summary, which can be displayed to frontline staff for efficient patient triaging.</li>
+        </ul>
+    </div>
+
+    <script src="ex.js"></script>
+</body>
+</html>
