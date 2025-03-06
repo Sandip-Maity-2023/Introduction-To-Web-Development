@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read More Box</title>
+    <style>
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .content-box {
+            display: none;
+            margin-top: 10px;
+            padding: 15px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#"><button class="button" onclick="toggleContent()">Read More</button></a>
+
+    <div id="contentBox" class="content-box">
+        <p>
+           <ul> Eat a balanced diet rich in fruits, vegetables, whole grains, and lean proteins.</ul>
+
+<ul>Stay hydrated by drinking plenty of water throughout the day.</ul>
+
+<ul>Prioritize sleep, aiming for 7–9 hours per night to allow your body to rest and recover.</ul>
+
+<ul>Exercise regularly, even if it's a brisk walk or light yoga, to maintain physical and mental well-being.</ul>
+
+<ul>Practice mindfulness or meditation to reduce stress and boost emotional resilience.</ul>
+        </p>
+    </div>
+
+    <script>
+        function toggleContent() {
+            var content = document.getElementById("contentBox");
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

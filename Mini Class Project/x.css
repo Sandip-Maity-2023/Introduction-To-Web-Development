@@ -410,6 +410,30 @@ header .fa-times{
   color: var(--blue);
   border: .2rem solid var(--blue);
 }
+/* here it is i added the media query at the end of the css file so that it can be visible ok you can see here*/
+#submitButton {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff; /* Blue color */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 2px 10px rgba(0, 123, 255, 0.3);
+}
+
+#submitButton:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarges on hover */
+}
+
+#submitButton:active {
+  background-color: #003f7f; /* Even darker blue when clicked */
+  transform: scale(0.98); /* Slightly reduces size on click */
+}
+
 /* contact section end  */
 
 /* bolg section start  */
