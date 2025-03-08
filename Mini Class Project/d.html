@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Queue Management</title>
+    <link rel="stylesheet" href="d.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hospital Queue Management</h1>
+
+        <!-- Form to admit patients -->
+        <div class="form-section">
+            <h2>Admit Patient</h2>
+            <form id="admit-form">
+                <label for="name">Patient Name:</label>
+                <input type="text" id="name" required placeholder="Enter patient's name">
+
+                <label for="disease">Disease:</label>
+                <input type="text" id="disease" required placeholder="Enter disease">
+
+                <label for="severity">Severity Level:</label>
+                <input type="number" id="severity" required placeholder="Enter severity (lower is more urgent)">
+
+                <button type="submit">Admit Patient</button>
+            </form>
+        </div>
+
+        <!-- Section for treating patients -->
+        <div class="action-section">
+            <h2>Next Patient</h2>
+            <div id="next-patient">No patients in the queue.</div>
+            <button id="treat-patient" disabled>Treat Next Patient</button>
+        </div>
+
+        <!-- Remaining patients section -->
+        <div class="remaining-section">
+            <h2>Remaining Patients</h2>
+            <div id="remaining-patients">There are no remaining patients.</div>
+        </div>
+    </div>
+
+    <script src="d.js"></script>
+</body>
+</html>
