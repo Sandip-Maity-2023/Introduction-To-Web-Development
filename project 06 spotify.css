@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+*{
+    margin:0;
+    padding: 0;
+}
+body{
+    background-color: antiquewhite;
+}
+.brand img{
+height: 50px;
+/* width: 50px; */
+padding: 4px 8px;
+}
+nav{
+    font-family: 'Ubuntu',sans-serif;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+    height: 60px;
+    list-style-type:none;
+      /*CSS property removes the default markers (bullets or numbers) from a list. This is useful when you want a clean, unmarked list, 
+      often styled with custom markers or indentation. */
+background-color: black;
+color: white;
+
+}
+
+nav ul li{
+    padding: 0 13px;
+}
+
+.brand{
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+.bottom{
+    position: sticky;
+    height:10px;
+    background-color: black;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.container{
+min-height: 75vh;
+}
+.icons{
+    margin-top: 34px;
+}

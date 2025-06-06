@@ -1,0 +1,37 @@
+<!-- div#number ENTER
+ cd filename //to into the file
+ cd .. exit from that file
+ npm create vite@latest
+ y
+ select react,java script
+ enter into the file cd vite-project
+ npm i
+ npm run dev
+ -->
+
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> React?</title>
+</head>
+<body>
+    <nav class="bg-blue">
+        <ul class="red">
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+            <li>Service</li>
+        </ul>
+    </nav>
+<div id="counter">0</div>
+<button id="btn">click me</button>
+<script>
+    document.getElementById("btn").addEventListener("click",()=>{
+        let num=parseInt(document.getElementById("counter").innerHTML)
+        document.getElementById("counter").innerHTML=num+1;
+    })
+</script>
+</body>
+</html>
