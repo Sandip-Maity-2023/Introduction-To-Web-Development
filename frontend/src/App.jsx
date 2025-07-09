@@ -35,31 +35,62 @@ function App() {
 
 export default App
 */
-import React from "react";
-import Home from "./home/Home";
-import { Navigate, Route, Routes } from "react-router-dom";
-import Courses from "./courses/Courses";
-import Signup from "./components/Signup";
-import { Toaster } from "react-hot-toast";
-import { useAuth } from "./context/AuthProvider";
+
+
+// import React from "react";
+// import Home from "./home/Home";
+// import { Navigate, Route, Routes } from "react-router-dom";
+// import Courses from "./courses/Courses";
+// import Signup from "./components/Signup";
+// import { Toaster } from "react-hot-toast";
+// import { useAuth } from "./context/AuthProvider";
+
+// function App() {
+//   const [authUser, setAuthUser] = useAuth();
+//   console.log(authUser);
+//   return (
+//     <>
+//       <div className="dark:bg-slate-900 dark:text-white">
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route
+//             path="/course"
+//             element={authUser ? <Courses /> : <Navigate to="/signup" />}
+//           />
+//           <Route path="/signup" element={<Signup />} />
+//         </Routes>
+//         <Toaster />
+//       </div>
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+import './App.css';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import FooterComponent from './components/FooterComponent';
+import HeaderComponent from './components/HeaderComponent';
+import ListEmployeeComponent from './components/ListEmployeeComponent';
+import AddEmployeeComponent from './components/AddEmployeeComponent';
 
 function App() {
-  const [authUser, setAuthUser] = useAuth();
-  console.log(authUser);
   return (
-    <>
-      <div className="dark:bg-slate-900 dark:text-white">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/course"
-            element={authUser ? <Courses /> : <Navigate to="/signup" />}
-          />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-        <Toaster />
-      </div>
-    </>
+    <div>
+      <Router>
+        <HeaderComponent />
+        <div className= "container">
+          <Switch>
+              <Route exact path = "/" component = {ListEmployeeComponent}></Route>
+              <Route path = "/employees" component = {ListEmployeeComponent}></Route>
+              <Route path = "/add-employee" component = {AddEmployeeComponent} ></Route>
+              <Route path = "/edit-employee/:id" component = {AddEmployeeComponent}></Route>
+            </Switch>
+        </div>
+        <FooterComponent />
+        </Router>
+    </div>
   );
 }
 

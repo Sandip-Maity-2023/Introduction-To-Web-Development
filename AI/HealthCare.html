@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthCare</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+     <style>
+    /* google font   */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+ #Trigger {
+      position: fixed;
+      bottom: 200px;
+      right: 40px;
+      background: #86d123;
+      width: 80px;
+      height: 80px;
+      color: #031e3a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+/* root color  */
+:root{
+  --blue:#0188df;
+  --black:#444d53;
+  --wight:#fff;
+}
+
+/* custom css  */
+*{
+  font-family: "Roboto", sans-serif;
+  margin: 0; padding: 0;
+  text-decoration: none;
+  text-transform: capitalize;
+  outline: none;
+  box-sizing: border-box;
+  transition: all linear .2s;
+}
+
+html{
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+/* button  */
+.button{
+  height: 3.5rem;
+  width: 15rem;
+  background: var(--blue);
+  color: var(--wight);
+  font-size: 1.7rem;
+  text-transform: capitalize;
+  border-radius: .5rem;
+  cursor: pointer;
+  margin: 1rem 0;
+  border: .1rem solid var(--blue);
+}
+
+.button:hover{
+  border: .1rem solid var(--blue);
+  background: var(--wight);
+  color: var(--blue);
+  letter-spacing: .2rem;
+}
+
+/* heading  */
+.heading{
+  text-align: center;
+  font-size: 4rem;
+  padding: 1rem;
+  padding-top: 8rem;
+  color: var(--blue);
+  letter-spacing: .1rem;
+}
+/* title  */
+.title{
+  text-align: center;
+  padding: 0rem 1rem;
+  font-size: 2.5rem;
+  color: var(--black);
+  font-weight: 300;
+}
+
+
+
+/* header navbar section start  */
+
+header{
+  width: 96%;
+  background: var(--wight);
+  position:fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
+
+/* logo name  */
+header a{
+  color: var(--black);
+}
+
+header a:hover{
+  color: var(--blue);
+}
+
+header .logo{
+  font-size: 3rem;
+}
+
+header .logo span{
+  color: var(--blue);
+}
+
+/* navbar link  */
+header .navbar ul{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+header .navbar ul li{
+  margin: 0 1rem;
+}
+
+header .navbar ul li a{
+  font-size: 2rem;
+  color: var(--black);
+}
+
+header .navbar ul li a:hover{
+  color: var(--blue);
+}
+
+header .fa-bars{
+  font-size: 3rem;
+  color: var(--blue);
+  cursor: pointer;
+  display: none;
+}
+
+header .fa-times{
+  transform: rotate(180deg);
+}
+
+
+.header-active{
+  top: 0;
+  width: 100%;
+  box-shadow: .1rem .3rem rgba(0,0,0,.3);
+}
+
+
+
+/* header navbar section end  */
+
+/* home section start  */
+
+.home{
+  min-height: 100vh;
+  padding-top: 10rem;
+}
+
+.home .row{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 85%;
+  margin: 0 auto;
+}
+
+/* home images  */
+.home .row .images img{
+  height: 75vh;
+}
+
+/* home heading  */
+.home .content h1{
+  font-size: 4rem;
+  color: var(--black);
+}
+
+.home .content h1 span{
+  color: var(--blue);
+}
+
+.home .content p{
+  font-size: 1.9rem;
+  color: var(--black);
+}
+
+
+/* home section end  */
+
+ .icons-container{
+  display: grid;
+  gap:2rem;
+  grid-template-columns: repeat(auto-fit,minmax(20rem,1fr));
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.icons-container .icons{
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  border-radius: .5rem;
+  text-align: center;
+  padding: 1rem;
+}
+.icons-container .icons i{
+  font-size: 4rem;
+  color: var(--green);
+  padding-bottom: .7rem;
+}
+.icons-container .icons h1{
+  font-size: 4rem;
+  color: var(--black);
+}
+.icons-container .icons p{
+  font-size: 2rem;
+color: var(--var);
+padding: .5rem 0;
+text-shadow: var(--box-shadow);
+}
+
+/* about section start  */
+.about{
+  background-color: #f9f9f9;
+}
+
+.about .box-container{
+  padding: 4rem 0;
+}
+
+.about .box-container .box{
+  width: 75%;
+  margin: 4rem auto;
+  border-radius: .5rem;
+  box-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--wight);
+}
+
+/* about images  */
+.about .box-container .box .images{
+  height: 40rem;
+  width: 50%;
+}
+
+.about .box-container .box .images img{
+  height: 100%;
+  width: 100%;
+}
+
+/* about heading & text */
+.about .box-container .box .content{
+  height: 100%;
+  width: 50%;
+  padding: 2rem;
+}
+
+.about .box-container .box .content h3{
+  font-size: 3rem;
+  color: var(--blue);
+  display: flex;
+  align-items: start;
+}
+
+.about .box-container .box .content p{
+  font-size: 1.5rem;
+  color: var(--black);
+  padding: 1rem 0;
+  text-align: start;
+}
+
+.about .box-container .box:nth-child(even){
+  flex-flow: row-reverse;
+}
+
+
+ /* about section end  */
+
+/* card section start  */
+
+.card .box-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card .box-container .box{
+  width: 30rem;
+  margin: 2rem 1rem;
+  overflow: hidden;
+  border-radius: .5rem;
+  box-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
+}
+
+/* card images  */
+.card .box-container .box img{
+  height: 30rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card .box-container .box .content{
+  padding: 1rem 1.3rem;
+}
+
+.card .box-container .box .content h2{
+  font-size: 2rem ;
+  text-align: center;
+  color: var(--black);
+}
+
+.card .box-container .box .content h2:hover{
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.card .box-container .box .content p{
+  font-size: 1.7rem;
+  text-align: center;
+  color: var(--black);
+}
+
+.card .box-container .box .content .icons{
+  text-align: center;
+}
+
+.card .box-container .box .content .icons a{
+  font-size: 2rem;
+  color: var(--blue);
+  text-align: center;
+  margin: 1rem;
+}
+/* card section end  */
+
+/* review section start  */
+.review .box-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+.review .box-container .box{
+  width: 35rem;
+  text-align: center;
+  padding: 0 2rem;
+  margin: 4rem 1.5rem;
+  box-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
+}
+
+/* images  */
+.review .box-container .box .images{
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: .5rem 0;
+  border-top: .1rem solid #333;
+}
+
+.review .box-container .box .images img{
+  height: 9rem;
+  width: 9rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: .8rem 1rem;
+}
+
+.review .box-container .box i{
+  font-size: 6rem ;
+  margin-top: -3rem;
+  color: var(--blue);
+  opacity: .4;
+}
+
+
+.review .box-container .box p{
+  color: var(--black);
+  font-size: 1.7rem;
+  padding: 2rem 0;
+}
+
+.review .box-container .box .info h3{
+  color: var(--blue);
+  font-size: 2rem;
+}
+.review .box-container .box .info span{
+  color: var(--black);
+  font-size: 2rem;
+}
+/* review section end */
+
+/* contact section start  */
+.contact{
+  background: #eee;
+}
+
+.contact .row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+}
+
+.contact .row .images img{
+  width: 50vw;
+  height: 70vh;
+}
+
+.contact .row  .form-container{
+  width: 50%;
+  padding-right: 6rem;
+}
+
+.contact .row  .form-container input, textarea{
+  height: 4rem;
+  width: 100%;
+  background: var(--wight);
+  border: none;
+  border-radius: 5rem;
+  padding: 0 1rem;
+  margin: 1rem 0;
+  color: var(--blue);
+  font-size: 1.7rem;
+}
+
+.contact .row  .form-container input:focus , textarea:focus{
+  border: .2rem solid var(--blue);
+}
+
+.contact .row  .form-container textarea{
+  height: 20rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  resize: none;
+}
+
+.contact .row  .form-container input[type="submit"]{
+  width: 17rem;
+  background: var(--blue);
+  color: var(--wight);
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.contact .row  .form-container input[type="submit"]:hover{
+  background: var(--wight);
+  color: var(--blue);
+  border: .2rem solid var(--blue);
+}
+/* here it is i added the media query at the end of the css file so that it can be visible ok you can see here*/
+#submitButton {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff; /* Blue color */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 2px 10px rgba(0, 123, 255, 0.3);
+}
+
+#submitButton:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarges on hover */
+}
+
+#submitButton:active {
+  background-color: #003f7f; /* Even darker blue when clicked */
+  transform: scale(0.98); /* Slightly reduces size on click */
+}
+
+/* contact section end  */
+
+/* bolg section start  */
+.blog .box-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.blog .box-container .box{
+  width: 35rem;
+  margin: 2rem 1rem;
+  overflow: hidden;
+  border-radius: .5rem;
+  box-shadow: 0 .3rem .5rem rgba(0,0,0,.3);
+}
+
+/* blog images  */
+.blog .box-container .box img{
+  width: 100%;
+  object-fit: cover;
+}
+
+.blog .box-container .box .content{
+  padding: 0 1.5rem;
+}
+
+.blog .box-container .box .content h2{
+  font-size: 2rem;
+  color: var(--blue);
+}
+
+.blog .box-container .box .content p{
+  font-size: 1.3rem;
+  color: var(--black);
+}
+/* bolg section end  */
+
+/* footer section start  */
+.footer{
+background: var(--black);
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+padding: 2rem 0;
+}
+
+.footer .box{
+width: 30rem;
+margin: 2rem;
+text-align: center;
+}
+
+.footer .box:nth-child(1){
+text-align: left;
+}
+
+/* logo  */
+
+.footer .box .logo{
+padding: 2rem 0;
+font-size: 3rem;
+color: var(--wight);
+}
+
+.footer .box .logo:hover{
+color: var(--blue);
+}
+
+.footer .box .logo span{
+color: var(--blue);
+}
+
+.footer .box p{
+font-size: 1.5rem;
+color: var(--wight);
+}
+
+.footer .box a{
+color: var(--wight);
+font-size: 2rem;
+display: block;
+padding: .2rem 0;
+}
+
+.footer .box a:hover{
+text-decoration: underline;
+}
+
+
+.footer .credit{
+width: 85%;
+padding-top: 1rem;
+font-size: 2rem;
+color: var(--wight);
+text-align: center;
+border-top: .2rem solid var(--wight);
+}
+
+.footer .credit span{
+color: var(--blue);
+text-decoration: underline;
+letter-spacing: .5rem;
+}
+
+
+
+/* footer section end  */
+
+
+
+/* media query  */
+
+@media (max-width:768px){
+
+  html{
+      font-size: 55%;
+  }
+
+  header .fa-bars{
+      display: block;
+  }
+  
+  header .navbar{
+      position: fixed;
+      top: -100rem; left: 0;
+      width: 100%;
+      background: var(--wight);
+      opacity: 0;
+  }
+
+  header .navbar ul{
+      flex-flow: column;
+      padding: 2rem 0;
+  }
+
+  header .navbar ul li{
+      margin: 1rem 0;
+      width: 100%;
+      text-align: center;
+  }
+
+  header .navbar ul li a{
+      font-size: 3rem;
+      display: block;
+  }
+
+  header .nav-toggle{
+      top: 5.5rem;
+      opacity: 1;
+  }
+
+  /* home media query  */
+
+  .home .row{
+      flex-flow: column;
+  }
+
+  .home .row .content{
+      text-align: center;
+  }
+
+  /* home images  */
+  .home .row .images img{
+      width: 100%;
+  }
+
+/* about media query  */
+ .about .box-container .box{
+  flex-flow: column;
+  width: 90%;
+ }
+
+ .about .box-container .box:nth-child(even){
+  flex-flow: column;
+ }
+
+ .about .box-container .box .images{
+  width: 100%;
+ }
+
+ .about .box-container .box .content{
+  width: 100%;
+ }
+ 
+ /* contact form  */
+ .contact .row{
+  flex-flow: column;
+ }
+
+ .contact .row .images img{
+  height: 50vh;
+  width: 90vw;
+ }
+
+ .contact .row .form-container{
+  width: 90%;
+  padding: 0;
+ }
+}
+/* Hospital Queue Management Section */
+#queue {
+  padding: 4rem 2rem;
+  background: #f5f5f5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+#queue h2 {
+  font-size: 2.5rem;
+  color: var(--blue);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+
+
+/* Form Section */
+.form-section {
+  width: 45%;
+  background: var(--wight);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-section label {
+  font-size: 1.6rem;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-section input {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  font-size: 1.6rem;
+}
+
+.form-section input:focus {
+  border-color: var(--blue);
+  outline: none;
+}
+
+.form-section button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--blue);
+  color: var(--wight);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-section button:hover {
+  background-color: #0056b3;
+}
+
+.form-section button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Action Section for Treating Patients */
+.action-section {
+  width: 45%;
+  background: var(--wight);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#next-patient {
+  font-size: 1.8rem;
+  color: var(--black);
+  margin-bottom: 1.5rem;
+}
+
+#treat-patient {
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
+  background-color: var(--blue);
+  color: var(--wight);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#treat-patient:hover {
+  background-color: #0056b3;
+}
+
+#treat-patient:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Remaining Patients Section */
+.remaining-section {
+  width: 100%;
+  background: var(--wight);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#remaining-patients {
+  font-size: 1.8rem;
+  color: var(--black);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  #queue {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-section, .action-section, .remaining-section {
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+
+  .form-section button,
+  #treat-patient {
+    font-size: 1.6rem;
+    padding: 0.8rem;
+  }
+
+  #next-patient, #remaining-patients {
+    font-size: 1.5rem;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+ <a href="web_chat.html" style="text-decoration: none;">
+  <div id="Trigger">
+    <i class="fa-solid fa-user-secret"></i>A
+  </div></a>
+
+
+    <header>
+
+        <!-- logo name  -->
+        <a href="#" class="logo"><i class="fas fa-heartbeat"></i><span>H</span>ealth <span>C</span>ares</a>
+
+        <!-- navbar link  -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#about">about</a></li>
+                <li><a href="#doctor">doctor</a></li>
+                <li><a href="#review">review</a></li>
+                <li><a href="#contact">contact</a></li>
+                <li><a href="#blog">blog</a></li>
+
+            </ul>
+        </nav>
+
+        <div class="fas fa-bars"></div>
+    </header>
+    <!-- header navbar section end  -->
+
+
+    <!-- home section start  -->
+
+    <section id="home" class="home">
+
+        <div class="row">
+
+            <!-- home images  -->
+            <div class="images">
+                <img src="./img/home.png" alt="Home Image">  <!--The first <img> tag looks for the image in the "img" folder.-->
+            </div>
+
+            <!-- home heading  -->
+            <div class="content">
+                <h1><span>Stay</span> Safe, <span>Stay</span> Healthy.</h1>
+                <p>I feels Better than before after using it</p>
+                <a href="y.html"><button class="button" title="Click here to explore more details about our services">read more</button></a>
+            </div>
+        </div>
+    </section>
+    <!-- home section end  -->
+    <!-- Hospital Queue management -->
+ <section id="queue" class="queue">
+    <div class="form-section">
+        <h2>Admit Patient</h2>
+        <form id="admit-form">
+            <label for="name">Patient Name:</label>
+            <input type="text" id="name" required placeholder="Enter patient's name">
+
+            <label for="disease">Disease:</label>
+            <input type="text" id="disease" required placeholder="Enter disease">
+
+            <label for="severity">Severity Level:</label>
+            <input type="number" id="severity" required placeholder="Enter severity (lower is more urgent)">
+
+            <button type="submit">Admit Patient</button>
+        </form>
+    </div>
+    <!-- Section for treating patients -->
+    <div class="action-section">
+        <h2>Next Patient</h2>
+        <div id="next-patient">No patients in the queue.</div>
+        <button id="treat-patient" disabled>Treat Next Patient</button>
+    </div>
+
+    <!-- Remaining patients section -->
+    <div class="remaining-section">
+        <h2>Remaining Patients</h2>
+        <div id="remaining-patients">There are no remaining patients.</div>
+    </div>
+    
+ </section>
+
+    <!-- about section start  -->
+
+    <section id="about" class="about">
+
+        <h1 class="heading">about our facility</h1>
+        <h3 class="title">learn and explore our facility</h3>
+
+        <div class="box-container">
+
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="./img/about-1.png" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>ambulance services</h3>
+                    <p>yeah! its effective</p>
+                 <a href="#"><button class="button">learn more</button></a>  
+                 <!--a href="#" class="btn">learn more<span class="far fa-chevron"></span></a--> 
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="./img/about-2.png" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>emergency rooms</h3>
+                    <p>In my Emergency times i have benefited by it</p>
+                 <a href="#"><button class="button">learn more</button></a>   
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="./img/about-3.png" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>free check-ups</h3>
+                    <p>It is helpful for needy people</p>
+                 <a href="#"><button class="button">learn more</button></a>   
+                </div>
+            </div>
+            <!-- end here  -->
+           </div>
+    </section>
+
+    <!-- about section end  -->
+    
+    <!-- card section start  -->
+
+    <section id="doctor" class="card">
+
+        <div class="container">
+
+            <h1 class="heading">doctors</h1>
+            <h3 class="title">our professional doctors</h3>
+
+            <div class="box-container">
+
+                <!-- start here  -->
+                <div class="box">
+                    <img src="./img/doctor-1.jpg" alt="">                
+                    
+                    <div class="content">
+                        <a href="#">
+                            <h2>Sandip Maity</h2>
+                        </a>
+                        <p>professional</p>
+
+                        <!-- card icons  -->
+                        <div class="icons">
+                            <a href="#" class="fab fa-facebook-f"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end here  -->
+
+                 <!-- start here  -->
+                 <div class="box">
+                    <img src="./img/doctor-2.jpg" alt="">                
+                    
+                    <div class="content">
+                        <a href="#">
+                            <h2>Pratiksha Pal</h2>
+                        </a>
+                        <p>professional</p>
+
+                        <!-- card icons  -->
+                        <div class="icons">
+                            <a href="#" class="fab fa-facebook-f"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end here  -->
+
+                 <!-- start here  -->
+                 <div class="box">
+                    <img src="./img/doctor-3.jpg" alt="">                
+                    
+                    <div class="content">
+                        <a href="#">
+                            <h2>Tanmay Banik</h2>
+                        </a>
+                        <p>professional</p>
+
+                        <!-- card icons  -->
+                        <div class="icons">
+                            <a href="www.google.com" class="fab fa-facebook-f"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end here  -->
+
+            </div>
+        </div>
+    </section>
+    <!-- card section end  -->
+
+    <!-- review section start  -->
+
+    <section id="review" class="review">
+
+        <h1 class="heading">our patient review</h1>
+        <h3 class="title">what patient says about us</h3>
+
+        <div class="box-container">
+
+            <!-- start here  -->
+            <div class="box">
+                <i class="fas fa-quote-left"></i>
+                <p>"Excellent care! The doctor was very attentive and kind."</p>
+
+                <div class="images">
+                    <img src="./img/img-1.jpg" alt="">
+
+                    <div class="info">
+                        <h3>Riya Das</h3>
+                        <span>date : 11 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <i class="fas fa-quote-left"></i>
+                <p>"Compassionate staff and great support throughout."</p>
+
+                <div class="images">
+                    <img src="./img/img-2.jpg" alt="">
+
+                    <div class="info">
+                        <h3>Bijay Das</h3>
+                        <span>date : 11 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <i class="fas fa-quote-left"></i>
+                <p>"Professional and caring team. Would visit again!"</p>
+
+                <div class="images">
+                    <img src="./img/img-3.jpg" alt="">
+
+                    <div class="info">
+                        <h3>Sandip Maity</h3>
+                        <span>date : 11 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end here  -->
+        </div>
+    </section>
+    <!-- review section end  -->
+ 
+    <!-- contact section start  -->
+
+    <section id="contact" class="contact">
+
+        <h1 class="heading">contact us</h1>
+        <h3 class="title">you can talk to us any times,</h3>
+
+        <div class="row">
+
+            <!-- form images  -->
+            <div class="images">
+                <img src="./img/form.png" alt="">
+            </div>
+
+            <div class="form-container">    
+
+            <input type="text" placeholder="full name" name="" id="">
+            <input type="email" placeholder="enter your email" name="" id="">
+
+            <input type="number" placeholder="phone" name="" id="">
+            <label for="message">Message:</label>
+            <textarea name="message" cols="30" rows="10" id="message" placeholder="Enter your message here"></textarea>
+            <input type="date" class="box">
+            <input type="submit" value="send">
+            <input type ="text" placeholder="Check Your Priority Score by entering disease" name="" id="">
+            <button id="submitButton">Get Priority Score</button>
+            </div>
+        </div>
+
+   </section>
+
+
+
+    <!-- contact section end  -->
+
+
+    <!-- blog section start  -->
+
+    <section id="blog" class="blog">
+
+        <h1 class="heading">blog</h1>
+        <h3 class="title">Create-Celebrate-Contribute-Learn</h3>
+
+        <div class="box-container">
+
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="./img/blog 1.png" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>diabetes</h2>
+                    </a>
+                    <p>A chronic condition affecting blood sugar levels, requiring lifestyle management and medication.</p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="./img/blog 2.png" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>covid-19 vaccine</h2>
+                    </a>
+                    <p>A contagious viral disease causing respiratory illness; prevention includes vaccination, masks, and hygiene.</p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="./img/blog 3.png" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>prevent epidemic</h2>
+                    </a>
+                    <p>Early detection, vaccination, hygiene, and public awareness help control outbreaks</p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+            <!-- end here  -->
+        </div>
+    </section>
+
+
+
+    <!-- blog section end  -->
+
+    <!-- footer section start  -->
+
+    <section class="footer">
+
+        <div class="box">
+            <h2 class="logo"><span>D</span>octors <span>C</span>ares</h2>
+
+            <p>Providing medical treatment, guidance, and emotional support for patient well-being.</p>
+        </div>
+
+        <div class="box">
+            <h2 class="logo"><span>S</span>hare</h2>
+
+            <a href="#">facebook</a>
+            <a href="#">twitter</a>
+            <a href="#">instagram</a>
+            <a href="#">pinterest</a>
+        </div>
+
+        <div class="box">
+            <h2 class="logo"><span>L</span>inks</h2>
+
+            <a href="#">home</a>
+            <a href="#">about</a>
+            <a href="#">Doctor</a>
+            <a href="#">Review</a>
+            <a href="#">contact</a>
+            <a href="#">blog</a>
+        </div>
+
+
+        <h1 class="credit">created by <span>Mini Project Group</span> all right reserved.</h1>
+    </section>
+
+
+
+
+
+
+
+
+    <!-- footer section end  -->
+    
+
+
+
+    <!-- jquery cdn link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script>
+        //gemini API
+// document.getElementById('Trigger').addEventListener('click',async function(e) {
+//     e.preventDefault();
+//     const user_q=prompt("Ask any question:");
+//     if(!user_q || user_q.trim()==""){
+//         alert("please enter a valid question:");
+//         return;
+//     }
+//     try{
+//         const response=await fetch("web_chat.html",{
+//             method:'POST',
+//             headers:{
+//                 'Content-Type':'application/json',
+//             },
+//             body:JSON.stringify({contents:[{parts:[{text:user_q}]}]
+//         })
+//     }
+// );
+// const data=await response.json();
+// const answer=data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response received.';
+
+// document.getElementById('geminiResponse').innerText=answer;
+//     }catch(err){
+//         document.getElementById('geminiResponse').innerText='Error:'+err.message;
+//     }
+// });
+
+//   navbar function 
+$(document).ready(function(){
+
+    $('.fa-bars').click(function(){
+        $(this).toggleClass('fa-times');
+        $('.navbar').toggleClass('nav-toggle');
+    });
+
+    $(window).on('scroll load',function(){
+        $('.fa-bars').removeClass('fa-times');
+        $('.navbar').removeClass('nav-toggle');
+
+        if($(Window).scrollTop()  >  30){
+            $('header').addClass('header-active');
+        }else{
+            $('header').removeClass('header-active');
+        }
+    });
+
+    
+});
+
+class Patient {
+    constructor(name, disease, severity, arrivalTime) {
+        this.name = name;
+        this.disease = disease;
+        this.severity = severity;
+        this.arrivalTime = arrivalTime;
+    }
+
+    compareTo(other) {
+        if (this.severity === other.severity) {
+            return this.arrivalTime - other.arrivalTime;
+        }
+        return this.severity - other.severity;
+    }
+
+    toString() {
+        return `${this.name} (Disease: ${this.disease}, Severity: ${this.severity}, Arrival Time: ${this.arrivalTime})`;
+    }
+}
+
+class HospitalQueue {
+    constructor() {
+        this.queue = [];
+        this.time = 0; // Time to track patient arrivals
+    }
+
+    admitPatient(name, disease, severity) {
+        const patient = new Patient(name, disease, severity, this.time);
+        this.queue.push(patient);
+        this.queue.sort((a, b) => a.compareTo(b)); // Sort patients by priority (severity)
+        this.time++;
+    }
+
+    treatPatient() {
+        if (this.queue.length > 0) {
+            return this.queue.shift(); // Treat the most urgent patient
+        }
+        return null;
+    }
+
+    getNextPatient() {
+        return this.queue.length > 0 ? this.queue[0] : null;
+    }
+
+    remainingPatients() {
+        return this.queue;
+    }
+}
+
+const hospital = new HospitalQueue();
+
+// DOM elements
+const admitForm = document.getElementById('admit-form');
+const nameInput = document.getElementById('name');
+const diseaseInput = document.getElementById('disease');
+const severityInput = document.getElementById('severity');
+const nextPatientDiv = document.getElementById('next-patient');
+const remainingPatientsDiv = document.getElementById('remaining-patients');
+const treatButton = document.getElementById('treat-patient');
+
+// Update the remaining patients display with full queue list
+function updateRemainingPatients() {
+    const remainingQueue = hospital.remainingPatients();
+    if (remainingQueue.length === 0) {
+        remainingPatientsDiv.innerText = "There are no remaining patients.";
+    } else {
+        remainingPatientsDiv.innerHTML = "Remaining Patients:<br>";
+        remainingQueue.forEach((patient, index) => {
+            remainingPatientsDiv.innerHTML += `${index + 1}. ${patient.toString()}<br>`;
+        });
+    }
+}
+
+// Update the next patient display
+function updateNextPatient() {
+    const nextPatient = hospital.getNextPatient();
+    if (nextPatient) {
+        nextPatientDiv.innerText = `Next patient: ${nextPatient.name} with disease ${nextPatient.disease} (Severity: ${nextPatient.severity})`;
+        treatButton.disabled = false;
+    } else {
+        nextPatientDiv.innerText = "No patients in the queue.";
+        treatButton.disabled = true;
+    }
+}
+
+// Handle the admit patient form submission
+admitForm.addEventListener('submit', (event) => {
+    event.preventDefault();  // Prevent default form submission (page reload)
+
+    const name = nameInput.value.trim();
+    const disease = diseaseInput.value.trim();
+    const severity = parseInt(severityInput.value.trim(), 10);
+
+    // Check if inputs are valid
+    if (name && disease && !isNaN(severity)) {
+        hospital.admitPatient(name, disease, severity);
+        nameInput.value = '';  // Clear the input fields after submission
+        diseaseInput.value = '';
+        severityInput.value = '';
+
+        // Update the UI with the next patient and the remaining patients
+        updateNextPatient();
+        updateRemainingPatients();
+    } else {
+        alert('Please fill in all fields with valid values.');
+    }
+});
+
+// Handle the treat next patient button click
+treatButton.addEventListener('click', () => {
+    const treatedPatient = hospital.treatPatient();
+    if (treatedPatient) {
+        alert(`Treated patient: ${treatedPatient.name} with disease ${treatedPatient.disease}`);
+    }
+
+    // Update the UI with the next patient and the remaining patients
+    updateNextPatient();
+    updateRemainingPatients();
+});
+
+    </script>
+</body>
+
+</html>

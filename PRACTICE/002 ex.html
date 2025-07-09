@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var i=0;
+        while(i<=10){
+            document.write("The number is "+i);
+            document.write("<br>");
+            i+=1;
+        }
+
+
+
+        var j=0;
+        for(j=0;j<=10;j++){
+if(j==3){
+    break;
+}
+document.write("the number is "+j);
+document.write("<br>");
+        }
+
+
+        // the continue command will break the current loop and continue with the next value 
+        var k=5;
+        for(k=5;k<=10;k++){
+            if(k==6) continue;
+        document.write("this is "+"<br>"+k);
+        }
+
+
+        function display(){
+            alert("Hello world! I am still here in learning progress");
+        }
+        function prod(a,b){
+            x=a*b;
+            return x;
+        }
+        product=prod(2,3);
+        console.log(product);
+        document.write(" "+product+"<br>");
+
+        </script>
+        <a href="javascript:void()" onClick="alert('Ooo, it's me!');">Click again!</a>
+        <a href="#" onClick="alert('Ooo,do it again!');">Click on me!</a>
+        <a href="javascript:alert('Ooo,do it again!')">Click please!</a>
+
+        <a href="javascript:void()" onMouseOver="alert('hee hee!');">Mouse over me</a>
+
+
+</body>
+<body>
+    <form>
+        <input type="button" value="click me!" onclick="display()">
+        <input type="button" onClick="display()">
+
+        <input type="text" onChange="checkField(this)">
+        <input type="text" onChange="if(this.value<=5){
+            alert("please enter a number greater than 5");
+         }">
+        
+         <input type="text" onChange="alert('Thanks for the entry.'); confirm('Do you want to continue?');">
+        
+    </form>
+</body>
+
+
+    <script>
+        var loaded=false;
+        function doit(){
+            alert('Everything is "loaded" and loaded='+loaded);
+        }
+    </script>
+    <!----> onload="loaded=true;">
+
+        <!-- or -->
+        <body onload="window.loaded=true;">
+            <form>
+                <input type="button" value="press me" onClick="if(loaded==true) doit;">
+            </form>
+
+        <!-- or -->
+         <input type="button" value="Press Me" onClick="if(loaded) doit();">
+         </body>
+
+<body>
+<script type="text/javascript">
+     var myCars=new Array(); //you can pass an integer argument to control array's size like 
+     // var myCars=new Array(3);
+     myCars[0]='fortuner';
+     myCars[1]='Volvo';
+     myCars[2]='BMW';
+
+     var cars=new Array("cool","hot","spring");
+     document.write(cars[2]);
+     cars[0]='warm'
+document.write(cars);
+</script>
+</body>
+
+</html>
