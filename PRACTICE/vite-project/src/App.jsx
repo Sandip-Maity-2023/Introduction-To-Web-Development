@@ -58,20 +58,75 @@ export default App;
 //40
 */
 
-import './App.css';
-import HeroSection from "./components/Hero";
-import Navigation from "./components/Navigation";
+// import './App.css';
+// import HeroSection from "./components/Hero";
+// import Navigation from "./components/Navigation";
 
-const App=()=>{
-  return(
-  <div>
-    <Navigation />
-    <HeroSection />
-    <h1>Welcome to the Vite + React App!</h1>
-    <p>This is a simple application to demonstrate the use of components.</p>
-</div>
-);
-};
+// const App=()=>{
+//   return(
+//   <div>
+//     <Navigation />
+//     <HeroSection />
+//     <h1>Welcome to the Vite + React App!</h1>
+//     <p>This is a simple application to demonstrate the use of components.</p>
+// </div>
+// );
+// };
+
+// export default App;
+
+/*
+import React,{useState} from 'react'
+
+function App() {
+  const [message,setMessage]=useState("Hello World!");
+  const changeMessage=()=>{ setMessage("welcome to React!"); }
+
+  return (
+    <div style={{textAlign:"center",marginTop:"50px",justifyContent:"center"}}>
+      <h1>{message}</h1>
+      <button onClick={changeMessage} style={{
+        padding:"10px 20px", 
+        fontSize:"16px",
+        backgroundColor:"rgb(0,255,0)",
+        color:"blue",
+        border:"none",
+        borderRadius:"5px",
+        cursor:"pointer"
+      }}>Click Me!</button>
+    </div>
+  );
+}
+
+export default App;
+*/
+
+
+import React,{use, useEffect,useState} from 'react';
+import ReactDOM from 'react-dom/client';
+
+function App() {
+
+  const [currentTime,setCurrentTime]=useState(new Date().toLocaleTimeString());
+
+  useEffect(()=>{
+    const interval=setInterval(()=>{
+      setCurrentTime(new Date().toLocaleTimeString());
+    },1000);
+    return ()=>clearInterval(interval);
+  },[]);
+
+    
+
+  return (
+    <div>
+      <h2>
+        Welcome to GeeksforGeeks!
+      </h2>
+      <h3>{currentTime}</h3>
+    </div>
+  )
+}
 
 export default App;
 

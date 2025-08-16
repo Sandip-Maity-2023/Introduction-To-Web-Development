@@ -1,401 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gallery</title>
-    <style>/* General Body Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-/* Gallery Container */
-.gallery-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-}
-
-/* Gallery Grid */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-/* Gallery Item */
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 200px; /* Fixed height for consistency */
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
-}
-
-/* Hover Effects */
-.gallery-item:hover {
-    transform: translateY(-5px);
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-    filter: brightness(0.8);
-}
-
-/* Navigation Buttons */
-.gallery-navigation, .filter-buttons {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.gallery-navigation button, .filter-buttons button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.gallery-navigation button:hover, .filter-buttons button:hover {
-    background-color: #0056b3;
-}
-
-.filter-buttons button.active {
-    background-color: #28a745;
-}
-
-/* Lightbox Styles */
-.lightbox {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    padding-top: 50px; /* Location of the box (top) */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
-    box-sizing: border-box; /* Include padding in width/height */
-}
-
-.lightbox-content {
-    margin: auto;
-    display: block;
-    max-width: 80%;
-    max-height: 80%;
-    object-fit: contain;
-}
-
-#lightboxCaption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px; /* Ensure enough space for longer captions */
-}
-
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.lightbox-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 24px;
-    -webkit-user-select: none; /* Safari support */
-    user-select: none; /* Prevent text selection */
-}
-
-.lightbox-nav-btn.prev {
-    left: 15px;
-}
-
-.lightbox-nav-btn.next {
-    right: 15px;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Gallery</title>
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-    .lightbox-content {
-        max-width: 95%;
-        max-height: 75%;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
     }
 
-    .close-btn {
-        top: 10px;
-        right: 20px;
-        font-size: 30px;
+    h1 {
+      text-align: center;
+      padding: 20px;
     }
 
-    .lightbox-nav-btn {
-        padding: 8px 12px;
-        font-size: 20px;
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
-}
 
-@media screen and (max-width: 480px) {
-    .gallery-grid {
-        grid-template-columns: 1fr; /* Single column layout */
+    .filter-buttons button {
+      padding: 10px 20px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .filter-buttons button:hover {
+      background: #0056b3;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
     }
 
     .gallery-item img {
-        height: 180px;
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
 
-    .gallery-navigation button, .filter-buttons button {
-        padding: 8px 15px;
-        font-size: 14px;
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(80%);
     }
-}
-</style>
+
+    /* Lightbox Styles */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border: 5px solid white;
+      border-radius: 10px;
+    }
+
+    .lightbox .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 30px;
+    }
+
+    .lightbox .controls span {
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+
+    .lightbox .controls span:hover {
+      transform: scale(1.2);
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .lightbox img {
+        max-width: 95%;
+      }
+
+      .lightbox .controls span {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Image Gallery</h1>
-    <div class="gallery-container">
-    <div class="gallery-grid">
-        <div class="gallery-item" data-category="nature">
-            <img src="images/doc.png" alt="Nature 1">
-        </div>
-        <div class="gallery-item" data-category="city">
-            <img src="images/girl.png" alt="City 1">
-        </div>
-        <div class="gallery-item" data-category="nature">
-            <img src="images/shoe1.png" alt="Nature 2">
-        </div>
-        <div class="gallery-item" data-category="city">
-            <img src="images/hos.png" alt="City 2">
-        </div>
-        </div>
+  <h1>Responsive Image Gallery</h1>
 
-    <div class="gallery-navigation">
-        <button id="prevBtn">Previous</button>
-        <button id="nextBtn">Next</button>
+  <div class="filter-buttons">
+    <button onclick="filterImages('all')">All</button>
+    <button onclick="filterImages('nature')">Nature</button>
+    <button onclick="filterImages('city')">City</button>
+    <button onclick="filterImages('people')">People</button>
+  </div>
+
+  <div class="gallery" id="gallery">
+    <div class="gallery-item nature"><img src="images/doc.png" alt="Nature" /></div>
+    <div class="gallery-item city"><img src="images/girl.png" alt="City" /></div>
+    <div class="gallery-item people"><img src="images/hos.png" alt="People" /></div>
+    <div class="gallery-item nature"><img src="images/can.png" alt="Nature" /></div>
+    <div class="gallery-item city"><img src="images/med.png" alt="City" /></div>
+    <div class="gallery-item people"><img src="images/shoe1.png" alt="People" /></div>
+    <div class="gallery-item nature"><img src="images/girl.png" alt="Nature" /></div>
+    <div class="gallery-item city"><img src="https://source.unsplash.com/400x300/?bridge,city" alt="City" /></div>
+    <div class="gallery-item people"><img src="https://source.unsplash.com/400x300/?woman,portrait" alt="People" /></div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <div class="controls">
+      <span onclick="prevImage()">&#10094;</span>
+      <span onclick="nextImage()">&#10095;</span>
     </div>
+    <img id="lightbox-img" src="" alt="lightbox" />
+  </div>
 
-    <div class="filter-buttons">
-        <button data-filter="all">All</button>
-        <button data-filter="nature">Nature</button>
-        <button data-filter="city">City</button>
-    </div>
-</div>
-
-<div id="lightbox" class="lightbox">
-    <span class="close-btn">&times;</span>
-    <img class="lightbox-content" id="lightboxImage">
-    <div id="lightboxCaption"></div>
-    <button id="prevLightBtn" class="lightbox-nav-btn prev">&#10094;</button>
-    <button id="nextLightBtn" class="lightbox-nav-btn next">&#10095;</button>
-</div>
-</body>
-<script>
-
-document.addEventListener('DOMContentLoaded', () => {
-    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+  <script>
+    const images = document.querySelectorAll('.gallery-item img');
     const lightbox = document.getElementById('lightbox');
-    const closeBtn = document.querySelector('.close-btn');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxCaption = document.getElementById('lightboxCaption');
-    const prevLightBtn = document.getElementById('prevLightBtn');
-    const nextLightBtn = document.getElementById('nextLightBtn');
-    const filterButtons = document.querySelectorAll('.filter-buttons button');
-
+    const lightboxImg = document.getElementById('lightbox-img');
     let currentIndex = 0;
-    let filteredItems = galleryItems; // Initially all items are visible
 
-    // Function to update the displayed gallery items based on currentIndex
-    function updateGalleryDisplay() {
-        galleryItems.forEach((item, index) => {
-            item.style.display = 'none'; // Hide all initially
-        });
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentIndex = index;
+        showLightbox(img.src);
+      });
+    });
 
-        const itemsPerPage = getItemsPerPage();
-        for (let i = 0; i < itemsPerPage; i++) {
-            const itemToShowIndex = currentIndex + i;
-            if (filteredItems[itemToShowIndex]) {
-                filteredItems[itemToShowIndex].style.display = 'block';
-            }
-        }
-
-        // Disable/enable navigation buttons
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex + itemsPerPage >= filteredItems.length;
+    function showLightbox(src) {
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
     }
 
-    // Determine how many items to show per page based on screen size
-    function getItemsPerPage() {
-        if (window.innerWidth <= 480) {
-            return 1;
-        } else if (window.innerWidth <= 768) {
-            return 2;
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    function filterImages(category) {
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach(item => {
+        if (category === 'all' || item.classList.contains(category)) {
+          item.style.display = 'block';
         } else {
-            return 4; // Default for larger screens
+          item.style.display = 'none';
         }
+      });
     }
 
-    // Navigation for main gallery
-    prevBtn.addEventListener('click', () => {
-        const itemsPerPage = getItemsPerPage();
-        if (currentIndex > 0) {
-            currentIndex = Math.max(0, currentIndex - itemsPerPage);
-            updateGalleryDisplay();
-        }
-    });
-
-    nextBtn.addEventListener('click', () => {
-        const itemsPerPage = getItemsPerPage();
-        if (currentIndex + itemsPerPage < filteredItems.length) {
-            currentIndex = Math.min(filteredItems.length - itemsPerPage, currentIndex + itemsPerPage);
-            updateGalleryDisplay();
-        }
-    });
-
-    // Lightbox functionality
-    galleryItems.forEach((item, index) => {
-        item.addEventListener('click', () => {
-            openLightbox(index);
-        });
-    });
-
-    function openLightbox(index) {
-        currentIndex = index; // Set current index for lightbox navigation
-        updateLightboxContent();
-        lightbox.style.display = 'block';
-    }
-
-    function updateLightboxContent() {
-        const currentItem = filteredItems[currentIndex];
-        if (currentItem) {
-            const imgSrc = currentItem.querySelector('img').src;
-            const imgAlt = currentItem.querySelector('img').alt;
-            lightboxImage.src = imgSrc;
-            lightboxCaption.textContent = imgAlt;
-        }
-
-        // Disable/enable lightbox navigation buttons
-        prevLightBtn.disabled = currentIndex === 0;
-        nextLightBtn.disabled = currentIndex === filteredItems.length - 1;
-    }
-
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-    });
-
+    // Close on click outside image
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = 'none';
-        }
+      if (e.target === lightbox || e.target === lightboxImg) {
+        closeLightbox();
+      }
     });
-
-    // Lightbox navigation
-    prevLightBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent closing lightbox when clicking button
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateLightboxContent();
-        }
-    });
-
-    nextLightBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent closing lightbox when clicking button
-        if (currentIndex < filteredItems.length - 1) {
-            currentIndex++;
-            updateLightboxContent();
-        }
-    });
-
-    // Keyboard navigation for lightbox (optional)
-    document.addEventListener('keydown', (e) => {
-        if (lightbox.style.display === 'block') {
-            if (e.key === 'ArrowLeft') {
-                prevLightBtn.click();
-            } else if (e.key === 'ArrowRight') {
-                nextLightBtn.click();
-            } else if (e.key === 'Escape') {
-                closeBtn.click();
-            }
-        }
-    });
-
-    // Image Filtering
-    filterButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const filter = e.target.dataset.filter;
-
-            // Update active button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-
-            filteredItems = galleryItems.filter(item => {
-                if (filter === 'all') {
-                    return true;
-                } else {
-                    return item.dataset.category === filter;
-                }
-            });
-
-            currentIndex = 0; // Reset index when filtering
-            updateGalleryDisplay(); // Update display for main gallery
-        });
-    });
-
-    // Initial display and handle window resize
-    const resizeObserver = new ResizeObserver(() => {
-        updateGalleryDisplay();
-    });
-
-    resizeObserver.observe(document.body); // Observe body for resize events
-    updateGalleryDisplay(); // Initial call
-});
-</script>
+  </script>
+</body>
 </html>

@@ -1,0 +1,16 @@
+form{
+  width: 1170px;
+  margin: auto;
+  display: flex;
+  gap: 20px;
+}
+form input{
+  flex-basis: 80%;
+}
+form button{
+  flex-basis: 20%;
+}
+.outerDiv ul{
+  width: 0px;
+  margin: auto;
+}

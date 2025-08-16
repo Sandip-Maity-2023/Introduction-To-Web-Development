@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title style="font-family:sans-serif;">Krishna Janmashtami Special</title>
+  
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  /* background: url("../krishna/img/r1.pn") no-repeat center center fixed; */
+   background: linear-gradient(to bottom, #88b4ee, #fff7d6); 
+  background-size:cover;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: #3018cd;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.card {
+  /* background:transparent 20%; */
+  background-color:rgba(10, 116, 158, 0.5);
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(227, 223, 30, 0.2);
+  max-width: 600px;
+}
+
+.buttons button, .card button {
+  background: #190eec;
+  color: rgb(237, 237, 236);
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttons button:hover, .card button:hover {
+  background: #1d4ed8;
+}
+:root {
+  --magnifier: 2;
+  --gap: 1vmin;
+  --transition: 0.5s;
+}
+
+.gallery {
+  width: 90vw;
+  height: 50vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap);
+  margin: auto;
+}
+
+.gallery img {
+  --brightness: 0.75;
+  --grayscale: 1;
+  transition: flex var(--transition), filter var(--transition);
+  height: 100%;
+  filter: grayscale(var(--grayscale)) brightness(var(--brightness));
+  object-fit: cover;
+  overflow: hidden;
+  flex: 1;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.gallery img:hover {
+  --brightness: 1.15;
+  --grayscale: 0;
+  flex: var(--magnifier);
+}
+/* 
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  
+} */
+
+/* Modal */
+.modal {
+  display: none;
+  position: sticky;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.audio {
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.audio button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.audio button:hover {
+  background: #1d4ed8;
+}
+
+
+  </style>
+
+</head>
+<body>
+  <h1>🌸 Krishna Janmashtami Special 🌸</h1>
+
+  <!-- Storybook -->
+  <section class="card">
+    <h2 id="story-title" style="font-size:32px;">📖 Makhan Chor🙏</h2>
+    <p id="story-text" style="color: #fdfdfb;font-size:25px;">Little Krishna loved butter so much that he would sneak into homes and steal it!</p>
+    <div class="buttons">
+      <button onclick="prevStory()">Prev</button>
+      <button onclick="nextStory()">Next</button>
+    </div>
+  </section>
+
+  <!-- Jhanki Gallery -->
+  <section>
+    <h2>🖼 Virtual Jhanki</h2>
+    <div class="gallery">
+      <img src="..\krishna\img\a.jpg" alt="Krishna with Radha" onclick="openModal(this)">
+      <img src="..\krishna\img\j.jpg" alt="Makhan Chor Jhanki" onclick="openModal(this)">
+      <img src="..\krishna\img\n.webp" alt="Krishna with Gopis" onclick="openModal(this)">
+      <img src="..\krishna\img\b.jpg" alt="Krishna Lifting Govardhan" onclick="openModal(this)">
+      <img src="..\krishna\img\c.jpg" alt="Krishna Playing Flute" onclick="openModal(this)">
+      <img src="..\krishna\img\r.jpg" alt="Krishna and Butter" onclick="openModal(this)">
+      <img src="..\krishna\img\m.jpeg" alt="Krishna with Cows" onclick="openModal(this)">
+    </div>
+  </section>
+
+  <!-- Modal for Jhanki -->
+  <div id="modal" class="modal" onclick="closeModal()">
+    <div class="modal-content">
+      <img id="modal-img" src="">
+      <p id="modal-caption"></p>
+    </div>
+  </div>
+
+<section class="audio">
+<p style="font-size: 32px; font-family:sans-serif;">🎵 Krishna Bhakti Audios</p>
+  
+  <div class="audio-controls">
+    <button onclick="playAudio('flute')">Play Flute 1</button>
+    <button onclick="playAudio('bhajan')">Play Flute 2</button>
+    <button onclick="playAudio('mantra')">Play Flute 3</button>
+    <button onclick="stopAudio()">⏹ Stop</button>
+  </div>
+
+  <!-- Hidden audio tags -->
+  <audio id="flute" src="..\krishna\img\f1.mp3"></audio>
+  <audio id="bhajan" src="..\krishna\img\f2.mp3"></audio>
+  <audio id="mantra" src="..\krishna\img\f3.mp3"></audio>
+</section>
+  <!-- Quotes -->
+  <section class="card">
+    <h2>📜 Bhagavad Gita Quote</h2>
+    <p id="quote" style="font-size: 25px; font-weight:700;">“You have the right to work, but never to the fruit of work.”</p>
+    <button onclick="newQuote()">New Quote</button>
+  </section>
+
+  <script>
+
+    // --- Krishna Stories ---
+const stories = [
+  {
+    title: "Makhan Chor",
+    text: "Little Krishna loved butter so much that he would sneak into homes and steal it!"
+  },
+  {
+    title: "Kaliya Naag Defeat",
+    text: "Krishna danced on the head of the venomous serpent Kaliya, subduing him and blessing him."
+  },
+  {
+    title: "Govardhan Leela",
+    text: "Krishna lifted the Govardhan mountain on his little finger to protect the villagers from Indra’s wrath."
+  }
+];
+
+let storyIndex = 0;
+const storyTitle = document.getElementById("story-title");
+const storyText = document.getElementById("story-text");
+
+function updateStory() {
+  storyTitle.textContent = "📖 " + stories[storyIndex].title;
+  storyText.textContent = stories[storyIndex].text;
+}
+
+function nextStory() {
+  storyIndex = (storyIndex + 1) % stories.length;
+  updateStory();
+}
+
+function prevStory() {
+  storyIndex = (storyIndex - 1 + stories.length) % stories.length;
+  updateStory();
+}
+setInterval(nextStory, 5000); // Auto change story every 10 seconds
+updateStory();
+
+// --- Bhagavad Gita Quotes ---
+const quotes = [
+  "You have the right to work, but never to the fruit of work.",
+  "Change is the law of the universe. You can be a millionaire or a pauper in an instant.",
+  "The soul is neither born, and nor does it die."
+];
+
+const quoteElem = document.getElementById("quote");
+
+function newQuote() {
+  const random = Math.floor(Math.random() * quotes.length);
+  quoteElem.textContent = "“" + quotes[random] + "”";
+}
+
+// --- Jhanki Modal ---
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
+const modalCaption = document.getElementById("modal-caption");
+
+function openModal(img) {
+  modal.style.display = "flex";
+  modalImg.src = img.src;
+  modalCaption.textContent = img.alt;
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+
+// --- Multiple Audio Player ---
+let currentAudio = null;
+
+function playAudio(id) {
+  // Stop previous if playing
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  // Play selected
+  currentAudio = document.getElementById(id);
+  currentAudio.play();
+}
+
+function stopAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+}
+
+  </script>
+</body>
+</html>

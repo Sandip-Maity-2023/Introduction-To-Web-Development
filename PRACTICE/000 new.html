@@ -15,10 +15,15 @@
             padding: 15px;
             margin: 10px;
         }
+
+        ul{
+            list-style-image: url("playing.gif");
+
+        }
       </style>
 </head>
 <body>
-      <div class="box box1">I am box1</div>
+      <!-- <div class="box box1">I am box1</div>
       <div class="box box2">I am box2</div>
       <div class="box box3">I am box3</div>
       
@@ -56,7 +61,58 @@
     }else{
         alert("Today is after 14th june 2024");
     }
+
+ $(document).ready(function(){
+    $.getJSON("gfgdetails.json",function(data){
+var student=' ';
+$.each(data,function(key,value){
+    student+='<tr>';
+    student+='<tr>' + value.GFGUserName+'</td';
+    student+='<td>' + value.NoOfProblems+'</td>';
+    student+='<td>' + value.TotalScore+'</td>';
+});
+$('#table').append(student);
+    });
+ });
  </script>
 
+</br>
+<table border="5" bordercolor="blue">
+    <tr>
+        <td>First Column of Outer Table</td>
+        <td>
+            <table border="5" bordercolor="red">
+                <tr>
+                    <td>First row of Inner table</td>
+                </tr>
+<tr>
+    <td>second row of Inner table</td>
+</tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<br></br>
+<section>
+<h1>GeeksForGeeks</h1>
+<table id='table'>
+    <tr>
+        <th>GFG userHandle</th>
+        <th>Practice Problem</th>
+        <th>Coding Score</th>
+        <th>GFG articles</th>
+    </tr>
+</table>
+</section> -->
+
+<p>Create a image</p>
+<ul>
+    <li>MERN</li>
+    <li>DSA</li>
+    <li>DevOps</li>
+    <li>Data</li>
+    <li>AI</li>
+</ul>
 </body>
 </html>

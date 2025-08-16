@@ -1,0 +1,19 @@
+body{
+    background-color: rgb(68,227,29);
+}
+/* joke lines */
+.joke{                
+    width: auto;
+    height: auto;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(50, 27, 223);
+}
+/* upper big writing */
+h1{
+    text-align: center;
+    color: beige;
+}
