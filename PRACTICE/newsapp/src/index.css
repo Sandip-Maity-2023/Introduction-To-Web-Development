@@ -17,6 +17,10 @@ nav{
   justify-content: space-around;
   background-color: lightblue;
   padding: 9px;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
+  
 }
 nav input{
   width: 250px;
@@ -24,21 +28,28 @@ nav input{
   padding: 9px;
   font-size: 18px;
   border: none;
+  border-radius: 25px;
 }
 .searchBar{
   display: flex;
   align-items: center;
   gap: 11px;
+  
 }
 nav button{
   width: 70px;
   height: 38px;
-  background-color: blue;
+  background-color: rgb(56, 56, 236);
   border: none;
   border-radius: 2px;
   color: white;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 20px;
+}
+
+nav button:hover{
+  color: aqua;
 }
 nav ul{
   display: flex;
@@ -84,8 +95,8 @@ nav ul{
   background-color: rgb(29, 162, 214);
   border: none;
   cursor: pointer;
-  width: 80px;
-  height: 28px;
+  width: 85px;
+  height: 32px;
   color: white;
   font-size: 13px;
   border-radius: 2px;
@@ -95,16 +106,19 @@ nav ul{
   justify-content: center;
   gap: 11px;
 }
+.categoryBtn:hover{
+  color: rgb(147, 28, 4);
+}
 .categoryBtn button{
   gap: 11px;
   width: 130px;
   height: 33px;
-  background-color: rgb(255, 108, 108);
+  background-color: rgb(34, 242, 41);
   border: none;
   outline: none;
   font-size: 18px;
   border-radius: 16px;
-  color: white;
+  color: rgb(72, 28, 230);
   cursor: pointer;
   padding: 2px;
 }

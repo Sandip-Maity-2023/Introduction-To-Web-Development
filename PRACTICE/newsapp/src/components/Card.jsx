@@ -19,7 +19,7 @@ const Card = ({data}) => {
                 <div className='content'>
                     <a className='title' onClick={()=>window.open(curItem.url)}>{curItem.title}</a>
                     <p>{curItem.description}</p>
-                    <button onClick={()=>window.open(curItem.url)}>Read More</button>
+                    <button onClick={()=>window.open(curItem.url)}>Explore More</button>
                 </div>
             </div>
         )

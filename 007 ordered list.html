@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            margin: 25px;
+            box-sizing: border-box;
+        }
+        .grand{
+            height: 350px;
+            width: 350px;
+            border: 2px solid red;
+        }
+        .parent{
+            height: 250px;
+            width: 250px;
+            border: 2px solid blue;
+        }
+        .child{
+            height: 150px;
+            width: 150px;
+            border: 2px solid green;
+        }
+    </style>
 </head>
 <body>
     <main>
@@ -23,6 +44,39 @@
         <li>color:red</li>
         <li>season:summer</li>
     </ol>
+
+    <div class="grand" id="one">GrandParent
+<div class="parent" id="two">parent
+<div class="child" id="three">child
+</div>
+</div>
+    </div>
 </main>
 </body>
+<script>
+    let grand=document.getElementById("one");
+    let parent =document.getElementById("two");
+    let child=document.getElementById("three");
+    grand.addEventListener("click",function(e){
+        e.stopPropagation();
+        alert("grandparent was clicked");
+        console.log(e.target);
+    })
+
+    parent.addEventListener("click",function(e){
+        e.stopPropagation();
+        //alert("parent was clicked");
+        console.log("child ");
+    })
+
+    child.addEventListener("click",function(e){
+        e.stopPropagation();
+        alert("child was clicked");
+        console.log(e.target);
+    })
+
+
+
+
+</script>
 </html>

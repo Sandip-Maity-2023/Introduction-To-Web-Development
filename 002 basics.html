@@ -4,18 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+     <link rel="stylesheet" 
+          href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    </script>
+    <style>
+        .light-mode{
+            background-color: white;
+            color: black;
+        }
+        .dark-mode{
+            background-color: black;
+            color: white;
+        }
+    </style>
+    </head>
 <body>
-    <headerparam>
+    <button id="theme-toggle" class="btn btn-secondary" onmouseover="geek()">Switch to Dark Mode</button>
+    <main><div class="toast" data-autohide="false">
+    <div class="toast-header">
+        <strong class="mr-auto text-primary">GeeksForGeeks</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+   
+    <div class="toast-body">
+        A computer Science portal for geeks
+    </div>
+     </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".toast").toast("show");
+    });
+
+    function geek(){
+        alert("Mouse move over");
+    }
+
+    document.addEventListener("mousemove",(e)=>{
+        console.log(`mouse moved to (${e.clientX},${e.clientY})`);
+    });
+
+    document.addEventListener("keydown",(e)=>{
+        console.log(`key passed:${e.key}`);
+    })
+</script>
+</main>
+
+
+
+
+
+    <header>
         <pre>
         <p>Education             Projects</p>
     </pre>
-    <progress></progress>
+    <progress>heas</progress>
     </header>
-    <main>hi</main>
+    <!-- <main>hi</main> -->
     <footer>
         <h3>contact me at hello@ac.com</h3>
     </footer>
     
 </body>
+<script>
+    const toggle=document.getElementById('theme-toggle');
+    const body=document.body;
+
+    body.classList.add('light-mode');
+
+    toggle.addEventListener('click',()=>{
+        if(body.classList.contains('light-mode')){
+            body.classList.replace('light-mode','dark-mode');
+toggle.textContent='switch to Light Mode';
+        }else{
+            body.classList.replace('dark-mode','light-mode');
+            toggle.textContent='switch to Dark Mode';
+        }
+    })
+</script>
 </html>

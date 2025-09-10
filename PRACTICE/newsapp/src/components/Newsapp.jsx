@@ -32,10 +32,10 @@ const Newsapp = () => {
     <div>
         <nav>
             <div>
-                <h1>Trendy News</h1>
+                <h1><span>N</span>ews<span>S</span>phere</h1>
             </div>
             <ul style={{display:"flex", gap:"11px"}}>
-                <a style={{fontWeight:600, fontSize:"17px"}}>All News</a>
+                <a style={{fontWeight:600, fontSize:"17px"}}>TopHeadlines</a>
                 <a style={{fontWeight:600, fontSize:"17px"}}>Trending</a>
 
             </ul>
@@ -45,7 +45,7 @@ const Newsapp = () => {
             </div>
         </nav>
         <div>
-            <p className='head'>Stay Update with TrendyNews</p>
+            <p className='head'>Stay Update & Explore More</p>
         </div>
         <div className='categoryBtn'>
             <button onClick={userInput} value="sports">Sports</button>

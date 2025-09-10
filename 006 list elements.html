@@ -23,6 +23,72 @@
         <li>color:red</li>
         <li>season:summer</li>
     </ul>
+
+    <h2>Interactive Item 1</h2>
+    <ul id="lists">
+<li>interative 1</li>
+<li>interative 2</li>
+<li>interative 3</li>
+    </ul>
+    <button id="btn">Click Here</button>
+    <form action="" class="ex">
+        <input type="text" placeholder="Enter Something" id="if"/>
+        <button type="submit" class="submit">
+            Submit
+        </button>
+    </form>
 </main>
 </body>
+<script>
+    let ul=document.querySelector('#lists');
+    ul.addEventListener('click',(e)=>{
+        if(e.target.tagName==='LI'){
+            e.target.style.backgroundColor='yellow';
+        }
+    });
+
+    document.querySelector('#btn').addEventListener('click',()=>{
+        let div1=document.createElement('div');
+        div1.textContent='New Element added';
+        div1.style.margin="10px 0";
+        document.body.appendChild(div1);
+    });
+
+    document.querySelector('.ex').addEventListener("submit",(e)=>{
+        let input=document.querySelector('#if');
+        if(!input.value){
+            e.preventDefault();
+            alert("Input can't be empty");
+        }
+    });
+
+document.querySelector('li').forEach((li)=>{li.addEventListener('click',(e)=>{
+        console.log(`clicked on item : ${e.target.textContent}`);
+    })
+})
+
+
+
+//callback hell
+setTimeout(()=>{
+    console.log("step 1");
+    setTimeout(()=>{
+        console.log("step 2");
+        setTimeout(()=>{
+            console.log("step 3");
+        },1000);
+    },1000);
+},1000);
+
+
+setTimeout(()=>console.log("setTimeout"),0);
+promise.resolve().then(()=>console.log("Promise"));
+console.log("End");
+
+console.log("start");
+setTimeout(()=>console.log("Inside setTimeout"),1000);
+for(let i=0;i<1e9;i++){} //1e9=1000 000 000 
+console.log('End');
+
+</script>
 </html>
