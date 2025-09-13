@@ -260,6 +260,7 @@ export default App;
 // }
 // export default App;
 
+/*
 import React from 'react'
 import Geeks from './Geek';
 
@@ -279,17 +280,37 @@ function App() {
 };
 */
 
-function App(){
+import Geeks from './Geek';
+import ProductList from './ProductList';
+
+const App=()=>{
+const p=[
+  {id:1,name:'product 1',price:10},
+  {id:2,name:'product 2',price:20},
+  {id:3,name:'product 3',price:30}
+];
+
+
   return(
     <div>
       {/* <Header/>
       <MainContent/>
       <Footer/> */}
       <Geeks/>
+      <div style={{margin:'5px'}}>
+
+        <h2 style={{color:'green'}}>
+          Geeks For Geeks |Reusable components Example
+        </h2>
+        <ProductList p={p}/>
+      </div>
+
     </div>
   );
 };
 export default App;
+
+
 
 
 

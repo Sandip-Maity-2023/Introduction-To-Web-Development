@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGEIAI - Farmer's Voice Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chat-container::-webkit-scrollbar-track {
+            background: #2d3748;
+        }
+        #chat-container::-webkit-scrollbar-thumb {
+            background-color: #4a5568;
+            border-radius: 20px;
+        }
+        .pulse {
+            animation: pulse-animation 1.5s infinite;
+        }
+        @keyframes pulse-animation {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 0 20px rgba(239, 68, 68, 0);
+            }
+        }
+        #mic-btn:disabled, #scan-btn:disabled, #weather-btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        #scanner-modal {
+            background-color: rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col h-screen antialiased">
+
+    <div class="container mx-auto max-w-3xl flex-1 p-4 flex flex-col">
+        <header class="text-center mb-4">
+            <h1 class="text-3xl font-bold text-green-400">AGEIAI </h1>
+            <p class="text-gray-400">Your Agricultural Voice & Vision Assistant</p>
+        </header>
+
+        <div id="chat-container" class="flex-1 overflow-y-auto bg-gray-800 rounded-lg p-4 space-y-4 shadow-inner">
+             <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center font-bold text-gray-900 shrink-0">AI</div>
+                <div class="bg-gray-700 rounded-lg p-3 max-w-[80%]">
+                    <p class="text-sm font-semibold mb-1 text-green-300">agriai</p>
+                    <p class="text-white">Hello! I am agriai. Select your language, then tap the mic to ask a question or tap the camera to scan a product or crop.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 p-4 bg-gray-800 rounded-lg shadow-lg">
+            <div id="status" class="text-center text-gray-400 mb-4 h-6">Select your language and press the mic or camera.</div>
+            <div class="flex items-center justify-center gap-4">
+                <div class="relative">
+                    <select id="language-select" class="bg-gray-700 border border-gray-600 rounded-lg p-3 appearance-none focus:outline-none focus:ring-2 focus:ring-green-500 pr-8">
+                        <option value="en-IN">English</option>
+                        <option value="hi-IN">हिन्दी (Hindi)</option>
+                        <option value="te-IN">తెలుగు (Telugu)</option>
+                        <option value="ml-IN">മലയാളം (Malayalam)</option>
+                    </select>
+                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+
+                <button id="weather-btn" class="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center text-white focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-transform duration-200 hover:scale-105" title="Get Weather Forecast">
+                    <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z"/></svg>
+                </button>
+
+                <button id="mic-btn" class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-white focus:outline-none focus:ring-4 focus:ring-red-400 transition-transform duration-200 hover:scale-105" title="Activate Microphone">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8h-1a6 6 0 11-12 0H3a7.001 7.001 0 006 6.93V17H7v2h6v-2h-2v-2.07z" clip-rule="evenodd"></path></svg>
+                </button>
+                 
+                <button id="scan-btn" class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white focus:outline-none focus:ring-4 focus:ring-blue-400 transition-transform duration-200 hover:scale-105" title="Scan Product/Crop">
+                    <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4L10 2h4l2 2h4v2H4V4zm0 4h16v12H4V8zm2 2v8h12v-8H6z"/><circle cx="12" cy="14" r="3"/></svg>
+                </button>
+                
+                 <button id="stop-btn" class="w-20 h-20 bg-gray-600 rounded-full flex items-center justify-center text-white focus:outline-none focus:ring-4 focus:ring-gray-400 transition-transform duration-200 hover:scale-105 hidden" title="Stop Speaking">
+                     <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="scanner-modal" class="fixed inset-0 z-50 flex-col items-center justify-center hidden">
+        <video id="video-feed" class="w-full h-full object-cover"></video>
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 flex justify-center gap-4">
+             <button id="capture-btn" class="px-6 py-3 bg-green-600 rounded-lg text-white font-bold">Capture</button>
+             <button id="close-scanner-btn" class="px-6 py-3 bg-red-600 rounded-lg text-white font-bold">Cancel</button>
+        </div>
+    </div>
+    <canvas id="capture-canvas" class="hidden"></canvas>
+
+
+    <script type="module">
+        const micBtn = document.getElementById('mic-btn');
+        const scanBtn = document.getElementById('scan-btn');
+        const weatherBtn = document.getElementById('weather-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const chatContainer = document.getElementById('chat-container');
+        const statusDiv = document.getElementById('status');
+        const languageSelect = document.getElementById('language-select');
+        
+        // Scanner elements
+        const scannerModal = document.getElementById('scanner-modal');
+        const videoFeed = document.getElementById('video-feed');
+        const captureBtn = document.getElementById('capture-btn');
+        const closeScannerBtn = document.getElementById('close-scanner-btn');
+        const captureCanvas = document.getElementById('capture-canvas');
+        let videoStream = null;
+
+        let isListening = false;
+        let recognition;
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+        } else {
+            statusDiv.textContent = "Sorry, your browser doesn't support speech recognition.";
+            micBtn.disabled = true;
+        }
+        
+        const synth = window.speechSynthesis;
+        let voices = [];
+
+        function populateVoiceList() {
+            voices = synth.getVoices();
+        }
+        
+        populateVoiceList();
+        if (synth.onvoiceschanged !== undefined) {
+          synth.onvoiceschanged = populateVoiceList;
+        }
+
+        function enableMainButtons() {
+            micBtn.disabled = false;
+            scanBtn.disabled = false;
+            weatherBtn.disabled = false;
+            statusDiv.textContent = 'Tap the mic or camera for your next query.';
+        }
+
+        micBtn.addEventListener('click', () => {
+            micBtn.disabled = true; // Disable button to prevent rapid clicks
+            scanBtn.disabled = true;
+            weatherBtn.disabled = true;
+            if (isListening) {
+                recognition.stop();
+            } else {
+                if(synth.speaking) synth.cancel(); // Stop any speaking before listening
+                recognition.lang = languageSelect.value;
+                try {
+                    recognition.start();
+                } catch (error) {
+                    console.error("Recognition start error:", error);
+                    statusDiv.textContent = "Error starting microphone. Please check permissions.";
+                    micBtn.disabled = false; // re-enable only mic button on specific error
+                    scanBtn.disabled = false;
+                    weatherBtn.disabled = false;
+                }
+            }
+        });
+        
+        // Scanner functionality
+        scanBtn.addEventListener('click', async () => {
+            scannerModal.classList.remove('hidden');
+            scannerModal.classList.add('flex');
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                videoFeed.srcObject = videoStream;
+                videoFeed.play();
+            } catch (err) {
+                console.error("Camera access error:", err);
+                statusDiv.textContent = "Could not access the camera. Please check permissions.";
+                scannerModal.classList.add('hidden');
+                scannerModal.classList.remove('flex');
+            }
+        });
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+            }
+            videoFeed.srcObject = null;
+            scannerModal.classList.add('hidden');
+            scannerModal.classList.remove('flex');
+        }
+
+        closeScannerBtn.addEventListener('click', stopCamera);
+        
+        captureBtn.addEventListener('click', () => {
+            const context = captureCanvas.getContext('2d');
+            captureCanvas.width = videoFeed.videoWidth;
+            captureCanvas.height = videoFeed.videoHeight;
+            context.drawImage(videoFeed, 0, 0, captureCanvas.width, captureCanvas.height);
+            
+            const imageDataUrl = captureCanvas.toDataURL('image/png');
+            const base64ImageData = imageDataUrl.split(',')[1];
+            
+            addMessageToChat('user', 'Here is the image I captured:', imageDataUrl);
+            getBotResponseForImage(base64ImageData);
+            
+            stopCamera();
+        });
+
+
+        stopBtn.addEventListener('click', () => {
+            if(synth.speaking) {
+                synth.cancel();
+                statusDiv.textContent = "Speech stopped.";
+                stopBtn.classList.add('hidden');
+            }
+        });
+
+
+        recognition.onstart = () => {
+            isListening = true;
+            micBtn.classList.add('pulse');
+            statusDiv.textContent = 'Listening... Speak now.';
+        };
+
+        recognition.onend = () => {
+            isListening = false;
+            micBtn.classList.remove('pulse');
+            micBtn.disabled = false;
+            scanBtn.disabled = false;
+            weatherBtn.disabled = false;
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            let errorMessage = 'An error occurred. Please try again.';
+            if (event.error === 'no-speech') {
+                errorMessage = "I didn't hear anything. Please tap the mic and speak.";
+            } else if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                errorMessage = "Microphone access denied. Please enable it in your browser settings.";
+            }
+            statusDiv.textContent = errorMessage;
+            isListening = false;
+            micBtn.classList.remove('pulse');
+            micBtn.disabled = false;
+            scanBtn.disabled = false;
+            weatherBtn.disabled = false;
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            addMessageToChat('user', transcript);
+            statusDiv.textContent = 'Processing your query...';
+            getBotResponse(transcript);
+        };
+
+        function addMessageToChat(sender, message, imageUrl = null) {
+            const messageWrapper = document.createElement('div');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('bg-gray-700', 'rounded-lg', 'p-3', 'max-w-[80%]');
+            
+            const senderP = document.createElement('p');
+            senderP.classList.add('text-sm', 'font-semibold', 'mb-1');
+            
+            const contentP = document.createElement('p');
+            contentP.textContent = message;
+
+            if (sender === 'user') {
+                messageWrapper.classList.add('flex', 'justify-end', 'items-start', 'gap-3');
+                messageDiv.classList.replace('bg-gray-700', 'bg-blue-600');
+                senderP.textContent = 'You';
+                senderP.classList.add('text-blue-200');
+                 messageDiv.append(senderP, contentP);
+                if (imageUrl) {
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.className = 'mt-2 rounded-lg max-w-full h-auto';
+                    messageDiv.appendChild(img);
+                }
+                 messageWrapper.appendChild(messageDiv);
+            } else {
+                messageWrapper.classList.add('flex', 'items-start', 'gap-3');
+                const avatar = document.createElement('div');
+                avatar.textContent = 'AI';
+                avatar.className = 'w-10 h-10 rounded-full bg-green-500 flex items-center justify-center font-bold text-gray-900 shrink-0';
+                senderP.textContent = 'agriai';
+                senderP.classList.add('text-green-300');
+                messageDiv.append(senderP, contentP);
+                messageWrapper.append(avatar, messageDiv);
+            }
+
+            chatContainer.appendChild(messageWrapper);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function getBotResponse(userText) {
+            micBtn.disabled = true;
+            scanBtn.disabled = true;
+            weatherBtn.disabled = true;
+            statusDiv.innerHTML = '<div class="flex items-center justify-center gap-2"><span>Thinking...</span><div class="w-4 h-4 border-2 border-dashed rounded-full animate-spin border-green-400"></div></div>';
+            
+            const apiKey = "AIzaSyDZ6eBo3liCpsfhlRum100FyE93U0NIXcs"; // API key will be automatically managed by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const selectedLanguage = languageSelect.options[languageSelect.selectedIndex].text.split('(')[0].trim();
+
+            const systemPrompt = `You are 'agriai', a friendly and helpful AI assistant for farmers. Your goal is to provide simple, clear, and direct answers to their questions. Your answers must be concise and easy to understand. Respond only in the ${selectedLanguage} language.`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: userText }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            await handleApiCall(apiUrl, payload);
+        }
+        
+        async function getBotResponseForImage(base64ImageData) {
+            micBtn.disabled = true;
+            scanBtn.disabled = true;
+            weatherBtn.disabled = true;
+            statusDiv.innerHTML = '<div class="flex items-center justify-center gap-2"><span>Analyzing Image...</span><div class="w-4 h-4 border-2 border-dashed rounded-full animate-spin border-green-400"></div></div>';
+        
+            const apiKey = "AIzaSyDZ6eBo3liCpsfhlRum100FyE93U0NIXcs";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const selectedLanguage = languageSelect.options[languageSelect.selectedIndex].text.split('(')[0].trim();
+
+            const promptText = `Please analyze this image of a crop leaf or farming product. Identify what is in the image and provide a helpful solution or information for a farmer. If it's a diseased plant, identify the disease and suggest simple, actionable remedies. If it's a pest, identify it and suggest control methods. If it's a product, explain its use. Keep the explanation simple and direct. Respond in ${selectedLanguage}.`;
+        
+            const payload = {
+                contents: [{
+                    parts: [
+                        { text: promptText },
+                        { inlineData: { mimeType: "image/png", data: base64ImageData } }
+                    ]
+                }]
+            };
+
+            await handleApiCall(apiUrl, payload);
+        }
+
+        async function handleApiCall(url, payload) {
+             try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API call failed with status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const botText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (botText) {
+                    addMessageToChat('bot', botText);
+                    speakText(botText, languageSelect.value);
+                } else {
+                    throw new Error("No response text found in API result.");
+                }
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                const errorMessage = "I'm sorry, I'm having trouble connecting. Please try again in a moment.";
+                addMessageToChat('bot', errorMessage);
+                speakText(errorMessage, 'en-IN');
+            } finally {
+                enableMainButtons();
+            }
+        }
+        
+        // --- Weather Functionality ---
+        weatherBtn.addEventListener('click', getWeatherForecast);
+
+        function getWeatherForecast() {
+            micBtn.disabled = true;
+            scanBtn.disabled = true;
+            weatherBtn.disabled = true;
+            statusDiv.innerHTML = '<div class="flex items-center justify-center gap-2"><span>Getting your location...</span><div class="w-4 h-4 border-2 border-dashed rounded-full animate-spin border-yellow-400"></div></div>';
+
+            if (!navigator.geolocation) {
+                const errorMsg = "Geolocation is not supported by your browser.";
+                statusDiv.textContent = errorMsg;
+                addMessageToChat('bot', errorMsg);
+                speakText(errorMsg, 'en-IN');
+                enableMainButtons();
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError);
+        }
+
+        async function handleLocationSuccess(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            statusDiv.innerHTML = '<div class="flex items-center justify-center gap-2"><span>Fetching weather data...</span><div class="w-4 h-4 border-2 border-dashed rounded-full animate-spin border-yellow-400"></div></div>';
+
+            try {
+                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+                if (!weatherResponse.ok) throw new Error('Failed to fetch weather data.');
+                const weatherData = await weatherResponse.json();
+                
+                const geoResponse = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+                if (!geoResponse.ok) throw new Error('Failed to fetch location name.');
+                const geoData = await geoResponse.json();
+                const city = geoData.address.city || geoData.address.town || geoData.address.village || 'your area';
+
+                const temperature = weatherData.current_weather.temperature;
+                const weatherCode = weatherData.current_weather.weathercode;
+                const weatherDescription = getWeatherDescription(weatherCode);
+
+                const forecastText = `The current temperature in ${city} is ${temperature}° Celsius with ${weatherDescription}.`;
+                
+                addMessageToChat('bot', forecastText);
+                speakText(forecastText, languageSelect.value);
+
+            } catch (error) {
+                console.error("Weather fetch error:", error);
+                const errorMsg = "Sorry, I couldn't get the weather forecast. Please try again.";
+                addMessageToChat('bot', errorMsg);
+                speakText(errorMsg, 'en-IN');
+            } finally {
+                enableMainButtons();
+            }
+        }
+
+        function handleLocationError(error) {
+            let errorMsg = "An unknown error occurred while getting your location.";
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMsg = "You denied the request for Geolocation. I need your location to provide a weather forecast.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMsg = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    errorMsg = "The request to get user location timed out.";
+                    break;
+            }
+            statusDiv.textContent = errorMsg;
+            addMessageToChat('bot', errorMsg);
+            speakText(errorMsg, 'en-IN');
+            enableMainButtons();
+        }
+
+        function getWeatherDescription(code) {
+            const codes = {
+                0: 'Clear sky', 1: 'Mainly clear', 2: 'Partly cloudy', 3: 'Overcast',
+                45: 'Fog', 48: 'Depositing rime fog',
+                51: 'Light drizzle', 53: 'Moderate drizzle', 55: 'Dense drizzle',
+                56: 'Light freezing drizzle', 57: 'Dense freezing drizzle',
+                61: 'Slight rain', 63: 'Moderate rain', 65: 'Heavy rain',
+                66: 'Light freezing rain', 67: 'Heavy freezing rain',
+                71: 'Slight snow fall', 73: 'Moderate snow fall', 75: 'Heavy snow fall',
+                77: 'Snow grains',
+                80: 'Slight rain showers', 81: 'Moderate rain showers', 82: 'Violent rain showers',
+                85: 'Slight snow showers', 86: 'Heavy snow showers',
+                95: 'Thunderstorm', 96: 'Thunderstorm with slight hail', 99: 'Thunderstorm with heavy hail',
+            };
+            return codes[code] || 'unknown weather conditions';
+        }
+
+
+        function speakText(text, lang) {
+            synth.cancel();
+
+            if (text !== '') {
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                utterance.onstart = () => stopBtn.classList.remove('hidden');
+                utterance.onend = () => stopBtn.classList.add('hidden');
+                utterance.onerror = (event) => {
+                    console.error('SpeechSynthesisUtterance.onerror', event);
+                    statusDiv.textContent = "Sorry, I'm unable to speak right now.";
+                    stopBtn.classList.add('hidden');
+                };
+
+                utterance.lang = lang;
+                const selectedVoice = voices.find(voice => voice.lang === lang);
+                if (selectedVoice) utterance.voice = selectedVoice;
+                
+                setTimeout(() => synth.speak(utterance), 100);
+            }
+        }
+        
+        setTimeout(() => {
+            const welcomeText = "Hello! I am agriai. Select your language, then tap the mic to ask a question or tap the camera to scan a product or crop.";
+            speakText(welcomeText, 'en-IN');
+        }, 500);
+
+    </script>
+</body>
+</html>

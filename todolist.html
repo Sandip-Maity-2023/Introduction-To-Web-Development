@@ -1,125 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To do List items</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-zJch5JzTjB+jP1lMBxZDJl6K5V24oK0dEhABLnIBF4VvD9biM1rKInLUZaQplwKfI+4K7jqTj6JrbVtO4gk0jQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-</head>
-<style>
-
-body{
-    font-family: 'Arial',sans-serif;
-    background: linear-gradient(135deg,#f06,#5c9be3,rgb(6, 236, 94),rgb(43, 13, 243));
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
-color:#fff;
-
-}
-
-.container{
-    background: rgba(255,255,255,0.1);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 14px 15px rgba(0,0,0,0.2);
-    width: 100%;
-    max-width: 400px;
-}
-input[type="text"]{
-    width: 70%;
-    padding: 15px;
-    border: none;
-    outline: none;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    margin-right: 1rem;
-    font-size: 1rem;
-    border-radius: 20px;
-}
-
-button{
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-border: none;
-background: #6b96ec;
-font-size: 1rem;
-margin-right: 0.5rem;
-box-shadow: inset  0 5px 15px rgba(207, 239, 44, 0.1);
-transition: background 0.3s;
-cursor: pointer;
-}
-button:hover{
-    background: #5c9be3;
-}
-</style>
-<body>
-    <div class="container">
-        <input type="text" placeholder="Add a new task...">
-        <button type="submit">Add</button>
-        <div id="task-list"></div>
-    </div>
-</body>
-<script>
-let input=document.querySelector('input');
-let btn=document.querySelector('button');
-let tasklist=document.getElementById('task-list');
-
-let task=[];
-let storage=localStorage.getItem('tasks');
-if(storage !==null){
-let data=JSON.parse(storage);
-task=data;
-maketodo();
-}
-
-function maketodo(){
-    tasklist.innerHTML='';
-    for(let i=0;i<task.length;i++){
-        let {id,text}=task[i];
-        let element=document.createElement('div');
-        element.innerHTML=
-        `<span class='task' contenteditable='false'>${text}</span>
-        <button class='edit'>Edit</button>
-        <button class='delete'>Delete<i class="fa-solid fa-trash"></i></button>`;
-
-        let delbtn=element.querySelector('.delete');
-        let editbtn=element.querySelector('.edit');
-        let taskText=element.querySelector('.task');
-
-        delbtn.addEventListener('click',function(){
-let filter=task.filter(function (taskobj){
-return taskobj.id !=id;
-        });
-        task=filter;
-        storage.setItem("task array",JSON.stringify(task));
-        tasklist.removeChild(element);
-        });
-        editbtn.addEventListener('click',function(){
-            if(editbtn.innerText==='Edit'){
-                taskText.setAttribute('contenteditable','false');
-                taskText.focus();
-                editbtn.innerText='Save';
-            }else{
-                taskText.setAttribute('contenteditable','false');
-                let updated=taskText.innerText.trim();
-                if(updated !==' '){
-                    task=task.map(function(taskobj){
-if(taskobj.id===id){
-    taskobj.text=updated;
-}
-return taskobj;
-                    });
-                    storage.setItem('task array',JSON.stringify(task));
-                }
-                editbtn.innerText='Edit';
-            }
-        });
-        element.classList.add('todo');
-        tasklist.appendChild(element);
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-zJch5JzTjB+jP1lMBxZDJl6K5V24oK0dEhABLnIBF4VvD9biM1rKInLUZaQplwKfI+4K7jqTj6JrbVtO4gk0jQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <style>
+    
+    body {
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(
+        135deg,
+        #f06,
+        #5c9be3,
+        rgb(6, 236, 94),
+        rgb(43, 13, 243)
+      );
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
+      padding:1rem;
     }
+
+    #newtask{
+      margin-bottom: 25px;
+    }
+
+.task{
+  margin-top: 20px;
 }
-</script>
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 14px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+    }
+    input[type="text"] {
+      width: 70%;
+      padding: 15px;
+      border: none;
+      outline: none;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      margin-right: 1rem;
+      font-size: 1rem;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+    button {
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: none;
+      background: #6b96ec;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      box-shadow: inset 0 5px 15px rgba(207, 239, 44, 0.1);
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0e74e8;
+    }
+
+  </style>
+  <body>
+    <div class="container">
+      <input id='newtask' type="text" placeholder="Add a new task..." />
+      <button type="submit">Add</button>
+      <div id="task-list"></div>
+    </div>
+  </body>
+  <script>
+
+newtask.addEventListener('keydown',(e)=>{
+if(e.key==='Enter'){
+  const text=newtask.value.trim();
+  if(!text) return;
+  task.push({id:Date.now(),text});
+  localStorage.setItem("tasks",JSON.stringify(task));
+  newtask.value='';
+  maketodo();
+}
+})
+    let input = document.querySelector("input");
+    let btn = document.querySelector("button");
+    let tasklist = document.getElementById("task-list");
+
+    let task = [];
+    let storage = localStorage.getItem("tasks"); //choosing a key name as tasks
+    if (storage !== null) {
+      task = JSON.parse(storage);
+      maketodo();
+    }
+
+    btn.addEventListener("click", function () {
+      let text = input.value.trim();
+      if (text !== " ") {
+        task.push({ id: Date.now(), text });
+        localStorage.setItem("tasks", JSON.stringify(task));
+        maketodo();
+        input.value = " ";
+      }
+    });
+
+    function maketodo() {
+      tasklist.innerHTML = "";
+      for (let i = 0; i < task.length; i++) {
+        let { id, text } = task[i];
+        let element = document.createElement("div");
+        element.innerHTML = `<span class='task' contenteditable='false' style='margin:10px 0;font-size:20px;display:inline-block;width:60%;color:white;'>${text}</span>
+        <div style='display:inline-block;width:38%;text-align:right'>
+        <button class='edit' style='margin-right:8px;padding:6px 12px;font-size:14px;'>Edit</button>
+        <button class='delete' style='padding:6px 12px;font-size:14px;'>Delete<i class="fa-solid fa-trash" style='margin-left:6px'></i></button>`;
+
+        let delbtn = element.querySelector(".delete");
+        let editbtn = element.querySelector(".edit");
+        let taskText = element.querySelector(".task");
+
+        delbtn.addEventListener("click", function () {
+          task = task.filter((t) => t.id !== id);
+          localStorage.setItem("tasks", JSON.stringify(task));
+          maketodo();
+        });
+
+        editbtn.addEventListener("click", function () {
+          if (editbtn.innerText === "Edit") {
+            taskText.setAttribute("contenteditable", "true");
+            taskText.focus();
+            editbtn.innerText = "Save";
+          } else {
+            taskText.setAttribute("contenteditable", "false");
+            let updated = taskText.innerText.trim();
+            if (updated !== " ") {
+              task = task.map((t) =>
+                t.id === id ? { ...t, text: updated } : t
+              );
+              localStorage.setItem("tasks", JSON.stringify(task));
+            }
+            editbtn.innerText = "Edit";
+          }
+        });
+        element.classList.add("todo");
+        tasklist.appendChild(element);
+      }
+    }
+
+  </script>
 </html>

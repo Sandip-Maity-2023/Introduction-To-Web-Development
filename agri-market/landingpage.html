@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri-AI | National Agriculture Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .header-bg {
+            background: linear-gradient(to right, #1a3a6e, #2e5a9b);
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .chatbot-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .chatbot-btn:hover {
+            transform: scale(1.1);
+        }
+        .weather-icon {
+            width: 80px;
+            height: 80px;
+        }
+        .forecast-card {
+            border: 1px solid #e2e8f0;
+        }
+        .live-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #10b981;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="header-bg text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="Screenshot 2025-09-10 211329.png" alt="Agri-AI Logo" class="h-16 w-16 rounded-full">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wider">Agri-AI</h1>
+                    <p class="text-sm opacity-90">Ministry of Agriculture & Farmer Welfare</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#weather" class="hover:text-yellow-300 transition">Weather</a>
+                <a href="#health" class="hover:text-yellow-300 transition">Soil & Crop Health</a>
+                <a href="#market" class="hover:text-yellow-300 transition">Market Prices</a>
+                <a href="#news" class="hover:text-yellow-300 transition">News</a>
+            </nav>
+            <button class="md:hidden" id="menu-btn" aria-label="Open navigation menu" title="Open navigation menu">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-4">
+            <a href="#weather" class="block py-2 px-4 text-sm hover:bg-blue-700">Weather</a>
+            <a href="#health" class="block py-2 px-4 text-sm hover:bg-blue-700">Soil & Crop Health</a>
+            <a href="#market" class="block py-2 px-4 text-sm hover:bg-blue-700">Market Prices</a>
+            <a href="#news" class="block py-2 px-4 text-sm hover:bg-blue-700">News</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left & Center Column -->
+            <div class="md:col-span-2 space-y-8">
+                
+                <!-- Weather Section -->
+                <section id="weather" class="section-card p-6">
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-blue-200 pb-2 flex items-center"><i class="fas fa-cloud-sun-rain mr-3 text-blue-600"></i>Weather Forecast</h2>
+                    <div id="weather-content" class="text-center">
+                        <p id="weather-loading">Fetching weather data for your location...</p>
+                        <!-- Weather data will be injected here -->
+                    </div>
+                </section>
+
+                <!-- Soil & Crop Health Section -->
+                <section id="health" class="section-card p-6">
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-green-200 pb-2 flex items-center"><i class="fas fa-leaf mr-3 text-green-600"></i>Soil & Crop Health Detection</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-6">
+                        <div>
+                            <p class="mb-4">Our advanced systems use satellite imagery and AI to monitor crop health, detect pests, and analyze soil moisture in real-time. Upload an image of your crop or soil for an instant analysis.</p>
+                            <div class="bg-gray-100 p-4 rounded-lg border-2 border-dashed border-gray-300">
+                                <label for="crop-image-upload" class="sr-only">Upload crop or soil image for analysis</label>
+                                <input type="file" id="crop-image-upload" class="hidden" accept="image/*" title="Upload crop or soil image for analysis">
+                                <button onclick="document.getElementById('crop-image-upload').click();" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                                    <i class="fas fa-upload mr-2"></i>Upload Image for Analysis
+                                </button>
+                            </div>
+                             <div id="image-preview-container" class="mt-4 hidden">
+                                 <img id="image-preview" src="#" alt="Image Preview" class="max-h-60 mx-auto rounded-lg shadow-md"/>
+                             </div>
+                        </div>
+                        <div id="analysis-container">
+                             <div id="analysis-placeholder" class="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg h-full flex flex-col justify-center items-center">
+                                <i class="fas fa-microscope text-4xl mb-3"></i>
+                                <p>Analysis results will appear here.</p>
+                            </div>
+                            <div id="analysis-loading" class="hidden text-center text-gray-500 p-8 h-full flex flex-col justify-center items-center">
+                                 <i class="fas fa-spinner fa-spin text-4xl mb-3 text-blue-500"></i>
+                                 <p>Analyzing Image...</p>
+                            </div>
+                            <div id="analysis-results" class="hidden p-4 bg-white rounded-lg border">
+                                 <!-- Results will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                 <!-- DHT11 Sensor Section -->
+                <section id="dht11" class="section-card p-6">
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-teal-200 pb-2 flex justify-between items-center">
+                        <span class="flex items-center"><i class="fas fa-thermometer-half mr-3 text-teal-600"></i>Field Monitoring (DHT11 Sensor)</span>
+                        <span class="flex items-center text-sm font-medium text-green-600">
+                            <span class="live-dot mr-2"></span>Live
+                        </span>
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-600 flex items-center justify-center"><i class="fas fa-temperature-high mr-2 text-red-500"></i>Temperature</h3>
+                            <p id="dht-temp" class="text-4xl font-bold mt-2">--.- °C</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-600 flex items-center justify-center"><i class="fas fa-tint mr-2 text-blue-500"></i>Humidity</h3>
+                            <p id="dht-humidity" class="text-4xl font-bold mt-2">--.- %</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Market Prices Section -->
+                <section id="market" class="section-card p-6">
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-yellow-200 pb-2 flex items-center"><i class="fas fa-chart-line mr-3 text-yellow-600"></i>Market Prices (Rubber - Kochi)</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="p-3">Period</th>
+                                    <th class="p-3">Price (per quintal)</th>
+                                    <th class="p-3">Trend</th>
+                                    <th class="p-3">Forecast</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium">Past (Last Month)</td>
+                                    <td class="p-3">₹15,500</td>
+                                    <td class="p-3 text-green-600 flex items-center"><i class="fas fa-arrow-up mr-2"></i>Increasing</td>
+                                    <td class="p-3">-</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-3 font-medium">Present (Today)</td>
+                                    <td class="p-3">₹15,200</td>
+                                    <td class="p-3 text-red-600 flex items-center"><i class="fas fa-arrow-down mr-2"></i>Decreasing</td>
+                                    <td class="p-3">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-medium">Future (Next Month)</td>
+                                    <td class="p-3">~ ₹15,000</td>
+                                    <td class="p-3 text-gray-500 flex items-center"><i class="fas fa-question-circle mr-2"></i>Projected</td>
+                                    <td class="p-3 text-yellow-600">Likely to Stabilize</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-8">
+                <!-- News Section -->
+                <aside id="news" class="section-card p-6">
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-red-200 pb-2 flex items-center"><i class="fas fa-newspaper mr-3 text-red-600"></i>Latest News</h2>
+                    <ul class="space-y-4">
+                        <li class="border-b pb-2">
+                            <a href="#" class="font-semibold hover:text-blue-700">Govt announces new subsidy for coconut rejuvenation.</a>
+                            <p class="text-sm text-gray-600">Sep 12, 2025 - New scheme aims to help coconut growers...</p>
+                        </li>
+                        <li class="border-b pb-2">
+                            <a href="#" class="font-semibold hover:text-blue-700">South-west monsoon to intensify over Kerala.</a>
+                            <p class="text-sm text-gray-600">Sep 11, 2025 - IMD forecasts heavy rainfall across the state...</p>
+                        </li>
+                        <li>
+                            <a href="#" class="font-semibold hover:text-blue-700">Rubber Board issues advisory on fungal disease.</a>
+                            <p class="text-sm text-gray-600">Sep 10, 2025 - Farmers advised to take preventive measures...</p>
+                        </li>
+                    </ul>
+                </aside>
+                 <!-- Quick Links -->
+                 <aside class="section-card p-6">
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-indigo-200 pb-2 flex items-center"><i class="fas fa-link mr-3 text-indigo-600"></i>Quick Links</h2>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="flex items-center hover:text-blue-700"><i class="fas fa-tractor w-5 mr-2"></i>Scheme Information</a></li>
+                        <li><a href="#" class="flex items-center hover:text-blue-700"><i class="fas fa-seedling w-5 mr-2"></i>Crop Advisory</a></li>
+                        <li><a href="#" class="flex items-center hover:text-blue-700"><i class="fas fa-file-alt w-5 mr-2"></i>Download Forms</a></li>
+                        <li><a href="#" class="flex items-center hover:text-blue-700"><i class="fas fa-phone-alt w-5 mr-2"></i>Contact Directory</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Chatbot Button -->
+    <a href="chatbot.html" class="chatbot-btn bg-blue-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
+        <i class="fas fa-comments text-3xl"></i>
+    </a>
+
+    <footer class="bg-gray-800 text-white mt-8 p-6 text-center">
+        <p>&copy; 2025 Agri-AI, Ministry of Agriculture & Farmer Welfare, Government of India. All Rights Reserved.</p>
+    </footer>
+
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Weather API fetch
+    const weatherContent = document.getElementById('weather-content');
+    const weatherLoading = document.getElementById('weather-loading');
+
+    // Default to Kochi, Kerala, India coordinates
+    const lat = 9.9312;
+    const lon = 76.2673;
+
+    const API_URL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            renderWeatherData(data);
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+            weatherLoading.textContent = 'Failed to load weather data. Please try again later.';
+        });
+
+    function renderWeatherData(data) {
+        weatherLoading.style.display = 'none';
+
+        // Current Weather
+        const currentTemp = data.current.temperature_2m;
+        const currentWmo = data.current.weather_code;
+        const { icon, description } = getWeatherInfo(currentWmo);
+
+        const currentWeatherHTML = `
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6">
+                <div class="text-center">
+                    <p class="text-lg font-medium text-gray-600">Now in Kochi</p>
+                    <div class="flex items-center justify-center gap-4">
+                         <i class="fas ${icon} text-5xl text-blue-500"></i>
+                         <p class="text-6xl font-bold">${Math.round(currentTemp)}°C</p>
+                    </div>
+                    <p class="text-xl capitalize">${description}</p>
+                </div>
+            </div>
+        `;
+        
+        // 5-Day Forecast
+        let forecastHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-6">';
+        for (let i = 0; i < 5; i++) {
+            const date = new Date(data.daily.time[i]);
+            const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const maxTemp = data.daily.temperature_2m_max[i];
+            const minTemp = data.daily.temperature_2m_min[i];
+            const dailyWmo = data.daily.weather_code[i];
+            const dailyWeather = getWeatherInfo(dailyWmo);
+
+            forecastHTML += `
+                <div class="forecast-card p-3 rounded-lg text-center bg-gray-50">
+                    <p class="font-bold">${day}</p>
+                    <i class="fas ${dailyWeather.icon} text-3xl my-2 text-blue-500"></i>
+                    <p class="font-semibold">${Math.round(maxTemp)}° / ${Math.round(minTemp)}°</p>
+                </div>
+            `;
+        }
+        forecastHTML += '</div>';
+
+        weatherContent.innerHTML = currentWeatherHTML + forecastHTML;
+    }
+
+    function getWeatherInfo(wmoCode) {
+        const wmo = {
+            0: { icon: 'fa-sun', description: 'Clear sky' },
+            1: { icon: 'fa-cloud-sun', description: 'Mainly clear' },
+            2: { icon: 'fa-cloud', description: 'Partly cloudy' },
+            3: { icon: 'fa-cloud', description: 'Overcast' },
+            45: { icon: 'fa-smog', description: 'Fog' },
+            48: { icon: 'fa-smog', description: 'Depositing rime fog' },
+            51: { icon: 'fa-cloud-rain', description: 'Light drizzle' },
+            53: { icon: 'fa-cloud-rain', description: 'Moderate drizzle' },
+            55: { icon: 'fa-cloud-showers-heavy', description: 'Dense drizzle' },
+            61: { icon: 'fa-cloud-rain', description: 'Slight rain' },
+            63: { icon: 'fa-cloud-showers-heavy', description: 'Moderate rain' },
+            65: { icon: 'fa-cloud-showers-heavy', description: 'Heavy rain' },
+            80: { icon: 'fa-cloud-showers-heavy', description: 'Slight rain showers' },
+            81: { icon: 'fa-cloud-showers-heavy', description: 'Moderate rain showers' },
+            82: { icon: 'fa-cloud-showers-heavy', description: 'Violent rain showers' },
+            95: { icon: 'fa-bolt', description: 'Thunderstorm' }
+        };
+        return wmo[wmoCode] || { icon: 'fa-question-circle', description: 'Unknown' };
+    }
+    
+    // File upload and analysis logic
+    const uploader = document.getElementById('crop-image-upload');
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+    const imagePreview = document.getElementById('image-preview');
+    const analysisPlaceholder = document.getElementById('analysis-placeholder');
+    const analysisLoading = document.getElementById('analysis-loading');
+    const analysisResults = document.getElementById('analysis-results');
+
+    uploader.addEventListener('change', (event) => {
+        if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                imagePreview.setAttribute('src', e.target.result);
+                imagePreviewContainer.classList.remove('hidden');
+            }
+            
+            reader.readAsDataURL(event.target.files[0]);
+
+            // Start analysis simulation
+            analysisPlaceholder.classList.add('hidden');
+            analysisResults.classList.add('hidden');
+            analysisLoading.classList.remove('hidden');
+
+            setTimeout(() => {
+                const mockResults = generateMockAnalysis();
+                displayAnalysisResults(mockResults);
+                analysisLoading.classList.add('hidden');
+                analysisResults.classList.remove('hidden');
+            }, 2500); // Simulate 2.5 second analysis time
+        }
+    });
+
+    function generateMockAnalysis() {
+        // This function returns a random mock analysis result
+        const soilTypes = ['Alluvial Soil', 'Laterite Soil', 'Red Soil'];
+        const moistureLevels = ['Optimal (35%)', 'Dry (18%)', 'Moist (45%)'];
+        const nutrientDeficiencies = ['None Detected', 'Nitrogen Deficiency', 'Potassium Deficiency'];
+        const pestDetections = ['No Pests Detected', 'Evidence of Aphids', 'Signs of Stem Borer'];
+
+        return {
+            soilType: soilTypes[Math.floor(Math.random() * soilTypes.length)],
+            moisture: moistureLevels[Math.floor(Math.random() * moistureLevels.length)],
+            nutrients: nutrientDeficiencies[Math.floor(Math.random() * nutrientDeficiencies.length)],
+            pests: pestDetections[Math.floor(Math.random() * pestDetections.length)],
+            recommendation: "It is recommended to apply a nitrogen-rich fertilizer. Ensure consistent irrigation for the next 7 days."
+        };
+    }
+
+    function displayAnalysisResults(results) {
+        analysisResults.innerHTML = `
+            <h3 class="text-xl font-bold mb-3 text-gray-800">Analysis Report</h3>
+            <div class="space-y-3">
+                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                    <span class="font-semibold">Soil Type:</span>
+                    <span>${results.soilType}</span>
+                </div>
+                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                    <span class="font-semibold">Moisture Level:</span>
+                    <span>${results.moisture}</span>
+                </div>
+                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                    <span class="font-semibold">Nutrient Status:</span>
+                    <span class="${results.nutrients === 'None Detected' ? 'text-green-600 font-medium' : 'text-orange-600 font-medium'}">${results.nutrients}</span>
+                </div>
+                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                    <span class="font-semibold">Pest Detection:</span>
+                     <span class="${results.pests === 'No Pests Detected' ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}">${results.pests}</span>
+                </div>
+            </div>
+            <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <h4 class="font-bold text-blue-800"><i class="fas fa-lightbulb mr-2"></i>Recommendation</h4>
+                <p class="text-sm text-blue-700">${results.recommendation}</p>
+            </div>
+        `;
+    }
+
+    // DHT11 Sensor Simulation
+    const dhtTemp = document.getElementById('dht-temp');
+    const dhtHumidity = document.getElementById('dht-humidity');
+
+    function updateDhtSensorData() {
+        // Simulate data for Kerala's climate
+        const temperature = (28 + Math.random() * 5).toFixed(1);
+        const humidity = (75 + Math.random() * 15).toFixed(1);
+
+        dhtTemp.textContent = `${temperature} °C`;
+        dhtHumidity.textContent = `${humidity} %`;
+    }
+
+    setInterval(updateDhtSensorData, 3000); // Update every 3 seconds
+    window.onload = updateDhtSensorData; // Initial data on load
+
+</script>
+
+</body>
+</html>
+
