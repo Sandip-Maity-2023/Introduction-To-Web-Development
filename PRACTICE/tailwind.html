@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to Tailwind CSS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --color-clifford: #da373d;
+    }
+  </style>
+</head>
+<body class="m-4">
+  <h1 class="text-4xl font-bold underline">m-4 means margin 4</h1>
+  <h1 class="text-green-500 text-4xl font-bold">GeeksforGeeks</h1>
+  <p><strong>Tailwind CSS Tutorial</strong></p>
+  <p>You can use Tailwind CSS as a replacement for CSS. This framework increases your pace to design any website.</p>
+
+  <div class="text-center mt-6">
+    <h1 class="text-green-400 text-5xl font-bold">GeeksforGeeks</h1>
+    <p class="text-gray-600">400 means color intensity (100, 400, 600, 800)</p>
+    <b>Tailwind CSS float class</b>
+    <div class="mx-10">
+      <a href="https://www.geeksforgeeks.org" target="_blank" rel="noopener noreferrer">
+        <img class="float-right p-2" src="https://media.geeksforgeeks.org/wp-content/uploads/20190807114330/GFG115.png" alt="link">
+      </a>
+      <p class="text-justify">
+        Tailwind CSS float class is used to float an element to the left or right of its container. 
+        The float classes in Tailwind CSS are:
+      </p>
+    </div>
+  </div>
+
+  <h2 class="text-[var(--color-clifford)] text-3xl font-bold mt-8">This uses custom Clifford color</h2>
+</body>
+</html>
