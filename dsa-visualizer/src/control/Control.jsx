@@ -14,7 +14,7 @@ function Control({handleArr,setSpeed,isSorting,handleSorting,userInput,setuserIn
         </div>
         <button className='neu-button' onClick={handleArr}>Generate New Array</button>
         <button className='neu-button' onClick={reSet}>Reset</button>
-        <select name="neumorphism-dropdown" value={selectedSorting} id="hello" onChange={handleSorting}>
+        <select name='neumorphism-dropdown' value={selectedSorting} id="hello" onChange={handleSorting}>
           <option value="">Select value</option>
           <option value="bubbleSort">Bubble Sorting</option>
           <option value="mergeSort">Merge Sorting</option>

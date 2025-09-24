@@ -38,7 +38,6 @@ merge(arr,l,m,r);
 }
 */
 
-import { sortedIndex } from "lodash";
 
 export const MergeSort = (arr) => {
   const animations = [];
@@ -62,7 +61,7 @@ const mergeSortHelper = (sorted, startIdx, endIdx, auxiliary, animations) => {
 };
 
 const merge = (sorted, startIdx, midIdx, endIdx, auxiliary, animations) => {
-  let k = startIdx;
+  let k = startIdx; //
   let i = startIdx;
   let j = midIdx + 1;
 

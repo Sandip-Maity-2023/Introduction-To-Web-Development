@@ -1,8 +1,11 @@
+/*yellow compare, blue reset, red swap green sorted
+
+*/
+
 import { useState, useEffect } from "react";
 import Visualizer from "./control/Visualizer";
 import Control from "./control/Control";
 import { MergeSort } from "./algorithm/MergeSort";
-import { divide } from "lodash";
 
 function App() {
   const [arr, setArr] = useState([]);
@@ -38,10 +41,10 @@ function App() {
 
     let animations = [];
     switch (sortingMethod) {
-      // case "bubbleSort":
-      //   animations = bubbleSort(arr);
-      //   bubbleAnimation(animations);
-      //   break;
+      case "bubbleSort":
+        animations = bubbleSort(arr);
+        bubbleAnimation(animations);
+        break;
       case "mergeSort":
         animations = MergeSort(arr);
         mergeAnimation(animations);
@@ -51,10 +54,14 @@ function App() {
     }
   };
 
+// i % 3 === 0: Start of comparison → color = yellow
+// i % 3 === 1: End of comparison → color = blue
+// i % 3 === 2: Actual value change → update height
+
   const mergeAnimation = (animations) => {
-    const bars = document.getElementById("bar");
+    const bars = document.getElementsByClassName("bar");
     for (let i = 0; i < animations.length; i++) {
-      const isColorChange = i % 3 !== 2;
+      const isColorChange = i % 3 !== 2; //color change
       if (isColorChange) {
         const [baroneIdx, bartwoIdx] = animations[i];
         const barone = bars[baroneIdx];
@@ -73,6 +80,8 @@ function App() {
         }, i * speed);
       }
     }
+
+    //paint all bars green after sorting
     setTimeout(() => {
       for (let j = 0; j < bars.length; j++) {
         setTimeout(() => {
@@ -81,12 +90,24 @@ function App() {
       }
       setisSorting(false);
     }, animations.length * speed);
+
+
   };
   return (
     <div>
-      <h1>Program visualizer</h1>
-      <Control handleArr={handleArr} handleSorting={handleSorting} userInput={userInput} setuserInput={setuserInput} setSpeed={setSpeed} reSet={reSet} isSorting={isSorting} speed={speed} selectedSorting={selectedSorting}/>
-      <Visualizer arr={arr}/>
+      <h1>Data Structure & Algorithm Visualizer</h1>
+      <Control
+        handleArr={handleArr}
+        handleSorting={handleSorting}
+        userInput={userInput}
+        setuserInput={setuserInput}
+        setSpeed={setSpeed}
+        reSet={reSet}
+        isSorting={isSorting}
+        speed={speed}
+        selectedSorting={selectedSorting}
+      />
+      <Visualizer arr={arr} />
     </div>
   );
 }
