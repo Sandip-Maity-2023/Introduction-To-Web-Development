@@ -282,6 +282,7 @@ function App() {
 
 import Geeks from './Geek';
 import ProductList from './ProductList';
+import Event from './Event';
 
 const App=()=>{
 const p=[
@@ -303,6 +304,7 @@ const p=[
           Geeks For Geeks |Reusable components Example
         </h2>
         <ProductList p={p}/>
+        <Event/>
       </div>
 
     </div>

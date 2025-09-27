@@ -1,11 +1,26 @@
 /*yellow compare, blue reset, red swap green sorted
 
 */
-
+ import "./App.css"
 import { useState, useEffect } from "react";
 import Visualizer from "./control/Visualizer";
 import Control from "./control/Control";
+
 import { MergeSort } from "./algorithm/MergeSort";
+import SelectionSort from "./algorithm/SelectionSort";
+import BubbleSort from "./algorithm/BubbleSort";
+import InsertionSort from "./algorithm/InsertionSort";
+import BinarySearch from "./algorithm/BinarySearch";
+
+import BubbleAnimation from "./animations/Bubble";
+import MergeAnimation from "./animations/Merge";
+import SelectionAnimation from "./animations/Selection";
+import Insertion from "./animations/Insertion";
+import QuickSort from "./algorithm/QuickSort";
+import Quick from "./animations/Quick";
+import Binary from "./animations/Binary";
+
+import Navbar from "./control/Navbar";
 
 function App() {
   const [arr, setArr] = useState([]);
@@ -13,6 +28,7 @@ function App() {
   const [speed, setSpeed] = useState(100);
   const [isSorting, setisSorting] = useState(false);
   const [selectedSorting, setselectedSorting] = useState("");
+  const [selectedTab, setselectedTab] = useState("");
 
   useEffect(() => {
     const userIn = userInput.split(",");
@@ -40,63 +56,67 @@ function App() {
     setisSorting(true);
 
     let animations = [];
+
     switch (sortingMethod) {
       case "bubbleSort":
-        animations = bubbleSort(arr);
-        bubbleAnimation(animations);
+        animations = BubbleSort(arr);
+        BubbleAnimation(animations, speed, setisSorting);
         break;
       case "mergeSort":
         animations = MergeSort(arr);
-        mergeAnimation(animations);
+        MergeAnimation(animations, speed, setisSorting);
+        break;
+      case "selectionSort":
+        animations = SelectionSort(arr);
+        SelectionAnimation(animations, speed, setisSorting);
+        break;
+      case "insertionSort":
+        animations = InsertionSort(arr);
+        Insertion(animations, speed, setisSorting);
+        break;
+      case "quickSort":
+        animations = QuickSort(arr);
+        Quick(animations, speed, setisSorting);
+        break;
+      case "binarySearch":
+        const target = parseInt(prompt("Enter number to search: "));
+        animations = BinarySearch(arr, target);
+        Binary(animations, speed, setisSorting);
         break;
       default:
         break;
     }
   };
 
-// i % 3 === 0: Start of comparison → color = yellow
-// i % 3 === 1: End of comparison → color = blue
-// i % 3 === 2: Actual value change → update height
+  // i % 3 === 0: Start of comparison → color = yellow
+  // i % 3 === 1: End of comparison → color = blue
+  // i % 3 === 2: Actual value change → update height
 
-  const mergeAnimation = (animations) => {
-    const bars = document.getElementsByClassName("bar");
-    for (let i = 0; i < animations.length; i++) {
-      const isColorChange = i % 3 !== 2; //color change
-      if (isColorChange) {
-        const [baroneIdx, bartwoIdx] = animations[i];
-        const barone = bars[baroneIdx];
-        const bartwo = bars[bartwoIdx];
-        const color = i % 3 === 0 ? "yellow" : "blue";
-        setTimeout(() => {
-          barone.style.backgroundColor = color;
-          bartwo.style.backgroundColor = color;
-        }, i * speed);
-      } else {
-        setTimeout(() => {
-          const [baroneIdx, newHeight] = animations[i];
-          const barOne = bars[baroneIdx];
-          barOne.style.height = `${newHeight}px`;
-          barOne.innerHTML = newHeight;
-        }, i * speed);
-      }
-    }
-
-    //paint all bars green after sorting
-    setTimeout(() => {
-      for (let j = 0; j < bars.length; j++) {
-        setTimeout(() => {
-          bars[j].style.backgroundColor = "green";
-        }, j * speed);
-      }
-      setisSorting(false);
-    }, animations.length * speed);
-
-
-  };
   return (
     <div>
-      <h1>Data Structure & Algorithm Visualizer</h1>
-      <Control
+<Navbar selectedTab={selectedTab} setselectedTab={setselectedTab}/>
+{selectedTab==='sorting' && (
+      <>
+        <h1>DSA</h1>
+        <Control
+          handleArr={handleArr}
+          handleSorting={handleSorting}
+          userInput={userInput}
+          setuserInput={setuserInput}
+          setSpeed={setSpeed}
+          reSet={reSet}
+          isSorting={isSorting}
+          speed={speed}
+          selectedSorting={selectedSorting}
+        />
+        <Visualizer arr={arr} />
+      </>
+)}
+
+{selectedTab==='searching' && (
+  <div>
+<h2>Searching Algorithm</h2>
+<Control
         handleArr={handleArr}
         handleSorting={handleSorting}
         userInput={userInput}
@@ -108,6 +128,14 @@ function App() {
         selectedSorting={selectedSorting}
       />
       <Visualizer arr={arr} />
+    </div>
+)}
+
+{selectedTab==='tree' && (
+  <div>
+    <h2>Tree Traversal</h2>
+    </div>
+)}
     </div>
   );
 }

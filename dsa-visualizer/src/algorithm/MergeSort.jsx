@@ -38,7 +38,6 @@ merge(arr,l,m,r);
 }
 */
 
-
 export const MergeSort = (arr) => {
   const animations = [];
   if (arr.length <= 1) return animations;
@@ -83,10 +82,10 @@ const merge = (sorted, startIdx, midIdx, endIdx, auxiliary, animations) => {
     animations.push([k, auxiliary[i]]); //overwrite height=value
     sorted[k++] = auxiliary[i++];
   }
-  while(j<=endIdx){
-    animations.push([j,j]);
-    animations.push([j,j]);
-    animations.push([k,auxiliary[j]]);
-    sorted[k++]=auxiliary[j++];
+  while (j <= endIdx) {
+    animations.push([j, j]);
+    animations.push([j, j]);
+    animations.push([k, auxiliary[j]]);
+    sorted[k++] = auxiliary[j++];
   }
 };
