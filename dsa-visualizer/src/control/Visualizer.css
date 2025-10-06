@@ -2,8 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
-    margin-top: 20px;
+    height: 400px;
+    width:750px;
+    margin: 40px;
+    background-color: rgba(106, 103, 103, 0.2);
+
 }
 .control-container{
     margin: 20px 0;
@@ -22,8 +25,8 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    color: #060606;
-    font-size: 12px;
+    color: #030303;
+    font-size: 17px;
     padding-bottom:5px;
 
 }
@@ -110,16 +113,16 @@ box-shadow: 3px 3px 10px #b3b3b3,-3px -3px 10px #ffffff;
 }
 .tooltip-text{
     /* visibility: hidden; */
-    width: 180px;
+    width: 200px;
     z-index: 1;
-    padding: 5px;
+    padding: 15px;
     background-color: #333;
     color: #fff;
     text-align: center;
     border-radius: 5px;
     position: absolute;
     top: -40px;
-    left: -75px;
+    left: 15px;
     opacity: 0;
     transition: opacity 0.3s ease;
     box-shadow: 0 4x 8px rgb(0,0,0,0.2);
@@ -131,5 +134,5 @@ box-shadow: 3px 3px 10px #b3b3b3,-3px -3px 10px #ffffff;
     opacity: 1;
 }
 .info-icon-wrapper:hover .info-icon{
-    box-shadow: 3px 3px 7px rgba(0,0,0,0.2),-3px -3px 7px rgba(255,255,255,0.7);
+    box-shadow: 3px 3px 7px rgba(40, 37, 37, 0.2),-3px -3px 7px rgba(255,255,255,0.7);
 }

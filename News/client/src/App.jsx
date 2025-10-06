@@ -5,11 +5,11 @@ import AllNews from "./components/AllNews";
 // import Footer from "./components/Footer";
 import TopHeadlines from "./components/TopHeadlines";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CountryNews from "./components/CountryNews";
+//import { BrowserRouter, Route, Routes } from "react-router-dom";
+//import CountryNews from "./components/CountryNews";
 
 function App() {
-  const [count, setCount] = useState(0)
+  //const [count, setCount] = useState(0)
   return (
     <div className="w-full">
       <BrowserRouter>

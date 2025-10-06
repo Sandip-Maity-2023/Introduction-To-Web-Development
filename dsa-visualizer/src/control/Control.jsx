@@ -20,7 +20,7 @@ function Control({
           value={userInput}
           onChange={(e) => setuserInput(e.target.value)}
           className="neumorphic-input"
-          placeholder="Enter your Array between 1-500"
+          placeholder="Enter your Array between 1-300"
         />
         <div className="info-icon-wrapper">
           <i className="info-icon">i</i>

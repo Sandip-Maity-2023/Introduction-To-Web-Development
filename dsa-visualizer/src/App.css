@@ -1,28 +1,40 @@
-.navbar{
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 30px;
-  background: #222;
-  color: #fff;
+.navbar {
+  width: 100%;                /* take full screen width */
+  background-color: #222;      /* dark background */
+  display: flex;               /* flexbox layout */
+  justify-content: space-between; /* logo left, links right */
+  align-items: center;         /* vertical centering */
+  padding: 15px 30px;          /* spacing inside */
+  box-sizing: border-box;
+  gap: 95px;
 }
 
-.nav-links{
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: yellow;
+}
+
+.nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 25px;                   /* space between items */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  color: white;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-.nav-links li{
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: background 0.3s;
+.nav-links li:hover {
+  color: yellow;               /* hover effect */
 }
 
-.nav-links li:hover{
-  background:#444;
-}
-.nav-links .active{
-  background: #007bff;
+.active {
+  color: yellow;               /* highlight active tab */
   font-weight: bold;
+  border-bottom: 2px solid yellow;
 }

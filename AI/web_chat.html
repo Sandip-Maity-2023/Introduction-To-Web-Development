@@ -37,7 +37,7 @@ roor defines css variables(satrting with--) for dark mode
   --secondary-hover-color: #444;
 }
 
-.light_mode {
+.Light {
   /* Light mode colors */
   --text-color: #222;
   --subheading-color: #A0A0A0;
@@ -346,7 +346,7 @@ body.hide-header .header {
   }
 
   .typing-area :where(.typing-form, .action-buttons) {
-    gap: 0.4rem;
+    gap: 2rem;
   }
 
   .typing-form .input-wrapper {
@@ -378,7 +378,7 @@ body.hide-header .header {
     <!-- Suggestion list -->
     <ul class="suggestion-list">
       <li class="suggestion">
-        <h4 class="text">Help me to find the symptoms of the desease</h4>
+        <h4 class="text">Help me to find the symptoms of the disease</h4>
         <span class="icon material-symbols-rounded">draw</span>
       </li>
       <li class="suggestion">
@@ -407,8 +407,8 @@ body.hide-header .header {
         <button id="send-message-button" class="icon material-symbols-rounded">send</button>
       </div>
       <div class="action-buttons">
-        <span id="theme-toggle-button" class="icon material-symbols-rounded">light</span>
-        <span id="delete-chat-button" class="icon material-symbols-rounded">delete</span>
+        <span id="theme-toggle-button" class="icon material-symbols-rounded">Light</span>
+        <span id="delete-chat-button" class="icon material-symbols-rounded">Delete</span>
       </div>
     </form>
     <p class="disclaimer-text">
@@ -435,11 +435,11 @@ const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-
 // Load theme and chat data from local storage on page load
 const loadDataFromLocalstorage = () => {
   const savedChats = localStorage.getItem("saved-chats");
-  const isLightMode = (localStorage.getItem("themeColor") === "light_mode");
+  const isLightMode = (localStorage.getItem("themeColor") === "Light");
 
   // Apply the stored theme
-  document.body.classList.toggle("light_mode", isLightMode);
-  toggleThemeButton.innerText = isLightMode ? "dark_mode" : "light_mode";
+  document.body.classList.toggle("Light", isLightMode);
+  toggleThemeButton.innerText = isLightMode ? "Dark" : "Light";
 
   // Restore saved chats or clear the chat container
   chatContainer.innerHTML = savedChats || '';
@@ -562,9 +562,9 @@ const handleOutgoingChat = () => {
 
 // Toggle between light and dark themes
 toggleThemeButton.addEventListener("click", () => {
-  const isLightMode = document.body.classList.toggle("light_mode");
-  localStorage.setItem("themeColor", isLightMode ? "light_mode" : "dark_mode");
-  toggleThemeButton.innerText = isLightMode ? "dark_mode" : "light_mode";
+  const isLightMode = document.body.classList.toggle("Light");
+  localStorage.setItem("themeColor", isLightMode ? "Light" : "dark");
+  toggleThemeButton.innerText = isLightMode ? "Dark" : "Light";
 });
 
 // Delete all chats from local storage when button is clicked

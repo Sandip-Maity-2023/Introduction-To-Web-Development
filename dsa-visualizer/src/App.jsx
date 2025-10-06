@@ -1,8 +1,9 @@
 /*yellow compare, blue reset, red swap green sorted
 
 */
- import "./App.css"
-import { useState, useEffect } from "react";
+/*yellow compare, blue reset, red swap green sorted */
+
+import { useState, useEffect, useMemo } from "react";
 import Visualizer from "./control/Visualizer";
 import Control from "./control/Control";
 
@@ -11,6 +12,7 @@ import SelectionSort from "./algorithm/SelectionSort";
 import BubbleSort from "./algorithm/BubbleSort";
 import InsertionSort from "./algorithm/InsertionSort";
 import BinarySearch from "./algorithm/BinarySearch";
+import { buildSampleTree, inorderTraversal } from "./algorithm/TreeTraversal";
 
 import BubbleAnimation from "./animations/Bubble";
 import MergeAnimation from "./animations/Merge";
@@ -19,6 +21,9 @@ import Insertion from "./animations/Insertion";
 import QuickSort from "./algorithm/QuickSort";
 import Quick from "./animations/Quick";
 import Binary from "./animations/Binary";
+import Tree from "./animations/Tree";
+
+import TreeVisualizer from "./control/TreeVisualizer";
 
 import Navbar from "./control/Navbar";
 
@@ -34,13 +39,13 @@ function App() {
     const userIn = userInput.split(",");
     const filteredInput = userIn
       .filter((item) => !isNaN(item) && Number.isInteger(parseFloat(item)))
-      .map((item) => Number(item) <= 500 && Number(item));
+      .map((item) => Number(item) <= 300 && Number(item));
     setArr([...filteredInput]);
   }, [userInput]);
 
   const handleArr = () => {
     const newArray = Array.from({ length: 15 }, () =>
-      Math.floor(Math.random() * 500)
+      Math.floor(Math.random() * 300)
     );
     setArr(newArray);
   };
@@ -88,56 +93,73 @@ function App() {
     }
   };
 
-  // i % 3 === 0: Start of comparison → color = yellow
-  // i % 3 === 1: End of comparison → color = blue
-  // i % 3 === 2: Actual value change → update height
-
   return (
     <div>
-<Navbar selectedTab={selectedTab} setselectedTab={setselectedTab}/>
-{selectedTab==='sorting' && (
-      <>
-        <h1>DSA</h1>
-        <Control
-          handleArr={handleArr}
-          handleSorting={handleSorting}
-          userInput={userInput}
-          setuserInput={setuserInput}
-          setSpeed={setSpeed}
-          reSet={reSet}
-          isSorting={isSorting}
-          speed={speed}
-          selectedSorting={selectedSorting}
-        />
-        <Visualizer arr={arr} />
-      </>
-)}
+      <Navbar selectedTab={selectedTab} setselectedTab={setselectedTab} />
 
-{selectedTab==='searching' && (
-  <div>
-<h2>Searching Algorithm</h2>
-<Control
-        handleArr={handleArr}
-        handleSorting={handleSorting}
-        userInput={userInput}
-        setuserInput={setuserInput}
-        setSpeed={setSpeed}
-        reSet={reSet}
-        isSorting={isSorting}
-        speed={speed}
-        selectedSorting={selectedSorting}
-      />
-      <Visualizer arr={arr} />
-    </div>
-)}
+      {selectedTab === "sorting" && (
+        <>
+          <h2>Sorting Animation</h2>
+          <Control
+            handleArr={handleArr}
+            handleSorting={handleSorting}
+            userInput={userInput}
+            setuserInput={setuserInput}
+            setSpeed={setSpeed}
+            reSet={reSet}
+            isSorting={isSorting}
+            speed={speed}
+            selectedSorting={selectedSorting}
+          />
+          <Visualizer arr={arr} />
+        </>
+      )}
 
-{selectedTab==='tree' && (
-  <div>
-    <h2>Tree Traversal</h2>
-    </div>
-)}
+      {selectedTab === "searching" && (
+        <div>
+          <h2>Searching Algorithm</h2>
+          <Control
+            handleArr={handleArr}
+            handleSorting={handleSorting}
+            userInput={userInput}
+            setuserInput={setuserInput}
+            setSpeed={setSpeed}
+            reSet={reSet}
+            isSorting={isSorting}
+            speed={speed}
+            selectedSorting={selectedSorting}
+          />
+          <Visualizer arr={arr} />
+        </div>
+      )}
+
+      {selectedTab === "tree" && (
+        <TreeTab speed={speed} setisSorting={setisSorting} />
+      )}
+
+      {selectedTab === "graph" && (
+        <div>
+          <h2>Graph Traversals</h2>
+        </div>
+      )}
     </div>
   );
 }
 
 export default App;
+
+function TreeTab({ speed, setisSorting }) {
+  const troot = useMemo(() => buildSampleTree(), []);
+  const animations = useMemo(() => inorderTraversal(troot), [troot]);
+
+  useEffect(() => {
+    Tree(animations, speed, setisSorting);
+  }, [animations, speed, setisSorting]);
+
+  return (
+    <div>
+      <h2>Tree Traversals</h2>
+      <TreeVisualizer root={troot} />
+    </div>
+  );
+}
