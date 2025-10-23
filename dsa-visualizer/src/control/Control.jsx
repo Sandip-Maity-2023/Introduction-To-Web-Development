@@ -1,6 +1,7 @@
 import React from "react";
 //import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
 import "./Visualizer.css";
+import "../App.css";
 
 function Control({
   handleArr,
@@ -11,6 +12,8 @@ function Control({
   setuserInput,
   reSet,
   selectedSorting,
+  selectedTab,
+  setselectedtab
 }) {
   return (
     <div className="control-container">
@@ -20,28 +23,28 @@ function Control({
           value={userInput}
           onChange={(e) => setuserInput(e.target.value)}
           className="neumorphic-input"
-          placeholder="Enter your Array between 1-300"
+          placeholder="Enter your Array between 0-300"
         />
         <div className="info-icon-wrapper">
-          <i className="info-icon">i</i>
+          <i className="info-icon" style={{marginLeft:'10px'}}>info </i>
           <span className="tooltip-text">
             Provide your array by comma separated integer
           </span>
         </div>
       </div>
-      <button className="neu-button" onClick={handleArr}>
+      <button className="button" onClick={handleArr}>
         Generate New Array
       </button>
-      <button className="neu-button" onClick={reSet}>
+      <button className="button" onClick={reSet}>
         Reset
       </button>
       <select
-        name="neumorphism-dropdown"
+        name="dropdown"
         value={selectedSorting}
-        id="hello"
+        id="dropdown"
         onChange={handleSorting}
       >
-        <option value="">Select value</option>
+        <option value="">Select Method</option>
         <option value="bubbleSort">Bubble Sort</option>
         <option value="mergeSort">Merge Sort</option>
         <option value="selectionSort">Selection Sort</option>
@@ -53,10 +56,10 @@ function Control({
         Speed:
         <input
           type="range"
-          min="5"
-          max="200"
+          min="10"
+          max="300"
           className="speedcontrol"
-          onChange={(e) => setSpeed(200 - e.target.value)}
+          onChange={(e) => setSpeed(300 - e.target.value)}
           disabled={isSorting}
         />
       </label>

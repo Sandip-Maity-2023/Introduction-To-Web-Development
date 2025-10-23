@@ -1,18 +1,24 @@
-// import React from 'react'
-// import TicTacToe from './TicTacToe' 
+import React from 'react'
+import TicTacToe from './TicTacToe' 
+import ToDoList from './ToDoList'
+function App() {
+  return (
+     <ToDoList/>
 
-// function App() {
-//   return (
-//     // <ToDoList/>
 
 
+    //<TicTacToe/>
+  )
+}
 
-//     <TicTacToe/>
-//   )
-// }
-
-// export default App
+export default App
 // App.jsx
+
+
+
+
+/*
+
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faHandPaper, faPlay, faStop, faMousePointer } from "@fortawesome/free-solid-svg-icons";
@@ -189,7 +195,7 @@ export default function App() {
         }}
       />
 
-      {/* Virtual cursor */}
+      {/* Virtual cursor *}
       <div
         ref={cursorRef}
         style={{
@@ -205,3 +211,5 @@ export default function App() {
     </div>
   );
 }
+
+*/

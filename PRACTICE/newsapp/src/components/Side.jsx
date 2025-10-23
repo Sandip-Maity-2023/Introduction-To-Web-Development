@@ -1,3 +1,148 @@
+
+/*import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faHome,
+  faClock,
+  faDownload,
+  faThumbsUp,
+  faVideo,
+  faList,
+} from "@fortawesome/free-solid-svg-icons";
+
+const Sidebar = ({ onToggle }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => {
+    const newState = !open;
+    setOpen(newState);
+    if (onToggle) onToggle(newState); // fixed undefined bug
+  };
+
+  const menuItems = [
+    { label: "Home", icon: faHome, link: "#" },
+    { label: "Shorts", icon: faVideo, link: "#" },
+    { label: "History", icon: faList, link: "#" },
+    { label: "Downloads", icon: faClock, link: "#" },
+    { label: "Saved", icon: faDownload, link: "#" },
+    { label: "Liked", icon: faThumbsUp, link: "#" },
+  ];
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {/* Top Navbar *
+      <nav
+        style={{
+          height: "60px",
+          display: "flex",
+          alignItems: "center",
+          padding: "0 20px",
+          background: "#fff",
+          borderBottom: "1px solid #ddd",
+          width: "100%",
+          borderRadius: "12px",
+          boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
+          position: "sticky",
+          top: 0,
+          zIndex: 1100,
+        }}
+      >
+        <FontAwesomeIcon
+          icon={faBars}
+          size="lg"
+          style={{
+            cursor: "pointer",
+            marginRight: "20px",
+            color: open ? "blue" : "black",
+            transition: "color 0.3s",
+          }}
+          onClick={handleToggle}
+        />
+        <h2 style={{ margin: 0, fontWeight: 600 }}>
+          <span style={{ color: "blue" }}>N</span>ews
+          <span style={{ color: "blue" }}>S</span>phere
+        </h2>
+      </nav>
+
+      {/* Sidebar Drawer 
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: open ? 0 : "-220px",
+          width: "200px",
+          height: "100vh",
+          backgroundColor: "#fff",
+          boxShadow: open ? "2px 0px 8px rgba(0,0,0,0.3)" : "none",
+          transition: "left 0.3s ease-in-out",
+          zIndex: 1000,
+          padding: "20px 10px",
+          borderRight: "1px solid #eee",
+        }}
+      >
+        <h3 style={{ marginBottom: "15px", color: "#333" }}>Menu</h3>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {menuItems.map((item) => (
+            <li
+              key={item.label}
+              style={{
+                margin: "10px 0",
+                borderRadius: "8px",
+                padding: "8px 10px",
+                transition: "background 0.3s",
+              }}
+            >
+              <a
+                href={item.link}
+                style={{
+                  textDecoration: "none",
+                  color: "#333",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <FontAwesomeIcon icon={item.icon} />
+                <span>{item.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Overlay when sidebar is open *
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0,0,0,0.3)",
+            zIndex: 900,
+            transition: "opacity 0.3s ease-in-out",
+          }}
+        ></div>
+      )}
+
+      <style jsx>{`
+        li:hover {
+          background-color: #f0f4ff;
+        }
+        li a:hover span {
+          color: blue;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default Sidebar;
+*/
+
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,78 +155,110 @@ import {
   faList,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Sidebar = () => {
+const Sidebar = ({ onToggle }) => {
   const [open, setOpen] = useState(false);
+
   const handleToggle = () => {
-    setOpen(!open);
-    if (onToggle) onToggle(!open);
+    const newState = !open;
+    setOpen(newState);
+    if (onToggle) onToggle(newState);
   };
 
+  const menuItems = [
+    { label: "Home", icon: faHome, link: "#" },
+    { label: "Shorts", icon: faVideo, link: "#" },
+    { label: "History", icon: faList, link: "#" },
+    { label: "Downloads", icon: faClock, link: "#" },
+    { label: "Saved", icon: faDownload, link: "#" },
+    { label: "Liked", icon: faThumbsUp, link: "#" },
+  ];
+
   return (
-    <div style={{ display: "flex" }}>
+    <>
+      {/* 🔹 Fixed Top Navbar (Always Visible) */}
       <nav
         style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
           height: "60px",
           display: "flex",
           alignItems: "center",
           padding: "0 20px",
           background: "#fff",
           borderBottom: "1px solid #ddd",
-          width: "100%",
-          borderRadius: "15px",
+          borderRadius: "0 0 12px 12px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+          zIndex: 1200,
+          justifyContent: "flex-start",
+          gap: "10px",
         }}
       >
+        {/* Hamburger Icon */}
         <FontAwesomeIcon
           icon={faBars}
           size="lg"
-          style={{ cursor: "pointer", margin: "15px" }}
+          style={{
+            cursor: "pointer",
+            color: open ? "blue" : "black",
+            transition: "color 0.3s",
+          }}
           onClick={handleToggle}
         />
-        <h2>
+        <h2 style={{ margin: 0, fontWeight: 600 }}>
           <span style={{ color: "blue" }}>N</span>ews
           <span style={{ color: "blue" }}>S</span>phere
         </h2>
       </nav>
+
+      {/* 🔹 Sidebar Drawer */}
       <div
         style={{
-          position: "absolute",
+          position: "fixed",
           top: 0,
-          left: open ? 0 : "-300px",
-          width: "150px",
+          left: open ? 0 : "-220px",
+          width: "200px",
           height: "100vh",
           backgroundColor: "#fff",
-          boxShadow: "2px 0px 5px rgba(0,0,0,0.5)",
+          boxShadow: open ? "2px 0 10px rgba(0,0,0,0.3)" : "none",
           transition: "left 0.3s ease-in-out",
-          zIndex: 1000,
-          padding: "20px",
-          borderRight: "1px solid #ddd",
-          cursor:"pointer"
+          zIndex: 1100,
+          padding: "80px 15px 20px 15px", // padding top so menu isn't under navbar
+          borderRight: "1px solid #eee",
         }}
       >
-        <h3 style={{ marginBottom: "15px" }}>Menu</h3>
-        <ul style={{ listStyle: "none", padding: 0, lineHeight: "2rem" }}>
-          <li>
-            <a href="#"><FontAwesomeIcon icon={faHome} />
-           Home</a>
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faVideo} />
-            Shorts
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faList} />
-            History
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faClock} />
-            Downloads
-          </li>
-          <li>
-            <FontAwesomeIcon icon={faDownload} />
-            Saved
-          </li>
+        <h3 style={{ marginBottom: "15px", color: "#333" }}>Menu</h3>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {menuItems.map((item) => (
+            <li
+              key={item.label}
+              style={{
+                margin: "10px 0",
+                borderRadius: "8px",
+                padding: "8px 10px",
+                transition: "background 0.3s",
+              }}
+            >
+              <a
+                href={item.link}
+                style={{
+                  textDecoration: "none",
+                  color: "#333",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <FontAwesomeIcon icon={item.icon} />
+                <span>{item.label}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
+
+      {/* 🔹 Overlay when sidebar is open */}
       {open && (
         <div
           onClick={() => setOpen(false)}
@@ -92,11 +269,11 @@ const Sidebar = () => {
             width: "100vw",
             height: "100vh",
             backgroundColor: "rgba(0,0,0,0.3)",
-            zIndex: 500,
+            zIndex: 1000,
           }}
         ></div>
       )}
-    </div>
+    </>
   );
 };
 

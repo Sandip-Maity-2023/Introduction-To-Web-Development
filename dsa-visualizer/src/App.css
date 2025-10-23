@@ -1,12 +1,18 @@
 .navbar {
-  width: 100%;                /* take full screen width */
+  width: 100vw;  
+  position: relative;           /* take full screen width */
   background-color: #222;      /* dark background */
   display: flex;               /* flexbox layout */
   justify-content: space-between; /* logo left, links right */
   align-items: center;         /* vertical centering */
-  padding: 15px 30px;          /* spacing inside */
+  padding: 20px;          /* spacing inside */
   box-sizing: border-box;
   gap: 95px;
+  flex-wrap: wrap;           /* wrap on small screens */
+  border-radius: "10px";
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  margin-top: "5px";
+
 }
 
 .logo {

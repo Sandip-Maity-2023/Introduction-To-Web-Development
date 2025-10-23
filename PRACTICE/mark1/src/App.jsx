@@ -280,6 +280,8 @@ function App() {
 };
 */
 
+
+/*
 import Geeks from './Geek';
 import ProductList from './ProductList';
 import Event from './Event';
@@ -296,7 +298,7 @@ const p=[
     <div>
       {/* <Header/>
       <MainContent/>
-      <Footer/> */}
+      <Footer/> 
       <Geeks/>
       <div style={{margin:'5px'}}>
 
@@ -312,7 +314,33 @@ const p=[
 };
 export default App;
 
+*/
 
+
+
+
+
+
+
+
+
+
+
+
+import React from 'react'
+//import Event from './Eventhandle'
+import Eventdefault from './Eventhandle'
+
+function App() {
+  return (
+    <div>
+{/* <Event/> */}
+<Eventdefault/>
+    </div>
+  )
+}
+
+export default App
 
 
 

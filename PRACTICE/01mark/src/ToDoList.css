@@ -1,10 +1,13 @@
 body{
     background-color: hsl(0, 68%, 69%);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
 .to-do-list{
     font-family: Arial, sans-serif;
     text-align: center;
-    margin-top: 100px;
+    /* margin-top: 100px; */
 }
 h1{
     font-size: 4rem;
@@ -45,9 +48,13 @@ input[type="text"]{
     border: 2px solid hsla(0, 0%, 80%, 0.5);
     border-radius: 5px;
     color: hsla(0, 0%, 0%, 0.5);
+    margin-right: 10px;
 }
 ol{
     padding: 0;
+    list-style: none;
+    width: 100%;
+    max-width: 400px;
 }
 li{
     font-size: 2rem;
@@ -59,6 +66,7 @@ li{
     border-radius: 5px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 .text{
     flex: 1;
@@ -69,12 +77,40 @@ li{
     margin-left: 10px;
 }
 
-.container{
+/* .container{
   display: flex;
   flex-direction: column; /* stack title + list */
-  justify-content: center; /* vertical center */
-  align-items: center; /* horizontal center */
-  min-height: 100vh; /* full height */
-  
-    
+  /*justify-content: center; /* vertical center */
+  /*align-items: center; /* horizontal center */
+  /*min-height: 100vh; /* full height */
+/*} */
+
+.edit-button{
+    background-color: hsl(45, 100%, 51%);
+}
+.edit-button:hover{
+    background-color: hsl(45, 100%, 41%);
+}
+.edit-input {
+  font-size: 1.6rem;
+  padding: 10px;
+  border: 2px solid hsla(0, 0%, 80%, 0.7);
+  border-radius: 5px;
+  flex: 1;
+}
+
+.save-button {
+  background-color: hsl(200, 90%, 55%);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.save-button:hover {
+  background-color: hsl(200, 90%, 45%);
 }
