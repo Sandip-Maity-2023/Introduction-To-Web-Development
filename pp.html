@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Panchami Das — AI & ML Researcher • Advanced Portfolio</title>
+  <meta name="description" content="Panchami Das — AI & ML Researcher. Quantum neural nets, GANs, accessibility, publications, projects, and open-source. Contact for internships & collaborations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Panchami Das",
+    "jobTitle":"AI & ML Researcher",
+    "url":"#",
+    "sameAs":["https://github.com/Panchami2005","https://www.linkedin.com/in/panchami-das-a2952b291"]
+  }
+  </script>
+
+  <style>
+    :root{ --bg:#020617; --glass:rgba(15,23,42,0.6); --accent:#5eead4; }
+    html,body{height:100%;}
+    body{font-family:'Inter',sans-serif;background:linear-gradient(180deg,#01040a 0%, #061226 100%);color:#dbeafe;}
+    .glass-card{background:var(--glass);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.06);border-radius:1rem}
+    .gradient-text{background:linear-gradient(90deg,#5eead4,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    /* progress bar */
+    #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),#a78bfa);width:0;z-index:60}
+    /* accessibility focus */
+    :focus{outline:3px solid rgba(94,234,212,0.15);outline-offset:3px}
+    /* project grid responsive */
+    .project-card{transition:transform .25s,box-shadow .25s}
+    .project-card:focus,.project-card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+    /* lazy placeholder */
+    .img-placeholder{background:linear-gradient(90deg,#0b1220,#07101a);min-height:160px;display:flex;align-items:center;justify-content:center;color:#64748b}
+    /* tiny keyboard helper */
+    .kbd{background:#0b1220;padding:.1rem .4rem;border-radius:.35rem;font-size:.75rem}
+    /* light theme override */
+    .light{--bg:#f8fafc;color:#0f172a}
+  </style>
+</head>
+<body class="antialiased" id="body">
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50" id="navbar">
+    <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="text-xl font-bold gradient-text" aria-label="Home">PD</a>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#about" class="hover:text-teal-300">About</a>
+        <a href="#projects" class="hover:text-teal-300">Projects</a>
+        <a href="#research" class="hover:text-teal-300">Research</a>
+        <a href="#experience" class="hover:text-teal-300">Experience</a>
+        <a href="#contact" class="hover:text-teal-300">Contact</a>
+        <button id="theme-toggle" class="px-3 py-2 rounded-md border">Theme</button>
+        <button id="resume-btn" class="bg-teal-500 text-slate-900 px-4 py-2 rounded-md font-semibold">Resume</button>
+      </div>
+      <div class="md:hidden flex items-center gap-3">
+        <button id="theme-toggle-mobile" class="p-2 rounded-md border">⚙️</button>
+        <button id="mobile-open" aria-label="Open menu" class="p-2">☰</button>
+      </div>
+    </nav>
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="hidden md:hidden bg-slate-900/90 backdrop-blur-sm p-6">
+      <a href="#about" class="block py-2">About</a>
+      <a href="#projects" class="block py-2">Projects</a>
+      <a href="#research" class="block py-2">Research</a>
+      <a href="#contact" class="block py-2">Contact</a>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 pt-28 pb-24 relative">
+    <!-- Hero -->
+    <section id="home" class="min-h-[70vh] grid md:grid-cols-2 gap-8 items-center" aria-labelledby="hero-heading">
+      <div>
+        <h1 id="hero-heading" class="text-4xl md:text-6xl font-extrabold leading-tight"> <span class="gradient-text">Panchami Das</span></h1>
+        <p class="mt-4 text-lg text-slate-300" id="typed-line">AI & ML Researcher • Quantum Neural Nets • Accessibility</p>
+        <p class="mt-4 text-slate-400 max-w-xl">I build research-grade machine learning systems and prototypes that blend classical deep learning, quantum-inspired architectures and real-world productization for healthcare, agriculture and assistive tech.</p>
+
+        <div class="mt-6 flex gap-3">
+          <a href="#contact" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-5 rounded-lg">Hire / Collaborate</a>
+          <a id="download-resume" href="https://drive.google.com/uc?export=download&id=1bdC0hgGbMaNcq5XfmJtNO8TT6Wv235n0" target="_blank" class="bg-teal-500 hover:bg-teal-600 text-slate-900 font-bold py-3 px-5 rounded-lg">Download CV</a>
+        </div>
+
+        <div class="mt-6 flex items-center gap-4">
+          <a href="https://github.com/Panchami2005" target="_blank" aria-label="GitHub" class="text-slate-400">GitHub</a>
+          <a href="https://www.linkedin.com/in/panchami-das-a2952b291" target="_blank" aria-label="LinkedIn" class="text-slate-400">LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=dzxNFMoAAAAJ&hl=en" target="_blank" aria-label="Scholar" class="text-slate-400">Scholar</a>
+        </div>
+
+        <!-- micro skills & metrics -->
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="glass-card p-3 text-center">
+            <div class="text-sm text-slate-400">Publications</div>
+            <div class="text-xl font-bold text-white">4</div>
+          </div>
+          <div class="glass-card p-3 text-center">
+            <div class="text-sm text-slate-400">Projects</div>
+            <div class="text-xl font-bold text-white">12+</div>
+          </div>
+          <div class="glass-card p-3 text-center">
+            <div class="text-sm text-slate-400">Hackathons</div>
+            <div class="text-xl font-bold text-white">20+</div>
+          </div>
+          <div class="glass-card p-3 text-center">
+            <div class="text-sm text-slate-400">Mentorship</div>
+            <div class="text-xl font-bold text-white">100+</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative flex justify-center items-center">
+        <picture>
+          <source media="(min-width:1024px)" srcset="https://lh3.googleusercontent.com/d/14Wg8tHqS13milBQm6q1ITq1nP_bIdr5h" />
+          <img loading="lazy" alt="Portrait of Panchami Das" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-teal-500/50 shadow-2xl" src="https://lh3.googleusercontent.com/d/14Wg8tHqS13milBQm6q1ITq1nP_bIdr5h" />
+        </picture>
+
+        <!-- small floating badges -->
+        <div class="absolute bottom-4 left-6 glass-card p-2 text-xs">ICDMAI 2025 • Springer</div>
+        <div class="absolute top-6 right-6 glass-card p-2 text-xs">AdHacks 2025 Winner</div>
+      </div>
+    </section>
+
+    <!-- Skills & Visualizations -->
+    <section id="skills" class="mt-16 scroll-animation" aria-labelledby="skills-heading">
+      <h2 id="skills-heading" class="text-3xl font-bold gradient-text text-center mb-8">Skills & Tooling</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass-card p-6">
+          <h3 class="font-bold mb-3">Core Areas</h3>
+          <ul class="text-slate-400 list-disc list-inside">
+            <li>Deep Learning (CNNs, Transformers)</li>
+            <li>Quantum & Hybrid Neural Networks (QCNN, QML)</li>
+            <li>Generative Models (GANs, Diffusion)</li>
+            <li>Computer Vision, NLP, Embedded ML</li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-6">
+          <h3 class="font-bold mb-3">Tools & Frameworks</h3>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="kbd">PyTorch</span>
+            <span class="kbd">TensorFlow</span>
+            <span class="kbd">Qiskit</span>
+            <span class="kbd">OpenCV</span>
+            <span class="kbd">scikit-learn</span>
+            <span class="kbd">Docker</span>
+            <span class="kbd">Git</span>
+            <span class="kbd">Google Cloud</span>
+          </div>
+        </div>
+
+        <div class="glass-card p-6">
+          <h3 class="font-bold mb-3">Live Skill Graph</h3>
+          <canvas id="skill-chart" width="400" height="200" aria-label="Skill radar chart"></canvas>
+          <p class="text-xs text-slate-400 mt-2">(Interactive — hover bars to see proficiency)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects with Filter + Search + Modal -->
+    <section id="projects" class="mt-20 scroll-animation" aria-labelledby="projects-heading">
+      <div class="flex items-center justify-between">
+        <h2 id="projects-heading" class="text-3xl font-bold gradient-text">Selected Projects</h2>
+        <div class="flex gap-3 items-center">
+          <select id="project-filter" class="rounded-md p-2 bg-slate-800">
+            <option value="all">All</option>
+            <option value="ml">Machine Learning</option>
+            <option value="quantum">Quantum</option>
+            <option value="robotics">Robotics</option>
+            <option value="accessibility">Accessibility</option>
+          </select>
+          <input id="project-search" placeholder="Search projects..." class="p-2 rounded-md bg-slate-800" />
+        </div>
+      </div>
+
+      <div id="projects-grid" class="grid md:grid-cols-3 gap-6 mt-6">
+        <!-- Cards are generated by JS for easier maintainability -->
+      </div>
+    </section>
+
+    <!-- Research & Publications -->
+    <section id="research" class="mt-20 scroll-animation" aria-labelledby="research-heading">
+      <h2 id="research-heading" class="text-3xl font-bold gradient-text text-center mb-8">Research & Publications</h2>
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div class="glass-card p-6">
+          <h3 class="font-bold">QCNN for Agriculture</h3>
+          <p class="text-slate-400">Presented at ICDMAI 2025 — Springer. (Link to paper & slides)</p>
+        </div>
+        <div class="glass-card p-6">
+          <h3 class="font-bold">Obstacle Detection for Visually Impaired</h3>
+          <p class="text-slate-400">Presented at JIS College of Engineering — Springer. (Link to artifact)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="mt-20 scroll-animation" aria-labelledby="experience-heading">
+      <h2 id="experience-heading" class="text-3xl font-bold gradient-text text-center mb-8">Experience & Leadership</h2>
+      <div class="max-w-4xl mx-auto">
+        <ol class="relative border-l border-slate-700 ml-6">
+          <li class="mb-10 ml-6">
+            <span class="absolute -left-6 bg-teal-500 text-slate-900 rounded-full w-10 h-10 flex items-center justify-center">🎓</span>
+            <h4 class="font-bold">B.Tech in CSE (AI & ML) — Adamas University</h4>
+            <time class="text-slate-400">2023 — 2027</time>
+            <p class="text-slate-400 mt-2">Coursework, leadership in clubs, hackathon mentorship and research assistance.</p>
+          </li>
+          <li class="mb-10 ml-6">
+            <span class="absolute -left-6 bg-purple-500 rounded-full w-10 h-10 flex items-center justify-center">🏆</span>
+            <h4 class="font-bold">AdHacks 2025 — Winner</h4>
+            <time class="text-slate-400">2025</time>
+            <p class="text-slate-400 mt-2">Led a team to build a product under time constraints; responsible for ML pipeline and deployment.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="mt-20 scroll-animation" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="text-3xl font-bold gradient-text text-center mb-6">Get In Touch</h2>
+      <div class="max-w-3xl mx-auto glass-card p-6">
+        <p class="text-slate-400">I'm open to internships, research collaborations, freelance product work, and mentorship. Fill the form or email me directly.</p>
+        <form id="contact-form" class="mt-4 grid grid-cols-1 gap-3" aria-label="Contact form">
+          <input name="name" required placeholder="Your name" class="p-3 rounded-md bg-slate-800" />
+          <input name="email" type="email" required placeholder="Your email" class="p-3 rounded-md bg-slate-800" />
+          <input name="subject" placeholder="Subject" class="p-3 rounded-md bg-slate-800" />
+          <textarea name="message" rows="4" required placeholder="Message" class="p-3 rounded-md bg-slate-800"></textarea>
+          <div class="flex items-center gap-3">
+            <button type="submit" class="bg-teal-500 px-4 py-2 rounded-md font-semibold">Send</button>
+            <button id="contact-mailto" type="button" class="px-4 py-2 rounded-md border">Open Email</button>
+            <span id="contact-feedback" role="status" aria-live="polite" class="text-sm text-slate-400"></span>
+          </div>
+        </form>
+      </div>
+
+      <p class="text-center text-slate-500 mt-6">Or email directly: <a href="mailto:panchamidas495@gmail.com" class="text-teal-300">panchamidas495@gmail.com</a></p>
+    </section>
+
+    <footer class="mt-20 text-center text-slate-500">© 2025 Panchami Das • Kolkata, India</footer>
+  </main>
+
+  <!-- Project Modal -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/60 z-60 p-6">
+    <div class="bg-slate-900 rounded-md p-6 max-w-3xl w-full glass-card">
+      <button id="modal-close" class="float-right">✖</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+  /* =======================
+     Client-side JS: features
+     - Theme toggle with persistence
+     - Scroll progress
+     - Typing effect
+     - Project list + filtering + modal details
+     - Skill chart (simple bar chart)
+     - Contact form fallback to mailto
+     - Accessibility: keyboard shortcuts
+     =======================*/
+
+  // Basic utilities
+  function $(q) { return document.querySelector(q); }
+  function $all(q){ return Array.from(document.querySelectorAll(q)); }
+
+  // Theme toggle
+  const body = document.getElementById('body');
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  function setTheme(t){ if(t==='light'){ body.classList.add('light'); localStorage.theme='light'; } else { body.classList.remove('light'); localStorage.theme='dark'; }}
+  const saved = localStorage.theme || 'dark'; setTheme(saved);
+  themeToggle?.addEventListener('click', ()=> setTheme(body.classList.contains('light') ? 'dark' : 'light'));
+  themeToggleMobile?.addEventListener('click', ()=> setTheme(body.classList.contains('light') ? 'dark' : 'light'));
+
+  // Mobile drawer
+  document.getElementById('mobile-open')?.addEventListener('click', ()=>{
+    const d = document.getElementById('mobile-drawer'); d.classList.toggle('hidden');
+  });
+
+  // Scroll progress
+  const prog = document.getElementById('progress');
+  window.addEventListener('scroll', ()=>{
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / total) * 100;
+    prog.style.width = pct + '%';
+  });
+
+  // Simple typing effect (hero)
+  (function typing(){
+    const el = document.getElementById('typed-line');
+    const phrases = ['AI & ML Researcher','Deep Learning','Quantum Neural Networks','Hackathon Enthusiast','Entrepreneur'];
+    let i=0,char=0,del=false;
+    function step(){
+      const p = phrases[i];
+      el.textContent = p.substring(0,char);
+      if(!del) char++; else char--;
+      if(char===p.length+1){ del=true; setTimeout(step,1200); return; }
+      if(char===0 && del){ del=false; i=(i+1)%phrases.length; }
+      setTimeout(step, del?60:100);
+    }
+    step();
+  })();
+
+  // Projects data (extendable)
+  const projects = [
+    {id:'p1',title:'Plant Health Detection using GANs',tags:['ml','agriculture'],year:2024,desc:'GAN-based augmentation + classifier for crop disease detection. Dataset pipeline, training scripts, evaluation.' ,thumb:''},
+    {id:'p2',title:'QCNN for Agriculture',tags:['quantum','ml'],year:2025,desc:'Quantum convolutional approach and hybrid classical-quantum pipeline. Presented at ICDMAI 2025.',thumb:''},
+    {id:'p3',title:'Smart Blind Stick',tags:['accessibility','robotics'],year:2024,desc:'Real-time obstacle detection system using ML + microcontroller + haptic feedback.',thumb:''},
+    {id:'p4',title:'Document Analysis with AI (DocutagAI)',tags:['ml','product'],year:2023,desc:'NLP pipelines for entity extraction and document automation for businesses.',thumb:''}
+  ];
+
+  // Render projects
+  const grid = document.getElementById('projects-grid');
+  function renderProjects(filter='all',search=''){
+    grid.innerHTML='';
+    const s = search.trim().toLowerCase();
+    const filtered = projects.filter(p=> (filter==='all' || p.tags.includes(filter)) && (p.title.toLowerCase().includes(s) || p.desc.toLowerCase().includes(s)) );
+    if(filtered.length===0){ grid.innerHTML='<div class="text-slate-400">No projects found.</div>'; return; }
+    filtered.forEach(p=>{
+      const card = document.createElement('button');
+      card.className = 'project-card glass-card p-4 text-left';
+      card.setAttribute('aria-haspopup','dialog');
+      card.innerHTML = `
+        <div class="flex justify-between items-start">
+          <div>
+            <h4 class="font-bold text-white">${p.title}</h4>
+            <p class="text-slate-400 text-sm mt-1">${p.tags.join(' • ')} • ${p.year}</p>
+          </div>
+          <div class="text-sm text-teal-300">Details ▸</div>
+        </div>
+        <p class="text-slate-400 mt-3 text-sm truncate">${p.desc}</p>
+      `;
+      card.addEventListener('click', ()=> openProjectModal(p));
+      grid.appendChild(card);
+    });
+  }
+  renderProjects();
+
+  document.getElementById('project-filter').addEventListener('change',(e)=> renderProjects(e.target.value, document.getElementById('project-search').value ));
+  document.getElementById('project-search').addEventListener('input',(e)=> renderProjects(document.getElementById('project-filter').value, e.target.value));
+
+  // Modal
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modal-content');
+  function openProjectModal(p){
+    modalContent.innerHTML = `
+      <h3 class="text-2xl font-bold">${p.title}</h3>
+      <p class="text-slate-400 mt-2">${p.desc}</p>
+      <div class="mt-4 flex gap-3">
+        <a href="#" class="px-3 py-2 rounded-md border">View Code</a>
+        <a href="#" class="px-3 py-2 rounded-md border">View Demo</a>
+      </div>
+    `;
+    modal.classList.remove('hidden'); modal.style.display='flex';
+    document.body.style.overflow='hidden';
+  }
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', (ev)=>{ if(ev.target===modal) closeModal(); });
+  function closeModal(){ modal.classList.add('hidden'); modal.style.display='none'; document.body.style.overflow=''; }
+
+  // Skill chart (tiny bar chart using canvas)
+  (function skillChart(){
+    const cvs = document.getElementById('skill-chart');
+    if(!cvs) return; const ctx=cvs.getContext('2d');
+    const skills = [{k:'DL',v:90},{k:'QNN',v:70},{k:'GANs',v:80},{k:'NLP',v:70},{k:'CV',v:85}];
+    // draw
+    function draw(){
+      const w=cvs.width, h=cvs.height; ctx.clearRect(0,0,w,h);
+      const barW = w / skills.length * 0.6; const gap = (w - skills.length*barW) / (skills.length+1);
+      skills.forEach((s,i)=>{
+        const x = gap + i*(barW+gap);
+        const barH = (s.v/100) * (h-40);
+        // background
+        ctx.fillStyle='rgba(255,255,255,0.06)'; ctx.fillRect(x, h-30, barW, - (h-30));
+        // value
+        ctx.fillStyle='rgba(94,234,212,0.9)'; ctx.fillRect(x, h-30, barW, -barH);
+        // label
+        ctx.fillStyle='#cbd5e1'; ctx.font='12px Inter, sans-serif'; ctx.fillText(s.k, x+barW/2 - 6, h-10);
+      });
+    }
+    draw();
+  })();
+
+  // Contact form: try AJAX to Formspree if provided, otherwise do mailto fallback
+  document.getElementById('contact-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const form = e.target; const data = new FormData(form);
+    const payload = {name:data.get('name'), email:data.get('email'), subject:data.get('subject'), message:data.get('message')};
+    const feedback = document.getElementById('contact-feedback');
+    feedback.textContent='Sending...';
+    try{
+      // Attempt fetch to a generic serverless endpoint (user can replace URL with Formspree action)
+      const endpoint = form.dataset.endpoint || '';
+      if(endpoint){
+        const res = await fetch(endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+        if(res.ok){ feedback.textContent='Message sent — thank you!'; form.reset(); }
+        else { throw new Error('Network'); }
+      } else {
+        // fallback: open mail client
+        const mailto = `mailto:panchamidas495@gmail.com?subject=${encodeURIComponent(payload.subject||'Portfolio Contact')}&body=${encodeURIComponent('Name: '+payload.name+'\nEmail: '+payload.email+'\n\n'+payload.message)}`;
+        window.location.href = mailto; feedback.textContent='Opening email client...';
+      }
+    }catch(err){ feedback.textContent='Could not send. Try emailing directly.'; }
+  });
+
+  document.getElementById('contact-mailto').addEventListener('click', ()=>{
+    window.location.href = 'mailto:panchamidas495@gmail.com';
+  });
+
+  // Keyboard shortcut: press "p" to focus projects search
+  window.addEventListener('keydown', (e)=>{
+    if(e.key==='p' && !e.metaKey && !e.ctrlKey){ document.getElementById('project-search').focus(); }
+    if(e.key==='/' && document.activeElement.tagName!=='INPUT'){ e.preventDefault(); document.getElementById('project-search').focus(); }
+    if(e.key==='Escape'){ closeModal(); document.getElementById('project-search').blur(); }
+  });
+
+  // Small accessibility: ensure important anchors have keyboard behavior
+  $all('a').forEach(a=>{ a.addEventListener('keyup', (ev)=>{ if(ev.key==='Enter') a.click(); }); });
+
+  // Init: prefilter from URL (e.g., ?tag=quantum)
+  const params = new URLSearchParams(location.search); if(params.get('tag')) renderProjects(params.get('tag'));
+
+  // Lazy improvement: reduce particle/animation load on low-power devices
+  (function maybeInitParticles(){
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced) return;
+    // Very lightweight particle background: Canvas with a few moving dots
+    const canvas = document.createElement('canvas'); canvas.id='bg-particles'; canvas.style.position='fixed'; canvas.style.inset=0; canvas.style.zIndex='-1'; document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d'); function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    const dots = Array.from({length: Math.max(12, Math.floor((innerWidth*innerHeight)/150000))}).map(()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,dx:(Math.random()-.5)*.6,dy:(Math.random()-.5)*.6,r:1+Math.random()*2}));
+    function loop(){ ctx.clearRect(0,0,canvas.width,canvas.height); dots.forEach(d=>{ d.x+=d.dx; d.y+=d.dy; if(d.x<0||d.x>canvas.width) d.dx*=-1; if(d.y<0||d.y>canvas.height) d.dy*=-1; ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2); ctx.fillStyle='rgba(167,139,250,0.12)'; ctx.fill(); }); requestAnimationFrame(loop); }
+    loop();
+  })();
+
+  // Make sure keyboard focus order good
+  document.addEventListener('DOMContentLoaded', ()=>{
+    // focus first meaningful element for keyboard users
+    document.querySelector('main a, main button, main input')?.focus();
+  });
+  </script>
+</body>
+</html>

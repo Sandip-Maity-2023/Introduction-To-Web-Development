@@ -3,35 +3,71 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  color: white;
-  padding-left: 150px;
+  justify-content: center;
+  /* color: white; */
+  /* padding-left: 150px; */
+  padding: 80px 5%;
   position: relative;
   transition: background 0.8s ease;
 }
 
 .home-container.light {
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-  color: #333;
+  /* background: linear-gradient(135deg, #4051f0 0%, #7c0151 100%); */
+  background: linear-gradient(135deg, #4051f0 0%, #7c0151 100%);
+  color: #222;
 }
 
 .home-container.dark {
-  background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
+  /* background: linear-gradient(135deg, #1e1e1e, #2c2c2c); */
+    background: linear-gradient(135deg, #0f0f0f, #232323);
+    color: #fff; 
+    /* not affect of its css defined */
 }
 
-/* Heading */
+/* Heading
 .home-content h2 {
-  padding: 5px;
-  padding-top: 70px;
+
+  margin-bottom:300px;
 }
 
 .home-content h1 {
-  color: #e0b50f;
+  color: #0e002b;
+  /* margin-bottom: 50px; 
+} */
+ .home-content h2p{
+  justify-content: space-between;
   padding: 5px;
+ }
+
+ .home-content h1{
+margin: 15px;
+ }
+
+.home-text{
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+.home-text h2{
+  line-height: 1.6;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.home-text .highlight{
+  color: #3b8ff3;
+  font-weight: bold;
+}
+
+.home-text h1{
+  font-size: 1.8rem;
+  /* color: #ffdf00; */
 }
 
 /* Buttons */
 .home-buttons {
-  margin-top: 20px;
+  padding: 10px;
+  margin-top: 25px;
 }
 
 .home-buttons .btn-hire {
@@ -47,7 +83,7 @@
 }
 
 .home-buttons .btn-cv {
-  background-color: #f29f67;
+  background-color: #3b8ff3;
   color: white;
   margin-left: 15px;
   transition: all 0.5s ease;
@@ -81,11 +117,11 @@
   gap: 15px;
 }
 .social-links a {
-  color: #28ec50;
+  color: #000701;
   transition: transform 0.3s ease;
 }
 .social-links a:hover {
-  transform: scale(1.2);
+  transform: scale(1.5);
 }
 
 /* Scroll Down Arrow */
@@ -102,7 +138,7 @@
   60% { transform: translateY(-5px); }
 }
 
-/* Responsive 
+/*Responsive*/ 
 @media (max-width: 600px) {
   .home-container {
     padding-left: 20px;

@@ -1,0 +1,146 @@
+.about{
+    padding: 70px 100px;
+    margin-left: 200px;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+}
+
+.about-title{
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #222;
+    border-bottom:3px solid #f29f67;
+    display: inline-block;
+    margin-bottom: 50px;
+}
+
+.about-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.about-left{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.about-right{
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.about-text{
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.skills{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.skill-card{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover{
+    background: #fef3eb;
+    border-color: #f29f67;
+}
+
+.skill-icon{
+    font-size: 1.5rem;
+    color: #f29f67;
+}
+
+.download-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,#f29f67,#ff7f50);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    width: fit-content;
+    margin-top: 25px;
+    box-shadow: 0 4px 10px rgba(242,159,103,0.4);
+    transition: background 0.3s ease,transform 0.3s ease;
+}
+
+.download-btn:hover{
+    background-color: linear-gradient(135deg,#ff9e6b,#ff7b47);
+}
+
+#dark .about-title{
+    color: #eaeaea;
+    border-color: 3px solid #f29f67;
+}
+
+#dark .skill-card{
+    background: rgba(255,255,255,0.0);
+    border-color: rgba(255,255, 255,0.1);
+}
+
+#dark .skill-card:hover{
+    background: rgba(255,255,255,0.1);
+}
+
+#dark .download-btn{
+    box-shadow: 0 4px 12px rgba(255,150,100,0.3);
+}
+
+@media(max-width:992px){
+    .about{
+        margin-left: 0;
+        padding: 50px 30px;
+    }
+    .about-container{
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-right{
+        align-items: center;
+    }
+    .skills{
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 600px) {
+  .about {
+    padding: 30px 20px;
+  }
+
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .about-text {
+    font-size: 0.95rem;
+  }
+
+  .skill-card {
+    font-size: 0.9rem;
+  }
+}

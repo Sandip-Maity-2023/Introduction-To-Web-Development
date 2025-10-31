@@ -2,22 +2,30 @@
 .navbar-profile-pic img {
   width: 150px;
   height: 150px;
-  border-radius: 90px;
-  /* object-fit: cover; */
-  border: 5px solid #39c61d;
-  display: flex;
-  vertical-align: middle;
-  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover; 
+  border: 3px solid #135803;
+  display: block;
+  /* vertical-align: middle; */
+  margin: 0 auto 30px;
+  box-shadow: 0 0 10px rgba(59,143,243,0.5);
+  transition: transform 0.3s ease;
 }
 
+.navbar-profile-pic img:hover{
+  transform: scale(1.3);
+}
 
 .nav-items {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem; */
+   display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  gap: 1.2rem; 
   color: white;
-  margin-left: 25px;
+  /* text-align: left; */
+}
+.nav-items.collapsed {
+  align-items: center;
 }
 
 .nav-link {
@@ -26,68 +34,58 @@
   align-items: center;
   gap: 0.6rem;
   font-size: 1.1rem; */
-  margin-top: 20px;
+  margin-top: 10px;
   transition: color 0.3s ease;
 }
 
+.nav-link a {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+  gap: 0.7rem;
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link a:hover {
+  color: #f29f67;
+  transform: translateX(10px);
+}
 .nav-link svg{
   margin-right: 10px;
+}
+
+.nav-text {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.nav-items.collapsed .nav-text {
+  display: none;
 }
 
 .nav-link:hover .nav-text {
   color: #f29f67;
 }
-
-.nav-link .active{
+/* 
+@media(max-width:768px){
+.menu-container{
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px 0;
+}
+.nav-items{
+  flex-direction: row;
+gap: 1rem;
+}
+.navbar-profile-pic img{
+  /* display: none; *
+}
+} */
+/* .nav-link a.active{
   color: #f29f67;
   border-left: 5px solid #f29f67;
   padding-left: 10px;
   text-decoration: none;
-}
-/* 
-.nav-text {
-  font-weight: 700;
-}
-
-.active .nav-text {
-  color: #4caf50;
-  font-weight: 600;
-} 
- */
-
-
-
-/* 
-.navbar-profile-pic img {
-  border-radius: 90px;
-  height: 150px;
-  width: 150px;
-  display: flex;
-  vertical-align: middle;
-  margin: 0 auto;
-  /* margin-top: 20px; *
-}
-
-.nav-item {
-  color: white;
-  /* margin-top: 30px; *
-  margin-left: 25px;
-}
-.nav-link {
-  margin-top: 20px;
-  cursor: pointer;
-}
-
-.nav-link svg {
-  margin-right: 10px;
-}
-.nav-link:hover {
-  color: #f29f67;
-}
-
-.nav-link .active {
-  color: #f29f67;
-  border-left: 5px solid #f29f67;
-  padding-left: 10px;
-  text-decoration: none;
-} 
+} */

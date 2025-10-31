@@ -14,7 +14,6 @@ import {
 } from "react-icons/fc";
 
 import "./MobileNav.css";
-import { set } from "lodash";
 
 const navitems = [
   { to: "home", label: "Home", icon: <FcHome /> },
@@ -28,15 +27,16 @@ const navitems = [
 
 const MobileNav = () => {
   const [open, setopen] = useState(false);
-  const [dark, setdark] = useState(false);
+  const [dark, setdark] = useState(
+    localStorage.getItem("theme")==="dark");
   const menuRef = useRef(null);
 
   //toggle menu
-  const handleopen = () => {
-    setopen((prev) => !prev);
+  const togglemenu = () => {
+    setopen(!open);
   };
   //close memu when link clicked
-  const handlemenu = () => {
+  const closemenu = () => {
     setopen(false);
   };
 
@@ -55,9 +55,8 @@ const MobileNav = () => {
 
   //close on ESC key
   useEffect(() => {
-    const handlekey = (e) => {
-      if (e.key === "Escape") setopen(false);
-    };
+    const handlekey = (e) => e.key === "Escape" && setopen(false);
+    
     document.addEventListener("keydown", handlekey);
     return () => document.removeEventListener("keydown", handlekey);
   }, []);
@@ -65,6 +64,7 @@ const MobileNav = () => {
   //toggle dark mode
   useEffect(() => {
     document.body.classList.toggle("dark-mode", dark);
+    localStorage.setItem("theme",dark ? "dark":"light");
   }, [dark]);
 
   return (
@@ -75,13 +75,13 @@ const MobileNav = () => {
           <AiOutlineMenuFold
             size={30}
             className="mobile-nav-icon"
-            onClick={handleopen}
+            onClick={togglemenu}
           />
         ) : (
           <BsMenuButtonWideFill
             size={30}
             className="mobile-nav-icon"
-            onClick={handleopen}
+            onClick={togglemenu}
           />
         )}
 
@@ -92,7 +92,7 @@ const MobileNav = () => {
           onClick={() => setdark((prev) => !prev)}
           aria-label="Toggle theme"
         >
-          {dark ? <MdLightMode /> : <MdDarkMode />}
+          {dark ? <MdLightMode size={26}/> : <MdDarkMode size={26}/>}
         </button>
       </div>
 
@@ -110,7 +110,7 @@ const MobileNav = () => {
                 smooth={true}
                 offset={-100}
                 duration={400}
-                onClick={handlemenu}
+                onClick={closemenu}
                 activeClass="active"
                 aria-label={label}
               >
@@ -123,7 +123,7 @@ const MobileNav = () => {
       </div>
 
       {/* background overlay when menu open */}
-      {open && <div className="menu-overlay" onClick={handleopen}></div>}
+      {open && <div className="menu-overlay" onClick={togglemenu}></div>}
     </div>
   );
 };

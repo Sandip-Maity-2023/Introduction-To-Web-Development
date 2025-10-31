@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useRef} from "react";
 import "../Home/Home.css";
 import { useTheme } from "../../context/ThemeContext";
 import Resume from "../../assets/docs/ats.pdf";
@@ -7,6 +7,8 @@ import { FaLinkedin, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import { FiArrowDown } from "react-icons/fi";
 import Fade from "react-awesome-reveal";
 import  Typewriter  from "typewriter-effect";
+
+//import { motion, useScroll, useTransform } from "framer-motion";
 
 const Home = () => {
   const themeContext = useTheme();
@@ -18,7 +20,7 @@ const Home = () => {
   };
 
   return (
-    <div className={`home-container ${theme}`} id="home">
+    <section className={`home-container ${theme}`} id="home">
       {/* theme toggle button */}
       <div className="theme-btn" onClick={handle}>
         {theme === "light" ? (
@@ -31,40 +33,44 @@ const Home = () => {
       {/* home content */}
       <div className="home-content container">
         <Fade right>
-          <h2>Hi 👋 I'm a</h2>
+          <h2>Hi 👋 I'm a <span className="highlight"><strong>Passionate Software Developer Engineer</strong></span></h2>
+          <section className="h2p">
           <h1>
             <Typewriter
               options={{
                 strings: [
-                  "AI/ML Developer!",
+                  "Machine Learning Developer!",
                   "MERN Stack Developer!",
-                  "React-Native Develper",
+                  "React-Native Develper!",
                 ],
                 autoStart: true,
                 loop: true,
               }}
             />
           </h1>
+          </section>
         </Fade>
 
         <Fade bottom>
           <div className="home-buttons">
             <a
               className="btn btn-hire"
-              href="https://api.whatsapp.com/send?phone=9002838296"
+              // href="https://api.whatsapp.com/send?phone=9002838296"
+              href="mailto:12sandip125@gmail.com"
               target="_blank"
               rel="noreferrer"
             >
-              Hire Me
+              Send Email
             </a>
             <a
-              className="btn btn-resume"
+              className="btn btn-cv"
               href={Resume}
               target="_blank"
               rel="noreferrer"
               download="ats.pdf"
             >
-              Download CV{" "}
+              Download CV
+              {/* {" "} */}
               <FiArrowDown
                 size={20}
                 style={{ marginLeft: "5px", marginTop: "3px" }}
@@ -74,18 +80,18 @@ const Home = () => {
         </Fade>
 
         {/* social links */}
-        <Fade bottom delay={500}>
+        <Fade direction="up" delay={400}>
           <div className="social-links">
             <a
               href="https://www.linkedin.com/in/sanath-s-2b4b00199/"
               target="_blank"
               rel="noreferrer"
             >
-              <FaLinkedin size={25} />
+              <FaLinkedin size={30} />
             </a>
 
             <a href="https://github.com" target="_blank" rel="noreferrer">
-              <FaGithub size={25} />
+              <FaGithub size={30} />
             </a>
 
             <a
@@ -93,11 +99,11 @@ const Home = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <FaInstagram size={25} />
+              <FaInstagram size={30} />
             </a>
 
             <a href="https://twitter.com" target="_blank" rel="noreferrer">
-              <FaTwitter size={25} />
+              <FaTwitter size={30} />
             </a>
           </div>
         </Fade>
@@ -105,11 +111,11 @@ const Home = () => {
         {/* scroll down indicator */}
         <div className="scroll-down">
           <a href="#about">
-            <FiArrowDown size={30} />
+            <FiArrowDown size={40} />
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 .sidebar-toggle-icons p svg{
-  background-color: #f29f67;
+  background-color: #a6b0f0;
   margin-top: 10px;
 }
 
@@ -54,7 +54,7 @@
 
 .container::-webkit-scrollbar-thumb {     /* mean */
   /* background-color: rgba(0, 0, 0, 0.2); */
-  background-color: #f29f67;
+  background-color: #2d1ce2;
   /* border-radius: 50%; */
 }
 

@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Escape the Haunted Mansion</title>
+<style>
+  :root{--bg:#0b0b12;--panel:#111118;--accent:#d95bff}
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#06060a 0%, #0f0f14 100%);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#eee}
+  #game-wrap{display:flex;gap:12px;padding:12px;box-sizing:border-box;height:100%}
+  #left{flex:1;display:flex;flex-direction:column}
+  #canvas{background:#000;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.7);}
+  #right{width:320px;display:flex;flex-direction:column;gap:12px}
+  .panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+  h1{margin:4px 0;font-size:18px}
+  .hud-row{display:flex;justify-content:space-between;align-items:center}
+  .bar{height:12px;background:rgba(255,255,255,0.06);border-radius:8px;overflow:hidden}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,#ffb86b,#ff6b6b);width:50%}
+  .inventory{display:flex;gap:8px;flex-wrap:wrap}
+  .slot{width:64px;height:64px;border-radius:8px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;font-size:12px;border:1px dashed rgba(255,255,255,0.03)}
+  button{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:#eee;cursor:pointer}
+  footer{color:#9a9aa8;font-size:12px;margin-top:auto}
+  .controls{font-size:13px;color:#d7d7df}
+  .log{height:140px;overflow:auto;background:rgba(0,0,0,0.2);padding:8px;border-radius:6px}
+  .big{font-weight:700;color:var(--accent)}
+</style>
+</head>
+<body>
+<div id="game-wrap">
+  <div id="left">
+    <canvas id="canvas" width="960" height="640"></canvas>
+    <div class="panel" style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-weight:600">Level: <span id="level">1</span></div>
+        <div style="font-size:13px;color:#bfbfd6">Objective: Find the golden key and escape the front gate.</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:12px;color:#bfbfd6">Enemies: <span id="enemies-left">0</span></div>
+        <div style="font-size:12px;color:#bfbfd6">Time: <span id="time">00:00</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="right">
+    <div class="panel">
+      <h1>Player</h1>
+      <div class="hud-row" style="gap:8px">
+        <div style="width:60%">
+          <div style="font-size:13px">Health</div>
+          <div class="bar" style="margin-top:6px"><i id="health-bar"></i></div>
+        </div>
+        <div style="width:40%">
+          <div style="font-size:13px">Flash</div>
+          <div class="bar" style="margin-top:6px"><i id="flash-bar" style="background:linear-gradient(90deg,#8ee7ff,#6b9bff);width:60%"></i></div>
+        </div>
+      </div>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <button id="use-candle">Use Candle</button>
+        <button id="sneak">Toggle Sneak</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h1>Inventory</h1>
+      <div class="inventory" id="inventory">
+        <div class="slot" id="slot-key">Empty</div>
+        <div class="slot" id="slot-talisman">Empty</div>
+        <div class="slot" id="slot-map">Empty</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h1>Game Log</h1>
+      <div class="log" id="glog"></div>
+    </div>
+
+    <div class="panel controls">
+      <h1>Controls</h1>
+      <div>Move: WASD / Arrow keys</div>
+      <div>Use Flashlight: Mouse (aim) + Left Click</div>
+      <div>Pick up / interact: E</div>
+      <div>Pause: P</div>
+    </div>
+<div class="inventory" id="inventory">
+    <div class="slot" id="slot-key">Empty</div>
+    <div class="slot" id="slot-talisman">Empty</div>
+    <div class="slot" id="slot-map">Empty</div>
+    <div class="slot" id="slot-fuse">Empty</div>
+</div>
+    <footer class="panel">Built for you — expand levels, add audio, replace art. Have fun, brave one!</footer>
+  </div>
+</div>
+
+<script>
+/*
+  Escape the Haunted Mansion - Single-file HTML5 Canvas game
+  Features implemented:
+  - Player movement (WASD / arrows)
+  - Flashlight cone that consumes battery
+  - Simple AI ghosts with patrol and chase behaviour
+  - Rooms with doors and a locked exit requiring a golden key
+  - Inventory system (collect key, talisman, map, **fuse**)
+  - Health, damage, logs, UI
+  - Small puzzle: find fuse to restore power (simulated)
+
+  Save this file as index.html and open in a modern browser.
+*/
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+
+// --- Game state
+let keysDown = {};
+let mouse = {x: W/2, y: H/2, down:false};
+let paused = false;
+let startTime = Date.now();
+
+const state = {
+  level:1,
+  player:{x:480,y:520,w:22,h:28,spd:160,health:100,flash:100,sneak:false},
+  inventory:{key:false,talisman:false,map:false,fuse:false}, // Added fuse to initial state
+  items:[],
+  ghosts:[],
+  walls:[],
+  doors:[],
+  logs:[],
+  escapeOpened:false
+};
+
+// Utility
+function addLog(s){ // Renamed log to addLog for consistency, but kept the function logic
+  state.logs.push(s);
+  const el = document.getElementById('glog');
+  el.innerHTML = state.logs.slice(-6).map(x=>'&middot; '+x).join('<br>');
+}
+
+// Simple map layout (rooms as rectangles). We'll render rooms and walls.
+function buildLevel(){
+  state.items=[]; state.ghosts=[]; state.walls=[]; state.doors=[]; state.logs=[]; state.escapeOpened=false;
+  // rooms: each room {x,y,w,h}
+  const rooms = [
+    {x:60,y:60,w:360,h:220}, // left top
+    {x:540,y:60,w:360,h:220}, // right top
+    {x:60,y:320,w:360,h:260}, // left bottom
+    {x:540,y:320,w:360,h:260}, // right bottom
+    {x:240,y:180,w:480,h:320} // central hall overlapping
+  ];
+  // walls are outside bounds and room separators. We'll add perimeter walls
+  state.walls.push({x:20,y:20,w:920,h:20});
+  state.walls.push({x:20,y:600,w:920,h:20});
+  state.walls.push({x:20,y:20,w:20,h:600});
+  state.walls.push({x:920,y:20,w:20,h:600});
+  // internal walls to make rooms
+  state.walls.push({x:420,y:20,w:20,h:260});
+  state.walls.push({x:420,y:340,w:20,h:280});
+  state.walls.push({x:20,y:300,w:420,h:20});
+  state.walls.push({x:540,y:300,w:420,h:20});
+
+  // Doors: small rects in walls. door {x,y,w,h,locked,leadsTo}
+  state.doors.push({x:420-6,y:140,w:12,h:40,locked:false});
+  state.doors.push({x:420-6,y:420,w:12,h:40,locked:false});
+  state.doors.push({x:220,y:300-6,w:40,h:12,locked:false});
+  state.doors.push({x:700,y:300-6,w:40,h:12,locked:false});
+
+  // Locked exit gate in the bottom center
+  state.doors.push({x:460,y:600-40,w:40,h:40,locked:true,exit:true});
+
+  // Items: key in right top, talisman left bottom, fuse in central hall
+  state.items.push({type:'golden_key',x:700,y:120,picked:false});
+  state.items.push({type:'talisman',x:160,y:420,picked:false});
+  state.items.push({type:'fuse',x:500,y:260,picked:false});
+  state.items.push({type:'map',x:240,y:120,picked:false});
+
+  // Ghosts (patrols)
+  state.ghosts.push(createGhost(140,120, [{x:140,y:120},{x:320,y:120},{x:320,y:200},{x:140,y:200}]));
+  state.ghosts.push(createGhost(760,420, [{x:760,y:420},{x:620,y:420},{x:620,y:500}]));
+  state.ghosts.push(createGhost(480,360, [{x:480,y:360},{x:550,y:360},{x:550,y:240},{x:410,y:240}]));
+
+  // Place player near bottom center
+  state.player.x = 480; state.player.y = 520; state.player.health = 100; state.player.flash = 100; state.player.sneak=false;
+}
+
+function createGhost(x,y,patrol){
+  return {x,y,w:26,h:36,patrol,pi:0,spd:60,mode:'patrol',aggroRange:180,chaseTimer:0};
+}
+
+// Collision helpers
+function rectsOverlap(a,b){
+  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
+function moveEntity(e,dx,dy){
+  // try move and collide with walls and doors
+  e.x += dx; e.y += dy;
+  const hitWall = state.walls.find(w=>rectsOverlap(e,w));
+  if(hitWall){ e.x -= dx; e.y -= dy; }
+  // doors: only block if locked
+  for(const d of state.doors){
+    if(d.locked && rectsOverlap(e,d)){
+      e.x -= dx; e.y -= dy; break;
+    }
+  }
+}
+
+// Input
+addEventListener('keydown',e=>{keysDown[e.key.toLowerCase()]=true; if(e.key==='p' || e.key==='P'){paused=!paused} });
+addEventListener('keyup',e=>{keysDown[e.key.toLowerCase()]=false});
+canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect(); mouse.x=(e.clientX-r.left)*(canvas.width/r.width); mouse.y=(e.clientY-r.top)*(canvas.height/r.height)});
+canvas.addEventListener('mousedown',e=>{mouse.down=true});
+canvas.addEventListener('mouseup',e=>{mouse.down=false});
+addEventListener('keypress',e=>{if(e.key.toLowerCase()==='e'){interact()}});
+
+// Interact with items/doors - streamlined item logic
+function interact(){
+  // check items (proximity pickup)
+  for(const it of state.items){
+    if(!it.picked && Math.hypot(state.player.x - it.x, state.player.y - it.y) < 40){
+      it.picked = true;
+      // Corrected item type assignment
+      const invProp = it.type === 'golden_key' ? 'key' : it.type;
+      state.inventory[invProp] = true;
+      addLog('Picked up '+(it.type.replace('_',' ')));
+      refreshInventoryUI(); // Update UI immediately
+    }
+  }
+  // doors
+  for(const d of state.doors){
+    // Using d.x+d.w/2 for center calculation for accurate distance to door center
+    if(Math.hypot(state.player.x - (d.x+d.w/2), state.player.y - (d.y+d.h/2)) < 40){
+      if(d.locked){
+        if(state.inventory.key){ d.locked=false; addLog('Unlocked the gate with the golden key.'); if(d.exit) state.escapeOpened=true;}
+        else addLog('The gate is locked. You need a golden key.');
+      } else {
+        addLog('Opened a door.');
+      }
+    }
+  }
+}
+
+// Game update
+let last = Date.now();
+function update(){
+  const now = Date.now();
+  const dt = Math.min(0.05,(now-last)/1000);
+  last = now;
+  if(paused) return;
+
+  const p = state.player;
+  // movement
+  let mvx=0,mvy=0;
+  if(keysDown['w']||keysDown['arrowup']) mvy -= 1;
+  if(keysDown['s']||keysDown['arrowdown']) mvy += 1;
+  if(keysDown['a']||keysDown['arrowleft']) mvx -= 1;
+  if(keysDown['d']||keysDown['arrowright']) mvx += 1;
+  const norm = Math.hypot(mvx,mvy) || 1;
+  const speed = p.sneak ? p.spd*0.45 : p.spd;
+  moveEntity(p, mvx/norm * speed * dt, mvy/norm * speed * dt);
+
+  // flashlight drains when used (mouse down)
+  if(mouse.down && p.flash>0){ p.flash = Math.max(0, p.flash - 15*dt); }
+  else { p.flash = Math.min(100, p.flash + 8*dt); }
+
+  // ghosts AI
+  for(const g of state.ghosts){
+    updateGhost(g,dt);
+    // collision with player
+    // Simplified bounding box for collision detection
+    if(rectsOverlap({x:p.x-5,y:p.y-5,w:p.w+10,h:p.h+10},g)){
+      // Base damage rate in health points per second (e.g., 18 health/sec)
+      let dmgRate = 18;
+      if(p.sneak) dmgRate *= 0.4; // Sneaking reduces damage
+      // if player has talisman, reduce damage further (e.g., by half)
+      if(state.inventory.talisman) dmgRate *= 0.5;
+
+      const dmg = dmgRate * dt;
+      p.health = Math.max(0, p.health - dmg);
+      if(p.health <= 0){ addLog('You have been consumed by the mansion...'); paused=true; }
+    }
+  }
+
+  // update UI elements
+  document.getElementById('health-bar').style.width = (p.health)+'%';
+  document.getElementById('flash-bar').style.width = (p.flash)+'%';
+  document.getElementById('level').innerText = state.level;
+  document.getElementById('enemies-left').innerText = state.ghosts.length;
+  const sec = Math.floor((Date.now()-startTime)/1000);
+  document.getElementById('time').innerText = String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');
+
+  // check escape
+  if(state.escapeOpened){ addLog('The mansion gate is unlocked! Go to the exit to escape.'); state.escapeOpened=false; }
+}
+
+function updateGhost(g,dt){
+  const p = state.player;
+  // distance to player
+  const dx = p.x - g.x, dy = p.y - g.y;
+  const dist = Math.hypot(dx,dy);
+  // Aggro logic improved: if in range AND (flash is on OR very small chance of random aggro)
+  if(dist < g.aggroRange && (p.flash > 5 && mouse.down || Math.random() < 0.002)){
+    g.mode = 'chase'; g.chaseTimer = 3.0;
+  }
+  if(g.mode === 'chase'){
+    // move toward player
+    const nx = dx/dist, ny = dy/dist;
+    const chaseSpeed = g.spd * 1.25;
+    moveEntity(g, nx * chaseSpeed * dt, ny * chaseSpeed * dt);
+    g.chaseTimer -= dt;
+    if(g.chaseTimer <= 0) g.mode = 'patrol';
+  } else {
+    // patrol along patrol points
+    const tp = g.patrol[g.pi];
+    const dx2 = tp.x - g.x, dy2 = tp.y - g.y;
+    const d2 = Math.hypot(dx2,dy2);
+    if(d2 < 6){ g.pi = (g.pi+1) % g.patrol.length; }
+    else {
+      const nx2 = dx2/d2, ny2 = dy2/d2;
+      moveEntity(g, nx2 * g.spd * dt, ny2 * g.spd * dt);
+    }
+  }
+}
+
+// Render
+function draw(){
+  // clear
+  ctx.fillStyle = '#07070a'; ctx.fillRect(0,0,W,H);
+
+  // draw rooms (lightly)
+  for(const w of state.walls){ ctx.fillStyle='rgba(20,20,28,0.9)'; ctx.fillRect(w.x,w.y,w.w,w.h); }
+
+  // draw doors
+  for(const d of state.doors){ ctx.fillStyle = d.locked ? 'rgba(180,120,40,0.95)' : 'rgba(60,200,120,0.95)'; ctx.fillRect(d.x,d.y,d.w,d.h); }
+
+  // draw items
+  for(const it of state.items){ if(it.picked) continue; drawItem(it); }
+
+  // draw ghosts (glowing)
+  for(const g of state.ghosts){ drawGhost(g); }
+
+  // draw player
+  drawPlayer(state.player);
+
+  // flashlight cone overlay
+  drawFlashlight();
+
+  // minimap or HUD hints (drawn on top-left)
+  ctx.fillStyle='rgba(255,255,255,0.03)'; ctx.fillRect(12,12,180,90);
+  ctx.fillStyle='#eee'; ctx.font='12px sans-serif'; 
+  const inventoryList = Object.keys(state.inventory).filter(k=>state.inventory[k]).map(k => k.charAt(0).toUpperCase() + k.slice(1)).join(', ');
+  ctx.fillText('Inventory: ' + (inventoryList || 'None'), 20, 36);
+}
+
+function drawItem(it){
+  ctx.save();
+  ctx.translate(it.x,it.y);
+  if(it.type==='golden_key'){
+    ctx.fillStyle='gold'; ctx.beginPath(); ctx.ellipse(0,0,10,14,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#6b3'; ctx.fillRect(-3,-2,6,6);
+  } else if(it.type==='talisman'){
+    ctx.fillStyle='purple'; ctx.beginPath(); ctx.moveTo(0,-10); ctx.lineTo(8,0); ctx.lineTo(0,10); ctx.lineTo(-8,0); ctx.closePath(); ctx.fill();
+  } else if(it.type==='fuse'){
+    ctx.fillStyle='#ffb86b'; ctx.fillRect(-8,-4,16,8);
+  } else if(it.type==='map'){
+    ctx.fillStyle='#eee'; ctx.fillRect(-10,-8,20,16); ctx.fillStyle='#b33'; ctx.fillRect(-6,-4,12,2);
+  }
+  ctx.restore();
+}
+
+function drawGhost(g){
+  ctx.save();
+  ctx.globalAlpha = 0.9;
+  // glow
+  const grad = ctx.createRadialGradient(g.x+g.w/2,g.y+g.h/2,4,g.x+g.w/2,g.y+g.h/2,70);
+  grad.addColorStop(0,'rgba(255,255,255,0.18)'); grad.addColorStop(1,'rgba(120,80,200,0.02)');
+  ctx.fillStyle = grad; ctx.beginPath(); ctx.ellipse(g.x+g.w/2,g.y+g.h/2,60,40,0,0,Math.PI*2); ctx.fill();
+  // body
+  ctx.fillStyle = 'rgba(180,180,255,0.95)'; ctx.beginPath(); ctx.ellipse(g.x+g.w/2,g.y+g.h/2,g.w/2,g.h/2,0,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawPlayer(p){
+  ctx.save();
+  // body
+  ctx.fillStyle = '#f2d9c9'; ctx.fillRect(p.x-10,p.y-14,20,28);
+  // head
+  ctx.fillStyle='#ffd8be'; ctx.beginPath(); ctx.ellipse(p.x,p.y-20,12,12,0,0,Math.PI*2); ctx.fill();
+  // eye when flashlight
+  ctx.fillStyle='#222'; ctx.fillRect(p.x+6,p.y-22,3,3);
+  ctx.restore();
+}
+
+function drawFlashlight(){
+  const p = state.player;
+  // mask whole screen dark
+  ctx.save();
+  ctx.fillStyle = 'rgba(0,0,0,0.86)';
+  ctx.fillRect(0,0,W,H);
+  // if player has flash > 0 and mouse.down show cone
+  const mx = mouse.x, my = mouse.y;
+  const angle = Math.atan2(my - p.y, mx - p.x);
+  const cone = (Math.PI/4) * (0.6 + p.flash/100); // cone width depends on flash
+  const length = 220 + p.flash*2;
+
+  // create composite to cut cone out
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.beginPath();
+  ctx.moveTo(p.x,p.y);
+  ctx.arc(p.x,p.y,length,angle-cone,angle+cone);
+  ctx.closePath();
+  ctx.fill();
+
+  // subtle light overlay
+  ctx.globalCompositeOperation = 'screen';
+  const lg = ctx.createRadialGradient(p.x,p.y,40,p.x,p.y,Math.max(220,length));
+  lg.addColorStop(0,'rgba(255,250,220,0.25)'); lg.addColorStop(1,'rgba(255,250,220,0.0)');
+  ctx.fillStyle = lg; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.arc(p.x,p.y,length,angle-cone,angle+cone); ctx.closePath(); ctx.fill();
+
+  // if player has map, show mini-map reveal effect: make small circles at items
+  if(state.inventory.map){
+    ctx.globalCompositeOperation='destination-out';
+    for(const it of state.items){ if(it.picked) continue; ctx.beginPath(); ctx.arc(it.x,it.y,24,0,Math.PI*2); ctx.fill(); }
+  }
+
+  ctx.restore();
+}
+
+// Game loop
+function loop(){ update(); draw(); requestAnimationFrame(loop); }
+
+// UI Buttons - Corrected logic for 'use-candle' (now Use Light)
+document.getElementById('use-candle').addEventListener('click',()=>{
+  if(state.inventory.fuse){ 
+    state.player.flash = Math.min(100, state.player.flash + 60); // Bigger boost
+    state.inventory.fuse = false;
+    addLog('<span class="big">SUCCESS!</span> You used the **Fuse** to restore power to the flashlight!');
+  }
+  else { 
+    state.player.flash = Math.min(100, state.player.flash + 12); // Small boost
+    addLog('You light a small **Candle** for a brief light recharge.'); 
+  }
+  refreshInventoryUI(); // Update inventory after using fuse
+});
+
+document.getElementById('sneak').addEventListener('click',()=>{ state.player.sneak = !state.player.sneak; addLog('Sneak '+(state.player.sneak?'enabled':'disabled')); });
+
+// Populate inventory UI - Added Fuse/Consumable Slot
+function refreshInventoryUI(){
+  document.getElementById('slot-key').innerText = state.inventory.key ? 'Golden Key' : 'Empty';
+  document.getElementById('slot-talisman').innerText = state.inventory.talisman ? 'Talisman' : 'Empty';
+  document.getElementById('slot-map').innerText = state.inventory.map ? 'Map' : 'Empty';
+  // Add a new slot for the fuse (requires a new slot in the HTML to show)
+  const inv = document.getElementById('inventory');
+  if (!document.getElementById('slot-fuse')) {
+    const fuseSlot = document.createElement('div');
+    fuseSlot.className = 'slot';
+    fuseSlot.id = 'slot-fuse';
+    inv.appendChild(fuseSlot);
+  }
+  document.getElementById('slot-fuse').innerText = state.inventory.fuse ? 'Fuse' : 'Empty';
+}
+
+// Removed the redundant auto-pickup interval function and its logic
+// Interaction logic is now handled in the 'interact' function.
+setInterval(refreshInventoryUI,300);
+
+// Start
+buildLevel(); loop();
+
+// expose simple API for further extension (so you can edit from console)
+window._ESCAPE_GAME = { state, buildLevel, createGhost };
+
+</script>
+</body>
+</html>

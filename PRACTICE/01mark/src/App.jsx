@@ -1,12 +1,14 @@
 import React from 'react'
 import TicTacToe from './TicTacToe' 
 import ToDoList from './ToDoList'
+import Form from './Form'
+ import FullSpotifyClone from './Rupam'
 function App() {
   return (
-     <ToDoList/>
+    //  <ToDoList/>
 
-
-
+    //  <Form/>
+<FullSpotifyClone/>
     //<TicTacToe/>
   )
 }
