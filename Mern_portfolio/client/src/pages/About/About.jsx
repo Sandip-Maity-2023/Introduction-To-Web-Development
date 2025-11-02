@@ -28,13 +28,18 @@ const About = () => {
         About Me
       </motion.h1>
 
+{/* left side */}
       <div className="about-container">
-        <motion.div
+        <motion.img
           className="about-left"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-        ></motion.div>
+        src=".\src\assets\docs\q.jpg"
+        alt="about-profile-pic"
+        >
+
+        </motion.img>
 
         {/* Right Content */}
         <motion.div

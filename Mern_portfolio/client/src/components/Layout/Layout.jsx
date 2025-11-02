@@ -15,7 +15,7 @@ const handleToggle=()=>{
 
 
   return (
-    <div>
+    <>
       <div className="sidebar-section">
         <div className={toggle ? "sidebar-toggle":"sidebar"}>
           <div className="sidebar-toggle-icons">               {/* it will be icon << >> */}
@@ -28,13 +28,15 @@ const handleToggle=()=>{
           </div>
            <Menus toggle={toggle}/>
         </div>
-        <div className="container">
+
+        {/* main content */}
+        <div className={`container ${toggle ? "shifted" : ""}`}>
 
           <ErrorBoundary><Home/></ErrorBoundary>
           
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

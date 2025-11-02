@@ -1,12 +1,17 @@
+
+
 import React,{useRef} from "react";
 import "../Home/Home.css";
 import { useTheme } from "../../context/ThemeContext";
 import Resume from "../../assets/docs/ats.pdf";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
-import { FaLinkedin, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
+import { MdMarkEmailRead } from "react-icons/md";
+import { FaLinkedin, FaGithub, FaInstagram, FaTwitter,FaHackerrank,FaFileDownload } from "react-icons/fa";
+import {SiLeetcode,SiGeeksforgeeks} from "react-icons/si";
 import { FiArrowDown } from "react-icons/fi";
-import Fade from "react-awesome-reveal";
-import  Typewriter  from "typewriter-effect";
+//import Fade from "react-awesome-reveal";
+import {motion} from "framer-motion";
+import  Typewriter  from "typewriter-effect"; 
 
 //import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -20,7 +25,7 @@ const Home = () => {
   };
 
   return (
-    <section className={`home-container ${theme}`} id="home">
+    <div className={`home-container ${theme}`} id="home">
       {/* theme toggle button */}
       <div className="theme-btn" onClick={handle}>
         {theme === "light" ? (
@@ -32,8 +37,8 @@ const Home = () => {
 
       {/* home content */}
       <div className="home-content container">
-        <Fade right>
-          <h2>Hi 👋 I'm a <span className="highlight"><strong>Passionate Software Developer Engineer</strong></span></h2>
+        <motion.div initial={{opacity:0,x:100}} whileInView={{opacity:1,x:0}} transition={{duration:0.8}}>
+          <h2>Hi 👋 I'm a{" "}<span className="highlight"><strong>Passionate Software Developer Engineer</strong></span></h2>
           <section className="h2p">
           <h1>
             <Typewriter
@@ -49,39 +54,45 @@ const Home = () => {
             />
           </h1>
           </section>
-        </Fade>
+        </motion.div>
 
-        <Fade bottom>
-          <div className="home-buttons">
-            <a
-              className="btn btn-hire"
-              // href="https://api.whatsapp.com/send?phone=9002838296"
-              href="mailto:12sandip125@gmail.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Send Email
-            </a>
-            <a
-              className="btn btn-cv"
-              href={Resume}
-              target="_blank"
-              rel="noreferrer"
-              download="ats.pdf"
-            >
-              Download CV
-              {/* {" "} */}
-              <FiArrowDown
-                size={20}
-                style={{ marginLeft: "5px", marginTop: "3px" }}
-              />
-            </a>
-          </div>
-        </Fade>
+{/* botton section */}
+      <motion.div className="home-buttons" initial={{opacity:0,y:50}} whileInView={{opacity:1,y:0}} transition={{duration:0.8,delay:0.2}}>
+        <div className="home-buttons">
+          <a
+            className="btn btn-hire"
+            // href="https://api.whatsapp.com/send?phone=9002838296"
+            href="mailto:12sandip125@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Send Email
+            <MdMarkEmailRead size={20} style={{marginLeft:"5px",marginTop:"3px"}}/>
+          </a>
+          <a
+            className="btn btn-cv"
+            href={Resume}
+            target="_blank"
+            rel="noreferrer"
+            download="ats.pdf"
+          >
+            Download CV
+            {/* {" "} */}
+            <FaFileDownload
+              size={20}
+              style={{ marginLeft: "5px", marginTop: "3px" }}
+            />
+          </a>
+        </div>
+      </motion.div>
 
         {/* social links */}
-        <Fade direction="up" delay={400}>
-          <div className="social-links">
+        <motion.div
+          className="social-links"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
             <a
               href="https://www.linkedin.com/in/sanath-s-2b4b00199/"
               target="_blank"
@@ -99,14 +110,13 @@ const Home = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <FaInstagram size={30} />
+              <SiLeetcode size={30} />
             </a>
 
             <a href="https://twitter.com" target="_blank" rel="noreferrer">
-              <FaTwitter size={30} />
+              <SiGeeksforgeeks size={30} />
             </a>
-          </div>
-        </Fade>
+        </motion.div>
 
         {/* scroll down indicator */}
         <div className="scroll-down">
@@ -115,8 +125,76 @@ const Home = () => {
           </a>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
 export default Home;
+
+
+
+
+
+// import React from "react";
+// import { useTheme } from "../../context/ThemeContext";
+// import Typewriter from "typewriter-effect";
+// import Resume from "../../assets/docs/ats.pdf";
+// import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+// import "./home.css";
+// import Fade from "react-awesome-reveal/Fade";
+
+// const Home = () => {
+//   const [theme, setTheme] = useTheme();
+//   //handle theme
+//   const handleTheme = () => {
+//     setTheme((prevState) => (prevState === "light" ? "dark" : "light"));
+//   };
+//   return (
+//     <>
+//       <div className="container-fluid home-container" id="home">
+//         <div className="theme-btn" onClick={handleTheme}>
+//           {theme === "light" ? (
+//             <BsFillMoonStarsFill size={30} />
+//           ) : (
+//             <BsFillSunFill size={30} />
+//           )}
+//         </div>
+//         <div className="container home-content">
+//           <Fade right>
+//             <h2>Hi 👋 I'm a</h2>
+//             <h1>
+//               <Typewriter
+//                 options={{
+//                   strings: [
+//                     "FullStack Developer!",
+//                     "Mern Stack Developer!",
+//                     "React native developer!",
+//                   ],
+//                   autoStart: true,
+//                   loop: true,
+//                 }}
+//               />
+//             </h1>
+//           </Fade>
+//           <Fade bottom>
+//             <div className="home-buttons">
+//               <a
+//                 className="btn btn-hire"
+//                 href="https://api.whatsapp.com/send?phone=1234567890"
+//                 rel="noreferrer"
+//                 target="_blank"
+//               >
+//                 Hire Me
+//               </a>
+//               <a className="btn btn-cv" href={Resume} download="your_name.pdf">
+//                 My Resume
+//               </a>
+//             </div>
+//           </Fade>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default Home;

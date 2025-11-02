@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { BsMenuButtonWideFill } from "react-icons/bs";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineMenuFold } from "react-icons/ai";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { Link } from "react-scroll";
 import {
   FcAbout,
@@ -12,118 +12,81 @@ import {
   FcReadingEbook,
   FcVideoProjector,
 } from "react-icons/fc";
-
 import "./MobileNav.css";
 
-const navitems = [
-  { to: "home", label: "Home", icon: <FcHome /> },
-  { to: "about", label: "About", icon: <FcAbout /> },
-  { to: "edu", label: "Education", icon: <FcReadingEbook /> },
-  { to: "tech", label: "Tech Stack", icon: <FcBiotech /> },
-  { to: "pro", label: "Projects", icon: <FcVideoProjector /> },
-  { to: "work", label: "Work Experience", icon: <FcPortraitMode /> },
-  { to: "con", label: "Contact", icon: <FcBusinessContact /> },
+const navLinks = [
+  { to: "home", icon: <FcHome />, label: "Home" },
+  { to: "about", icon: <FcAbout />, label: "About" },
+  { to: "education", icon: <FcReadingEbook />, label: "Education" },
+  { to: "techstack", icon: <FcBiotech />, label: "Tech Stack" },
+  { to: "projects", icon: <FcVideoProjector />, label: "Projects" },
+  { to: "work", icon: <FcPortraitMode />, label: "Experience" },
+  { to: "contact", icon: <FcBusinessContact />, label: "Contact" },
 ];
 
-const MobileNav = () => {
-  const [open, setopen] = useState(false);
-  const [dark, setdark] = useState(
-    localStorage.getItem("theme")==="dark");
-  const menuRef = useRef(null);
+const MobileNav = ({ theme = "light" }) => {
+  const [open, setOpen] = useState(false);
 
-  //toggle menu
-  const togglemenu = () => {
-    setopen(!open);
-  };
-  //close memu when link clicked
-  const closemenu = () => {
-    setopen(false);
-  };
-
-  //close menu when clicking outside
-  useEffect(() => {
-    const handleclick = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setopen(false);
-      }
-    };
-
-    //click outside
-    if (open) document.addEventListener("mousedown", handleclick);
-    return () => document.removeEventListener("mousedown", handleclick);
-  }, [open]);
-
-  //close on ESC key
-  useEffect(() => {
-    const handlekey = (e) => e.key === "Escape" && setopen(false);
-    
-    document.addEventListener("keydown", handlekey);
-    return () => document.removeEventListener("keydown", handlekey);
-  }, []);
-
-  //toggle dark mode
-  useEffect(() => {
-    document.body.classList.toggle("dark-mode", dark);
-    localStorage.setItem("theme",dark ? "dark":"light");
-  }, [dark]);
+  const handleToggle = () => setOpen(!open);
+  const handleMenuClick = () => setOpen(false);
 
   return (
-    <div className="mobile-nav">
-      {/* header bar */}
+    <div className={`mobile-nav ${theme === "dark" ? "dark" : ""}`}>
+      {/* Top Bar */}
       <div className="mobile-nav-header">
         {open ? (
           <AiOutlineMenuFold
             size={30}
             className="mobile-nav-icon"
-            onClick={togglemenu}
+            onClick={handleToggle}
           />
         ) : (
-          <BsMenuButtonWideFill
+          <GiHamburgerMenu
             size={30}
             className="mobile-nav-icon"
-            onClick={togglemenu}
+            onClick={handleToggle}
           />
         )}
-
         <span className="mobile-nav-title">My Portfolio</span>
-        {/* Theme toggle */}
-        <button
-          className="theme-toggle-btn"
-          onClick={() => setdark((prev) => !prev)}
-          aria-label="Toggle theme"
-        >
-          {dark ? <MdLightMode size={26}/> : <MdDarkMode size={26}/>}
-        </button>
       </div>
 
-      {/* slide-in menu */}
-      <div
-        ref={menuRef}
-        className={`mobile-nav-menu ${open ? "open" : "closed"}`}
-      >
-        <nav className="nav-items">
-          {navitems.map(({ to, label, icon }) => (
-            <div key={to} className="nav-link">
-              <Link
-                to={to}
-                spy={true}
-                smooth={true}
-                offset={-100}
-                duration={400}
-                onClick={closemenu}
-                activeClass="active"
-                aria-label={label}
-              >
-                {icon}
-                <span className="nav-text">{label}</span>
-              </Link>
+      {/* Slide-In Menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="mobile-nav-menu"
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          >
+            <div className="nav-items">
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.to}
+                  className="nav-link"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    to={link.to}
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={400}
+                    onClick={handleMenuClick}
+                    activeClass="active"
+                  >
+                    <span className="icon">{link.icon}</span>
+                    <span className="label">{link.label}</span>
+                  </Link>
+                </motion.div>
+              ))}
             </div>
-          ))}
-        </nav>
-      </div>
-
-      {/* background overlay when menu open */}
-      {open && <div className="menu-overlay" onClick={togglemenu}></div>}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

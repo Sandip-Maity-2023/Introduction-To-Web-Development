@@ -5,24 +5,25 @@ import { Link } from "react-scroll";
 import {
   FcAbout,
   FcBiotech,
-  FcBusinessContact,
   FcHome,
   FcPortraitMode,
   FcReadingEbook,
   FcVideoProjector,
 } from "react-icons/fc";
-
+import { MdAddToHomeScreen } from "react-icons/md";
+import { FcAndroidOs,FcContacts,FcCamcorderPro,FcBriefcase,FcCallback,FcBusinessContact } from "react-icons/fc";
+//import {motion} from "framer-motion"
 //import profilePic from "../../assets/san.jpg";
 
 // Navigation items array for cleaner mapping
 const NAV_ITEMS = [
-  { to: "home", label: "Home", icon: <FcHome size={25}/>  },
+  { to: "home", label: "Home", icon: <FcBusinessContact size={25}/>  },
   { to: "about", label: "About", icon: <FcAbout size={25}/> },
   { to: "education", label: "Education", icon: <FcReadingEbook size={25}/> },
-  { to: "techstack", label: "Tech Stack", icon: <FcBiotech size={25}/> },
-  { to: "projects", label: "Projects", icon: <FcVideoProjector size={25}/> },
-  { to: "work", label: "Work Experience", icon: <FcPortraitMode size={25}/> },
-  { to: "contact", label: "Contact", icon: <FcBusinessContact size={25}/> },
+  { to: "techstack", label: "Tech Stack", icon: <FcAndroidOs size={25}/> },
+  { to: "projects", label: "Projects", icon: <FcCamcorderPro size={25}/> },
+  { to: "work", label: "Experience", icon: <FcBriefcase size={25}/> },
+  { to: "contact", label: "Contact", icon: <FcCallback size={25}/> },
 ];
 
 const Menus = ({ toggle }) => {
@@ -53,9 +54,9 @@ duration={100} — time in milliseconds for the scroll animation (100ms is very 
                 <div key={to} className="nav-link">
                   <Link
                     to={to}
-                    spy
-                    smooth
-                    offset={-200}
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
                     duration={100}
                     activeClass="active"
                   >
@@ -75,8 +76,8 @@ duration={100} — time in milliseconds for the scroll animation (100ms is very 
               <div key={to} className="nav-link">
                 <Link
                   to={to}
-                  spy
-                  smooth
+                  spy={true}
+                  smooth={true}
                   offset={-100}
                   duration={100}
                   activeClass="active"

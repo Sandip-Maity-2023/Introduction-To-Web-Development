@@ -1,17 +1,19 @@
 /* overall layout */
 .sidebar-section {
   display: flex;
-  /* height: 100vh;
-   */
-    /* overflow: hidden;  */
+  height: 100vh;
+
+  /* overflow: hidden;   */
   background-color: black;
 }
 .sidebar {
   height: 100vh;
   background-color: #1e1e2c;
   width: 90px;
- 
-  /* transition: all 0.3s ease; */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
   /* min-width: 90px;
    display: flex;
   position: relative;
@@ -22,22 +24,29 @@
   position: fixed;
 }
 .sidebar-toggle {
-
-  width: 200px;
+  width: 180px;
+  height: 100vh;
+  position: fixed;
+  transition: all 0.3s ease;
+  background-color: #1e1e2c;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
   /* background-color: #0e0101;
   min-width: 240px;
   height: 100%; */
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
 }
 .sidebar-toggle-icons {
   display: flex;
-  align-items: right;
-  justify-content: right;
+  /* align-items: right; */
+  justify-content: flex-end;
   cursor: pointer;
   /* padding: 10px; */
-  cursor: pointer;
+  padding: 10px;
 }
-.sidebar-toggle-icons p svg{
+.sidebar-toggle-icons p svg {
   background-color: #a6b0f0;
   margin-top: 10px;
 }
@@ -52,14 +61,20 @@
   width: 8px;
 }
 
-.container::-webkit-scrollbar-thumb {     /* mean */
+.container::-webkit-scrollbar-thumb {
+  /* mean */
   /* background-color: rgba(0, 0, 0, 0.2); */
   background-color: #2d1ce2;
   /* border-radius: 50%; */
 }
 
-@media(max-width:600px){
-  .sidebar{
+.container.shifted {
+  width: calc(100% - 200px); /* expanded sidebar width */
+  margin-left: 170px;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
     display: none;
   }
 }
