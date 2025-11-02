@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "./components/Layout/Layout";
-import MobileNav from "./components/MobileNav/MobileNav";
+//import MobileNav from "./components/MobileNav/MobileNav";
 import { useTheme } from "./context/ThemeContext";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
@@ -20,7 +20,7 @@ function App() {
     <>
       <div id={theme}>
         <Layout />
-        <MobileNav />
+        {/* <MobileNav /> */}
 
         <div className="container">
           <About />

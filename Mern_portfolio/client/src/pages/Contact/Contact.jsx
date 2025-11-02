@@ -74,7 +74,7 @@ const Contact = () => {
                     Contact With
                     <BsLinkedin color="blue" size={30} className="ms-2" />
                     <BsGithub color="black" size={30} className="ms-2" />
-                    <BsFacebook color="blue" size={30} className="ms-2" />
+                    {/* <BsFacebook color="blue" size={30} className="ms-2" /> */}
                   </h6>
                 </div>
 
@@ -140,7 +140,7 @@ const Contact = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <button className="button" onClick={handleSubmit}>
+                  <button className="button" onClick={handleSubmit} style={{padding:"7px",borderRadius:"10px",backgroundColor:"blue"}}>
                     SEND MESSAGE
                   </button>
                 </motion.div>
