@@ -1,6 +1,7 @@
 // src/control/Vi.jsx
 import React from "react";
 import "./Vi.css";
+import PathFindingVisualizer from "../animations/PathFinderVisualizer";
 
 /* ========================================================
    NAVBAR COMPONENT
@@ -62,7 +63,12 @@ export function Control({
           <option value="binarySearch">Binary Search</option>
         </>
       );
-    } 
+    } else if(selectedTab==="PathFinder"){
+<>
+<option value="">Select Path Finding Method</option>
+<PathFindingVisualizer/>
+</>
+    }
     else {
       return <option value="">(No options available)</option>;
     }

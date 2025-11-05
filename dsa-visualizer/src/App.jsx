@@ -1,29 +1,32 @@
-// src/App.jsx
-import React, { useState, useEffect } from "react";
-import { Navbar, Control, Visualizer } from "./control/Vi.jsx";
-
-// Algorithms
+import React, { useState, useEffect, useRef } from "react";
+import Visualizer2 from "./control/Visu.jsx";
+import { Visualizer, Navbar, Control } from "./control/Vi.jsx";
+import PathFindingVisualizer from "./animations/PathFinderVisualizer.jsx";
+import TreeVisualizer from "./control/TreeVisualizer.jsx";
+import BinaryTreeVisualizer from "./animations/treeAni.jsx";
+// 🔹 Sorting & Searching Algorithms
 import {
   MergeSort,
   SelectionSort,
   BubbleSort,
   InsertionSort,
   QuickSort,
-  BinarySearch,LinearSearch
+  BinarySearch,
+  LinearSearch,
 } from "./algorithm/All.jsx";
 
-// Animations
+// 🔹 Sorting & Searching Animations
 import {
   BubbleAnimation,
   MergeAnimation,
   SelectionAnimation,
   InsertionAnimation,
   QuickAnimation,
-  BinaryAnimation,LinearAnimation
+  BinaryAnimation,
+  LinearAnimation,
 } from "./animations/Ani.jsx";
 
-
-// imports
+// 🔹 Tree Traversal Algorithms
 import {
   preorder,
   inorder,
@@ -31,54 +34,69 @@ import {
   levelOrder,
   generateRandomTree,
 } from "./algorithm/TreeTraversal.jsx";
+
 import { TreeAnimation } from "./animations/Tree.jsx";
-import TreeVisualizer from "./control/TreeVisualizer.jsx";
-
-
-
-
-
-
+import MSTVisualizer from "./control/mst.jsx";
 
 function App() {
-
-  const [treeRoot, setTreeRoot] = useState(null);
-
   const [arr, setArr] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [speed, setSpeed] = useState(100);
   const [isSorting, setIsSorting] = useState(false);
   const [selectedSorting, setSelectedSorting] = useState("");
   const [selectedTab, setSelectedTab] = useState("sorting");
+  const [treeRoot, setTreeRoot] = useState(null);
 
+  // ✅ Pathfinding Visualizer refs
+  const visualizePathRef = useRef(null);
+  const clearVisualizerRef = useRef(null);
+  const setAlgorithmRef = useRef(null);
+  const algorithmsRef = useRef([]);
+
+  const [visualizerRendering, setVisualizerRendering] = useState(false);
+
+  // 🔹 Connect PathfindingVisualizer functions
+  const getVisualizerFunctions = (
+    visualizePathfinding,
+    clearVisualizer,
+    setAlgorithm,
+    algorithms
+  ) => {
+    visualizePathRef.current = visualizePathfinding;
+    clearVisualizerRef.current = clearVisualizer;
+    setAlgorithmRef.current = setAlgorithm;
+    algorithmsRef.current = algorithms;
+  };
+
+  // ------------------- Handle Tree Traversal ------------------- //
   const handleTree = (type) => {
-  const { root } = generateRandomTree(7);
-  setTreeRoot(root);
-  setIsSorting(true);
+    const { root } = generateRandomTree(7);
+    setTreeRoot(root);
+    setIsSorting(true);
 
-  let animations = [];
-  switch (type) {
-    case "preorder":
-      animations = preorder(root);
-      break;
-    case "inorder":
-      animations = inorder(root);
-      break;
-    case "postorder":
-      animations = postorder(root);
-      break;
-    case "levelorder":
-      animations = levelOrder(root);
-      break;
-    default:
-      setIsSorting(false);
-      return;
-  }
+    let animations = [];
+    switch (type) {
+      case "preorder":
+        animations = preorder(root);
+        break;
+      case "inorder":
+        animations = inorder(root);
+        break;
+      case "postorder":
+        animations = postorder(root);
+        break;
+      case "levelorder":
+        animations = levelOrder(root);
+        break;
+      default:
+        setIsSorting(false);
+        return;
+    }
 
-  TreeAnimation(animations, speed, setIsSorting);
-};
+    TreeAnimation(animations, speed, setIsSorting);
+  };
 
-  // ------------------- HANDLE USER INPUT ------------------- //
+  // ------------------- Handle User Input ------------------- //
   useEffect(() => {
     if (!userInput.trim()) return;
     const filtered = userInput
@@ -88,7 +106,7 @@ function App() {
     setArr(filtered);
   }, [userInput]);
 
-  // ------------------- ARRAY GENERATION ------------------- //
+  // ------------------- Generate Array ------------------- //
   const handleArray = () => {
     if (userInput.trim()) {
       const filtered = userInput
@@ -111,7 +129,7 @@ function App() {
     setIsSorting(false);
   };
 
-  // ------------------- SORT / SEARCH HANDLER ------------------- //
+  // ------------------- Sorting Handler ------------------- //
   const handleSorting = (e) => {
     const method = e.target.value;
     if (!arr.length) {
@@ -149,105 +167,143 @@ function App() {
         QuickAnimation(animations, speed, setIsSorting);
         break;
 
-      case "binarySearch":
-        const target = parseInt(prompt("Enter number to search: "));
-        if (isNaN(target)) {
-          alert("Please enter a valid number!");
-          setIsSorting(false);
-          return;
-        }
-        animations = BinarySearch(arr, target);
-        BinaryAnimation(animations, speed, setIsSorting);
-        break;
-
       default:
         setIsSorting(false);
         break;
     }
   };
 
+  // ------------------- Searching Handler ------------------- //
   const handleSearching = (e) => {
-  const method = e.target.value;
-  if (!arr.length) {
-    alert("Please generate or enter an array first!");
-    return;
-  }
+    const method = e.target.value;
+    if (!arr.length) {
+      alert("Please generate or enter an array first!");
+      return;
+    }
 
-  setSelectedSorting(method);
-  setIsSorting(true);
+    setSelectedSorting(method);
+    setIsSorting(true);
 
-  let animations = [];
-  const target = parseInt(prompt("Enter number to search: "));
-  if (isNaN(target)) {
-    alert("Please enter a valid number!");
-    setIsSorting(false);
-    return;
-  }
-
-  switch (method) {
-    case "linearSearch":
-      animations = LinearSearch(arr, target);
-      LinearAnimation(animations, speed, setIsSorting);
-      break;
-
-    case "binarySearch":
-      const sortedArr = [...arr].sort((a, b) => a - b);
-      setArr(sortedArr); // show sorted array visually
-      animations = BinarySearch(sortedArr, target);
-      BinaryAnimation(animations, speed, setIsSorting);
-      break;
-
-    default:
-      alert("Select a valid searching algorithm!");
+    const target = parseInt(prompt("Enter number to search: "));
+    if (isNaN(target)) {
+      alert("Please enter a valid number!");
       setIsSorting(false);
-      break;
-  }
-};
+      return;
+    }
 
+    let animations = [];
+    switch (method) {
+      case "linearSearch":
+        animations = LinearSearch(arr, target);
+        LinearAnimation(animations, speed, setIsSorting);
+        break;
 
+      case "binarySearch":
+        const sortedArr = [...arr].sort((a, b) => a - b);
+        setArr(sortedArr);
+        animations = BinarySearch(sortedArr, target);
+        BinaryAnimation(animations, speed, setIsSorting);
+        break;
+
+      default:
+        alert("Select a valid searching algorithm!");
+        setIsSorting(false);
+        break;
+    }
+  };
+
+  // ------------------- Render Tabs ------------------- //
   return (
-  <div className="app-container">
-    <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+    <div className="app-container">
+      <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
 
-    {(selectedTab === "sorting" || selectedTab === "searching") && (
-      <>
-        <Control
-          handleArray={handleArray}
-          handleSorting={selectedTab === "sorting" ? handleSorting : handleSearching}
-          resetArray={resetArray}
-          setSpeed={setSpeed}
-          isSorting={isSorting}
-          userInput={userInput}
-          setUserInput={setUserInput}
-          selectedSorting={selectedSorting}
-          selectedTab={selectedTab} // 👈 important
-        />
-        <Visualizer arr={arr} />
-      </>
-    )}
-
-      {selectedTab === "tree" && (
-  <>
-    <div className="control-container">
-      <button className="button" onClick={() => handleTree("preorder")} disabled={isSorting}>
-        Preorder
-      </button>
-      <button className="button" onClick={() => handleTree("inorder")} disabled={isSorting}>
-        Inorder
-      </button>
-      <button className="button" onClick={() => handleTree("postorder")} disabled={isSorting}>
-        Postorder
-      </button>
-      <button className="button" onClick={() => handleTree("levelorder")} disabled={isSorting}>
-        Level Order
-      </button>
-    </div>
-    <TreeVisualizer root={treeRoot} />
-  </>
+      {/* Sorting + Searching */}
+      {(selectedTab === "sorting" || selectedTab === "searching") && (
+        <>
+          <Control
+            handleArray={handleArray}
+            handleSorting={
+              selectedTab === "sorting" ? handleSorting : handleSearching
+            }
+            resetArray={resetArray}
+            setSpeed={setSpeed}
+            isSorting={isSorting}
+            userInput={userInput}
+            setUserInput={setUserInput}
+            selectedSorting={selectedSorting}
+            selectedTab={selectedTab}
+          />
+          <Visualizer arr={arr} />
+        </>
       )}
 
+      {/* Tree Traversal */}
+      {selectedTab === "tree" && (
+        <>
+        <BinaryTreeVisualizer />
+          <div className="control-container">
+            <button
+              className="button"
+              onClick={() => handleTree("preorder")}
+              disabled={isSorting}
+            >
+              Preorder
+            </button>
+            <button
+              className="button"
+              onClick={() => handleTree("inorder")}
+              disabled={isSorting}
+            >
+              Inorder
+            </button>
+            <button
+              className="button"
+              onClick={() => handleTree("postorder")}
+              disabled={isSorting}
+            >
+              Postorder
+            </button>
+            <button
+              className="button"
+              onClick={() => handleTree("levelorder")}
+              disabled={isSorting}
+            >
+              Level Order
+            </button>
+          </div>
+          <TreeVisualizer root={treeRoot} />
+        </>
+      )}
+
+      {/* ✅ Pathfinding Visualizer Integration */}
+      {/* {selectedTab === "pathfinding" && (
+        <div className="pathfinding-container">
+          <PathFindingVisualizer
+            getFunctions={getVisualizerFunctions}
+            setVisualizerRendering={setVisualizerRendering}
+          />
+        </div>
+      )} */}
+      {selectedTab === "pathfinding" && (
+        <>
+          <div className="">PathFinding</div>
+          <Visualizer arr={arr} selectedTab={selectedTab} />
+        </>
+      )}
+
+      {/* Placeholder for Graph & AI Visualizers */}
       {selectedTab === "graph" && (
-        <h2 className="tab-title">Graph Visualizer (Coming Soon)</h2>
+  
+        <>    
+        <MSTVisualizer/>
+        </>
+      )}
+
+      {selectedTab === "ai" && (
+        <div className="ai-container">
+          <h2>AI Visualizer (Coming Soon)</h2>
+          <p>Deep Learning & Neural Network simulations will be added soon.</p>
+        </div>
       )}
     </div>
   );

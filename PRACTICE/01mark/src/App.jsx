@@ -3,14 +3,21 @@ import TicTacToe from './TicTacToe'
 import ToDoList from './ToDoList'
 import Form from './Form'
  import FullSpotifyClone from './Rupam'
+ import BinaryTreeVisualizer from '../../../dsa-visualizer/src/animations/treeAni'
+import MSTVisualizer from '../../../dsa-visualizer/src/control/mst'
+
 function App() {
   return (
-    //  <ToDoList/>
+    <>
+      {/* <ToDoList/> */}
 
-    //  <Form/>
-<FullSpotifyClone/>
-    //<TicTacToe/>
-  )
+      {/* <Form/> */}
+      {/* <FullSpotifyClone/> */}
+      {/* <TicTacToe/> */}
+      {/* <BinaryTreeVisualizer/> */}
+      <MSTVisualizer/>
+    </>
+  );
 }
 
 export default App
