@@ -1,23 +1,20 @@
-import React from "react";
-
-export default function Tree(animations, speed, setisSorting) {
+export function TreeAnimation(animations, speed, setIsSorting) {
   const nodes = document.getElementsByClassName("tree-node");
 
-  for (let i = 0; i < animations.length; i++) {
+  animations.forEach((value, i) => {
     setTimeout(() => {
-      const val = animations[i];
-      for (let node of nodes) {
-        if (node.innerHTML === String(val)) {
-          node.style.backgroundColor = "yellow";
+      for (let n of nodes) {
+        if (parseInt(n.innerText) === value) {
+          n.style.backgroundColor = "yellow";
           setTimeout(() => {
-            node.style.backgroundColor = "green";
-          }, speed);
+            n.style.backgroundColor = "green";
+          }, speed / 2);
         }
       }
     }, i * speed);
-  }
+  });
 
   setTimeout(() => {
-    setisSorting(false);
+    setIsSorting(false);
   }, animations.length * speed);
 }

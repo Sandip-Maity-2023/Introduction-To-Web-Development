@@ -1,61 +1,66 @@
-import React from "react";
-
-//binart tree node
-export class TreeNode {
-  constructor(val) {
-    this.val = val;
+// TreeAlgo.jsx
+export class Node {
+  constructor(value) {
+    this.value = value;
     this.left = null;
     this.right = null;
   }
 }
 
-//build a sample tree
-export function buildSampleTree() {
-  let root = new TreeNode(1);
-  root.left = new TreeNode(2);
-  root.right = new TreeNode(3);
-  root.left.left = new TreeNode(4);
-  root.left.right = new TreeNode(5);
-  root.right.left = new TreeNode(6);
-  root.right.right = new TreeNode(7);
-  return root;
+export function generateRandomTree(size = 7) {
+  const values = Array.from({ length: size }, () =>
+    Math.floor(Math.random() * 100)
+  );
+  const root = buildTree(values);
+  return { root, values };
 }
 
-//traversal animations
-export function inorderTraversal(root, animations = []) {
-  if (!root) return animations;
-  inorderTraversal(root.left, animations);
-  animations.push(root.val);
-  inorderTraversal(root.right, animations);
+function buildTree(values) {
+  if (!values.length) return null;
+  const nodes = values.map((v) => new Node(v));
+  for (let i = 0; i < nodes.length; i++) {
+    const leftIdx = 2 * i + 1;
+    const rightIdx = 2 * i + 2;
+    if (leftIdx < nodes.length) nodes[i].left = nodes[leftIdx];
+    if (rightIdx < nodes.length) nodes[i].right = nodes[rightIdx];
+  }
+  return nodes[0];
+}
+
+// Traversal animations
+export function preorder(root, animations = []) {
+  if (!root) return;
+  animations.push(root.value);
+  preorder(root.left, animations);
+  preorder(root.right, animations);
   return animations;
 }
 
-export function preorderTraversal(root, animations = []) {
-  if (!root) return animations;
-  preorderTraversal(root.left, animations);
-  animations.push(root.val);
-  preorderTraversal(root.right, animations);
+export function inorder(root, animations = []) {
+  if (!root) return;
+  inorder(root.left, animations);
+  animations.push(root.value);
+  inorder(root.right, animations);
   return animations;
 }
 
-export function postorderTraversal(root, animations = []) {
-  if (!root) return animations;
-  postorderTraversal(root.left, animations);
-  animations.push(root.val);
-  postorderTraversal(root.right, animations);
+export function postorder(root, animations = []) {
+  if (!root) return;
+  postorder(root.left, animations);
+  postorder(root.right, animations);
+  animations.push(root.value);
   return animations;
 }
 
-export function bfsTraversal(root) {
-const animations=[];
-if(!root) return animations;
-
-let queue=[root];
-while(queue.length>0){
-    let node=queue.shift(); 
-    animations.push(node.val);
-    if(node.left) queue.push(node.left);
-    if(node.right) queue.push(node.right);
-}
-return animations;
+export function levelOrder(root) {
+  const animations = [];
+  if (!root) return animations;
+  const queue = [root];
+  while (queue.length) {
+    const node = queue.shift();
+    animations.push(node.value);
+    if (node.left) queue.push(node.left);
+    if (node.right) queue.push(node.right);
+  }
+  return animations;
 }

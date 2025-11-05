@@ -1,169 +1,256 @@
-/*yellow compare, blue reset, red swap green sorted
+// src/App.jsx
+import React, { useState, useEffect } from "react";
+import { Navbar, Control, Visualizer } from "./control/Vi.jsx";
 
-*/
-/*yellow compare, blue reset, red swap green sorted */
+// Algorithms
+import {
+  MergeSort,
+  SelectionSort,
+  BubbleSort,
+  InsertionSort,
+  QuickSort,
+  BinarySearch,LinearSearch
+} from "./algorithm/All.jsx";
 
-import { useState, useEffect, useMemo } from "react";
-import Visualizer from "./control/Visualizer";
-import Control from "./control/Control";
+// Animations
+import {
+  BubbleAnimation,
+  MergeAnimation,
+  SelectionAnimation,
+  InsertionAnimation,
+  QuickAnimation,
+  BinaryAnimation,LinearAnimation
+} from "./animations/Ani.jsx";
 
-import { MergeSort } from "./algorithm/MergeSort";
-import SelectionSort from "./algorithm/SelectionSort";
-import BubbleSort from "./algorithm/BubbleSort";
-import InsertionSort from "./algorithm/InsertionSort";
-import BinarySearch from "./algorithm/BinarySearch";
-import { buildSampleTree, inorderTraversal } from "./algorithm/TreeTraversal";
 
-import BubbleAnimation from "./animations/Bubble";
-import MergeAnimation from "./animations/Merge";
-import SelectionAnimation from "./animations/Selection";
-import Insertion from "./animations/Insertion";
-import QuickSort from "./algorithm/QuickSort";
-import Quick from "./animations/Quick";
-import Binary from "./animations/Binary";
-import Tree from "./animations/Tree";
+// imports
+import {
+  preorder,
+  inorder,
+  postorder,
+  levelOrder,
+  generateRandomTree,
+} from "./algorithm/TreeTraversal.jsx";
+import { TreeAnimation } from "./animations/Tree.jsx";
+import TreeVisualizer from "./control/TreeVisualizer.jsx";
 
-import TreeVisualizer from "./control/TreeVisualizer";
-import Navbar from "./control/Navbar";
+
+
+
+
+
 
 function App() {
+
+  const [treeRoot, setTreeRoot] = useState(null);
+
   const [arr, setArr] = useState([]);
-  const [userInput, setuserInput] = useState("");
+  const [userInput, setUserInput] = useState("");
   const [speed, setSpeed] = useState(100);
-  const [isSorting, setisSorting] = useState(false);
-  const [selectedSorting, setselectedSorting] = useState("");
-  const [selectedTab, setselectedTab] = useState("");
+  const [isSorting, setIsSorting] = useState(false);
+  const [selectedSorting, setSelectedSorting] = useState("");
+  const [selectedTab, setSelectedTab] = useState("sorting");
 
-  //-- Parse and validate user input to array whenever it changes --//
+  const handleTree = (type) => {
+  const { root } = generateRandomTree(7);
+  setTreeRoot(root);
+  setIsSorting(true);
+
+  let animations = [];
+  switch (type) {
+    case "preorder":
+      animations = preorder(root);
+      break;
+    case "inorder":
+      animations = inorder(root);
+      break;
+    case "postorder":
+      animations = postorder(root);
+      break;
+    case "levelorder":
+      animations = levelOrder(root);
+      break;
+    default:
+      setIsSorting(false);
+      return;
+  }
+
+  TreeAnimation(animations, speed, setIsSorting);
+};
+
+  // ------------------- HANDLE USER INPUT ------------------- //
   useEffect(() => {
-    if (!userInput) return;
-
+    if (!userInput.trim()) return;
     const filtered = userInput
       .split(",")
-
-      .filter((item) => !isNaN(item) && item>=0 && item<=300)
-      .map((item) => Number(item.trim()))
-    setArr([filtered]);
+      .map((num) => Number(num.trim()))
+      .filter((num) => !isNaN(num) && num >= 0 && num <= 300);
+    setArr(filtered);
   }, [userInput]);
 
-  
-  const handleArr = () => {
-    const newArray = Array.from({ length: 15 }, () =>
-      Math.floor(Math.random() * 300)
-    );
-    setArr(newArray);
+  // ------------------- ARRAY GENERATION ------------------- //
+  const handleArray = () => {
+    if (userInput.trim()) {
+      const filtered = userInput
+        .split(",")
+        .map((num) => Number(num.trim()))
+        .filter((num) => !isNaN(num) && num >= 0 && num <= 300);
+      setArr(filtered);
+    } else {
+      const newArray = Array.from({ length: 18 }, () =>
+        Math.floor(Math.random() * 300)
+      );
+      setArr(newArray);
+    }
   };
 
-  const reSet = () => {
+  const resetArray = () => {
     setArr([]);
-    setselectedSorting("");
+    setUserInput("");
+    setSelectedSorting("");
+    setIsSorting(false);
   };
 
+  // ------------------- SORT / SEARCH HANDLER ------------------- //
   const handleSorting = (e) => {
-    const sortingMethod = e.target.value;
-    setselectedSorting(sortingMethod);
-    setisSorting(true);
+    const method = e.target.value;
+    if (!arr.length) {
+      alert("Please generate or enter an array first!");
+      return;
+    }
+    setSelectedSorting(method);
+    setIsSorting(true);
 
     let animations = [];
 
-    switch (sortingMethod) {
+    switch (method) {
       case "bubbleSort":
         animations = BubbleSort(arr);
-        BubbleAnimation(animations, speed, setisSorting);
+        BubbleAnimation(animations, speed, setIsSorting);
         break;
+
       case "mergeSort":
         animations = MergeSort(arr);
-        MergeAnimation(animations, speed, setisSorting);
+        MergeAnimation(animations, speed, setIsSorting);
         break;
+
       case "selectionSort":
         animations = SelectionSort(arr);
-        SelectionAnimation(animations, speed, setisSorting);
+        SelectionAnimation(animations, speed, setIsSorting);
         break;
+
       case "insertionSort":
         animations = InsertionSort(arr);
-        Insertion(animations, speed, setisSorting);
+        InsertionAnimation(animations, speed, setIsSorting);
         break;
+
       case "quickSort":
         animations = QuickSort(arr);
-        Quick(animations, speed, setisSorting);
+        QuickAnimation(animations, speed, setIsSorting);
         break;
-      case "Search":
+
+      case "binarySearch":
         const target = parseInt(prompt("Enter number to search: "));
+        if (isNaN(target)) {
+          alert("Please enter a valid number!");
+          setIsSorting(false);
+          return;
+        }
         animations = BinarySearch(arr, target);
-        Binary(animations, speed, setisSorting);
+        BinaryAnimation(animations, speed, setIsSorting);
         break;
+
       default:
+        setIsSorting(false);
         break;
     }
   };
 
+  const handleSearching = (e) => {
+  const method = e.target.value;
+  if (!arr.length) {
+    alert("Please generate or enter an array first!");
+    return;
+  }
+
+  setSelectedSorting(method);
+  setIsSorting(true);
+
+  let animations = [];
+  const target = parseInt(prompt("Enter number to search: "));
+  if (isNaN(target)) {
+    alert("Please enter a valid number!");
+    setIsSorting(false);
+    return;
+  }
+
+  switch (method) {
+    case "linearSearch":
+      animations = LinearSearch(arr, target);
+      LinearAnimation(animations, speed, setIsSorting);
+      break;
+
+    case "binarySearch":
+      const sortedArr = [...arr].sort((a, b) => a - b);
+      setArr(sortedArr); // show sorted array visually
+      animations = BinarySearch(sortedArr, target);
+      BinaryAnimation(animations, speed, setIsSorting);
+      break;
+
+    default:
+      alert("Select a valid searching algorithm!");
+      setIsSorting(false);
+      break;
+  }
+};
+
+
   return (
-    <div>
-      <Navbar selectedTab={selectedTab} setselectedTab={setselectedTab} />
+  <div className="app-container">
+    <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
 
-      {selectedTab === "sorting" && (
-        <>
-          <h2>Sorting Animation</h2>
-          <Control
-            handleArr={handleArr}
-            handleSorting={handleSorting}
-            userInput={userInput}
-            setuserInput={setuserInput}
-            setSpeed={setSpeed}
-            reSet={reSet}
-            isSorting={isSorting}
-            speed={speed}
-            selectedSorting={selectedSorting}
-          />
-          <Visualizer arr={arr} />
-        </>
-      )}
-
-      {selectedTab === "searching" && (
-        <div>
-          <h2>Searching Algorithm</h2>
-          <Control
-            handleArr={handleArr}
-            handleSorting={handleSorting}
-            userInput={userInput}
-            setuserInput={setuserInput}
-            setSpeed={setSpeed}
-            reSet={reSet}
-            isSorting={isSorting}
-            speed={speed}
-            selectedSorting={selectedSorting}
-          />
-          <Visualizer arr={arr} />
-        </div>
-      )}
+    {(selectedTab === "sorting" || selectedTab === "searching") && (
+      <>
+        <Control
+          handleArray={handleArray}
+          handleSorting={selectedTab === "sorting" ? handleSorting : handleSearching}
+          resetArray={resetArray}
+          setSpeed={setSpeed}
+          isSorting={isSorting}
+          userInput={userInput}
+          setUserInput={setUserInput}
+          selectedSorting={selectedSorting}
+          selectedTab={selectedTab} // 👈 important
+        />
+        <Visualizer arr={arr} />
+      </>
+    )}
 
       {selectedTab === "tree" && (
-        <TreeTab speed={speed} setisSorting={setisSorting} />
+  <>
+    <div className="control-container">
+      <button className="button" onClick={() => handleTree("preorder")} disabled={isSorting}>
+        Preorder
+      </button>
+      <button className="button" onClick={() => handleTree("inorder")} disabled={isSorting}>
+        Inorder
+      </button>
+      <button className="button" onClick={() => handleTree("postorder")} disabled={isSorting}>
+        Postorder
+      </button>
+      <button className="button" onClick={() => handleTree("levelorder")} disabled={isSorting}>
+        Level Order
+      </button>
+    </div>
+    <TreeVisualizer root={treeRoot} />
+  </>
       )}
 
       {selectedTab === "graph" && (
-        <div>
-          <h2>Graph Traversals</h2>
-        </div>
+        <h2 className="tab-title">Graph Visualizer (Coming Soon)</h2>
       )}
     </div>
   );
 }
 
 export default App;
-
-function TreeTab({ speed, setisSorting }) {
-  const troot = useMemo(() => buildSampleTree(), []);
-  const animations = useMemo(() => inorderTraversal(troot), [troot]);
-
-  useEffect(() => {
-    Tree(animations, speed, setisSorting);
-  }, [animations, speed, setisSorting]);
-
-  return (
-    <div>
-      <h2>Tree Traversals</h2>
-      <TreeVisualizer root={troot} />
-    </div>
-  );
-}

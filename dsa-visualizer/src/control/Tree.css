@@ -1,0 +1,29 @@
+.tree {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.tree-node-container {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.tree-node {
+  background-color: #3498db;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.tree-children {
+  display: flex;
+  justify-content: space-around;
+}

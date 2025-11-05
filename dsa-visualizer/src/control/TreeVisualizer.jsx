@@ -1,25 +1,21 @@
 import React from "react";
+import "./Tree.css";
 
 export default function TreeVisualizer({ root }) {
-  if (!root) return null;
+  if (!root) return <p className="tree-empty">No tree generated</p>;
 
-  return (
-    <div className="tree">
-      <TreeNodeComponent node={root} />
-    </div>
-  );
-}
-
-function TreeNodeComponent({ node }) {
-  if (!node) return null;
-
-  return (
-    <div className="tree-level">
-      <div className="tree-node">{node.val}</div>
-      <div className="tree-children">
-        {node.left && <TreeNodeComponent node={node.left} />}
-        {node.right && <TreeNodeComponent node={node.right} />}
+  const renderNode = (node) => {
+    if (!node) return null;
+    return (
+      <div className="tree-node-container">
+        <div className="tree-node">{node.value}</div>
+        <div className="tree-children">
+          {renderNode(node.left)}
+          {renderNode(node.right)}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  return <div className="tree">{renderNode(root)}</div>;
 }
