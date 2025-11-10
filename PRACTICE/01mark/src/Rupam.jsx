@@ -35,7 +35,7 @@ export default function FullSpotifyClone() {
 
   return (
     <div style={{ maxWidth: 800, margin: "auto", fontFamily: "Arial" }}>
-      <h1>Spotify Clone - Full Songs & Friend Choice Playlist</h1>
+      <h1>SUKU Music</h1>
 
       {/* Search Songs */}
       <input

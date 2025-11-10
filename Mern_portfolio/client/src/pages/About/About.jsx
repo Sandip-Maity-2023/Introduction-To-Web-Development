@@ -28,7 +28,7 @@ const About = () => {
         About Me
       </motion.h1>
 
-{/* left side */}
+     {/* left side */}
       <div className="about-container">
         <motion.img
           className="about-left"

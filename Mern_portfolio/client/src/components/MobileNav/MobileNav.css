@@ -1,111 +1,42 @@
-/* === Base Header Bar === */
 .mobile-nav {
+  overflow: hidden;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  z-index: 9999;
-  background-color: rgba(30, 30, 30, 0.95);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 2px 8px rgba(245, 227, 227, 0.25);
+  z-index: 1;
 }
 
 .mobile-nav-header {
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 15px;
+  height: 50px;
+  width: 100%;
+  background-color: #1e1e1e;
+  padding: 8px;
 }
 
-.mobile-nav-icon {
-  color: #f5f5f5;
+.mobile-nav-header .mobile-nav-icon {
+  color: white;
   cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.mobile-nav-icon:hover {
-  transform: scale(1.2);
 }
 
 .mobile-nav-title {
-  color: #4490ed;
+  margin-left: 20px;
+  color: #f29f67;
   font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 18px;
+  text-transform: capitalize;
+  vertical-align: middle;
+  font-size: 20px;
 }
-/* === Slide-In Menu === */
-.mobile-nav-menu {
-  position: fixed;
-  top: 55px;
-  left: 0;
-  width: 70%;
-  height: calc(100vh - 55px);
-  background: rgba(28, 28, 28, 0.97);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  padding: 25px 20px;
-  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.4);
-  border-top-right-radius: 10px;
+
+.mobile-nav-menu .nav-items {
+  height: auto;
+  width: 200px;
+  background-color: #1e1e1e;
+  padding: 10px;
+  padding-bottom: 20px;
   border-bottom-right-radius: 10px;
 }
 
-/* === Links === */
-.nav-items {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 10px;
-}
-
-.nav-link a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 17px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.nav-link a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #4a90e2;
-  transform: translateX(6px);
-}
-
-.nav-link a.active {
-  background-color: rgba(68, 144, 237, 0.3);
-  color: #4a90e2;
-  font-weight: 600;
-}
-
-/* === Dark Mode === */
-.mobile-nav.dark {
-  background-color: rgba(15, 15, 30, 0.9);
-}
-
-.mobile-nav.dark .mobile-nav-title {
-  color: #0eb6a5;
-}
-
-.mobile-nav.dark .mobile-nav-menu {
-  background: rgba(15, 15, 30, 0.95);
-}
-
-.mobile-nav.dark .nav-link a.active {
-  background: rgba(14, 182, 165, 0.25);
-  color: #0eb6a5;
-}
-
-/* === Hide on Desktop === */
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .mobile-nav {
     display: none;
   }

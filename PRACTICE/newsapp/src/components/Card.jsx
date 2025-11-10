@@ -1,38 +1,4 @@
-/*
-import React from 'react'
 
-const Card = ({data}) => {
-     console.log(data);
-
-     const readMore = (url) =>{
-        window.open(url)
-     }
-     
-  return (
-    <div className='cardContainer'>
-    {data.map((curItem,index)=>{
-        if(!curItem.urlToImage){
-            return null
-        }else{
-            return(
-            <div className='card'>
-                <img src={curItem.urlToImage}/>
-                <div className='content'>
-                    <a className='title' onClick={()=>window.open(curItem.url)}>{curItem.title}</a>
-                    <p>{curItem.description}</p>
-                    <button onClick={()=>window.open(curItem.url)}>Explore More</button>
-                </div>
-            </div>
-        )
-        }
-         
-    })}
-    </div>
-  )
-}
-
-export default Card;
-*/
 
 
 import React from "react";
@@ -135,10 +101,11 @@ const Card = ({ data = [] }) => {
                   backgroundColor: "#007bff",
                   color: "white",
                   border: "none",
-                  padding: "8px 14px",
+                  padding: "2px 14px",
                   borderRadius: "6px",
                   cursor: "pointer",
                   transition: "background 0.3s",
+                  // boxShadow:"1 1 3px 0.1",
                 }}
                 onMouseEnter={(e) =>
                   (e.target.style.backgroundColor = "#0056b3")

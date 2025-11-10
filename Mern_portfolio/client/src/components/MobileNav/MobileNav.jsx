@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { Link } from "react-scroll";
@@ -13,81 +12,141 @@ import {
   FcVideoProjector,
 } from "react-icons/fc";
 import "./MobileNav.css";
-
-const navLinks = [
-  { to: "home", icon: <FcHome />, label: "Home" },
-  { to: "about", icon: <FcAbout />, label: "About" },
-  { to: "education", icon: <FcReadingEbook />, label: "Education" },
-  { to: "techstack", icon: <FcBiotech />, label: "Tech Stack" },
-  { to: "projects", icon: <FcVideoProjector />, label: "Projects" },
-  { to: "work", icon: <FcPortraitMode />, label: "Experience" },
-  { to: "contact", icon: <FcBusinessContact />, label: "Contact" },
-];
-
-const MobileNav = ({ theme = "light" }) => {
+const MobileNav = () => {
   const [open, setOpen] = useState(false);
 
-  const handleToggle = () => setOpen(!open);
-  const handleMenuClick = () => setOpen(false);
+  //handle open
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
+  // handle menu clicks
+  const handleMenuClick = () => {
+    setOpen(false);
+  };
   return (
-    <div className={`mobile-nav ${theme === "dark" ? "dark" : ""}`}>
-      {/* Top Bar */}
-      <div className="mobile-nav-header">
-        {open ? (
-          <AiOutlineMenuFold
-            size={30}
-            className="mobile-nav-icon"
-            onClick={handleToggle}
-          />
-        ) : (
-          <GiHamburgerMenu
-            size={30}
-            className="mobile-nav-icon"
-            onClick={handleToggle}
-          />
-        )}
-        <span className="mobile-nav-title">My Portfolio</span>
-      </div>
+    <>
+      <div className="mobile-nav">
+        <div className="mobile-nav-header">
+          {open ? (
+            <AiOutlineMenuFold
+              size={30}
+              className="mobile-nav-icon"
+              onClick={handleOpen}
+            />
+          ) : (
+            <GiHamburgerMenu
+              size={30}
+              className="mobile-nav-icon"
+              onClick={handleOpen}
+            />
+          )}
 
-      {/* Slide-In Menu */}
-      <AnimatePresence>
+          <span className="mobile-nav-title">Portfolio</span>
+        </div>
         {open && (
-          <motion.div
-            className="mobile-nav-menu"
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
+          <div className="mobile-nav-menu">
             <div className="nav-items">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.to}
-                  className="nav-link"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
+              <div className="nav-item">
+                <div className="nav-link">
                   <Link
-                    to={link.to}
+                    to="home"
                     spy={true}
                     smooth={true}
                     offset={-100}
-                    duration={400}
+                    duration={100}
                     onClick={handleMenuClick}
-                    activeClass="active"
                   >
-                    <span className="icon">{link.icon}</span>
-                    <span className="label">{link.label}</span>
+                    <FcHome />
+                    Home
                   </Link>
-                </motion.div>
-              ))}
+                </div>
+                <div className="nav-link">
+                  <Link
+                    to="about"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={100}
+                    onClick={handleMenuClick}
+                  >
+                    <FcAbout />
+                    About
+                  </Link>
+                </div>
+                <div className="nav-link">
+                  <Link
+                    to="education"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={100}
+                    onClick={handleMenuClick}
+                  >
+                    <FcReadingEbook />
+                    Education
+                  </Link>
+                </div>
+
+                <div className="nav-link">
+                  <Link
+                    to="techstack"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={100}
+                    onClick={handleMenuClick}
+                  >
+                    <FcBiotech />
+                    Tech Stack
+                  </Link>
+                </div>
+
+                <div className="nav-link">
+                  <Link
+                    to="projects"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={100}
+                    onClick={handleMenuClick}
+                  >
+                    <FcVideoProjector />
+                    Projects
+                  </Link>
+                </div>
+                <div className="nav-link">
+                  <Link
+                    to="work"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={100}
+                    onClick={handleMenuClick}
+                  >
+                    <FcPortraitMode />
+                    Work Experince
+                  </Link>
+                </div>
+                <div className="nav-link">
+                  <Link
+                    to="contact"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={100}
+                    onClick={handleMenuClick}
+                  >
+                    <FcBusinessContact />
+                    Contact
+                  </Link>
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 };
 
