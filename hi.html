@@ -1,150 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalHarvest - Login</title>
-    <style>
-        /* Embedded CSS */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechLearn - Learn Tech Easily</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Poppins',sans-serif;background-color:#f4f6f8;color:#222;scroll-behavior:smooth;}
+    
+    header{background-color:#006400;color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #FF4081, #81D4FA);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+    header h1{font-size:1.5rem;}
+    nav a{color:white;text-decoration:none;margin:0 10px;font-weight:500;position:relative;}
+    nav a::after{content:'';position:absolute;width:0;height:2px;left:0;bottom:-3px;background:white;transition:0.3s;}
+    nav a:hover::after{width:100%;}
 
-        .login-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
-            animation: fadeIn 1.5s ease-in-out;
-        }
+    .hero{background:linear-gradient(120deg,#e8f5e9,#c8e6c9);padding:3rem 2rem;text-align:center;}
+    .hero h2{font-size:2rem;margin-bottom:1rem;color:#004d00;}
+    .hero p{font-size:1.1rem;color:#333;margin-bottom:1.5rem;}
+    .typewriter{font-size:1.5rem;color:#006400;font-weight:600;height:2rem;overflow:hidden;white-space:nowrap;border-right:3px solid #006400;animation:blink 0.6s step-end infinite alternate;}
+    @keyframes blink{50%{border-color:transparent;}}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .explore-container{position:relative;display:inline-block;}
+    .explore-btn{background:#006400;color:white;padding:0.7rem 1.2rem;border:none;border-radius:8px;cursor:pointer;font-size:1rem;transition:0.3s;}
+    .explore-btn:hover{background:#004d00;}
+    .explore-options{display:none;position:absolute;top:100%;left:0;background:white;color:#222;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.1);margin-top:5px;z-index:50;}
+    .explore-container:hover .explore-options{display:block;}
+    .explore-options div{padding:0.6rem 1rem;cursor:pointer;}
+    .explore-options div:hover{background:#f0f0f0;}
 
-        .login-header h2 {
-            margin: 0;
-            font-size: 2em;
-            color: #333;
-        }
+    .section{padding:3rem 1rem;text-align:center;display:none;}
+    .active-section{display:block;}
 
-        .login-header p {
-            margin-top: 10px;
-            margin-bottom: 30px;
-            font-size: 1em;
-            color: #777;
-        }
+    .topics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
+    .card{background:white;border-radius:10px;overflow:hidden;box-shadow:0 3px 8px rgba(0,0,0,0.1);transition:transform 0.3s;}
+    .card:hover{transform:translateY(-6px);}
+    .card img{width:100%;height:150px;object-fit:cover;}
+    .card-content{padding:1rem;text-align:left;}
+    .card h3{color:#006400;}
+    .card p{font-size:0.9rem;color:#555;margin:0.3rem 0;}
+    .card button{margin-top:0.5rem;background:#006400;color:white;border:none;padding:0.5rem 1rem;border-radius:6px;cursor:pointer;}
+    .stars{color:gold;font-size:1rem;}
 
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
+    .practice-list,.job-list{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;}
+    .practice-item,.job-item{background:white;padding:2rem;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);width:180px;transition:transform 0.4s;}
+    .practice-item:hover,.job-item:hover{transform:scale(1.05);}
 
-        .input-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
+    .contact{max-width:600px;margin:0 auto;}
+    .contact input,.contact textarea{width:100%;padding:0.7rem;margin:0.5rem 0;border-radius:8px;border:1px solid #ccc;}
+    .contact button{background:#006400;color:white;border:none;padding:0.7rem 1rem;border-radius:8px;cursor:pointer;}
 
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-            transition: border-color 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: #FF4081;
-            outline: none;
-        }
-
-        button {
-            background: linear-gradient(135deg, #FF4081, #81D4FA);
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 5px;
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: linear-gradient(135deg, #81D4FA, #FF4081);
-        }
-
-        .error-message {
-            color: #FF4081;
-            margin-top: 15px;
-            font-size: 0.9em;
-        }
-    </style>
+    footer{background:#222;color:white;text-align:center;padding:1.5rem;margin-top:2rem;}
+    footer a{color:#90ee90;text-decoration:none;}
+  </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <h2>Welcome to LocalHarvest</h2>
-            <p>Your gateway to fresh, locally sourced products</p>
-        </div>
-        <form id="loginForm" onsubmit="return validateLogin()">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-            <p id="errorMessage" class="error-message"></p>
-        </form>
+  <header>
+    <h1>TechLearn</h1>
+    <nav>
+      <a href="#" id="homeLink">Home</a>
+      <a href="#" id="topicsLink">Topics</a>
+      <a href="#" id="practiceLink">Practice</a>
+      <a href="#" id="jobsLink">Jobs</a>
+      <a href="#" id="contactLink">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero active-section">
+    <h2><span class="typewriter" id="typewriter"></span></h2>
+    <p>Connect with trusted experts, anytime. Get real answers, real guidance, in real time.</p>
+    <div class="explore-container">
+      <button class="explore-btn">Explore</button>
+      <div class="explore-options">
+        <div>1:1 Expert Session</div>
+        <div>Personalized Feed</div>
+        <div>Build Your Network</div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        // Embedded JavaScript
+  <section id="topics" class="section">
+    <h2 style="color:#006400;margin-bottom:1rem;">Explore Topics</h2>
+    <div class="topics-grid">
+      <div class="card">
+        <img src="https://picsum.photos/seed/web/400/200" alt="Web Development">
+        <div class="card-content">
+          <h3>Web Development</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 10K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.w3schools.com','_blank')">Explore Now</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/seed/python/400/200" alt="Python Programming">
+        <div class="card-content">
+          <h3>Python Programming</h3>
+          <p>Beginner to Intermediate</p>
+          <p>Interested Students: 8K</p>
+          <div class="stars">★★★★☆</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/python-programming-language/','_blank')">Explore Now</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/seed/dsa/400/200" alt="Data Structures">
+        <div class="card-content">
+          <h3>Data Structures</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 9K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Dummy credentials for demonstration purposes
-        const validUsername = 'farmer123';
-        const validPassword = 'password123';
+  <section id="practice" class="section">
+    <h2 style="color:#006400;margin-bottom:1rem;">Practice Platforms</h2>
+    <div class="practice-list">
+      <div class="practice-item">LeetCode</div>
+      <div class="practice-item">HackerRank</div>
+      <div class="practice-item">GeeksforGeeks</div>
+      <div class="practice-item">Codeforces</div>
+    </div>
+  </section>
 
-        // Function to validate the login
-        function validateLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
+  <section id="jobs" class="section">
+    <h2 style="color:#006400;margin-bottom:1rem;">Job Portals</h2>
+    <div class="job-list">
+      <div class="job-item">LinkedIn</div>
+      <div class="job-item">Internshala</div>
+      <div class="job-item">Naukri.com</div>
+      <div class="job-item">Indeed</div>
+    </div>
+  </section>
 
-            if (username === validUsername && password === validPassword) {
-                // If credentials are correct, redirect to the dashboard
-                window.location.href = 'dashboard.html';
-            } else {
-                // If credentials are incorrect, show an error message
-                errorMessage.textContent = 'Invalid username or password. Please try again.';
-            }
+  <section id="contact" class="section">
+    <h2 style="color:#006400;margin-bottom:1rem;">Contact Us</h2>
+    <div class="contact">
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button>Submit</button>
+    </div>
+  </section>
 
-            // Prevent form submission (as this is just a demonstration)
-            return false;
+  <footer>
+    <p><strong>Address:</strong> TechLearn HQ, India</p>
+    <p><strong>Creators:</strong> TechLearn Dev Team</p>
+    <p><strong>Read more:</strong> <a href="#">Roadmap Articles</a></p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.section, .hero');
+    const navLinks = document.querySelectorAll('nav a');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        sections.forEach(sec => sec.classList.remove('active-section'));
+        const id = link.id.replace('Link','');
+        document.getElementById(id).classList.add('active-section');
+      });
+    });
+
+    // Typewriter animation
+    const words = ["Career Guidance", "Learning Roadmaps", "Skill Development"];
+    let i=0, j=0, currentWord='', isDeleting=false;
+    const typewriterEl = document.getElementById('typewriter');
+
+    function type(){
+      currentWord = words[i];
+      if(!isDeleting){
+        typewriterEl.textContent = currentWord.substring(0,j+1);
+        j++;
+        if(j===currentWord.length){
+          isDeleting=true;
+          setTimeout(type,1200);
+          return;
         }
-    </script>
+      } else {
+        typewriterEl.textContent = currentWord.substring(0,j-1);
+        j--;
+        if(j===0){
+          isDeleting=false;
+          i=(i+1)%words.length;
+        }
+      }
+      setTimeout(type,isDeleting?60:120);
+    }
+    type();
+  </script>
 </body>
 </html>

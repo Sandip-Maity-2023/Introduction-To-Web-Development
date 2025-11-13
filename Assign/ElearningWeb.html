@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechLearn - Learn, Teach & Explore Tech Easily</title>
+
+    <style>
+    :root {
+      --primary: #006400;
+      --primary-dark: #004d00;
+      --accent: #1ddc1d;
+      --bg: #f4f6f8;
+      --text-dark: #222;
+      --text-light: #555;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(to right, #e8f5e9, #f4fff4);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero-section {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: auto;
+      animation: fadeIn 1s ease;
+    }
+
+    .hero h2 {
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .typewriter {
+      color: var(--primary);
+      font-weight: 800;
+      border-right: 3px solid var(--primary);
+      animation: blink 0.6s step-end infinite alternate;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      width: 200px;
+      text-align: left;
+      animation: dropdown 0.3s ease;
+    }
+
+    .dropdown div {
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown div:hover {
+      background: #f5f5f5;
+    }
+
+    @keyframes dropdown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    h2.section-title {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Cards */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover { transform: translateY(-6px); }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .card-content {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .card h3 { color: var(--primary); }
+    .card p { font-size: 0.9rem; color: var(--text-light); }
+    .stars { color: gold; margin: 0.3rem 0; }
+
+    .practice-list, .job-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .practice-item, .job-item {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 180px;
+      font-weight: 600;
+      text-decoration: none;
+      color: inherit;
+      transition: 0.3s;
+    }
+
+    .practice-item:hover, .job-item:hover {
+      transform: scale(1.05);
+      background: #f1fff1;
+    }
+
+    /* Contact */
+    .contact {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    footer a { color: #90ee90; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    @media (max-width: 600px) {
+      header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+
+</head>
+<body>
+  <header>
+    <h1>
+      <span style="color: #39f505">T</span>ech<span style="color: #04f318">L</span>earn
+    </h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#topics">Topics</a>
+      <a href="#practice">Practice</a>
+      <a href="#jobs">Jobs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-section">
+      <h2>Connect with trusted experts, anytime. Get real answers, real guidance, in real time.</h2>
+      <h2><span class="typewriter" id="typewriter"></span></h2>
+      <p>Articles, tutorials, notes, and resources for students, beginners, and tech enthusiasts — just like GeeksforGeeks.</p>
+      <div style="position:relative; display:inline-block;">
+        <button class="explore-btn" id="exploreBtn" style="width: 90px;height: 30px;background-color: #09c645;border-radius: 20px">Explore</button>
+        <div id="exploreOptions" style=" display: none;position: absolute;background: white;color: #222;border-radius: 10px;box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);margin-top: 8px;left: 50%;transform: translateX(-50%);width: 220px;overflow: hidden;animation: fadeIn 0.3s ease;font-family: 'Segoe UI', sans-serif;">
+  <div style="padding: 10px 14px;border-bottom: 1px solid #eee;cursor: pointer;transition: all 0.3s;" 
+     onmouseover="this.style.background='#e8ffe8'" 
+     onmouseout="this.style.background='white'">
+     💬 1:1 Expert Session
+  </div>
+
+  <div style="padding: 10px 14px;border-bottom: 1px solid #eee;cursor: pointer;transition: all 0.3s;" 
+     onmouseover="this.style.background='#e8ffe8'" 
+     onmouseout="this.style.background='white'">
+     🧠 Personalized Feed
+  </div>
+
+  <div style="padding: 10px 14px;cursor: pointer;transition: all 0.3s;" 
+     onmouseover="this.style.background='#e8ffe8'" 
+     onmouseout="this.style.background='white'">
+     🌐 Build Your Network
+  </div>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <h2 class="section-title">Explore Topics</h2>
+    <div class="topics-grid">
+      <div class="card">
+        <img src="./img/web.png" alt="Web Development" />
+        <div class="card-content">
+          <h3>Web Development</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 10K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.w3schools.com','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/py.png" alt="Python Programming" />
+        <div class="card-content">
+          <h3>Python Programming</h3>
+          <p>Beginner to Intermediate</p>
+          <p>Interested Students: 8K</p>
+          <div class="stars">★★★★☆</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/python-programming-language/','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/dsa.png" alt="Data Structures" />
+        <div class="card-content">
+          <h3>Data Structures</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 9K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/ml.webp" alt="Data Structures" />
+        <div class="card-content">
+          <h3>Machine Learning</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 9K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+
+      <div class="card">
+        <img src="./img/block.png" alt="Data Structures" />
+        <div class="card-content">
+          <h3>BlockChain Development</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 9K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/ui.png" alt="Data Structures" />
+        <div class="card-content">
+          <h3>UI/UX Development </h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 9K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/hack.png" alt="Data Structures" />
+        <div class="card-content">
+          <h3>Ethical Hacking</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 9K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="./img/cloud.png" alt="Data Structures" />
+        <div class="card-content">
+          <h3>Cloud Computing</h3>
+          <p>Beginner to Advanced</p>
+          <p>Interested Students: 9K</p>
+          <div class="stars">★★★★★</div>
+          <button onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="practice">
+    <h2 class="section-title">Practice Platforms</h2>
+    <div class="practice-list">
+    <div class="practice-item" data-link="https://leetcode.com/">LeetCode</div>
+    <div class="practice-item" data-link="https://www.hackerrank.com/">HackerRank</div>
+    <div class="practice-item" data-link="https://www.geeksforgeeks.org/">GeeksforGeeks</div>
+    <div class="practice-item" data-link="https://codeforces.com/">Codeforces</div>
+    </div>
+  </section>
+
+  <section id="jobs">
+    <h2 class="section-title">Job Portals</h2>
+   <div class="job-list">
+  <a class="job-item" href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <a class="job-item" href="https://internshala.com/" target="_blank" rel="noopener noreferrer">Internshala</a>
+  <a class="job-item" href="https://www.naukri.com/" target="_blank" rel="noopener noreferrer">Naukri.com</a>
+  <a class="job-item" href="https://www.indeed.com/" target="_blank" rel="noopener noreferrer">Indeed</a>
+</div>
+
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact">
+      <p>If you have any questions or want to contribute tutorials, email us at <strong>info@techlearn.com</strong>.</p>
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Your Email" />
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button>Send Message</button>
+    </div>
+  </section>
+
+  <footer>
+    <h2>TechLearn</h2>
+    <p>© 2025 TechLearn. Built with ❤️ for learners everywhere.</p>
+    <h3> Develop & Designed by Sandip Maity</h3>
+  </footer>
+
+  <script>
+    // Navbar active highlight
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+
+    // Typewriter Effect
+    const words = ["Career Guidance", "Learning Roadmaps", "Skill Development"];
+    let i = 0, j = 0, currentWord = "", isDeleting = false;
+    const typewriterEl = document.getElementById("typewriter");
+
+    function type() {
+      currentWord = words[i];
+      if (!isDeleting) {
+        typewriterEl.textContent = currentWord.substring(0, j + 1);
+        j++;
+        if (j === currentWord.length) {
+          isDeleting = true;
+          setTimeout(type, 1200);
+          return;
+        }
+      } else {
+        typewriterEl.textContent = currentWord.substring(0, j - 1);
+        j--;
+        if (j === 0) {
+          isDeleting = false;
+          i = (i + 1) % words.length;
+        }
+      }
+      setTimeout(type, isDeleting ? 60 : 120);
+    }
+    type();
+
+    // Explore Dropdown
+    const exploreBtn = document.getElementById("exploreBtn");
+    const exploreOptions = document.getElementById("exploreOptions");
+    exploreBtn.addEventListener("click", () => {
+      exploreOptions.style.display =
+        exploreOptions.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!exploreBtn.contains(e.target) && !exploreOptions.contains(e.target)) {
+        exploreOptions.style.display = "none";
+      }
+    });
+
+
+  </script>
+</body>
+</html>
