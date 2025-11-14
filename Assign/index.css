@@ -1,0 +1,37 @@
+
+
+#tutorials {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.video-box {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+.video-box:hover {
+  transform: scale(1.03);
+}
+
+.video-box iframe {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.video-box h3 {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+  color: var(--primary);
+}
