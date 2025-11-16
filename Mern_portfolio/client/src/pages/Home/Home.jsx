@@ -1,7 +1,7 @@
 
 
 import React,{useRef} from "react";
-import "../Home/Home.css";
+import "../Home/Home1.css";
 import { useTheme } from "../../context/ThemeContext";
 import Resume from "../../assets/docs/ats.pdf";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
@@ -101,7 +101,7 @@ const Home = () => {
               <FaLinkedin size={30} />
             </a>
 
-            <a href="https://github.com" target="_blank" rel="noreferrer">
+            <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub">
               <FaGithub size={30} />
             </a>
 
@@ -130,5 +130,6 @@ const Home = () => {
 };
 
 export default Home;
+
 
 

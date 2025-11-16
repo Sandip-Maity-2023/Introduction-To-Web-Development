@@ -1,155 +1,78 @@
-/* ==============================
-   CONTACT SECTION STYLING
-   ============================== */
-#contact {
-  position: relative;
-  overflow: hidden;
-  font-family: "Poppins", sans-serif;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  gap: 3rem; /* ✅ Spacing between image & form */
-  padding: 5px;
-  background: linear-gradient(135deg, #dee0e6, #77aaf5); /* dark bluish gradient */
-  color: #63f2fc;
-  z-index: 1;
-  margin: 15px;
+.contact-section {
+width: 100%;
+max-width: 450px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Prevent image from blending with sidebar */
-#contact .contact-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 80px; /* ✅ Push away from sidebar */
+
+.contact-form h2 {
+margin-bottom: 15px;
+text-align: center;
 }
 
-#contact .contact-image img {
-  border-radius: 55px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  max-width: 480px;
-  width: 100%;
-  height: auto;
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+
+.social-icons {
+display: flex;
+justify-content: center;
+gap: 15px;
+margin-bottom: 10px;
 }
 
-#contact .contact-image img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 25px rgba(45, 212, 191, 0.4);
+
+.divider {
+text-align: center;
+margin: 10px 0 20px;
 }
 
-/* ==============================
-   FORM CONTAINER
-   ============================== */
-#contact form {
-  flex: 1;
-  max-width: 500px;
-  padding: 2.5rem;
-  /* -webkit-backdrop-filter: blur(12px); */
-  /* backdrop-filter: blur(12px); */
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 35px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
-}
 
-form h2 {
-  font-weight: 700;
-  color: #181313;
-  letter-spacing: 0.5px;
-  margin-bottom: 2rem;
-}
-
-form p {
-  color: #130707;
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Inputs */
 input,
 textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: #01020c;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
+width: 100%;
+padding: 12px;
+margin-bottom: 12px;
+border-radius: 10px;
+border: 1px solid rgba(0, 0, 0, 0.2);
+outline: none;
+transition: 0.3s;
 }
+
 
 input:focus,
 textarea:focus {
-  border-color: #14b8a6;
-  box-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
-  outline: none;
+border-color: #5a9bff;
+box-shadow: 0 0 10px rgba(90, 155, 255, 0.4);
 }
 
-/* Button */
-button[type="submit"] {
-  position: relative;
-  /* overflow: hidden; */
-  background-color: #14b8a6;
-  color: #3f42eb;
-  padding: 145px;
-  margin: 2px;
-  /* border: none; */
-  border-radius: 0.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.4s ease;
+
+button {
+width: 100%;
+padding: 12px;
+background: #2563eb;
+color: #fff;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+cursor: pointer;
+transition: 0.3s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #03a89b;
-  box-shadow: 0 0 20px rgba(3, 248, 215, 0.4);
-  color: rgb(19, 19, 250);
-  padding: 10px;
+
+button:hover {
+background: #1e4fcf;
 }
+
 
 /* ==============================
-   SOCIAL ICONS
-   ============================== */
-.contact-socials a {
-  display: inline-block;
-  margin: 0 10px;
-  transition: all 0.3s ease;
+RESPONSIVE
+============================== */
+@media (max-width: 768px) {
+.contact-section {
+text-align: center;
+padding: 50px 15px;
 }
 
-.contact-socials a:hover {
-  transform: scale(1.15) translateY(-2px);
-  filter: drop-shadow(0 0 6px rgba(43, 163, 237, 0.6));
+
+.contact-image img {
+max-width: 320px;
 }
-
-/* ==============================
-   RESPONSIVE DESIGN
-   /* ============================== */
-@media (max-width: 1024px) {
-  #contact {
-    flex-direction: column;
-    padding: 4rem 2rem;
-    text-align: center;
-  }
-
-  #contact .contact-image {
-    /* margin-left: 0;  ✅ Fix sidebar overlap on mobile  */
-  }
-
-  #contact .contact-image img {
-    max-width: 380px;
-  }
-
-  #contact form {
-    width: 100%;
-    max-width: 500px;
-  }
 }
-
-@media (max-width: 600px) {
-  #contact {
-    gap: 2rem;
-  }
-} 

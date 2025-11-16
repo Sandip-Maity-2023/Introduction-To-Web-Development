@@ -1,6 +1,6 @@
 .project {
   margin-left: 100px;
-  padding: 5px;
+  padding: 40px 20px;
 }
 
 .section-title {
@@ -31,6 +31,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
+  width: 100%;
 }
 
 .project-card {
@@ -43,9 +44,14 @@
   flex-direction: column;
 }
 
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(19, 135, 129, 0.25);
+}
+
 .card-img-wrapper {
   position: relative;
-  height: 180px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -78,7 +84,7 @@
 }
 
 .card-content h4 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: #138781;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -101,6 +107,7 @@
 .card-actions {
   display: flex;
   justify-content: space-between;
+  margin-top: auto;
 }
 
 .card-actions a {
@@ -129,27 +136,86 @@
 
 #dark .project-card {
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: #ed0f0f;
 }
 
 #dark .card-actions a {
-  background: #0eb6a5;
-  color: #fff;
+  background: #0ae9d3;
+  color: #ed0e0e;
 }
 
 #dark .card-actions a:hover {
   background: transparent;
-  border: 1px solid #0eb6a5;
-  color: #0eb6a5;
+  border: 1px solid #1109ea;
+  color: #0bebd4;
 }
 
 /* Responsive */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .project {
     margin-top: 40px;
   }
 
   .project hr {
     width: 80%;
+  }
+} */
+
+
+
+/* ───── RESPONSIVE ───── */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .project {
+    margin-left: 50px;
+  }
+}
+
+/* Large Phones / Small Tablets */
+@media (max-width: 768px) {
+  .project {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .project hr {
+    width: 60%;
+  }
+
+  .card-img-wrapper {
+    height: 170px;
+  }
+
+  .card-actions a {
+    font-size: 0.9rem;
+    padding: 7px 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .project {
+    padding: 10px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-img-wrapper {
+    height: 150px;
+  }
+
+  .card-content h4 {
+    font-size: 1rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
   }
 }

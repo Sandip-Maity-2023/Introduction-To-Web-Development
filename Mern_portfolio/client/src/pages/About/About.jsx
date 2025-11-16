@@ -1,6 +1,6 @@
 import React from "react";
 import "./About.css";
-import { motion, scale } from "framer-motion";
+import { motion} from "framer-motion";
 import {
   FaDownload,
   FaLaptopCode,
@@ -37,9 +37,9 @@ const About = () => {
           transition={{ duration: 0.6 }}
         src=".\src\assets\docs\q.jpg"
         alt="about-profile-pic"
-        >
+        />
 
-        </motion.img>
+        
 
         {/* Right Content */}
         <motion.div
@@ -49,7 +49,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <p className="about-text">
-            I’m a <b>pre-final year student pursuing Computer Science & Enginnering (AIML) at Adamas University,Kolkata.<br/><br/>I completed my 10th (WBBSE) in 2021 with 92% and my 12th (WBCHSE) in 2023 with 77% from Panchrol High School, Purba Medinipur, West Bengal.</b>{" "}
+            I’m a <b>pre-final year student pursuing Computer Science & Engineering (AIML) at Adamas University,Kolkata.<br/><br/>I completed my 10th (WBBSE) in 2021 with 92% and my 12th (WBCHSE) in 2023 with 77% from Panchrol High School, Purba Medinipur, West Bengal.</b>{" "}
             <b>Machine Learning</b>, <b>Deep Learning</b>, and I focus on
             building impactful applications.<b></b>.
             <br />

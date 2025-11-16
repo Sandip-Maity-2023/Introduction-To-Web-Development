@@ -1,11 +1,17 @@
 .education-section {
-  padding: 100px 0;
+  /* padding: 100px 0; */
+  padding: 80px 20px;
   background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
   color: #fff;
-  overflow-x: hidden;
-  margin-left: 100px;
+  width: 100%;
+  /* overflow-x: hidden;
+  margin-left: 100px; */
 }
 
+.education-container{
+  max-width: 1000px;
+  margin: 0 auto;
+}
 .education-section h2 {
   font-weight: 800;
   letter-spacing: 1px;
@@ -45,7 +51,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .education-section {
     padding: 60px 8px;
   }
@@ -54,5 +60,33 @@
   }
   .vertical-timeline-element-content {
     padding: 1.2rem !important;
+  }
+} */
+
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .education-section {
+    padding: 70px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .education-section {
+    padding: 60px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-section {
+    padding: 50px 8px;
+  }
+
+  .timeline-title {
+    font-size: 1.5rem;
+  }
+
+  .timeline-subtitle {
+    font-size: 0.9rem;
   }
 }

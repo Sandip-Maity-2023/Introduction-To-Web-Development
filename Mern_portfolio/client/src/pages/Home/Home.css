@@ -1,6 +1,7 @@
 /* Container & Theme */
 .home-container {
   height: 100vh; 
+  width: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,11 +142,12 @@ margin: 15px;
 }
 
 /*Responsive*/ 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .home-container {
     padding-left: 20px;
     margin-top: 50px;
     height: auto;
+    width: auto;
   }
   .home-content h2,
   .home-content h1 {
@@ -156,4 +158,17 @@ margin: 15px;
     width: 155px;
     height: 50px;
   }
+} */
+
+/* Responsive */
+@media (max-width: 900px) {
+.home-container { padding: 40px 4%; }
+.container { text-align:center; }
+.theme-btn { right: 8px; top: 8px; }
+}
+
+
+/* Tablet */
+@media (min-width: 901px) and (max-width: 1100px) {
+.container { max-width: 900px; }
 }
