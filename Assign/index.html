@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TechLearn - Learn, Teach & Explore Tech Easily</title>
 
-  <link rel="stylesheet" href="index.css" />
+  
     <style>
 
     :root {
@@ -264,9 +264,114 @@ background-color: #158115;
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    @media (max-width: 600px) {
-      header { flex-direction: column; align-items: flex-start; }
-    }
+    /* ============================
+   RESPONSIVE DESIGN FIXES
+   ADD AT BOTTOM OF STYLE TAG
+============================ */
+
+/* Large Screens (Desktops & Laptops) */
+@media (min-width: 1200px) {
+  .hero-section {
+    max-width: 1000px;
+  }
+
+  nav a {
+    font-size: 1.1rem;
+  }
+
+  .video-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+}
+
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 12px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  nav a {
+    font-size: 1rem;
+  }
+
+  .hero h2 {
+    font-size: 1.3rem;
+  }
+
+  .hero-section {
+    padding: 1.5rem;
+  }
+
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card img {
+    height: 150px;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-box iframe {
+    height: 200px;
+  }
+
+  .practice-item, .job-item {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .contact input,
+  .contact textarea {
+    font-size: 1rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
+}
+
+/* Very Small Screens (Mobile S) */
+@media (max-width: 480px) {
+
+  h1 {
+    font-size: 1.4rem !important;
+  }
+
+  .hero h2 {
+    font-size: 1.1rem;
+  }
+
+  .explore-btn {
+    width: 90px !important;
+  }
+
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-box iframe {
+    height: 180px;
+  }
+
+  footer h2 {
+    font-size: 1.2rem;
+  }
+}
+
   </style>
 
 
@@ -342,7 +447,9 @@ background-color: #158115;
   </section>
 
   <section id="topics">
-    <h2 class="section-title">Explore Topics</h2>
+    <h1>Algorithm Visualization</h1>
+    <button id="card-button" onclick="window.open('./ze.html')">Explore Now</button>
+    <h2 class="section-title">Recommendation Topics</h2>
     <div class="topics-grid">
       <div class="card">
         <img src="./img/web.png" alt="Web Development" />
@@ -496,6 +603,38 @@ background-color: #158115;
   </div>
 </section>
 
+<section id="custom-site" class="custom-section">
+  <h2 class="section-title">Build Your Personalized Learning Space</h2>
+
+  <p class="custom-desc">
+    Don’t like the recommended platforms?  
+    Create your <strong>own customized tech learning website</strong> based on your interests.
+  </p>
+
+  <div class="custom-card">
+
+    <h3>Your Interests</h3>
+    <p class="small-text">Choose what you want your custom learning website to focus on:</p>
+
+    <div class="interest-grid">
+      <div class="interest-option" data-value="web">🌐 Web Development</div>
+      <div class="interest-option" data-value="python">🐍 Python</div>
+      <div class="interest-option" data-value="dsa">🧩 Data Structures</div>
+      <div class="interest-option" data-value="ai">🤖 Artificial Intelligence</div>
+      <div class="interest-option" data-value="blockchain">🔗 Blockchain</div>
+      <div class="interest-option" data-value="cyber">👨‍💻 Cyber Security</div>
+    </div>
+
+    <button id="generateSiteBtn" class="custom-btn">Generate My Custom Website →</button>
+
+    <div id="resultBox" class="result-box" style="display: none;">
+      <h3>Your Custom Website:</h3>
+      <p id="siteURL"></p>
+      <button id="visitSiteBtn" class="visit-btn">Visit Website</button>
+    </div>
+
+  </div>
+</section>
 
 
 
@@ -589,7 +728,67 @@ background-color: #158115;
         this.textContent = "Turn Light ON";
       }
     });
+
+
+    
   </script>
   
+
+  <script>
+  // Make practice items clickable
+  document.querySelectorAll(".practice-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const link = item.getAttribute("data-link");
+      if (link) window.open(link, "_blank");
+    });
+  });
+
+  
+</script>
+
+
+<script>
+  // Make practice items clickable
+  document.querySelectorAll(".job-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const link = item.getAttribute("data-link");
+      if (link) window.open(link, "_blank");
+    });
+  });
+</script>
+
+
+
+<script>
+  let selectedInterest = null;
+
+  // Select options
+  document.querySelectorAll(".interest-option").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".interest-option").forEach(i => i.classList.remove("active"));
+      btn.classList.add("active");
+      selectedInterest = btn.getAttribute("data-value");
+    });
+  });
+
+  // Generate custom site URL
+  document.getElementById("generateSiteBtn").addEventListener("click", () => {
+    if (!selectedInterest) {
+      alert("Please select at least one interest!");
+      return;
+    }
+
+    const siteURL = `https://google.com/?category=${selectedInterest}`;
+
+
+    document.getElementById("siteURL").innerText = siteURL;
+    document.getElementById("resultBox").style.display = "block";
+
+    document.getElementById("visitSiteBtn").onclick = () => {
+      window.open(siteURL, "_blank");
+    };
+  });
+</script>
+
 </body>
 </html>
