@@ -4,7 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TechLearn - Learn, Teach & Explore Tech Easily</title>
+<style>.multi-links {
+  position: relative;
+  margin-top: 10px;
+}
 
+.multi-btn {
+  padding: 8px 12px;
+  background: #08c708;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.multi-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.multi-menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.multi-menu a:hover {
+  background: #e7ffe7;
+}
+
+.multi-links.active .multi-menu {
+  display: block;
+}
+</style>
   
     <style>
 
@@ -372,7 +411,7 @@ background-color: #158115;
   }
 }
 
-  </style>
+  </>
 
 
 <style>
@@ -446,158 +485,419 @@ background-color: #158115;
     </div>
   </section>
 
-  <section id="topics">
-    <h1>Algorithm Visualization</h1>
-    <button id="card-button" onclick="window.open('./ze.html')">Explore Now</button>
-    <h2 class="section-title">Recommendation Topics</h2>
-    <div class="topics-grid">
-      <div class="card">
-        <img src="./img/web.png" alt="Web Development" />
-        <div class="card-content">
-          <h3>Web Development</h3>
-          <p>Beginner to Advanced</p>
-          <p>Interested Students: 10K</p>
-          <div class="stars">★★★★★</div>
-          <button id="card-button" onclick="window.open('https://www.w3schools.com','_blank')">Explore Now</button>
+<section id="topics">
+  <h1>Algorithm Visualization</h1>
+  <button id="card-button" onclick="window.open('./ze.html')">Explore Now</button>
+
+  <h2 class="section-title">Recommendation Topics</h2>
+
+  <div class="topics-grid">
+
+    <div class="card">
+      <img src="./img/web.png" alt="Web Development" />
+      <div class="card-content">
+        <h3>Web Development</h3>
+        <p>Beginner to Advanced</p>
+        <p>Interested Students: 10K</p>
+        <div class="stars">★★★★★</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://www.w3schools.com" target="_blank">W3Schools</a>
+            <a href="https://developer.mozilla.org" target="_blank">MDN Docs</a>
+            <a href="https://www.freecodecamp.org" target="_blank">FreeCodeCamp</a>
+            <a href="https://www.geeksforgeeks.org/web-development/" target="_blank">GFG</a>
+            <a href="https://www.javatpoint.com/web-development" target="_blank">JavaPoint</a>
+          </div>
         </div>
       </div>
-
-      <div class="card">
-        <img src="./img/py.png" alt="Python Programming" />
-        <div class="card-content">
-          <h3>Python Programming</h3>
-          <p>Beginner to Intermediate</p>
-          <p>Interested Students: 8K</p>
-          <div class="stars">★★★★☆</div>
-          <button id="card-button" onclick="window.open('https://www.geeksforgeeks.org/python-programming-language/','_blank')">Explore Now</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="./img/dsa.png" alt="Data Structures" />
-        <div class="card-content">
-          <h3>Data Structures</h3>
-          <p>Beginner to Advanced</p>
-          <p>Interested Students: 9K</p>
-          <div class="stars">★★★★★</div>
-          <button id="card-button" onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="./img/ml.webp" alt="Data Structures" />
-        <div class="card-content">
-          <h3>Machine Learning</h3>
-          <p>Beginner to Advanced</p>
-          <p>Interested Students: 9K</p>
-          <div class="stars">★★★★★</div>
-          <button id="card-button" onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
-        </div>
-      </div>
-
-
-      <div class="card">
-        <img src="./img/block.png" alt="Data Structures" />
-        <div class="card-content">
-          <h3>BlockChain Development</h3>
-          <p>Beginner to Advanced</p>
-          <p>Interested Students: 9K</p>
-          <div class="stars">★★★★★</div>
-          <button id="card-button" onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="./img/ui.png" alt="Data Structures" />
-        <div class="card-content">
-          <h3>UI/UX Development </h3>
-          <p>Beginner to Advanced</p>
-          <p>Interested Students: 9K</p>
-          <div class="stars">★★★★★</div>
-          <button id="card-button" onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="./img/hack.png" alt="Data Structures" />
-        <div class="card-content">
-          <h3>Ethical Hacking</h3>
-          <p>Beginner to Advanced</p>
-          <p>Interested Students: 9K</p>
-          <div class="stars">★★★★★</div>
-          <button id="card-button" onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="./img/cloud.png" alt="Data Structures" />
-        <div class="card-content">
-          <h3>Cloud Computing</h3>
-          <p>Beginner to Advanced</p>
-          <p>Interested Students: 9K</p>
-          <div class="stars">★★★★★</div>
-          <button id="card-button" onclick="window.open('https://www.geeksforgeeks.org/data-structures/','_blank')">Explore Now</button>
-        </div>
-      </div>
-
     </div>
-  </section>
+
+
+
+    <div class="card">
+      <img src="./img/py.png" alt="Python Programming" />
+      <div class="card-content">
+        <h3>Python Programming</h3>
+        <p>Beginner to Intermediate</p>
+        <p>Interested Students: 8K</p>
+        <div class="stars">★★★★☆</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://www.python.org/doc/" target="_blank">Python Docs</a>
+            <a href="https://www.geeksforgeeks.org/python-programming-language/" target="_blank">GFG</a>
+            <a href="https://www.w3schools.com/python/" target="_blank">W3Schools</a>
+            <a href="https://www.javatpoint.com/python-tutorial" target="_blank">JavaPoint</a>
+            <a href="https://www.tutorialspoint.com/python/index.htm" target="_blank">TutorialsPoint</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <div class="card">
+      <img src="./img/dsa.png" alt="Data Structures" />
+      <div class="card-content">
+        <h3>Data Structures</h3>
+        <p>Beginner to Advanced</p>
+        <p>Interested Students: 9K</p>
+        <div class="stars">★★★★★</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://www.geeksforgeeks.org/data-structures/" target="_blank">GFG</a>
+            <a href="https://www.programiz.com/dsa" target="_blank">Programiz</a>
+            <a href="https://www.javatpoint.com/data-structure-tutorial" target="_blank">JavaPoint</a>
+            <a href="https://www.tutorialspoint.com/data_structures_algorithms/index.htm" target="_blank">TutorialsPoint</a>
+            <a href="https://www.coursera.org/specializations/data-structures-algorithms" target="_blank">Coursera</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <img src="./img/ml.webp" alt="Machine Learning" />
+      <div class="card-content">
+        <h3>Machine Learning</h3>
+        <p>Beginner to Advanced</p>
+        <p>Interested Students: 9K</p>
+        <div class="stars">★★★★★</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://www.kaggle.com/learn" target="_blank">Kaggle</a>
+            <a href="https://www.tensorflow.org/tutorials" target="_blank">TensorFlow</a>
+            <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank">Scikit-Learn</a>
+            <a href="https://www.geeksforgeeks.org/machine-learning/" target="_blank">GFG</a>
+            <a href="https://www.coursera.org/learn/machine-learning" target="_blank">Coursera ML</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <img src="./img/block.png" alt="BlockChain" />
+      <div class="card-content">
+        <h3>BlockChain Development</h3>
+        <p>Beginner to Advanced</p>
+        <p>Interested Students: 9K</p>
+        <div class="stars">★★★★★</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://www.geeksforgeeks.org/blockchain-technology/" target="_blank">GFG</a>
+            <a href="https://ethereum.org/en/developers/" target="_blank">Ethereum Docs</a>
+            <a href="https://bitcoin.org/en/developer-documentation" target="_blank">Bitcoin Docs</a>
+            <a href="https://www.javatpoint.com/blockchain-tutorial" target="_blank">JavaPoint</a>
+            <a href="https://www.tutorialspoint.com/blockchain/index.htm" target="_blank">TutorialsPoint</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <img src="./img/ui.png" alt="UI UX" />
+      <div class="card-content">
+        <h3>UI/UX Development</h3>
+        <p>Beginner to Advanced</p>
+        <p>Interested Students: 9K</p>
+        <div class="stars">★★★★★</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://www.figma.com/community" target="_blank">Figma</a>
+            <a href="https://www.behance.net" target="_blank">Behance</a>
+            <a href="https://www.interaction-design.org" target="_blank">Interaction Design</a>
+            <a href="https://www.javatpoint.com/ui-ux" target="_blank">JavaPoint</a>
+            <a href="https://www.tutorialspoint.com/ui_ux_design/index.htm" target="_blank">TutorialsPoint</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <img src="./img/hack.png" alt="Ethical Hacking" />
+      <div class="card-content">
+        <h3>Ethical Hacking</h3>
+        <p>Beginner to Advanced</p>
+        <p>Interested Students: 9K</p>
+        <div class="stars">★★★★★</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://www.geeksforgeeks.org/ethical-hacking/" target="_blank">GFG</a>
+            <a href="https://www.kali.org/docs/" target="_blank">Kali Docs</a>
+            <a href="https://tryhackme.com" target="_blank">TryHackMe</a>
+            <a href="https://www.hackthebox.com" target="_blank">HackTheBox</a>
+            <a href="https://www.tutorialspoint.com/ethical_hacking/index.htm" target="_blank">TutorialsPoint</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <img src="./img/cloud.png" alt="Cloud" />
+      <div class="card-content">
+        <h3>Cloud Computing</h3>
+        <p>Beginner to Advanced</p>
+        <p>Interested Students: 9K</p>
+        <div class="stars">★★★★★</div>
+
+        <div class="multi-links">
+          <button class="multi-btn">Explore Resources ▼</button>
+          <div class="multi-menu">
+            <a href="https://aws.amazon.com/education/awseducate/" target="_blank">AWS Educate</a>
+            <a href="https://cloud.google.com/learn" target="_blank">Google Cloud</a>
+            <a href="https://azure.microsoft.com/en-us/resources" target="_blank">Microsoft Azure</a>
+            <a href="https://www.geeksforgeeks.org/cloud-computing/" target="_blank">GFG</a>
+            <a href="https://www.javatpoint.com/cloud-computing" target="_blank">JavaPoint</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
   <section id="practice">
-    <h2 class="section-title">Practice Platforms</h2>
-    <div class="practice-list">
-    <div class="practice-item" data-link="https://leetcode.com/">LeetCode</div>
-    <div class="practice-item" data-link="https://www.hackerrank.com/">HackerRank</div>
-    <div class="practice-item" data-link="https://www.geeksforgeeks.org/">GeeksforGeeks</div>
-    <div class="practice-item" data-link="https://codeforces.com/">Codeforces</div>
+  <h2 class="section-title">Practice Platforms</h2>
+
+  <div class="practice-list">
+
+    <div class="practice-item">
+      LeetCode
+      <div class="multi-links">
+        <button class="multi-btn">More Platforms ▼</button>
+        <div class="multi-menu">
+          <a href="https://leetcode.com/" target="_blank">LeetCode</a>
+          <a href="https://www.hackerrank.com/" target="_blank">HackerRank</a>
+          <a href="https://www.codechef.com/" target="_blank">CodeChef</a>
+          <a href="https://codeforces.com/" target="_blank">Codeforces</a>
+          <a href="https://www.geeksforgeeks.org/" target="_blank">GeeksforGeeks</a>
+        </div>
+      </div>
     </div>
+
+    <div class="practice-item">
+      HackerRank
+      <div class="multi-links">
+        <button class="multi-btn">More Platforms ▼</button>
+        <div class="multi-menu">
+          <a href="https://www.hackerrank.com/" target="_blank">HackerRank</a>
+          <a href="https://leetcode.com/" target="_blank">LeetCode</a>
+          <a href="https://www.codechef.com/" target="_blank">CodeChef</a>
+          <a href="https://atcoder.jp/" target="_blank">AtCoder</a>
+          <a href="https://codeforces.com/" target="_blank">Codeforces</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="practice-item">
+      GeeksforGeeks
+      <div class="multi-links">
+        <button class="multi-btn">More Platforms ▼</button>
+        <div class="multi-menu">
+          <a href="https://www.geeksforgeeks.org/" target="_blank">GeeksforGeeks</a>
+          <a href="https://leetcode.com/" target="_blank">LeetCode</a>
+          <a href="https://www.hackerrank.com/" target="_blank">HackerRank</a>
+          <a href="https://www.interviewbit.com/" target="_blank">InterviewBit</a>
+          <a href="https://www.codechef.com/" target="_blank">CodeChef</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="practice-item">
+      Codeforces
+      <div class="multi-links">
+        <button class="multi-btn">More Platforms ▼</button>
+        <div class="multi-menu">
+          <a href="https://codeforces.com/" target="_blank">Codeforces</a>
+          <a href="https://atcoder.jp/" target="_blank">AtCoder</a>
+          <a href="https://leetcode.com/" target="_blank">LeetCode</a>
+          <a href="https://www.codechef.com/" target="_blank">CodeChef</a>
+          <a href="https://www.hackerrank.com/" target="_blank">HackerRank</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+ <section id="jobs">
+  <h2 class="section-title">Job Portals</h2>
+
+  <div class="job-list">
+
+    <div class="job-item">
+      LinkedIn
+      <div class="multi-links">
+        <button class="multi-btn">More Portals ▼</button>
+        <div class="multi-menu">
+          <a href="https://www.linkedin.com/jobs/" target="_blank">LinkedIn</a>
+          <a href="https://naukri.com/" target="_blank">Naukri</a>
+          <a href="https://indeed.com/" target="_blank">Indeed</a>
+          <a href="https://wellfound.com/jobs" target="_blank">WellFound</a>
+          <a href="https://www.glassdoor.co.in/Job/index.htm" target="_blank">Glassdoor</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-item">
+      Internshala
+      <div class="multi-links">
+        <button class="multi-btn">More Portals ▼</button>
+        <div class="multi-menu">
+          <a href="https://internshala.com/" target="_blank">Internshala</a>
+          <a href="https://www.naukri.com/" target="_blank">Naukri</a>
+          <a href="https://www.indeed.com/" target="_blank">Indeed</a>
+          <a href="https://www.linkedin.com/jobs/" target="_blank">LinkedIn</a>
+          <a href="https://www.foundit.in/" target="_blank">Foundit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-item">
+      Naukri.com
+      <div class="multi-links">
+        <button class="multi-btn">More Portals ▼</button>
+        <div class="multi-menu">
+          <a href="https://www.naukri.com/" target="_blank">Naukri</a>
+          <a href="https://www.indeed.com/" target="_blank">Indeed</a>
+          <a href="https://www.linkedin.com/jobs/" target="_blank">LinkedIn</a>
+          <a href="https://www.glassdoor.co.in" target="_blank">Glassdoor</a>
+          <a href="https://wellfound.com/jobs" target="_blank">WellFound</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-item">
+      Indeed
+      <div class="multi-links">
+        <button class="multi-btn">More Portals ▼</button>
+        <div class="multi-menu">
+          <a href="https://indeed.com/" target="_blank">Indeed</a>
+          <a href="https://www.naukri.com/" target="_blank">Naukri</a>
+          <a href="https://www.linkedin.com/jobs/" target="_blank">LinkedIn</a>
+          <a href="https://www.timesjobs.com/" target="_blank">TimesJobs</a>
+          <a href="https://wellfound.com/jobs" target="_blank">WellFound</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
   </section>
 
-  <section id="jobs">
-    <h2 class="section-title">Job Portals</h2>
-   <div class="job-list">
-  <a class="job-item" href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  <a class="job-item" href="https://internshala.com/" target="_blank" rel="noopener noreferrer">Internshala</a>
-  <a class="job-item" href="https://www.naukri.com/" target="_blank" rel="noopener noreferrer">Naukri.com</a>
-  <a class="job-item" href="https://www.indeed.com/" target="_blank" rel="noopener noreferrer">Indeed</a>
-</div>
-
-  </section>
 
 
-
-  
 <section id="tutorials">
   <h2 class="section-title">Tutorials</h2>
 
   <div class="video-grid">
 
     <div class="video-box">
-      <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" 
+      <iframe src="https://www.youtube.com/embed/UB1O30fR-EE"
         title="HTML Tutorial" frameborder="0" allowfullscreen>
       </iframe>
       <h3>HTML Full Course for Beginners</h3>
+
+      <!-- Dropdown Resources -->
+      <div class="multi-links">
+        <button class="multi-btn">More Resources ▼</button>
+        <div class="multi-menu">
+          <a href="https://www.w3schools.com/html/" target="_blank">W3Schools</a>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">MDN Docs</a>
+          <a href="https://www.tutorialspoint.com/html/index.htm" target="_blank">TutorialsPoint</a>
+          <a href="https://www.javatpoint.com/html-tutorial" target="_blank">JavaPoint</a>
+          <a href="https://www.geeksforgeeks.org/html-tutorial/" target="_blank">GeeksForGeeks</a>
+        </div>
+      </div>
     </div>
 
+
+
     <div class="video-box">
-      <iframe src="https://www.youtube.com/embed/yfoY53QXEnI" 
+      <iframe src="https://www.youtube.com/embed/yfoY53QXEnI"
         title="CSS Tutorial" frameborder="0" allowfullscreen>
       </iframe>
       <h3>CSS Crash Course</h3>
+
+      <!-- Dropdown Resources -->
+      <div class="multi-links">
+        <button class="multi-btn">More Resources ▼</button>
+        <div class="multi-menu">
+          <a href="https://www.w3schools.com/css/" target="_blank">W3Schools</a>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN Docs</a>
+          <a href="https://www.tutorialspoint.com/css/index.htm" target="_blank">TutorialsPoint</a>
+          <a href="https://www.javatpoint.com/css-tutorial" target="_blank">JavaPoint</a>
+          <a href="https://www.geeksforgeeks.org/css-tutorial/" target="_blank">GeeksForGeeks</a>
+        </div>
+      </div>
     </div>
 
+
+
     <div class="video-box">
-      <iframe src="https://www.youtube.com/embed/PkZNo7MFNFg" 
+      <iframe src="https://www.youtube.com/embed/PkZNo7MFNFg"
         title="JavaScript Tutorial" frameborder="0" allowfullscreen>
       </iframe>
       <h3>JavaScript Full Course</h3>
+
+      <!-- Dropdown Resources -->
+      <div class="multi-links">
+        <button class="multi-btn">More Resources ▼</button>
+        <div class="multi-menu">
+          <a href="https://www.w3schools.com/js/" target="_blank">W3Schools</a>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN Docs</a>
+          <a href="https://javascript.info" target="_blank">JavaScript Info</a>
+          <a href="https://www.javatpoint.com/javascript-tutorial" target="_blank">JavaPoint</a>
+          <a href="https://www.geeksforgeeks.org/javascript/" target="_blank">GeeksForGeeks</a>
+        </div>
+      </div>
     </div>
 
+
+
     <div class="video-box">
-      <iframe src="https://www.youtube.com/embed/w7ejDZ8SWv8" 
+      <iframe src="https://www.youtube.com/embed/w7ejDZ8SWv8"
         title="React Tutorial" frameborder="0" allowfullscreen>
       </iframe>
       <h3>React Tutorial for Beginners</h3>
+
+      <!-- Dropdown Resources -->
+      <div class="multi-links">
+        <button class="multi-btn">More Resources ▼</button>
+        <div class="multi-menu">
+          <a href="https://react.dev/" target="_blank">React Docs</a>
+          <a href="https://legacy.reactjs.org/docs/getting-started.html" target="_blank">React Legacy Docs</a>
+          <a href="https://www.w3schools.com/react/" target="_blank">W3Schools</a>
+          <a href="https://www.geeksforgeeks.org/reactjs-tutorials/" target="_blank">GeeksForGeeks</a>
+          <a href="https://www.javatpoint.com/reactjs-tutorial" target="_blank">JavaPoint</a>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -787,6 +1087,15 @@ background-color: #158115;
     document.getElementById("visitSiteBtn").onclick = () => {
       window.open(siteURL, "_blank");
     };
+  });
+</script>
+
+
+<script>
+  document.querySelectorAll(".multi-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.parentElement.classList.toggle("active");
+    });
   });
 </script>
 

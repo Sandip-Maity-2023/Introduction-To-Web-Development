@@ -22,12 +22,12 @@ const Sidebar = ({ onToggle }) => {
   };
 
   const menuItems = [
-    { label: "Home", icon: faHome, link: "#" },
-    { label: "Shorts", icon: faVideo, link: "#" },
-    { label: "History", icon: faList, link: "#" },
-    { label: "Downloads", icon: faClock, link: "#" },
-    { label: "Saved", icon: faDownload, link: "#" },
-    { label: "Liked", icon: faThumbsUp, link: "#" },
+    { label: "Home", icon: faHome, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
+    { label: "Shorts", icon: faVideo, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
+    { label: "History", icon: faList, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
+    { label: "Downloads", icon: faClock, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
+    { label: "Saved", icon: faDownload, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
+    { label: "Liked", icon: faThumbsUp, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
   ];
 
   return (

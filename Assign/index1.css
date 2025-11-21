@@ -1,0 +1,39 @@
+.multi-links {
+  position: relative;
+  margin-top: 10px;
+}
+
+.multi-btn {
+  padding: 8px 12px;
+  background: #08c708;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.multi-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.multi-menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.multi-menu a:hover {
+  background: #e7ffe7;
+}
+
+.multi-links.active .multi-menu {
+  display: block;
+}
