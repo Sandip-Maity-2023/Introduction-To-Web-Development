@@ -1,21 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 
-/**
- * Props:
- *  - onClose: function to close window
- *  - newsData: (optional) array of articles; used if user toggles "Include headlines"
- */
 const ChatbotWindow = ({ onClose, newsData = [] }) => {
-  // System instruction is stored separately for Gemini
-  const SYSTEM_INSTRUCTION = "You are a helpful news assistant. Keep answers short and friendly.";
+  const SYSTEM_INSTRUCTION =
+    "You are a helpful news assistant. Keep answers short and friendly.";
+
+  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyAjYUiYmmLwdvwwQOpDTCsJ4Yrh8sztkX4";
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [listening, setListening] = useState(false);
   const [includeHeadlines, setIncludeHeadlines] = useState(false);
-  
+
   const recognitionRef = useRef(null);
   const messagesEndRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
@@ -25,13 +21,15 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  // Init SpeechRecognition (if available)
+  // Setup voice recognition
   useEffect(() => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       recognitionRef.current = null;
       return;
     }
+
     const rec = new SpeechRecognition();
     rec.lang = "en-US";
     rec.interimResults = false;
@@ -42,30 +40,17 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
       setInput((prev) => (prev ? prev + " " + text : text));
     };
 
-    rec.onend = () => {
-      setListening(false);
-    };
-
-    rec.onerror = (e) => {
-      console.error("SpeechRecognition error", e);
-      setListening(false);
-    };
-
+    rec.onend = () => setListening(false);
     recognitionRef.current = rec;
   }, []);
 
   const startListening = () => {
     if (!recognitionRef.current) {
-      alert("Speech recognition not supported in this browser.");
+      alert("Speech recognition not supported.");
       return;
     }
-    try {
-      recognitionRef.current.start();
-      setListening(true);
-    } catch (e) {
-      console.error(e);
-      setListening(false);
-    }
+    recognitionRef.current.start();
+    setListening(true);
   };
 
   const stopListening = () => {
@@ -74,57 +59,58 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
   };
 
   const speakText = (text) => {
-    if (!("speechSynthesis" in window)) {
-      return;
-    }
-    synthRef.current.cancel();
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "en-US";
-    utter.rate = 1;
+    synthRef.current.cancel();
     synthRef.current.speak(utter);
   };
 
+  // ======================
+  // GOOGLE GEMINI FRONTEND CALL
+  // ======================
   const callGemini = async (userText) => {
   setLoading(true);
 
   try {
-    // Build conversation history for Ollama
-    const currentHistory = [
-      ...messages,
-      { role: "user", text: userText }
-    ];
+    let fullPrompt = SYSTEM_INSTRUCTION + "\n\n";
 
-    // Add headlines context to user message
-    let finalUserText = userText;
-
-    if (includeHeadlines && Array.isArray(newsData) && newsData.length > 0) {
+    if (includeHeadlines && newsData.length > 0) {
       const top = newsData
         .slice(0, 5)
         .map((a, i) => `${i + 1}. ${a.title}`)
         .join("\n");
 
-      finalUserText = `${userText}\n\nRecent headlines:\n${top}`;
+      fullPrompt += "Recent Headlines:\n" + top + "\n\n";
     }
 
-    const ollamaMessages = currentHistory.map((m) => ({
-      role: m.role,
-      content:
-        m.role === "user" && m.text === userText ? finalUserText : m.text,
-    }));
+    fullPrompt += "Conversation:\n";
+    messages.forEach((m) => {
+      fullPrompt += `${m.role === "user" ? "User" : "Assistant"}: ${m.text}\n`;
+    });
 
-    // Call LOCAL Ollama API
-    const response = await axios.post(
-      "http://localhost:11434/api/chat",
+    fullPrompt += `User: ${userText}\nAssistant: `;
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
       {
-        model: "llama3.1", // Change model if you installed a different one
-        messages: ollamaMessages
-      },
-      { headers: { "Content-Type": "application/json" } }
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: fullPrompt }],
+            },
+          ],
+        }),
+      }
     );
 
+    const data = await response.json();
+
     const aiText =
-      response.data?.message?.content ||
-      "Sorry, I couldn't generate a reply.";
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "Sorry, I couldn't generate a reply (API returned empty).";
 
     setMessages((prev) => [
       ...prev,
@@ -133,33 +119,25 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
     ]);
 
     speakText(aiText);
-  } catch (error) {
-    console.error("Ollama API error:", error);
-    const err = "Sorry, local AI service failed.";
+  } catch (err) {
+    console.error("Gemini Error:", err);
+    const errMsg = "Gemini request failed (check API key or domain restrictions).";
     setMessages((prev) => [
       ...prev,
       { role: "user", text: userText },
-      { role: "assistant", text: err },
+      { role: "assistant", text: errMsg },
     ]);
-    speakText(err);
+    speakText(errMsg);
   } finally {
     setLoading(false);
   }
 };
 
 
-
-
-
-  
-
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed) return;
-    
-    // Clear input immediately
     setInput("");
-    
     await callGemini(trimmed);
   };
 
@@ -184,40 +162,59 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
         width: "360px",
         maxWidth: "92vw",
         height: "520px",
-        background: "#ffffff",
+        background: "#fff",
         borderRadius: "12px",
         boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
         padding: "12px",
         zIndex: 9999,
         display: "flex",
         flexDirection: "column",
-        fontFamily: "sans-serif",
       }}
     >
       {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-        <div style={{ fontWeight: 700 }}>AI Chatbot</div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 8,
+          fontWeight: "bold",
+        }}
+      >
+        AI Chatbot
         <div style={{ display: "flex", gap: 8 }}>
-          <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, cursor: "pointer" }}>
+          <label style={{ fontSize: 12 }}>
             <input
               type="checkbox"
               checked={includeHeadlines}
               onChange={(e) => setIncludeHeadlines(e.target.checked)}
-            />
+            />{" "}
             Headlines
           </label>
+
           <button
             onClick={clearConversation}
-            style={{ background: "#f2f2f2", border: "none", padding: "6px 8px", borderRadius: 8, cursor: "pointer", fontSize: 12 }}
+            style={{
+              background: "#eee",
+              border: "none",
+              padding: "6px 8px",
+              borderRadius: 8,
+              cursor: "pointer",
+            }}
           >
             Clear
           </button>
+
           <button
             onClick={() => {
               synthRef.current.cancel();
               onClose();
             }}
-            style={{ background: "transparent", border: "none", cursor: "pointer", fontSize: 18 }}
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              fontSize: 18,
+            }}
           >
             ✖
           </button>
@@ -229,60 +226,61 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
         style={{
           flex: 1,
           overflowY: "auto",
-          padding: "8px",
-          background: "#f9f9f9",
+          background: "#f8f8f8",
+          padding: 8,
           borderRadius: 8,
           marginBottom: 8,
         }}
       >
         {messages.length === 0 && (
-            <div style={{textAlign: "center", color: "#888", marginTop: "50%", transform: "translateY(-50%)", fontSize: "0.9rem"}}>
-                How can I help you today?
-            </div>
+          <div style={{ textAlign: "center", color: "#888", marginTop: "40%" }}>
+            How can I help you today?
+          </div>
         )}
+
         {messages.map((m, i) => (
-          <div key={i} style={{ marginBottom: 8, display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start" }}>
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              justifyContent: m.role === "user" ? "flex-end" : "flex-start",
+              marginBottom: 8,
+            }}
+          >
             <div
               style={{
-                maxWidth: "80%",
+                maxWidth: "75%",
                 background: m.role === "user" ? "#0b74ff" : "#e5e5e5",
-                color: m.role === "user" ? "white" : "#222",
+                color: m.role === "user" ? "#fff" : "#222",
                 padding: "8px 12px",
                 borderRadius: 12,
-                lineHeight: 1.4,
-                fontSize: "14px",
-                whiteSpace: "pre-wrap"
+                fontSize: 14,
+                whiteSpace: "pre-wrap",
               }}
             >
               {m.text}
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} />
+
+        <div ref={messagesEndRef}></div>
       </div>
 
-      {/* Input controls */}
-      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+      {/* Input */}
+      <div style={{ display: "flex", gap: 8 }}>
         <button
           onMouseDown={startListening}
           onMouseUp={stopListening}
-          onTouchStart={startListening}
-          onTouchEnd={stopListening}
-          title="Hold to speak"
           style={{
             width: 40,
             height: 40,
             borderRadius: "50%",
-            background: listening ? "#ff4d4f" : "#f0f0f0",
             border: "none",
-            fontSize: "1.2rem",
-            cursor: "pointer",
-            display: "flex", 
-            alignItems: "center", 
-            justifyContent: "center"
+            background: listening ? "#ff4d4f" : "#eee",
+            fontSize: 18,
           }}
         >
-          {listening ? "🛑" : "🎙️"}
+          🎙️
         </button>
 
         <textarea
@@ -297,8 +295,6 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
             borderRadius: 20,
             border: "1px solid #ddd",
             resize: "none",
-            outline: "none",
-            fontFamily: "inherit"
           }}
         />
 
@@ -306,14 +302,14 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
           onClick={handleSend}
           disabled={loading}
           style={{
-            height: 40,
             padding: "0 16px",
+            height: 40,
             borderRadius: 20,
             background: "#0b74ff",
-            color: "white",
+            color: "#fff",
             border: "none",
+            fontWeight: "bold",
             cursor: "pointer",
-            fontWeight: "bold"
           }}
         >
           {loading ? "..." : "Send"}

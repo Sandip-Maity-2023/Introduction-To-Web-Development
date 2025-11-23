@@ -5,6 +5,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "firebase": "^12.6.0",
     "flask": "^0.2.10",
     "googleapis": "^166.0.0",
     "lodash": "^4.17.21",

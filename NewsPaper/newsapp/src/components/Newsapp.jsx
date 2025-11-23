@@ -7,6 +7,14 @@ import axios from "axios";
 import WeatherWidget from "./Weather";
 
 const Newsapp = () => {
+
+const Newsapp = ({ user }) => {
+  const [userEmail, setUserEmail] = useState(user?.email || "");
+
+  // now your email sending function will use logged in email
+};
+
+
   const [search, setSearch] = useState("india");
   const [newsData, setNewsData] = useState([]);
   const [error, setError] = useState(null);
