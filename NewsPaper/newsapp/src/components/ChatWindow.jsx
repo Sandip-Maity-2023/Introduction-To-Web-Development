@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 const ChatbotWindow = ({ onClose, newsData = [] }) => {
   const SYSTEM_INSTRUCTION =
-    "You are a helpful news assistant. Keep answers short and friendly.";
+    "You are a helpful news assistant. Keep answers short and friendly.Speak like female and her voice";
 
-  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyAjYUiYmmLwdvwwQOpDTCsJ4Yrh8sztkX4";
+  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyAagV_D-6lChf28mcgu3lxGnij2j55T89o";
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");

@@ -11,6 +11,8 @@ import {
   faVideo,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
+import Profile from "./Profile";
+
 
 const Sidebar = ({ onToggle }) => {
   const [open, setOpen] = useState(false);
@@ -28,6 +30,7 @@ const Sidebar = ({ onToggle }) => {
     { label: "Downloads", icon: faClock, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
     { label: "Saved", icon: faDownload, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
     { label: "Liked", icon: faThumbsUp, link: "https://drive.google.com/drive/folders/17wygf1b3YJI3w4NnX88N_pgNHqYPrW88?usp=drive_link" },
+    
   ];
 
   return (
@@ -86,6 +89,7 @@ const Sidebar = ({ onToggle }) => {
         }}
       >
         <h3 style={{ marginBottom: "15px", color: "#333" }}>Menu</h3>
+      
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {menuItems.map((item) => (
             <li
@@ -111,7 +115,9 @@ const Sidebar = ({ onToggle }) => {
                 <span>{item.label}</span>
               </a>
             </li>
+            
           ))}
+          <Profile/>
         </ul>
       </div>
 
@@ -130,6 +136,7 @@ const Sidebar = ({ onToggle }) => {
           }}
         ></div>
       )}
+
     </>
   );
 };

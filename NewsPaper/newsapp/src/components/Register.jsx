@@ -1,5 +1,6 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+// Register.jsx
 import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./Firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
@@ -9,89 +10,135 @@ function Register() {
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const [age, setAge] = useState("");
+  const [preferences, setPreferences] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      const user = auth.currentUser;
-      console.log(user);
-      if (user) {
-        await setDoc(doc(db, "Users", user.uid), {
-          email: user.email,
-          firstName: fname,
-          lastName: lname,
-          photo:""
-        });
-      }
-      console.log("User Registered Successfully!!");
-      toast.success("User Registered Successfully!!", {
-        position: "top-center",
+      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCred.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        email,
+        firstName: fname,
+        lastName: lname,
+        age,
+        preferences: preferences.length
+          ? preferences.split(",").map((p) => p.trim())
+          : [],
+        photo: "",
+        createdAt: new Date(),
       });
-    } catch (error) {
-      console.log(error.message);
-      toast.error(error.message, {
-        position: "bottom-center",
-      });
+
+      toast.success("Registration Successful!");
+      window.location.href = "/login";
+
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      <h3>Sign Up</h3>
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2>Create Account</h2>
 
-      <div className="mb-3">
-        <label>First name</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="First name"
-          onChange={(e) => setFname(e.target.value)}
-          required
-        />
-      </div>
+        <form onSubmit={handleRegister}>
+          <input
+            className="form-control"
+            placeholder="First Name"
+            onChange={(e) => setFname(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-      <div className="mb-3">
-        <label>Last name</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Last name"
-          onChange={(e) => setLname(e.target.value)}
-        />
-      </div>
+          <input
+            className="form-control"
+            placeholder="Last Name"
+            onChange={(e) => setLname(e.target.value)}
+            style={styles.input}
+          />
 
-      <div className="mb-3">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-      <div className="mb-3">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-      <div className="d-grid">
-        <button type="submit" className="btn btn-primary">
-          Sign Up
-        </button>
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Age"
+            onChange={(e) => setAge(e.target.value)}
+            style={styles.input}
+          />
+
+          <input
+            className="form-control"
+            placeholder="Preferences (comma separated)"
+            onChange={(e) => setPreferences(e.target.value)}
+            style={styles.input}
+          />
+
+          <button type="submit" style={styles.btn}>Register</button>
+        </form>
+
+        <p style={{ marginTop: "10px" }}>
+          Already have an account? <a href="/login">Login</a>
+        </p>
       </div>
-      <p className="forgot-password text-right">
-        Already registered <a href="/login">Login</a>
-      </p>
-    </form>
+    </div>
   );
 }
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#f0f2f5"
+  },
+  card: {
+    width: "360px",
+    background: "white",
+    padding: "30px",
+    borderRadius: "20px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+    textAlign: "center",
+  },
+  input: {
+    marginTop: "10px",
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    width: "100%"
+  },
+  btn: {
+    marginTop: "15px",
+    width: "100%",
+    padding: "12px",
+    borderRadius: "10px",
+    background: "#0d6efd",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+    fontWeight: "bold",
+  }
+};
+
 export default Register;

@@ -5,7 +5,7 @@ import ChatbotButton from "./ChatbotButton";
 import ChatbotWindow from "./ChatWindow";
 import axios from "axios";
 import WeatherWidget from "./Weather";
-
+import Anchor from "./Anchor";
 const Newsapp = () => {
 
 const Newsapp = ({ user }) => {
@@ -247,6 +247,11 @@ const Newsapp = ({ user }) => {
         ))}
       </div>
 
+
+
+
+
+{/* <Anchor newsText={newsData.map(n => n.title).join(". ")} /> */}
 
 {/* weather */}
 <WeatherWidget city="Delhi" />
