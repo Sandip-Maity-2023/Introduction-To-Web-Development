@@ -8,7 +8,7 @@ import Anchor from "./Anchor";
 const Newsapp = () => {
 
 const Newsapp = ({ user }) => {
-  const [userEmail, setUserEmail] = useState(user?.email || "");
+  //const [userEmail, setUserEmail] = useState(user?.email || "");
 
   // now your email sending function will use logged in email
 };

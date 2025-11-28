@@ -5,19 +5,19 @@ const WeatherWidget = ({ city = "Delhi" }) => {
   const [expanded, setExpanded] = useState(false);
   const [weather, setWeather] = useState(null);
 
-  const API_KEY = "4a0a8b6dcd3c1d2f75c640424fb81516";
+  const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
   const fetchWeather = async () => {
     try {
       const weatherRes = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
       const weatherData = await weatherRes.json();
 
       const { lat, lon } = weatherData.coord;
 
       const aqiRes = await fetch(
-        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`
       );
       const aqiData = await aqiRes.json();
 

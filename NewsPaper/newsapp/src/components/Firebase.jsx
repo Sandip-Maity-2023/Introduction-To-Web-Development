@@ -4,7 +4,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtZmiiNXkkyx13bNXBlY6tgAJRduITskM",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "login-auth-b193f.firebaseapp.com",
   projectId: "login-auth-b193f",
   storageBucket: "login-auth-b193f.firebasestorage.app",
