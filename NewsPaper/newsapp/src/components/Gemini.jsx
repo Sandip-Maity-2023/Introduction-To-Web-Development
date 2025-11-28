@@ -1,6 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyAagV_D-6lChf28mcgu3lxGnij2j55T89o");
+const genAI = new GoogleGenerativeAI({
+  apiKey: import.meta.env.VITE_GEMINI_API_KEY,
+});
 
 export async function getSpokenNewsSummary(text) {
   try {
@@ -13,8 +15,10 @@ export async function getSpokenNewsSummary(text) {
     `;
 
     const result = await model.generateContent(prompt);
-    const response = await result.response.text();
+    //const response = await result.response.text();
+    const response = result?.response?.text?.();
     return response;
+    
   } catch (err) {
     console.error("Gemini error:", err);
     return "Sorry, I could not process the news.";

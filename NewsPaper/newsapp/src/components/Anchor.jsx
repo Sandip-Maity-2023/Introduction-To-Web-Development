@@ -1,133 +1,15 @@
-// import React, { useState, useEffect, useRef } from "react";
-// import happy from "../assets/happy.png";
-// import sad from "../assets/sad.png";
-// import neutral from "../assets/Gemini.png";
-// import mouthOpen from "../assets/Gemini.png";
-
-// import { getSpokenNewsSummary } from "./Gemini";  // >>> Gemini API import
-
-// export default function Anchor({ newsText = "" }) {
-//   const [mood, setMood] = useState("neutral");
-//   const [isSpeaking, setIsSpeaking] = useState(false);
-//   const [aiText, setAiText] = useState(""); // Gemini generated text
-
-//   const synthRef = useRef(window.speechSynthesis);
-
-//   // -------------------------
-//   // Simple Sentiment Detector
-//   // -------------------------
-//   const analyzeSentiment = (text) => {
-//     if (!text) return "neutral";
-
-//     const happyWords = ["good", "great", "win", "happy", "success", "growth"];
-//     const sadWords = ["bad", "crime", "died", "loss", "fail", "attack"];
-
-//     const lower = text.toLowerCase();
-//     let score = 0;
-
-//     happyWords.forEach((w) => lower.includes(w) && (score += 1));
-//     sadWords.forEach((w) => lower.includes(w) && (score -= 1));
-
-//     if (score > 0) return "happy";
-//     if (score < 0) return "sad";
-//     return "neutral";
-//   };
-
-//   // -------------------------
-//   // SPEAK USING GEMINI RESULT
-//   // -------------------------
-//   const speak = async () => {
-//     if (!newsText) return;
-
-//     // 1️⃣ Get spoken-style script from Gemini API
-//     const generated = await getSpokenNewsSummary(newsText);
-//     setAiText(generated);
-
-//     // 2️⃣ Detect mood from Gemini output
-//     const moodDetected = analyzeSentiment(generated);
-//     setMood(moodDetected);
-
-//     // 3️⃣ Speak the generated text
-//     const utter = new SpeechSynthesisUtterance(generated);
-//     utter.lang = "en-US";
-
-//     utter.onstart = () => setIsSpeaking(true);
-//     utter.onend = () => setIsSpeaking(false);
-
-//     synthRef.current.cancel();
-//     synthRef.current.speak(utter);
-//   };
-
-//   // -------------------------
-//   // LIP-SYNC
-//   // -------------------------
-//   useEffect(() => {
-//     let interval;
-//     if (isSpeaking) {
-//       interval = setInterval(() => {
-//         setIsSpeaking((prev) => !prev); // flip mouth open/close
-//       }, 180);
-//     }
-//     return () => clearInterval(interval);
-//   }, [isSpeaking]);
-
-//   // -------------------------
-//   // Select correct face image
-//   // -------------------------
-//   const getImage = () => {
-//     if (isSpeaking) return mouthOpen;
-//     if (mood === "happy") return happy;
-//     if (mood === "sad") return sad;
-//     return neutral;
-//   };
-
-//   return (
-//     <div style={{ textAlign: "center", marginTop: 20 }}>
-//       <img
-//         src={getImage()}
-//         width="220"
-//         style={{
-//           borderRadius: "12px",
-//           transition: "0.2s",
-//         }}
-//       />
-
-//       <button
-//         onClick={speak}
-//         style={{
-//           marginTop: 10,
-//           padding: "10px 18px",
-//           background: "#0b74ff",
-//           color: "white",
-//           border: "none",
-//           borderRadius: 10,
-//           cursor: "pointer",
-//           fontWeight: "600",
-//         }}
-//       >
-//         🎤 Speak News
-//       </button>
-
-//       {/* Show what Gemini generated */}
-//       {aiText && (
-//         <p style={{ marginTop: 10, fontSize: "14px", opacity: 0.7 }}>
-//           {aiText}
-//         </p>
-//       )}
-//     </div>
-//   );
-// }
 
 
 import React, { useState, useEffect, useRef } from "react";
 import happy from "../assets/happy.png";
 import sad from "../assets/sad.png";
-import neutral from "../assets/Gemini.png";
-import mouthOpen from "../assets/Gemini.png";
+import neutral from "../assets/neutral.png";
+import mouthOpen from "../assets/open.png";
 
 import { getSpokenNewsSummary } from "./Gemini";
 
 export default function Anchor({ newsText = "" }) {
+
   const [mood, setMood] = useState("neutral");
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [aiText, setAiText] = useState("");
@@ -169,9 +51,10 @@ export default function Anchor({ newsText = "" }) {
       setMood(analyzeSentiment(generated));
 
       // 4️⃣ Create utterance
-      const utter = new SpeechSynthesisUtterance(generated);
-      utter.lang = "en-US";
+      const utter = new SpeechSynthesisUtterance(generated); //interface of the web speech API represents a speech request
+      utter.lang = "en-US";   // Set language
 
+      //handle speech events
       utter.onstart = () => {
         console.log("Speech started");
         setIsSpeaking(true);
@@ -216,8 +99,8 @@ export default function Anchor({ newsText = "" }) {
     <div style={{ textAlign: "center", marginTop: 20 }}>
       <img
         src={getImage()}
-        width="220"
-        style={{ borderRadius: "12px", transition: "0.2s" }}
+        width="650"
+        style={{ borderRadius: "12px", transition: "0.1s" }}
       />
 
       <button
@@ -230,14 +113,14 @@ export default function Anchor({ newsText = "" }) {
           border: "none",
           borderRadius: 10,
           cursor: "pointer",
-          fontWeight: "600",
+          fontWeight: "500",
         }}
       >
         🎤 Speak News
       </button>
 
       {aiText && (
-        <p style={{ marginTop: 10, fontSize: "14px", opacity: 0.7 }}>{aiText}</p>
+        <p style={{ marginTop: 10, fontSize: "16px", opacity: 0.7 }}>{aiText}</p>
       )}
     </div>
   );

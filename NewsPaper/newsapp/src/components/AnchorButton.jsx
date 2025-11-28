@@ -1,5 +1,6 @@
 import React from "react";
 
+// Anchor Button Component
 const AnchorButton = ({ onClick }) => {
   return (
     <button
@@ -22,7 +23,7 @@ const AnchorButton = ({ onClick }) => {
         alignItems: "center",
       }}
       onMouseEnter={(e) => {
-        e.target.style.transform = "scale(1.1)";
+        e.target.style.transform = "scale(1.2)";
         e.target.style.boxShadow = "0px 12px 25px rgba(0,0,0,0.35)";
       }}
       onMouseLeave={(e) => {

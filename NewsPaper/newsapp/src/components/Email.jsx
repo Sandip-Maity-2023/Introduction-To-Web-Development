@@ -26,7 +26,7 @@ const NewsletterSender = () => {
 
     try {
       const promises = categories.map((cat) =>
-        axios.get(`https://newsapi.org/v2/top-headlines?category=${cat}&apiKey=e733550425fb40bd8be6237f7a60c919`)
+        axios.get(`https://newsapi.org/v2/top-headlines?category=${cat}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}&pageSize=5&country=us`)
       );
 
       const results = await Promise.all(promises);

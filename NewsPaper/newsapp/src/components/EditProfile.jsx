@@ -161,7 +161,7 @@ const styles = {
   },
   backBtn: {
     width: "100%",
-    padding: "12px",
+    padding: "15px",
     marginTop: "10px",
     background: "#6c757d",
     color: "white",

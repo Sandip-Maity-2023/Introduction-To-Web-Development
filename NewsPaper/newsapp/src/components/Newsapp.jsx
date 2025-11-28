@@ -3,7 +3,6 @@ import Card from "./Card";
 import Sidebar from "./Side";
 import ChatbotButton from "./ChatbotButton";
 import ChatbotWindow from "./ChatWindow";
-import axios from "axios";
 import WeatherWidget from "./Weather";
 import Anchor from "./Anchor";
 const Newsapp = () => {
@@ -25,24 +24,6 @@ const Newsapp = ({ user }) => {
 
   const [userEmail, setUserEmail] = useState("");
 
-  //   const sendEmailSummary = async () => {
-  //   if (!userEmail) return alert("Enter your email!");
-
-  //   const categories = JSON.parse(localStorage.getItem("emailCategories")) || [];
-  //   const sendTime = localStorage.getItem("emailTime") || "09:00";
-
-  //   try {
-  //     await axios.post("http://localhost:5000/send-news-email", {
-  //       userEmail,
-  //       categories,
-  //       sendTime,
-  //     });
-
-  //     alert("Preferences saved & test email sent!");
-  //   } catch (err) {
-  //     alert("Failed to send email.");
-  //   }
-  // };
 
   const sendNewsSummaryEmail = async () => {
     if (!userEmail) return alert("Please enter email!");
@@ -57,7 +38,7 @@ const Newsapp = ({ user }) => {
 
     for (const category of categories) {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${category}&language=en&pageSize=5&apiKey=NEWS_API_KEY`
+        `https://newsapi.org/v2/everything?q=${category}&language=en&pageSize=5&apiKey=VITE_NEWS_API_KEY`
       );
       const json = await response.json();
       allNews = [...allNews, ...json.articles];
@@ -82,13 +63,13 @@ const Newsapp = ({ user }) => {
 
   // ✅ move API key to .env for safety (e.g., VITE_NEWS_API_KEY)
   const API_KEY =
-    import.meta.env.VITE_NEWS_API_KEY || "e733550425fb40bd8be6237f7a60c919";
+    import.meta.env.VITE_NEWS_API_KEY;
 
   const getData = async (query = search) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${query}&language=en&pageSize=50&apiKey=${API_KEY}`
+        `https://newsapi.org/v2/everything?q=${query}&language=en&pageSize=50&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
       );
       const jsonData = await response.json();
 

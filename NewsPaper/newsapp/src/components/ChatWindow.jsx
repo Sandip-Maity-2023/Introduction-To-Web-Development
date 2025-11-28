@@ -4,7 +4,7 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
   const SYSTEM_INSTRUCTION =
     "You are a helpful news assistant. Keep answers short and friendly.Speak like female and her voice";
 
-  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyAagV_D-6lChf28mcgu3lxGnij2j55T89o";
+  const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -91,7 +91,7 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
     fullPrompt += `User: ${userText}\nAssistant: `;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -166,7 +166,7 @@ const ChatbotWindow = ({ onClose, newsData = [] }) => {
         borderRadius: "12px",
         boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
         padding: "12px",
-        zIndex: 9999,
+        zIndex: 10000,
         display: "flex",
         flexDirection: "column",
       }}

@@ -6,10 +6,10 @@ const ChatbotButton = ({ onClick }) => {
       onClick={onClick}
       style={{
         position: "fixed",
-        right: "25px",
-        bottom: "150px",
+        right: "19px",
+        bottom: "120px",
         padding: "15px 20px",
-        borderRadius: "50px",
+        borderRadius: "30px",
         backgroundColor: "#007bff",
         color: "white",
         border: "none",
@@ -22,6 +22,7 @@ const ChatbotButton = ({ onClick }) => {
       💬 Chat with AI
     </button>
   );
+  
 };
 
 export default ChatbotButton;

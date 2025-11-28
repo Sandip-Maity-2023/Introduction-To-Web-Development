@@ -4,9 +4,9 @@ import React from "react";
 const analyzeBias = (title = "", description = "") => {
   const text = (title + " " + description).toLowerCase();
 
-  const positiveWords = ["growth", "success", "win", "improved"];
-  const negativeWords = ["crime", "terror", "attack", "crisis", "fail"];
-  const politicalWords = ["election", "government", "policy", "minister"];
+  const positiveWords = ["growth", "success", "win", "improved","victory","benefit","progress","achievement","opportunity","innovation","advancement","breakthrough","stability","peace","health","education"];
+  const negativeWords = ["crime", "terror", "attack", "crisis", "fail","loss", "decline","scandal","corruption","disaster","fraud","poverty","unemployment","pollution","war","inflation","recession"];
+  const politicalWords = ["election", "government", "policy", "minister", "senate","congress","parliament","diplomacy","legislation","campaign","vote","democracy","autocracy","bureaucracy","federal","state","municipal"];
 
   let score = 0;
 
@@ -22,6 +22,7 @@ const analyzeBias = (title = "", description = "") => {
 };
 
 const Card = ({ data = [] }) => {
+
   const readMore = (url) => {
     if (url) window.open(url, "_blank", "noopener,noreferrer");
   };
@@ -63,7 +64,7 @@ const Card = ({ data = [] }) => {
               flexDirection: "column",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.02)";
+              e.currentTarget.style.transform = "scale(1.05)";
               e.currentTarget.style.boxShadow =
                 "0 6px 16px rgba(0,0,0,0.15)";
             }}
@@ -122,6 +123,7 @@ const Card = ({ data = [] }) => {
                   : "No description available."}
               </p>
 
+
               {/* ⭐ NEW — NLP / BIAS SECTION */}
               <div
                 style={{
@@ -132,7 +134,7 @@ const Card = ({ data = [] }) => {
                 }}
               >
                 <strong style={{ fontSize: "0.9rem" }}>🧠 NLP Analysis</strong>
-                <p style={{ margin: "5px 0", fontSize: "0.85rem" }}>
+                <p style={{ margin: "5px 0", fontSize: "0.95rem" }}>
                   <strong>Sentiment:</strong>{" "}
                   <span
                     style={{
@@ -148,6 +150,7 @@ const Card = ({ data = [] }) => {
                     {bias.sentiment}
                   </span>
                 </p>
+                
                 <p style={{ margin: "5px 0", fontSize: "0.85rem" }}>
                   <strong>Category:</strong> {bias.category}
                 </p>
