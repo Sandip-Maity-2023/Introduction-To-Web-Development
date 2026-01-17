@@ -1,11 +1,12 @@
 import React from "react";
-import html from "../../public/html.png";
-import css from "../../public/css.jpg";
-import java from "../../public/java.png";
-import javascript from "../../public/javascript.png";
-import oracle from "../../public/oracle.png";
-import spring from "../../public/spring.png";
-import springBoot from "../../public/springBoot.jpg";
+import html from "../public/html.png";
+import css from "../public/css.jpg";
+import java from "../public/java.png";
+import javascript from "../public/javascript.png";
+import oracle from "../public/oracle.png";
+import spring from "../public/spring.png";
+import springBoot from "../public/springBoot.jpg";
+
 function Experiance() {
   const cardItem = [
     {
