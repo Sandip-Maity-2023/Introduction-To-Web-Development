@@ -1,6 +1,6 @@
 import React from 'react'
 import {Routes,Route} from 'react-router-dom'
-import SignUp from './pages/SignUp'
+import SignUp from "./pages/SignUp"
 import SignIn from './pages/SignIn'
 
 function App() {
@@ -12,4 +12,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
