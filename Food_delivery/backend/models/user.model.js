@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    fullname: {
+    fullName: {
       type: String,
       required: true,
     },
@@ -25,6 +25,16 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin", "deliveryBoy"],
       required: true,
     },
+    resetOtp:{
+      type: String,
+    },
+    isOtpVerified:{
+      type: Boolean,
+      default:false,
+    },
+    otpExpires:{
+      type: Date,
+    }
   },
   { timestamps: true },
 );

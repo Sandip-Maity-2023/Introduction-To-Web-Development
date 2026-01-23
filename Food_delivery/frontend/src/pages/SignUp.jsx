@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { FaRegMehRollingEyes } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { serverUrl } from "../App";
 
 function SignUp() {
   const primaryColor = "#ff4d2d";
@@ -10,6 +14,32 @@ function SignUp() {
   const borderColor = "#ddd";
   const [showPassword, setShowPassword] = React.useState(false);
   const [role, setRole] = useState("user");
+  const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mobile, setMobile] = useState("");
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await axios.post(
+        `${serverUrl}/api/auth/signup`,
+        {
+          fullName,
+          email,
+          password,
+          mobile,
+          role,
+        },
+        { withCredentials: true },
+      );
+      console.log(result.data);
+      //navigate("/signin");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div
@@ -43,6 +73,8 @@ function SignUp() {
             className="w-full border rounded-lg px-3 py-2 focus:outline-none"
             placeholder="Enter your Full Name"
             style={{ border: `1px solid ${borderColor}` }}
+            onChange={(e) => setFullName(e.target.value)}
+            value={fullName}
           />
         </div>
 
@@ -60,6 +92,8 @@ function SignUp() {
             className="w-full border rounded-lg px-3 py-2 focus:outline-none"
             placeholder="Enter your Email"
             style={{ border: `1px solid ${borderColor}` }}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </div>
 
@@ -77,6 +111,8 @@ function SignUp() {
             className="w-full border rounded-lg px-3 py-2 focus:outline-none"
             placeholder="Enter your Mobile Number"
             style={{ border: `1px solid ${borderColor}` }}
+            onChange={(e) => setMobile(e.target.value)}
+            value={mobile}
           />
         </div>
 
@@ -95,9 +131,11 @@ function SignUp() {
               className="w-full border rounded-lg cursor-pointer px-3 py-2 focus:outline-none"
               placeholder="Enter your password"
               style={{ border: `1px solid ${borderColor}` }}
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
             <button
-              type="bottom"
+              type="botton"
               aria-label="Toggle password visibility"
               className="absolute right-3 top-[14px] text-gray-500"
               onClick={() => {
@@ -122,7 +160,7 @@ function SignUp() {
     <option value="admin">Admin</option>
     <option value="deliveryBoy">Delivery</option>
   </select> */}
-            {["user", "Owner", "DeliveryBoy"].map((r) => (
+            {["user", "admin", "deliveryBoy"].map((r) => (
               <button
                 key={r}
                 className="flex-1 border rounded-lg px-3 py-2 text-center font-medium transition-colors cursor-pointer"
@@ -139,7 +177,29 @@ function SignUp() {
           </div>
         </div>
 
-        
+        <button
+          type="button"
+          className="w-full font-semibold py-2 rounded-lg transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64326] cursor-pointer"
+          onClick={handleSignUp}
+        >
+          Sign Up
+        </button>
+
+        <button
+          type="button"
+          className="w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 cursor-pointer border-gray-400 hover:bg-gray-100"
+        >
+          <FcGoogle size={20} />
+          <span>Sign up with Google</span>
+        </button>
+
+        <p
+          className="text-center mt-6 cursor-pointer"
+          onClick={() => navigate("/signin")}
+        >
+          Already have an account ?{" "}
+          <span className="text-[#ff4d2d] cursor-pointer">Sign In</span>
+        </p>
       </div>
     </div>
   );

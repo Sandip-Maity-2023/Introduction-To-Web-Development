@@ -5,8 +5,8 @@ import genToken from "../utils/token.js";
 export const signUp = async (req, res) => {
   try {
     const { fullName, email, password, mobile, role } = req.body;
-    const user = await User.findOne({ email });
-    if (User) {
+    let user = await User.findOne({ email });
+    if (user) {
       return res.status(400).json({ message: "User Already exist." });
     }
     if (password.length < 6) {
@@ -46,7 +46,7 @@ export const signUp = async (req, res) => {
 export const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await user.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "User does not exits." });
     }
@@ -73,8 +73,10 @@ export const signIn = async (req, res) => {
 export const signOut = async(req, res) => {
   try {
     res.clearCookie("token");
-    return res.status(500).json({ message: "log out successfully" });
+    return res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
-    return res.status(500).json(`sign out error ${err}`);
+    return res.status(200).json(`sign out error ${err}`);
   }
 };
+
+
