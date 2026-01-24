@@ -1,25 +1,23 @@
-const nodemailer = require("nodemailer");
-
+//const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   port: 587,
   secure: false, // Use true for port 465, false for port 587
   auth: {
-    user: "maddison53@ethereal.email",
-    pass: "jn7jnAPss4f63QBp6D",
+    user: process.env.EMAIL,
+    pass: process.env.PASS,
   },
 });
 
-// Send an email using async/await
-(async () => {
-  const info = await transporter.sendMail({
-    from: '"Maddison Foo Koch" <maddison53@ethereal.email>',
-    to: "bar@example.com, baz@example.com",
-    subject: "Hello ✔",
-    text: "Hello world?", // Plain-text version of the message
-    html: "<b>Hello world?</b>", // HTML version of the message
+export const sendOtpMail = async (to, otp) => {
+  await transporter.sendMail({
+    from: process.env.EMAIL, // sender address
+    to, // list of receivers
+    subject:"Reset Your Password - OTP Inside", // Subject line
+    html: `<p>Your OTP for password reset is: <b>${otp}</b>.It expires in 5 minutes.</p>`, // html body
   });
-
-  console.log("Message sent:", info.messageId);
-})();
+};
