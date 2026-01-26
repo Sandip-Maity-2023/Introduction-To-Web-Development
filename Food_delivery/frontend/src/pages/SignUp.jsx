@@ -9,6 +9,8 @@ import { serverUrl } from "../App";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase.js";
 import {ClipLoader} from "react-spinners"
+import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice.js";
 
 
 function SignUp() {
@@ -16,6 +18,8 @@ function SignUp() {
   const hoverColor = "#e04326";
   const bgColor = "#fff9f6";
   const borderColor = "#ddd";
+
+
   const [showPassword, setShowPassword] = React.useState(false);
   const [role, setRole] = useState("user");
   const navigate = useNavigate();
@@ -25,6 +29,7 @@ function SignUp() {
   const [mobile, setMobile] = useState("");
  const [err,setErr]=useState("")
 const [loading,setLoading]=useState(false)
+const dispatch=useDispatch()
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -41,7 +46,8 @@ const [loading,setLoading]=useState(false)
         },
         { withCredentials: true },
       );
-      console.log(result.data);
+      dispatch(setUserData(result.data));
+      //console.log(result.data);
       setErr("")
       setLoading(false)
       //navigate("/signin");
@@ -72,7 +78,8 @@ const [loading,setLoading]=useState(false)
         },
         { withCredentials: true },
       );
-      console.log(data);
+      //console.log(data);
+      dispatch(setUserData(data))
     } catch (err) {
       console.log(err);
     }
