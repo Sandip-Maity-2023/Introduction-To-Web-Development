@@ -79,7 +79,7 @@ const dispatch=useDispatch()
         { withCredentials: true },
       );
       //console.log(data);
-      dispatch(setUserData(data))
+      Dispatch(setUserData(data))
     } catch (err) {
       console.log(err);
     }
@@ -204,7 +204,7 @@ const dispatch=useDispatch()
     <option value="admin">Admin</option>
     <option value="deliveryBoy">Delivery</option>
   </select> */}
-            {["user", "admin", "deliveryBoy"].map((r) => (
+            {["user", "owner", "deliveryBoy"].map((r) => (
               <button
                 key={r}
                 className="flex-1 border rounded-lg px-3 py-2 text-center font-medium transition-colors cursor-pointer"

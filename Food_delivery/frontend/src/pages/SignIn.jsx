@@ -10,6 +10,8 @@ import {auth} from "../firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { ClipLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice";
+//import {useGetCurrentUserData} from "../hooks/useGetCurrentUser"
 
 
 function SignIn() {
@@ -72,7 +74,7 @@ const dispatch=useDispatch()
           { withCredentials: true },
         );
         //console.log(data);
-        useDispatch(setUserData(data))
+        dispatch(setUserData(data))
       } catch (err) {
         console.log(err);
       }
@@ -138,7 +140,7 @@ const dispatch=useDispatch()
               value={password}
             required/>
             <button
-              type="botton"
+              type="button"
               aria-label="Toggle password visibility"
               className="absolute right-3 top-[14px] text-gray-500"
               onClick={() => {
@@ -180,7 +182,7 @@ const dispatch=useDispatch()
           onClick={() => navigate("/signup")}
         >
           Want to create a new account ?{" "}
-          <span className="text-[#ff4d2d] cursor-pointer">Sign In</span>
+          <span className="text-[#ff4d2d] cursor-pointer">Sign up</span>
         </p>
       </div>
     </div>
