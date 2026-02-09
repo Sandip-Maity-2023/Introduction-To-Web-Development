@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaRegMehRollingEyes } from "react-icons/fa";
+//import { FaRegMehRollingEyes } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -30,27 +30,33 @@ const [err,setErr]=useState("")
 const [loading,setLoading]=useState(false)
 const dispatch=useDispatch()
 
-  const handleSignIn = async (e) => {
+  
+
+const handleSignIn = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    if (!email || !password) {
+      setErr("email and password are required");
+      return;
+    }
+    setLoading(true);
     try {
       const result = await axios.post(
         `${serverUrl}/api/auth/signin`,
         {
           email,
-          password
+          password,
         },
         { withCredentials: true },
       );
       //console.log(result.data);
-      dispatch(setUserData(result.data))
-      setErr("")
-      setLoading(false)
+      dispatch(setUserData(result.data));
+      setErr("");
+      setLoading(false);
       //navigate("/signin");
     } catch (error) {
       console.log(error);
-      setErr(error?.response?.data?.message)
-      setLoading(false)
+      setErr(error?.response?.data?.message || "Sign in failed");
+      setLoading(false);
     }
   };
 

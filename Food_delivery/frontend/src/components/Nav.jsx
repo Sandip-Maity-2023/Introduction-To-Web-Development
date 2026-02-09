@@ -7,9 +7,12 @@ import {RxCross2} from "react-icons/rx";
 import { serverUrl } from "../App";
 import { linkWithCredential } from "firebase/auth";
 import { setUserData } from "../redux/userSlice";
+import {FaPlus} from "react-icons/tb";
+import { TbReceipt2 } from "react-icons/tb";
 
 function Nav() {
   const { userData,city } = useSelector((state) => state.user);
+  const { myShopData } = useSelector((state) => state.owner);
   const [showInfo, setShowInfo] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const dispatch=useDispatch()
@@ -47,7 +50,16 @@ console.log(err)
               className="text-[#ff4d2d] md:hidden"
               onClick={() => (setShowSearch = true)}
             />}
-           
+           {userData.role=='owner' ?<>{myShopData?}
+           <button className="hidden md:flex items-center gap-1 p-2 cursor-pointer rounded-full bg-[#ff4d2d]/10 text-[#ff4d2d]">
+            <FaPlus size={20}/>
+            <span>Add Food Item</span>
+           </button>
+
+           <button className="md:hidden flex items-center p-2 cursor-pointer rounded-full bg-[#ff4d2d]/10 text-[#ff4d2d]">
+            <FaPlus size={20}/>
+           </button>
+           </>}
             <div className="relative cursor-pointer">
               <FiShoppingCart size={25} className="text-[#ff4d2d]" />
               <span className="absolute right-[-9px] top-[-12px] text-[#ff4d2d]">
