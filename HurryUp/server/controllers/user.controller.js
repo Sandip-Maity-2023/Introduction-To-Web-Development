@@ -1,8 +1,6 @@
-import UserModel from "../models/user.model";
-import bcryptjs from "bcrypt";
+import UserModel from "../models/user.model.js";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { update } from "lodash";
-import { send } from "vite";
 
 export async function registerUserController(req, res) {
   try {
