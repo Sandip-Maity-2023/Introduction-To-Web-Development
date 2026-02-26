@@ -1,24 +1,12 @@
+import { Router } from "express";
+import auth from "../middleware/auth.js";
+import { AddSubCategoryController, deleteSubCategoryController, getSubCategoryController, updateSubCategoryController } from "../controllers/subCategory.controller.js";
 
-import {Router} from 'express'
-import auth from '../middleware/auth.js'
-import uploadImageController from '../controllers/uploadImage.controller.js'
-import upload from "../middleware/multer.js"
+const subCategoryRouter = Router()
 
-const uploadRouter=Router()
+subCategoryRouter.post('/create',auth,AddSubCategoryController)
+subCategoryRouter.post('/get',getSubCategoryController)
+subCategoryRouter.put('/update',auth,updateSubCategoryController)
+subCategoryRouter.delete('/delete',auth,deleteSubCategoryController)
 
-uploadRouter.post("/upload",auth,upload.single("image"),uploadImageController)
-export default uploadRouter
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default subCategoryRouter

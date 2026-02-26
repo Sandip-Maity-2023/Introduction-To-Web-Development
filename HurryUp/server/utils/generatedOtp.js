@@ -1,11 +1,4 @@
-
-const generateOtp=()=>{
-    return Math.floor(Math.random() * 900000)+100000; //10 000 to 99 9999
+const generatedOtp = ()=>{
+    return Math.floor(Math.random() * 900000) + 100000  /// 100000 to 999999
 }
-
-export default generateOtp;
-
-
-
-
-
+export default generatedOtp

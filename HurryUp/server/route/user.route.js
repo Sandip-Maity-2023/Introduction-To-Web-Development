@@ -1,41 +1,23 @@
+import { Router } from 'express'
+import { forgotPasswordController, loginController, logoutController, refreshToken, registerUserController, resetpassword, updateUserDetails, uploadAvatar, userDetails, verifyEmailController, verifyForgotPasswordOtp } from '../controllers/user.controller.js'
+import auth from '../middleware/auth.js'
+import upload from '../middleware/multer.js'
 
+const userRouter = Router()
 
-import { Router } from "express";
-import { forgotPasswordController,loginController,logoutController,registerUserController,resetPassword,updateUserDetails,uploadAvatar,loginUserDetails,verifyEmailController,verifyForgotPasswordOtp } from "../controllers/user.controller.js";
-
-import auth from "../middleware/auth.js"
-import upload from "../middleware/multer.js";
-
-const router= Router();
-
-router.post('/register',registerUserController);
-router.post('/verify-email',verifyEmailController);
-router.post('/login',loginController);
-
-router.get('/logout',auth,logoutController);  
-  
-router.put('/upload-avatar',auth,upload.single('avatar'),uploadAvatar);
-router.put('/update-user',auth,updateUserDetails);
-
-router.put('/forgot-password',forgotPasswordController);
-router.put('/verify-forgot-password-otp',verifyForgotPasswordOtp);
-router.put('/reset-password',resetPassword);
-
-router.post('/refrsh-token',refreshToken);
-
-router.get('/user-details',auth,loginUserDetails);
-
-export default router
+userRouter.post('/register',registerUserController)
+userRouter.post('/verify-email',verifyEmailController)
+userRouter.post('/login',loginController)
+userRouter.get('/logout',auth,logoutController)
+userRouter.put('/upload-avatar',auth,upload.single('avatar'),uploadAvatar)
+userRouter.put('/update-user',auth,updateUserDetails)
+userRouter.put('/forgot-password',forgotPasswordController)
+userRouter.put('/verify-forgot-password-otp',verifyForgotPasswordOtp)
+userRouter.put('/reset-password',resetpassword)
+userRouter.post('/refresh-token',refreshToken)
+userRouter.get('/user-details',auth,userDetails)
 
 
 
 
-
-
-
-
-
-
-
-
-
+export default userRouter

@@ -1,23 +1,20 @@
+import UserModel from "../models/user.model.js"
+import jwt from 'jsonwebtoken'
 
-import jwt from "jsonwebtoken";
-import UserModel from "../models/user.model";
+const genertedRefreshToken = async(userId)=>{
+    const token = await jwt.sign({ id : userId},
+        process.env.SECRET_KEY_REFRESH_TOKEN,
+        { expiresIn : '7d'}
+    )
 
-const generatedRefreshToken= async (userId)=>{
+    const updateRefreshTokenUser = await UserModel.updateOne(
+        { _id : userId},
+        {
+            refresh_token : token
+        }
+    )
 
-const token= await jwt.sign({id:userId},
-    process.env.SECRET_KEY_REFRESH_TOKEN,
-    {expiresIn:'7d'});
-
-    const updatedRefreshTokenUser= await UserModel.updateOne({_id:userId},{refreshToken:token});
-
-    return token;
+    return token
 }
 
-export default generatedRefreshToken;
-
-
-
-
-
-
-
+export default genertedRefreshToken

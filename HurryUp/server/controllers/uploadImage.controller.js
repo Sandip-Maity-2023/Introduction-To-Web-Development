@@ -1,34 +1,24 @@
+import uploadImageClodinary from "../utils/uploadImageClodinary.js"
 
-import uploadImageCloudinary from "../utils/uploadImageCloudinary.js"
-
-const uploadImageController=async(req,res)=>{
+const uploadImageController = async(request,response)=>{
     try {
-        const file=req.file;
+        const file = request.file
 
-        const uploadImage=await uploadImageCloudinary(file)
+        const uploadImage = await uploadImageClodinary(file)
 
-        return res.json({
-            message:"Upload done",
-
-            data:uploadImage,
-            success:true,
-            error:false
-
+        return response.json({
+            message : "Upload done",
+            data : uploadImage,
+            success : true,
+            error : false
         })
     } catch (error) {
-        return res.status(500).json({
-            message:error.message || error,
-            error:true,
-            success:false
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
         })
     }
 }
 
 export default uploadImageController
-
-
-
-
-
-
-
