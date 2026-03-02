@@ -71,7 +71,7 @@ const Header = () => {
                 className="hidden lg:block"
               />
               <img
-                src={logo}
+                src={HurryUp}
                 width={120}
                 height={60}
                 alt="logo"

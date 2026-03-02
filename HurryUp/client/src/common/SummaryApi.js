@@ -1,6 +1,4 @@
-import { method } from "lodash";
-
-export const baseURL = import.meta.env.VITE_API_URL;
+export const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8880";
 
 const SummaryApi = {
   register: {
@@ -24,7 +22,7 @@ const SummaryApi = {
     method: "put",
   },
   refreshToken: {
-    url: "api/user/refresh-token",
+    url: "/api/user/refresh-token",
     method: "post",
   },
   userDetails: {
@@ -60,7 +58,7 @@ const SummaryApi = {
     method: "put",
   },
   deleteCategory: {
-    url: "/api/category/create",
+    url: "/api/category/delete",
     method: "delete",
   },
   createSubCategory: {
@@ -83,32 +81,32 @@ const SummaryApi = {
     url: "/api/product/create",
     method: "post",
   },
-  getProduct:{
-    url:'/api/product/get',
-    method:'post'
+  getProduct: {
+    url: "/api/product/get",
+    method: "post",
   },
   getProductByCategory: {
     url: "/api/product/get-product-by-category",
     method: "post",
   },
   getProductByCategoryAndSubCategory: {
-    url: "/api/product/get-product-by-category-and-subcategory",
+    url: "/api/product/get-pruduct-by-category-and-subcategory",
     method: "post",
   },
   getProductDetails: {
     url: "/api/product/get-product-details",
     method: "post",
   },
-  updateProductDetails:{
-    url:'/api/product/update-product-details',
-    method:'update'
+  updateProductDetails: {
+    url: "/api/product/update-product-details",
+    method: "put",
   },
   deleteProduct: {
     url: "/api/product/delete-product",
     method: "delete",
   },
   searchProduct: {
-    url: "/api/cart/search-product",
+    url: "/api/product/search-product",
     method: "post",
   },
   addTocart: {

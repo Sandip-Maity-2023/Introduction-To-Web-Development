@@ -83,6 +83,7 @@ const Login = () => {
                             value={data.email}
                             onChange={handleChange}
                             placeholder='Enter your email'
+                            autoComplete='email'
                         />
                     </div>
                     <div className='grid gap-1'>
@@ -96,6 +97,7 @@ const Login = () => {
                                 value={data.password}
                                 onChange={handleChange}
                                 placeholder='Enter your password'
+                                autoComplete='current-password'
                             />
                             <div onClick={() => setShowPassword(preve => !preve)} className='cursor-pointer'>
                                 {
