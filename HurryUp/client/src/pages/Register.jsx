@@ -87,6 +87,7 @@ const Register = () => {
                             value={data.name}
                             onChange={handleChange}
                             placeholder='Enter your name'
+                            autoComplete='name'
                         />
                     </div>
                     <div className='grid gap-1'>
@@ -99,6 +100,7 @@ const Register = () => {
                             value={data.email}
                             onChange={handleChange}
                             placeholder='Enter your email'
+                            autoComplete='email'
                         />
                     </div>
                     <div className='grid gap-1'>
@@ -112,6 +114,7 @@ const Register = () => {
                                 value={data.password}
                                 onChange={handleChange}
                                 placeholder='Enter your password'
+                                autoComplete='new-password'
                             />
                             <div onClick={() => setShowPassword(preve => !preve)} className='cursor-pointer'>
                                 {
@@ -135,6 +138,7 @@ const Register = () => {
                                 value={data.confirmPassword}
                                 onChange={handleChange}
                                 placeholder='Enter your confirm password'
+                                autoComplete='new-password'
                             />
                             <div onClick={() => setShowConfirmPassword(preve => !preve)} className='cursor-pointer'>
                                 {
