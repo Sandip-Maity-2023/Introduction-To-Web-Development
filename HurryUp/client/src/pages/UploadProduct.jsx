@@ -143,9 +143,9 @@ const UploadProduct = () => {
 
   }
 
-  // useEffect(()=>{
-  //   successAlert("Upload successfully")
-  // },[])
+  useEffect(()=>{
+    successAlert("Upload successfully")
+  },[])
   return (
     <section className=''>
         <div className='p-2   bg-white shadow-md flex items-center justify-between'>

@@ -34,6 +34,7 @@ const Register = () => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault()
+        console.log("Submit clicked, data:", data)
 
         if(data.password !== data.confirmPassword){
             toast.error(
@@ -43,6 +44,7 @@ const Register = () => {
         }
 
         try {
+            console.log("Calling Axios with data:", data)
             const response = await Axios({
                 ...SummaryApi.register,
                 data : data

@@ -50,7 +50,7 @@ const GlobalProvider = ({children}) => {
           const { data : responseData } = response
 
           if(responseData.success){
-              // toast.success(responseData.message)
+               toast.success(responseData.message)
               fetchCartItem()
               return responseData
           }
@@ -113,7 +113,7 @@ const GlobalProvider = ({children}) => {
           dispatch(handleAddAddress(responseData.data))
         }
       } catch (error) {
-          // AxiosToastError(error)
+           AxiosToastError(error)
       }
     }
     const fetchOrder = async()=>{
