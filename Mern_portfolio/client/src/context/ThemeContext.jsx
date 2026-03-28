@@ -1,15 +1,3 @@
-// ThemeContext.jsx
-import React, { createContext, useContext, useState } from "react";
+import { createContext } from "react";
 
-const ThemeContext = createContext();
-
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
-  return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
-//hooks
-export const useTheme = () => useContext(ThemeContext);
+export const ThemeContext = createContext();

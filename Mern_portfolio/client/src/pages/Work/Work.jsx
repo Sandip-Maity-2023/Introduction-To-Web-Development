@@ -4,8 +4,8 @@ import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 import { SiReact, SiNodedotjs, SiMongodb } from "react-icons/si";
+import "react-vertical-timeline-component/style.min.css";
 import "./Work.css";
 
 const experiences = [
@@ -37,7 +37,7 @@ const experiences = [
     company: "CodeCrafters Inc.",
     period: "2018 - 2020",
     description:
-      "Assisted in building web interfaces, optimized components for performance, and contributed to the company’s internal tool ecosystem.",
+      "Assisted in building web interfaces, optimized components for performance, and contributed to the company's internal tool ecosystem.",
     tech: ["HTML", "CSS", "JavaScript"],
     icon: <SiMongodb />,
     link: "#",
@@ -84,17 +84,15 @@ const WorkExp = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h3 className="vertical-timeline-element-title">
-                  {exp.role}
-                </h3>
+                <h3 className="vertical-timeline-element-title">{exp.role}</h3>
                 <h4 className="vertical-timeline-element-subtitle">
                   {exp.company}
                 </h4>
                 <p>{exp.description}</p>
                 <div className="tech-tags">
-                  {exp.tech.map((t, i) => (
-                    <span key={i} className="tag">
-                      {t}
+                  {exp.tech.map((tech, index) => (
+                    <span key={index} className="tag">
+                      {tech}
                     </span>
                   ))}
                 </div>

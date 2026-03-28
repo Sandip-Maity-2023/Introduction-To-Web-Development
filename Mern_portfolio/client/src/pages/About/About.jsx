@@ -1,47 +1,43 @@
 import React from "react";
-import "./About.css";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import {
   FaDownload,
   FaLaptopCode,
   FaGlobeAsia,
   FaUserGraduate,
 } from "react-icons/fa";
-import Resume from "../../assets/docs/ats.pdf"
+import Resume from "../../assets/docs/ats.pdf";
+import ProfileImage from "../../assets/docs/q.jpg";
+import "./About.css";
+
 const About = () => {
   const skills = [
     { icon: <FaLaptopCode />, label: "Full Stack Development" },
-    { icon: <FaUserGraduate />, label: "Machine Learing" },
-    { icon: <FaGlobeAsia />, label: "React-Native Development" },
+    { icon: <FaUserGraduate />, label: "Machine Learning" },
+    { icon: <FaGlobeAsia />, label: "React Native Development" },
   ];
 
   return (
     <section className="about" id="about">
-      {/* top heading */}
       <motion.h1
         className="about-title"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        id="about"
       >
         About Me
       </motion.h1>
 
-     {/* left side */}
       <div className="about-container">
         <motion.img
           className="about-left"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-        src=".\src\assets\docs\q.jpg"
-        alt="about-profile-pic"
+          src={ProfileImage}
+          alt="about-profile-pic"
         />
 
-        
-
-        {/* Right Content */}
         <motion.div
           className="about-right"
           initial={{ opacity: 0, x: 50 }}
@@ -49,35 +45,37 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <p className="about-text">
-            I’m a <b>pre-final year student pursuing Computer Science & Engineering (AIML) at Adamas University,Kolkata.<br/><br/>I completed my 10th (WBBSE) in 2021 with 92% and my 12th (WBCHSE) in 2023 with 77% from Panchrol High School, Purba Medinipur, West Bengal.</b>{" "}
-            <b>Machine Learning</b>, <b>Deep Learning</b>, and I focus on
-            building impactful applications.<b></b>.
+            I'm a <b>pre-final year student pursuing Computer Science & Engineering (AIML) at Adamas University, Kolkata.</b>
             <br />
             <br />
-            <b>I want to become a Software Developer Enginner</b>
+            I completed my 10th (WBBSE) in 2021 with 92% and my 12th (WBCHSE) in 2023 with 77% from Panchrol High School, Purba Medinipur, West Bengal.
             <br />
-            <b>My hobbies include flower Gardening,Travelling & Exploring,watching movies</b>
             <br />
-            My approach blends innovation and purpose — I love turning ideas
-            into scalable, user-friendly technology.
+            I enjoy working in <b>Machine Learning</b>, <b>Deep Learning</b>, and full-stack development, with a focus on building impactful applications.
+            <br />
+            <br />
+            <b>I want to become a Software Development Engineer.</b>
+            <br />
+            <b>My hobbies include flower gardening, travelling, exploring, and watching movies.</b>
+            <br />
+            <br />
+            My approach blends innovation and purpose. I love turning ideas into scalable, user-friendly technology.
           </p>
 
-          {/* skills section */}
           <div className="skills">
-            {skills.map((skills, index) => (
+            {skills.map((skill, index) => (
               <motion.div
                 className="skill-card"
                 key={index}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 200 }}
               >
-                <div className="skill-icon">{skills.icon}</div>
-                <p>{skills.label}</p>
+                <div className="skill-icon">{skill.icon}</div>
+                <p>{skill.label}</p>
               </motion.div>
             ))}
           </div>
 
-          {/* Download */}
           <motion.a
             href={Resume}
             download="ats.pdf"

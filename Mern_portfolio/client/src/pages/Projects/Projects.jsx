@@ -54,7 +54,7 @@ const Projects = () => {
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
-        ⚙️ Explore some of my featured projects built using cutting-edge
+        Explore some of my featured projects built using cutting-edge
         technologies across web, mobile, and backend.
       </motion.p>
 

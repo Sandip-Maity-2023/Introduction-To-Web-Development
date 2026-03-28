@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./components/Layout/Layout";
 import MobileNav from "./components/MobileNav/MobileNav";
-import { useTheme } from "./context/ThemeContext";
+import { useTheme } from "./context/useTheme";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import Education from "./pages/Eduaction/Education";
@@ -38,7 +38,7 @@ function App() {
             animate={{ scale: [1, 1.2, 1, 1.2, 1], rotate: [0, 3, -3, 3, 0] }}
             transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
           >
-            Made with Love Portfolio &copy; 2025
+            Made with Love Portfolio &copy; 2026
           </motion.h4>
         </div>
       </div>

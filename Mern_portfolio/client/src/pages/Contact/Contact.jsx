@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import "./Contact.css";
 import { motion } from "framer-motion";
-import { BsFacebook, BsGithub, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsLinkedin } from "react-icons/bs";
 
 const Contact = () => {
   const [name, setname] = useState("");

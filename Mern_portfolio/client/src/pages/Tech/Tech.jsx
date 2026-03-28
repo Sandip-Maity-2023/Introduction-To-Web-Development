@@ -6,8 +6,10 @@ import "./Tech.css";
 const Techstack = () => {
   const [category, setCategory] = useState("All");
 
-  // extract categories dynamically
-  const categories = ["All", ...new Set(TechstackList.map((item) => item.category || "Other"))];
+  const categories = [
+    "All",
+    ...new Set(TechstackList.map((item) => item.category || "Other")),
+  ];
 
   const filteredList =
     category === "All"
@@ -16,21 +18,20 @@ const Techstack = () => {
 
   return (
     <section id="techstack" className="techstack-container">
-      {/* Title */}
       <motion.div
         className="text-center mb-10"
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="techstack-title">🧠 Technologies Stack</h2>
+        <h2 className="techstack-title">Technologies Stack</h2>
         <hr className="techstack-divider" />
         <div className="techstack-subtitle">
-          Including programming languages, frameworks, databases, frontend & backend tools, and APIs
+          Including programming languages, frameworks, databases, frontend and
+          backend tools, and APIs
         </div>
       </motion.div>
 
-      {/* Filter buttons */}
       <div className="techstack-filters">
         {categories.map((cat) => (
           <button
@@ -43,14 +44,17 @@ const Techstack = () => {
         ))}
       </div>
 
-      {/* Tech Cards Grid */}
       <motion.div
         className="techstack-grid"
         initial="hidden"
         whileInView="visible"
         variants={{
           hidden: { opacity: 0, y: 40 },
-          visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.08 } },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { staggerChildren: 0.08 },
+          },
         }}
       >
         {filteredList.map((tech) => (
@@ -66,7 +70,9 @@ const Techstack = () => {
             </div>
             <h5 className="tech-name">{tech.name}</h5>
             {tech.experience && (
-              <div className="tech-experience">{tech.experience} yrs experience</div>
+              <div className="tech-experience">
+                {tech.experience} yrs experience
+              </div>
             )}
           </motion.div>
         ))}
