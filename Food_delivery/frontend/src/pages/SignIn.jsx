@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { serverUrl } from "../App";
-import {auth} from "../firebase"
+import {auth, hasValidFirebaseConfig} from "../firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { ClipLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
@@ -16,7 +16,6 @@ import { setUserData } from "../redux/userSlice";
 
 function SignIn() {
   const primaryColor = "#ff4d2d";
-  const hoverColor = "#e04326";
   const bgColor = "#fff9f6";
   const borderColor = "#ddd";
   const [showPassword, setShowPassword] = React.useState(false);
@@ -64,13 +63,13 @@ const handleSignIn = async (e) => {
 
 
   const handleGoogleAuth = async () => {
-      // if (!mobile) {
-      //   return alert("mobile no is required");
-      // }
+      if (!hasValidFirebaseConfig) {
+        setErr("Google sign-in is not configured yet. Add a valid VITE_FIREBASE_APIKEY in frontend/.env");
+        return;
+      }
+
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      //console.log(result)
-      //const user=result.user;
       try {
         const { data } = await axios.post(
           `${serverUrl}/api/auth/google-auth`,
@@ -79,10 +78,10 @@ const handleSignIn = async (e) => {
           },
           { withCredentials: true },
         );
-        //console.log(data);
+        setErr("");
         dispatch(setUserData(data))
       } catch (err) {
-        console.log(err);
+        setErr(err?.response?.data?.message || "Google sign in failed");
       }
     };
 
@@ -175,7 +174,8 @@ const handleSignIn = async (e) => {
         <button
           type="button"
           className="w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 cursor-pointer border-gray-400 hover:bg-gray-100"
-        onClick={handleGoogleAuth}>
+        onClick={handleGoogleAuth}
+        disabled={!hasValidFirebaseConfig}>
           <FcGoogle size={20} />
           <span>Sign In with Google</span>
         </button>

@@ -35,6 +35,19 @@ if(!shop){
   }
 };
 
+export const getMyShop = async (req, res) => {
+  try {
+    const shop = await Shop.findOne({ owner: req.userId }).populate("owner items");
+    if (!shop) {
+      return res.status(404).json({ message: "shop not found" });
+    }
+
+    return res.status(200).json(shop);
+  } catch (err) {
+    return res.status(500).json({ message: `get my shop error ${err}` });
+  }
+};
+
 // export const editShop = async (req, res) => {
 //   try {
 //     const { name, city, state, address } = req.body;

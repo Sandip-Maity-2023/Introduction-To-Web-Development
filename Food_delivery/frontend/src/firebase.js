@@ -7,8 +7,10 @@ import {getAuth} from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseApiKey = import.meta.env.VITE_FIREBASE_APIKEY;
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  apiKey: firebaseApiKey,
   authDomain: "food-delivery-754f6.firebaseapp.com",
   projectId: "food-delivery-754f6",
   storageBucket: "food-delivery-754f6.firebasestorage.app",
@@ -16,6 +18,9 @@ const firebaseConfig = {
   appId: "1:471172979993:web:fe7b4f53d06e06f940b988",
   measurementId: "G-EN1G5NYB0J"
 };
+
+export const hasValidFirebaseConfig =
+  Boolean(firebaseApiKey) && !firebaseApiKey.includes("XXX");
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

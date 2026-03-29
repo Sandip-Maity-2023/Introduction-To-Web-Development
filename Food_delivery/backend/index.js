@@ -28,7 +28,16 @@ app.use("/api/user",userRouter)
 app.use("/api/shop",shopRouter)
 app.use("/api/item",itemRouter)
 
-app.listen(PORT,()=>{
-    connectDb();
-    console.log(`Server is running at ${PORT}`);
-});
+const startServer = async () => {
+    try {
+        await connectDb();
+        app.listen(PORT,()=>{
+            console.log(`Server is running at ${PORT}`);
+        });
+    } catch (err) {
+        console.error(`Failed to start server: ${err?.message || err}`);
+        process.exit(1);
+    }
+};
+
+startServer();

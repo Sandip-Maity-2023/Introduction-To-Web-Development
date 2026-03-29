@@ -1,6 +1,5 @@
 import express from "express"
 import {signUp,signIn,signOut,resetPassword,sendOtp,verifyOtp,googleAuth} from "../controllers/auth.controllers.js"
-import { auth } from "googleapis/build/src/apis/abusiveexperiencereport/index.js";
 
 const authRouter=express.Router();
 

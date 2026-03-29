@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaRegMehRollingEyes } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -7,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { serverUrl } from "../App";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../firebase.js";
+import { auth, hasValidFirebaseConfig } from "../firebase.js";
 import {ClipLoader} from "react-spinners"
 import { useDispatch } from "react-redux";
 import { setUserData } from "../redux/userSlice.js";
@@ -15,7 +14,6 @@ import { setUserData } from "../redux/userSlice.js";
 
 function SignUp() {
   const primaryColor = "#ff4d2d";
-  const hoverColor = "#e04326";
   const bgColor = "#fff9f6";
   const borderColor = "#ddd";
 
@@ -33,6 +31,11 @@ const dispatch=useDispatch()
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    if (!fullName || !email || !password || !mobile || !role) {
+      setErr("all fields are required");
+      return;
+    }
+
     setLoading(true)
     try {
       const result = await axios.post(
@@ -47,20 +50,21 @@ const dispatch=useDispatch()
         { withCredentials: true },
       );
       dispatch(setUserData(result.data));
-      //console.log(result.data);
       setErr("")
       setLoading(false)
-      //navigate("/signin");
     } catch (error) {
-      console.log("STATUS:", error.response?.status);
-      console.log("MESSAGE:", error.response?.data);
-      console.log(error?.response?.data?.message);
+      setErr(error?.response?.data?.message || error?.response?.data || "Sign up failed");
+      setLoading(false);
     }setLoading(false)
   };
 
   const handleGoogleAuth = async () => {
+    if (!hasValidFirebaseConfig) {
+      setErr("Google sign-in is not configured yet. Add a valid VITE_FIREBASE_APIKEY in frontend/.env");
+      return;
+    }
+
     if (!mobile) {
-      //return alert("mobile no is required");
       return setErr("mobile no is required")
     }
     const provider = new GoogleAuthProvider();
@@ -78,10 +82,10 @@ const dispatch=useDispatch()
         },
         { withCredentials: true },
       );
-      //console.log(data);
-      Dispatch(setUserData(data))
+      setErr("");
+      dispatch(setUserData(data))
     } catch (err) {
-      console.log(err);
+      setErr(err?.response?.data?.message || "Google sign up failed");
     }
   };
 
@@ -236,6 +240,7 @@ const dispatch=useDispatch()
           type="button"
           className="w-full mt-4 flex items-center justify-center gap-2 border rounded-lg px-4 py-2 transition duration-200 cursor-pointer border-gray-400 hover:bg-gray-100"
           onClick={handleGoogleAuth}
+          disabled={!hasValidFirebaseConfig}
         >
           <FcGoogle size={20} />
           <span>Sign up with Google</span>

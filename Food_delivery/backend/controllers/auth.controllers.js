@@ -8,6 +8,10 @@ import { sendOtpMail } from "../utils/mail.js";
 export const signUp = async (req, res) => {
   try {
     const { fullName, email, password, mobile, role } = req.body;
+    if (!fullName || !email || !password || !mobile || !role) {
+      return res.status(400).json({ message: "all fields are required" });
+    }
+
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ message: "User Already exist." });
@@ -34,15 +38,25 @@ export const signUp = async (req, res) => {
     });
 
     const token = await genToken(user._id);
+    if (!token) {
+      return res.status(500).json({ message: "token generation failed" });
+    }
+
     res.cookie("token", token, {
       secure: false,
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
     });
-    return res.status(201).json(user);
+    return res.status(201).json({
+      _id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      mobile: user.mobile,
+      role: user.role,
+    });
   } catch (err) {
-    return res.status(500).json(`sign up error ${err}`);
+    return res.status(500).json({ message: `sign up error ${err?.message || err}` });
   }
 };
 
@@ -65,6 +79,10 @@ export const signIn = async (req, res) => {
     }
 
     const token = await genToken(user._id);
+    if (!token) {
+      return res.status(500).json({ message: "token generation failed" });
+    }
+
     res.cookie("token", token, {
       secure: false,
       sameSite: "strict",
@@ -72,9 +90,15 @@ export const signIn = async (req, res) => {
       httpOnly: true,
     });
 
-    return res.status(200).json(user);
+    return res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      mobile: user.mobile,
+      role: user.role,
+    });
   } catch (err) {
-    return res.status(500).json(`sign In error ${err}`);
+    return res.status(500).json({ message: `sign In error ${err?.message || err}` });
   }
 };
 
@@ -146,22 +170,40 @@ export const resetPassword = async (req, res) => {
 export const googleAuth=async(req,res)=>{
   try{
 const {fullName,email,mobile,role}=req.body
+if (!email) {
+  return res.status(400).json({ message: "email is required" });
+}
+
 let user=await User.findOne({email})
 if(!user){
+  if (!fullName || !mobile || !role) {
+    return res.status(400).json({ message: "fullName, mobile and role are required for first-time Google sign in" });
+  }
+
   user=await User.create({
     fullName,email,mobile,role
   })
 }
     const token = await genToken(user._id);
+    if (!token) {
+      return res.status(500).json({ message: "token generation failed" });
+    }
+
     res.cookie("token", token, {
       secure: false,
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
     });
-return res.status(200).json(user)
+return res.status(200).json({
+  _id: user._id,
+  fullName: user.fullName,
+  email: user.email,
+  mobile: user.mobile,
+  role: user.role,
+})
   }catch(err){
-return res.status(500).json(`googleAuth error ${err}`)
+return res.status(500).json({ message: `googleAuth error ${err?.message || err}` })
   }
 }
 

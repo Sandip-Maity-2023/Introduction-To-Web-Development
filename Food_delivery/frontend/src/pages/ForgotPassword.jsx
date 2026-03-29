@@ -20,7 +20,7 @@ const [loading,setLoading]=useState(false)
   const handleSendOtp=async()=>{
     setLoading(true)
     try{
-      const result=await axios.post(`${serverUrl}/api/auth/send-otp`,{email},
+      await axios.post(`${serverUrl}/api/auth/send-otp`,{email},
       {withCredentials:true});
       setErr("")
       setStep(2);
@@ -35,7 +35,7 @@ const [loading,setLoading]=useState(false)
 
   const handleVerifyOtp=async(e)=>{
     e.preventDefault();
-    setLoading(True)
+    setLoading(true)
     try{
       const result=await axios.post(`${serverUrl}/api/auth/verify-otp`,{email,otp},
       {withCredentials:true});
