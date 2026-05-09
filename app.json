@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "plugins": [
+      "expo-sharing"
+    ],
+    "android": {
+      "permissions": [
+        "ACCESS_FINE_LOCATION"
+      ]
+    }
+  }
+}

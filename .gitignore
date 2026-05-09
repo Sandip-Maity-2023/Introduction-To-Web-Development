@@ -1,0 +1,15 @@
+node_modules/
+frontend/node_modules/
+backend/venv/
+
+.expo/
+frontend/.expo/
+.vscode/
+frontend/.vscode/
+
+frontend/.git-nested-backup/
+
+__pycache__/
+*.pyc
+.env
+.env.*
