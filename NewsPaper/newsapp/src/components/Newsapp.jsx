@@ -215,8 +215,8 @@ const Newsapp = () => {
 
         {!loading && getRecommendedArticles(newsData).length > 0 && (
           <div style={{ marginBottom: "26px" }}>
-            <h3 style={{ marginBottom: "12px", color: "#0f172a" }}>
-              ⭐ Recommended for you
+            <h3 style={{ marginBottom: "12px", color: "#0f172a", fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif" }}>
+              Recommendations
             </h3>
             <Card data={getRecommendedArticles(newsData)} />
           </div>

@@ -1,6 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const rawApiBase = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
+const normalizeBase = (raw) => {
+  if (!raw) return "http://localhost:5000";
+  const trimmed = String(raw).trim();
+  // If it's like ":5000" (missing host), assume localhost
+  if (trimmed.startsWith(":")) return `http://localhost${trimmed}`;
+  // If it has protocol, return without trailing slash
+  if (/^https?:\/\//i.test(trimmed)) return trimmed.replace(/\/$/, "");
+  // If it's just a port (e.g. "5000") or host:port, add http://
+  return `http://${trimmed.replace(/\/$/, "")}`;
+};
+
+const API_BASE = normalizeBase(rawApiBase);
 
 const emptyComposer = {
   title: "",
