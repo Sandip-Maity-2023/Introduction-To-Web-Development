@@ -1,25 +1,17 @@
 import "./App.css";
 import Newsapp from "./components/Newsapp";
-import Sidebar from "./components/Side";
+import CommunityBoard from "./components/CommunityBoard";
 import Footer from "./components/Footer";
-import Email from "./components/Email";
-import WeatherWidget from "./components/Weather";
 import { signOut } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Anchor from "./components/Anchor";
-import AnchorButton from "./components/AnchorButton";
 import Login from "./components/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import { auth } from "./components/Firebase";
-//import Profile from "./components/Profile";
 function App() {
   const [user, setUser] = useState(null);
-  const [showAnchor, setShowAnchor] = useState(false);
-
-  const sampleNews =
-    "Breaking news: Technology stocks rise sharply as market shows strong recovery.";
+  const [activeView, setActiveView] = useState("news");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -38,58 +30,82 @@ function App() {
 
   return (
     <>
-      {/* --- Floating Logout Button --- */}
-      <div style={{ textAlign: "right", padding: "10px" }}>
+      <div
+        style={{
+          position: "fixed",
+          top: "20px",
+          right: "20px",
+          zIndex: 2000,
+        }}
+      >
         <button
           onClick={handleLogout}
           style={{
-            position: "fixed",
-            right: "20px",
-            top: "20px",
-            background: "#ff4d4d",
+            background: "linear-gradient(135deg, #ef4444, #dc2626)",
             border: "none",
-            padding: "10px 20px",
-            borderRadius: "8px",
+            padding: "12px 18px",
+            borderRadius: "999px",
             color: "white",
             cursor: "pointer",
-            zIndex: 2000,
-            fontWeight: "bold",
+            fontWeight: 800,
+            boxShadow: "0 12px 24px rgba(220, 38, 38, 0.24)",
           }}
         >
           Logout
         </button>
       </div>
 
-      {/* --- MAIN NEWS APP --- */}
-      <Newsapp user={user} />
-
-      {/* --- FLOATING ANCHOR BUTTON --- */}
-      <AnchorButton onClick={() => setShowAnchor(!showAnchor)} />
-
-      {/* --- FLOATING ANCHOR WINDOW --- */}
-      {showAnchor && (
+      <div
+        style={{
+          maxWidth: "1180px",
+          margin: "0 auto",
+          padding: "20px 20px 0",
+        }}
+      >
         <div
           style={{
-            position: "fixed",
-            right: "110px",
-            bottom: "210px",
-            zIndex: 9999,
-            background: "white",
-            padding: "10px",
-            borderRadius: "12px",
-            boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
+            display: "inline-flex",
+            gap: "10px",
+            margin: "50px 10px 10px 20px",
+            padding: "8px",
+            borderRadius: "999px",
+            background: "rgba(15, 23, 42, 0.9)",
+            boxShadow: "0 16px 34px rgba(15, 23, 42, 0.18)",
           }}
         >
-          <Anchor newsText={user} />
+          <button
+            onClick={() => setActiveView("news")}
+            style={{
+              border: "none",
+              background: activeView === "news" ? "#fff" : "transparent",
+              color: activeView === "news" ? "#0f172a" : "#e2e8f0",
+              padding: "12px 18px",
+              borderRadius: "999px",
+              fontWeight: 800,
+              cursor: "pointer",
+            }}
+          >
+            News Feed
+          </button>
+          <button
+            onClick={() => setActiveView("community")}
+            style={{
+              border: "none",
+              background: activeView === "community" ? "#fff" : "transparent",
+              color: activeView === "community" ? "#0f172a" : "#e2e8f0",
+              padding: "12px 18px",
+              borderRadius: "999px",
+              fontWeight: 800,
+              cursor: "pointer",
+            }}
+          >
+            Community
+          </button>
         </div>
-      )}
+      </div>
 
-      {/* --- WEATHER WIDGET FLOATING LIKE BEFORE --- */}
-      <WeatherWidget city="Kolkata" />
+      {activeView === "news" ? <Newsapp user={user} /> : <CommunityBoard user={user} />}
 
-      {/* --- SIDEBAR + FOOTER --- */}
-      <Sidebar />
-      <Email />
       <Footer />
 
       <ToastContainer />
