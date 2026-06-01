@@ -16,7 +16,7 @@ app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ limit: "100mb", extended: true }));
 
 const PORT = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://12sandip125_db_user:laHjglLie5LmKFq4@cluster12.u5i9wus.mongodb.net/?appName=Cluster12";
+const MONGODB_URI = process.env.MONGODB_URI || "";
 const MONGODB_DB = process.env.MONGODB_DB || "News_feed";
 
 const transporter = nodemailer.createTransport({
@@ -69,7 +69,7 @@ const getCollection = async () => {
       postsCollection = db.collection("posts");
       await postsCollection.createIndex({ createdAt: -1 });
       await postsCollection.createIndex({ authorId: 1 });
-      console.log("✅ Connected to MongoDB");
+      console.log(`✅ Connected to MongoDB database "${MONGODB_DB}"`);
     } catch (err) {
       mongoConnected = false;
       console.warn("⚠️ MongoDB connection failed:", err.message);
@@ -98,12 +98,16 @@ const savePost = async (post) => {
   const collection = await getCollection();
 
   if (!collection) {
-    memoryPosts.unshift(post);
-    return post;
+    const memoryPost = { ...post, _id: post._id || randomUUID() };
+    memoryPosts.unshift(memoryPost);
+    return memoryPost;
   }
 
-  const result = await collection.insertOne(post);
-  return { ...post, _id: result.insertedId };
+  // Let MongoDB create the unique _id (ObjectId) for real persistence.
+  const document = { ...post };
+  delete document._id;
+  const result = await collection.insertOne(document);
+  return { ...document, _id: result.insertedId };
 };
 
 const findPostById = async (id) => {
@@ -260,9 +264,12 @@ app.post("/api/posts", async (req, res) => {
       return res.status(400).json({ error: "Add text, image, or video before posting." });
     }
 
+    if (MONGODB_URI && !mongoConnected) {
+      await getCollection();
+    }
+
     const createdAt = new Date().toISOString();
     const post = {
-      _id: randomUUID(),
       title: trimmedTitle,
       content: trimmedContent,
       mediaType,
@@ -379,7 +386,13 @@ cron.schedule("* * * * *", () => {
 });
 
 app.get("/health", (_req, res) => {
-  res.json({ status: "ok", mongoUriPresent: Boolean(MONGODB_URI), mongoConnected });
+  res.json({
+    status: "ok",
+    port: PORT,
+    mongoUriPresent: Boolean(MONGODB_URI),
+    mongoConnected,
+    mongoDatabase: MONGODB_DB,
+  });
 });
 
 app.listen(PORT, async () => {

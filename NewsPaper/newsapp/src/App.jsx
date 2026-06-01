@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import { auth } from "./components/Firebase";
+
 function App() {
   const [user, setUser] = useState(null);
   const [activeView, setActiveView] = useState("news");
