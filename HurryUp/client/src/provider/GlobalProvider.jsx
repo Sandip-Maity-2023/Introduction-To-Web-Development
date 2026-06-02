@@ -97,11 +97,6 @@ const GlobalProvider = ({children}) => {
       setNotDiscountTotalPrice(notDiscountPrice)
   },[cartItem])
 
-    const handleLogoutOut = ()=>{
-        localStorage.clear()
-        dispatch(handleAddItemCart([]))
-    }
-
     const fetchAddress = async()=>{
       try {
         const response = await Axios({
@@ -133,7 +128,6 @@ const GlobalProvider = ({children}) => {
 
     useEffect(()=>{
       fetchCartItem()
-      handleLogoutOut()
       fetchAddress()
       fetchOrder()
     },[user])
