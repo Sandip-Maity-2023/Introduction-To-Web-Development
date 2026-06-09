@@ -67,10 +67,13 @@
   background-color: #2d1ce2;
   /* border-radius: 50%; */
 }
-
+.container{
+  width: 100%;
+  transition: all 0.3s ease;
+}
 .container.shifted {
-  width: calc(100% - 200px); /* expanded sidebar width */
-  margin-left: 170px;
+ /* width: calc(100% - 200px);  expanded sidebar width */
+  margin-left: 180px;
 }
 
 /* mobile view */

@@ -1,8 +1,8 @@
 .techstack-container{
 padding: 100px 20px;
-margin-left: 100px;
-background: #f8f9fa;
-color: #1e1e2c;
+margin-left: 0;
+background: #050113;
+color: #0a0914;
 min-height: 100vh;
 }
 .techstack-title{
@@ -43,7 +43,7 @@ color: #138781;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
-
+    width: 150px;
 }
 
 .techstack-filter-btn:hover,.techstack-filter-btn.active{

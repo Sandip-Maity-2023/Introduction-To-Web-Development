@@ -1,112 +1,35 @@
-// import React from "react";
-// //import { MdSchool } from "react-icons/md";
-// import {
-//   VerticalTimeline,
-//   VerticalTimelineElement,
-// } from "react-vertical-timeline-component";
-// import { motion } from "framer-motion";
-// import "react-vertical-timeline-component/style.min.css";
-// import "./Education.css";
-
-// const educationData =[
-//   {
-//     title: "Bachelor of Technology (B.TECH)",
-//     subtitle: "ADAMAS UNIVERSITY, IN",
-//     date: "2023 - 2027",
-//     details:[
-//       "Computer Science & Engineering (AI & ML)",
-//       "Data Structures & Algorithms",
-//       "Computer Fundamentals",
-//       "System Design",
-//       "Web Development",
-//       "Emerging Technologies",
-//     ],
-//   },
-// ];
-
-// const Education = () => {
-//   return (
-//     <section className="education-section" id="education">
-//       <motion.h2
-//         className="text-4xl font-bold text-center text-teal-500 uppercase mb-2"
-//         initial={{ opacity: 0, y: -30 }}
-//         whileInView={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.5 }}
-//       >
-//         Education Details
-//       </motion.h2>
-
-//       <motion.hr
-//         className="mx-auto border-t-4 border-teal-500 w-56 mb-10"
-//         initial={{ scaleX: 0 }}
-//         whileInView={{ scaleX: 1 }}
-//         transition={{ duration: 0.6 }}
-//       />
-
-//       <VerticalTimeline>
-//         {educationData.map((edu, index) => (
-//           <VerticalTimelineElement
-//             key={index}
-//             className="vertical-timeline-element--education"
-//             contentStyle={{
-//               background: "rgba(255,255,255,0.1)",
-//               backdropFilter: "blur(12px)",
-//               color: "white",
-//               boxShadow: "0 4px 30px rgba(0,0,0,0.3)",
-//             }}
-//             contentArrowStyle={{ borderRight: "7px solid rgba(255,255,255,0.3)" }}
-//             date={edu.date}
-//             iconStyle={{
-//               background: "linear-gradient(135deg, #00bfa6 0%, #0077ff 100%)",
-//               color: "#fff",
-//             }}
-//             // icon={<MdSchool />}
-//           >
-//             <h3 className="vertical-timeline-element-title font-semibold text-teal-400 text-lg">
-//               {edu.title}
-//             </h3>
-//             <h4 className="vertical-timeline-element-subtitle text-gray-200 mb-2">
-//               {edu.subtitle}
-//             </h4>
-//             <div className="text-gray-400 text-sm">
-//               Pursuing CourseWork in advanced <h6>Computer Science & Engineering(AI ML)</h6> Data Structure & Algorithm,Computer Fundamentals,System Design,Web Development,
-//               and emerging technologies.
-//             </div>
-//           </VerticalTimelineElement>
-//         ))}
-//       </VerticalTimeline>
-//     </section>
-//   );
-// };
-
-// export default Education;
-
-
-
-
-
 import React from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
+import { FaGraduationCap } from "react-icons/fa";
 import "react-vertical-timeline-component/style.min.css";
 import "./Education.css";
 
 const educationData = [
   {
-    title: "Bachelor of Technology (B.TECH)",
-    subtitle: "ADAMAS UNIVERSITY, IN",
-    date: "2023 - 2027",
-    details: [
-      "Computer Science & Engineering (AI & ML)",
-      "Data Structures & Algorithms",
-      "Computer Fundamentals",
-      "System Design",
-      "Web Development",
-      "Emerging Technologies",
-    ],
+    title: "Bachelor of Technology (B.Tech)",
+    subtitle: "Adamas University, Kolkata",
+    course: "Computer Science & Engineering (AI & ML)",
+    duration: "2023 - 2027",
+    passingYear: "Expected 2027",
+    cgpa: "8.5 / 10",
+  },
+  {
+    title: "Higher Secondary Education",
+    subtitle: "Panchrol High School (H.S)",
+    duration: "2022 - 2023",
+    passingYear: "2023",
+    marks: "77%",
+  },
+  {
+    title: "Secondary Education (Class X)",
+    subtitle: "Panchrol High School (H.S)",
+    duration: "2020 - 2021",
+    passingYear: "2021",
+    marks: "92%",
   },
 ];
 
@@ -114,12 +37,12 @@ const Education = () => {
   return (
     <section className="education-section" id="education">
       <motion.h2
-        className="text-4xl font-bold text-center text-teal-500 uppercase mb-2"
+        className="text-3xl font-bold text-center text-teal-500 uppercase mb-2"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Education Details
+        Education
       </motion.h2>
 
       <motion.hr
@@ -134,6 +57,13 @@ const Education = () => {
           {educationData.map((edu, index) => (
             <VerticalTimelineElement
               key={index}
+              date={edu.duration}
+              icon={<FaGraduationCap />}
+              iconStyle={{
+                background:
+                  "linear-gradient(135deg, #00bfa6 0%, #0077ff 100%)",
+                color: "#fff",
+              }}
               contentStyle={{
                 background: "rgba(255,255,255,0.12)",
                 backdropFilter: "blur(10px)",
@@ -144,21 +74,52 @@ const Education = () => {
               contentArrowStyle={{
                 borderRight: "7px solid rgba(255,255,255,0.25)",
               }}
-              date={edu.date}
-              iconStyle={{
-                background:
-                  "linear-gradient(135deg, #00bfa6 0%, #0077ff 100%)",
-                color: "#fff",
-              }}
             >
               <h3 className="timeline-title">{edu.title}</h3>
+
               <h4 className="timeline-subtitle">{edu.subtitle}</h4>
 
-              <ul className="edu-list">
-                {edu.details.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+              {edu.course && (
+                <p className="course-name">{edu.course}</p>
+              )}
+
+              <div className="education-meta">
+                <p style={{ color: "#083e8a" }}>
+                  <strong>Duration:</strong> {edu.duration}
+                </p>
+
+                {edu.passingYear && (
+                  <p style={{ color: "#083e8a" }}>
+                    <strong>Passing Year:</strong> {edu.passingYear}
+                  </p>
+                )}
+
+                {edu.cgpa && (
+                  <p style={{ color: "#083e8a" }}>
+                    <strong>CGPA:</strong> {edu.cgpa}
+                  </p>
+                )}
+
+                {edu.marks && (
+                  <p style={{ color: "#083e8a" }}>
+                    <strong>Marks:</strong> {edu.marks}
+                  </p>
+                )}
+              </div>
+
+              {edu.subjects && edu.subjects.length > 0 && (
+                <>
+                  <h5 className="subject-heading">
+                    Relevant Coursework
+                  </h5>
+
+                  <ul className="edu-list">
+                    {edu.subjects.map((subject, i) => (
+                      <li key={i}>{subject}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </VerticalTimelineElement>
           ))}
         </VerticalTimeline>

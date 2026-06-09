@@ -140,7 +140,7 @@ const Contact = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <button className="button" onClick={handleSubmit} style={{padding:"7px",borderRadius:"10px",backgroundColor:"blue"}}>
+                  <button className="button" onClick={handleSubmit} style={{}}>
                     SEND MESSAGE
                   </button>
                 </motion.div>

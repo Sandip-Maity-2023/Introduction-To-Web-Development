@@ -1,6 +1,7 @@
 .project {
-  margin-left: 100px;
+  margin-left: 0;
   padding: 40px 20px;
+  background-color:#1b1b28;
 }
 
 .section-title {
@@ -35,7 +36,7 @@
 }
 
 .project-card {
-  background: #fff;
+  background: #c0e5f0;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   overflow: hidden;
