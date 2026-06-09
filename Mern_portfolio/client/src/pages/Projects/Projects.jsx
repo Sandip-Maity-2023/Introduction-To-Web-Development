@@ -6,29 +6,29 @@ import "./Projects.css";
 const projects = [
   {
     id: 1,
-    title: "Techinfoyt Shopping Website",
-    type: "Full Stack",
-    tech: ["Node", "Express", "React", "MongoDB"],
+    title: "Research Mind",
+    type: "Multi-Agent AI Research Assistant",
+    tech: ["LangChain", "RAG", "AstraDB", "Streamlit"],
     image:
       "https://unctad.org/sites/default/files/2021-03/2021-03-15_eCommerceCOVID19report-1-1220x675px.jpg",
-    github: "https://github.com/techinfo-youtube/ecommerce-app-2023",
+    github: "https://github.com/Sandip-Maity-2023/Advanced_Development/tree/main/multiAgent",
     live: "#",
   },
   {
     id: 2,
-    title: "Techinfoyt Coding App",
-    type: "Mobile App",
-    tech: ["React Native", "iOS / Android"],
+    title: "NewsSphere",
+    type: "Cross-Platform News Aggregator",
+    tech: ["React", "MongoDB", "Node.js", "Express"],
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR356D-1YtSagN4-_ZdjZ5H9o6PKUO4h12dvw&usqp=CAU",
-    github: "https://github.com/techinfo-youtube/ecommerce-app-2023",
+    github: "https://github.com/Sandip-Maity-2023/Introduction-To-Web-Development/tree/main/NewsPaper",
     live: "#",
   },
   {
     id: 3,
-    title: "Techinfoyt Job Portal",
-    type: "Backend",
-    tech: ["Node", "Express", "NoSQL"],
+    title: "AI-Based Cataract Detection System",
+    type: "Mobile app for cataract detection",
+    tech: ["React Native", "TypeScript", "Firebase","PyTorch"],
     image:
       "https://www.nextwebi.com/assets/img/img-source/mobile-top-banner-28.png",
     github: "#",

@@ -108,7 +108,7 @@ const Home = () => {
               href={Resume}
               target="_blank"
               rel="noreferrer"
-              download="ats.pdf"
+              download="Sandip82.pdf"
             >
               Download CV
               <FaFileDownload
@@ -126,7 +126,7 @@ const Home = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <a
-            href="https://www.linkedin.com/in/sanath-s-2b4b00199/"
+            href="https://www.linkedin.com/in/sandip-maity-243537292"
             target="_blank"
             rel="noreferrer"
           >
@@ -134,7 +134,7 @@ const Home = () => {
           </a>
 
           <a
-            href="https://github.com"
+            href="https://github.com/Sandip-Maity-2023"
             target="_blank"
             rel="noreferrer"
           >
@@ -142,7 +142,7 @@ const Home = () => {
           </a>
 
           <a
-            href="https://leetcode.com"
+            href="https://leetcode.com/Sandip-Maity-2023/"
             target="_blank"
             rel="noreferrer"
           >
@@ -150,7 +150,7 @@ const Home = () => {
           </a>
 
           <a
-            href="https://www.geeksforgeeks.org"
+            href="hhttps://www.geeksforgeeks.org/user/4sandipmaity2023/"
             target="_blank"
             rel="noreferrer"
           >

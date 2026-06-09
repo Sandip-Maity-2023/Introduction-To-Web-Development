@@ -131,7 +131,7 @@ const Footer = () => {
         }}
       >
         <p>
-          ❤️ Designed & Developed by <strong>Your Name</strong>
+          ❤️ Designed & Developed by <strong>Sandip Maity</strong>
         </p>
 
         <p>

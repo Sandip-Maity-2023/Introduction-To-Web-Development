@@ -24,14 +24,14 @@ export const TechstackList = [
     name: "HTML",
     icon: BsFiletypeHtml,
     category: "Frontend",
-    experience: 3,
+    experience: 2,
   },
   {
     _id: 2,
     name: "CSS/SCSS",
     icon: BsFiletypeCss,
     category: "Frontend",
-    experience: 3,
+    experience: 2,
   },
   {
     _id: 3,
@@ -45,14 +45,14 @@ export const TechstackList = [
     name: "JavaScript",
     icon: SiJavascript,
     category: "Frontend",
-    experience: 3,
+    experience: 2,
   },
   {
     _id: 5,
     name: "TypeScript",
     icon: SiTypescript,
     category: "Frontend",
-    experience: 2,
+    experience: 1,
   },
   {
     _id: 7,
@@ -76,14 +76,14 @@ export const TechstackList = [
     name: "Adobe XD",
     icon: SiAdobexd,
     category: "Design",
-    experience: 1.5,
+    experience: 1,
   },
   {
     _id: 13,
     name: "Photoshop",
     icon: SiAdobephotoshop,
     category: "Design",
-    experience: 3,
+    experience: 2,
   },
 
   // Mobile
@@ -92,7 +92,7 @@ export const TechstackList = [
     name: "React Native",
     icon: SiReact,
     category: "Mobile",
-    experience: 1.5,
+    experience: 1,
   },
 
   // Backend
@@ -131,14 +131,14 @@ export const TechstackList = [
     name: "MySQL",
     icon: SiMysql,
     category: "Database",
-    experience: 1.5,
+    experience: 2,
   },
   {
     _id: 20,
     name: "Firebase",
     icon: SiFirebase,
     category: "Database",
-    experience: 1.5,
+    experience: 2,
   },
 
   // Tools / DevOps
@@ -147,7 +147,7 @@ export const TechstackList = [
     name: "Git / GitHub",
     icon: SiGithub,
     category: "Tools",
-    experience: 2.5,
+    experience: 3,
   },
   {
     _id: 22,

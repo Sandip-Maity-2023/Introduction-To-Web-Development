@@ -4,7 +4,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaDownload, FaLaptopCode, FaGlobeAsia, FaUserGraduate } from "react-icons/fa";
-import Resume from "../../assets/docs/ats.pdf";
+import Resume from "../../assets/docs/Sandip82.pdf";
 import ProfileImage from "../../assets/docs/q.jpg";
 import "./About.css";
 
@@ -64,7 +64,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="about-text">
-              I'm a <b>pre-final year student pursuing Computer Science & Engineering (AIML) at Adamas University, Kolkata.</b>
+              I'm a <b>Computer Science and Engineering student at Adamas University,kolkata specializing in full-stack web development and machine learning. Driven by a passion for creating impactful software, I have hands-on experience building intelligent multi-agent AI systems, engineering computer vision applications, and developing scalable university management platforms. With practical internship experience as both a Full Stack Developer and a Machine Learning Intern</b>
               <br /><br />
               I completed my 10th (WBBSE) in 2021 with 92% and my 12th (WBCHSE) in 2023 with 77% from Panchrol High School, Purba Medinipur, West Bengal.
               <br /><br />
@@ -93,7 +93,7 @@ const About = () => {
 
             <motion.a
               href={Resume}
-              download="ats.pdf"
+              download="Sandip82.pdf"
               className="download-btn"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

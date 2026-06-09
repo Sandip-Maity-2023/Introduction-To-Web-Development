@@ -11,37 +11,26 @@ import "./Work.css";
 const experiences = [
   {
     id: 1,
-    role: "Full Stack Developer",
-    company: "Techverse Innovations Pvt. Ltd.",
-    period: "2023 - Present",
+    role: "Full Stack Developer Intern",
+    company: "Cycoders' Club",
+    period: "May 2025 - July 2025",
     description:
       "Leading development of scalable full-stack web applications. Working with React, Node.js, and MongoDB to deliver end-to-end solutions.",
     tech: ["React", "Node.js", "MongoDB", "Express"],
     icon: <SiReact />,
-    link: "#",
+    link: "https://www.cycoders.in/",
   },
   {
     id: 2,
-    role: "Frontend Developer",
-    company: "XYZ Digital Solutions",
-    period: "2020 - 2022",
+    role: "Machine Learning Intern",
+    company:"Worked on building and optimizing machine learning models for various projects, including natural language processing and computer vision applications. Collaborated with cross-functional teams to integrate ML solutions into production environments.",
+    period: "2026",
     description:
       "Developed responsive, user-centric UIs using React and Material UI. Collaborated with designers and backend developers for seamless integration.",
-    tech: ["React", "Redux", "Material UI"],
+    tech: ["Python", "Flask", "fastAPI", "TensorFlow","PyTorch","scikit-learn"],
     icon: <SiNodedotjs />,
-    link: "#",
-  },
-  {
-    id: 3,
-    role: "Junior Developer",
-    company: "CodeCrafters Inc.",
-    period: "2018 - 2020",
-    description:
-      "Assisted in building web interfaces, optimized components for performance, and contributed to the company's internal tool ecosystem.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    icon: <SiMongodb />,
-    link: "#",
-  },
+    link: "https://www.codsoft.in/",
+  }
 ];
 
 const WorkExp = () => {
