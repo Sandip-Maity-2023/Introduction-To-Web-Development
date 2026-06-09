@@ -19,7 +19,7 @@ const Footer = () => {
 
         {/* Brand */}
         <div className="footer-section">
-          <h3>Your Name</h3>
+          <h3>Sandip Maity</h3>
 
           <span className="status-badge">
             🟢 Open to Opportunities
@@ -56,11 +56,11 @@ const Footer = () => {
           <h4>Contact</h4>
 
           <p>
-            <FaEnvelope /> yourmail@gmail.com
+            <FaEnvelope /> 12sandip125@gmail.com
           </p>
 
           <p>
-            <FaPhone /> +91 9876543210
+            <FaPhone /> +91 9002838296
           </p>
 
           <p>
@@ -82,7 +82,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://forms.gle/YOUR_GOOGLE_FORM_LINK"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfmMN6h9tvsrGIXTNvEfuh_CHlMvW-Bc1jXNhl7qGXnoxbf8g/viewform?usp=publish-editor"
             target="_blank"
             rel="noreferrer"
             className="footer-btn mt-2"
@@ -95,7 +95,7 @@ const Footer = () => {
       {/* Social Icons */}
       <div className="footer-social">
         <a
-          href="https://github.com/yourgithub"
+          href="https://github.com/Sandip-Maity-2023"
           target="_blank"
           rel="noreferrer"
         >
@@ -103,7 +103,7 @@ const Footer = () => {
         </a>
 
         <a
-          href="https://linkedin.com/in/yourlinkedin"
+          href="https://linkedin.com/in/sandipmaity"
           target="_blank"
           rel="noreferrer"
         >
@@ -111,7 +111,7 @@ const Footer = () => {
         </a>
 
         <a
-          href="https://instagram.com/yourinstagram"
+          href="https://instagram.com/sandipmaity"
           target="_blank"
           rel="noreferrer"
         >

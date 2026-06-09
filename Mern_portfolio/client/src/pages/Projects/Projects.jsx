@@ -10,9 +10,9 @@ const projects = [
     type: "Multi-Agent AI Research Assistant",
     tech: ["LangChain", "RAG", "AstraDB", "Streamlit"],
     image:
-      "https://unctad.org/sites/default/files/2021-03/2021-03-15_eCommerceCOVID19report-1-1220x675px.jpg",
+      "https://res.cloudinary.com/dabmttnpz/image/upload/v1781027335/i3_io5mke.jpg",
     github: "https://github.com/Sandip-Maity-2023/Advanced_Development/tree/main/multiAgent",
-    live: "#",
+    live: "https://advanceddevelopment-qez9ahhxagjtfjdh9wvjev.streamlit.app/",
   },
   {
     id: 2,
@@ -20,9 +20,9 @@ const projects = [
     type: "Cross-Platform News Aggregator",
     tech: ["React", "MongoDB", "Node.js", "Express"],
     image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR356D-1YtSagN4-_ZdjZ5H9o6PKUO4h12dvw&usqp=CAU",
+      "https://res.cloudinary.com/dabmttnpz/image/upload/v1781027336/i2_wxqd5k.jpg",
     github: "https://github.com/Sandip-Maity-2023/Introduction-To-Web-Development/tree/main/NewsPaper",
-    live: "#",
+    live: "https://glistening-torrone-4e821f.netlify.app/",
   },
   {
     id: 3,
@@ -30,9 +30,9 @@ const projects = [
     type: "Mobile app for cataract detection",
     tech: ["React Native", "TypeScript", "Firebase","PyTorch"],
     image:
-      "https://www.nextwebi.com/assets/img/img-source/mobile-top-banner-28.png",
-    github: "#",
-    live: "#",
+      "https://res.cloudinary.com/dabmttnpz/image/upload/v1781027335/i1_h99n5o.jpg",
+    github: "https://github.com/Sandip-Maity-2023/Mini_Project",
+    live: "https://mini-project-mjx11f0dg-sandip-maity-2023s-projects.vercel.app/",
   },
 ];
 
