@@ -9,12 +9,30 @@ import Techstack from "./pages/Tech/Tech";
 import Projects from "./pages/Projects/Projects";
 import WorkExp from "./pages/Work/Work";
 import ScrollToTop from "react-scroll-to-top";
-import { motion } from "framer-motion";   // ✅ replaced react-awesome-reveal
+import { motion } from "framer-motion"; // ✅ replaced react-awesome-reveal
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Footer from "./pages/Footer/Footer"
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import "./App.css";
+
 function App() {
   const [theme] = useTheme();
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -31,26 +49,18 @@ function App() {
           <Contact />
         </div>
 
-        {/* ✅ Replaced <Tada> with a Framer Motion animation */}
-        <div className="footer pb-3 ms-3">
-          <motion.h4
-            className="text-center"
-            animate={{ scale: [1, 1.2, 1, 1.2, 1], rotate: [0, 3, -3, 3, 0] }}
-            transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-          >
-            Made with Love Portfolio &copy; 2026
-          </motion.h4>
-        </div>
+        <Footer />
       </div>
 
-      <ScrollToTop
-        smooth
-        color="#f28f67"
-        style={{
-          backgroundColor: "#1e1e2c",
-          borderRadius: "80px",
-        }}
-      />
+      <div className="scroll-buttons">
+        <button onClick={scrollToTop}>
+          <FaArrowUp />
+        </button>
+
+        <button onClick={scrollToBottom}>
+          <FaArrowDown />
+        </button>
+      </div>
 
       <ToastContainer />
     </>

@@ -1,3 +1,6 @@
+
+
+
 import React from "react";
 import { motion } from "framer-motion";
 import Typewriter from "typewriter-effect";
@@ -20,6 +23,26 @@ const Home = () => {
 
   return (
     <div className={`home-container ${theme}`} id="home">
+
+      {/* VIDEO BACKGROUND */}
+      <video
+        className="hero-video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+      >
+        <source
+          src="https://res.cloudinary.com/dabmttnpz/video/upload/v1780932677/Spaceship_travel_from_left_right_202606082046_qzsf1o.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* DARK OVERLAY */}
+      <div className="video-overlay"></div>
+
+      {/* THEME BUTTON */}
       <div className="theme-btn" onClick={handle}>
         {theme === "light" ? (
           <BsFillMoonStarsFill size={30} />
@@ -28,33 +51,36 @@ const Home = () => {
         )}
       </div>
 
+      {/* CONTENT */}
       <div className="home-content container">
+
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2>
+          <h2 style={{ color: theme === "light" ? "#0646db" : "#64b5f6", fontWeight: "500" }}>
             Hi, I'm a{" "}
-            <span className="highlight">
-              <strong>Passionate Software Development Engineer</strong>
+            <span className="highlight" style={{ color: theme === "light" ? "#0646db" : "#64b5f6", fontWeight: "500" }}>
+              <strong>Software Development Engineer</strong>
             </span>
           </h2>
-          <section className="h2p">
-            <h1>
-              <Typewriter
-                options={{
-                  strings: [
-                    "Machine Learning Developer!",
-                    "MERN Stack Developer!",
-                    "React Native Developer!",
-                  ],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
-            </h1>
-          </section>
+
+<section className="h2p">
+  <h1 className={`typewriter-text ${theme}`}>
+    <Typewriter
+      options={{
+        strings: [
+          "Machine Learning Developer!",
+          "MERN Stack Developer!",
+          "React Native Developer!",
+        ],
+        autoStart: true,
+        loop: true,
+      }}
+    />
+  </h1>
+</section>
         </motion.div>
 
         <motion.div
@@ -76,6 +102,7 @@ const Home = () => {
                 style={{ marginLeft: "5px", marginTop: "3px" }}
               />
             </a>
+
             <a
               className="btn btn-cv"
               href={Resume}
@@ -102,7 +129,6 @@ const Home = () => {
             href="https://www.linkedin.com/in/sanath-s-2b4b00199/"
             target="_blank"
             rel="noreferrer"
-            aria-label="LinkedIn"
           >
             <FaLinkedin size={30} />
           </a>
@@ -111,7 +137,6 @@ const Home = () => {
             href="https://github.com"
             target="_blank"
             rel="noreferrer"
-            aria-label="GitHub"
           >
             <FaGithub size={30} />
           </a>
@@ -120,7 +145,6 @@ const Home = () => {
             href="https://leetcode.com"
             target="_blank"
             rel="noreferrer"
-            aria-label="LeetCode"
           >
             <SiLeetcode size={30} />
           </a>
@@ -129,17 +153,36 @@ const Home = () => {
             href="https://www.geeksforgeeks.org"
             target="_blank"
             rel="noreferrer"
-            aria-label="GeeksforGeeks"
           >
             <SiGeeksforgeeks size={30} />
           </a>
         </motion.div>
 
+        <motion.div
+  className="hero-info"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 1 }}
+>
+  <div className="glass-card">
+    🕒 {new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}
+  </div>
+
+  <div className="glass-card">
+    📅 {new Date().toLocaleDateString()}
+  </div>
+
+</motion.div>
+
         <div className="scroll-down">
-          <a href="#about" aria-label="Scroll to About section">
-            <FiArrowDown size={40} />
+          <a href="#about">
+            <FiArrowDown size={40} style={{ marginTop: "10px" }} />
           </a>
         </div>
+
       </div>
     </div>
   );

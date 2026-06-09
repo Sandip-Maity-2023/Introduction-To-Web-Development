@@ -1,9 +1,16 @@
 /* ───────── MAIN SECTION ───────── */
 
 .work {
-  background-color: #1387812a;
-  margin-left: 100px;
-  padding: 40px 20px;
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #111827 50%,
+    #1e293b 100%
+  );
+
+  margin-left: 0;
+  padding: 80px 5%;
+  min-height: 100vh;
 }
 
 .work-exp {
@@ -13,16 +20,20 @@
 }
 
 .work-exp h2 {
-  font-weight: bold;
+  font-weight: 400;
   text-align: center;
-  color: #1e1e2c;
+  color: #ffffff;
   margin-bottom: 10px;
+  font-size: 2rem;
 }
 
 .work-exp hr {
-  width: 320px;
-  margin: 10px auto 40px;
-  border: 1px solid #138781;
+  width: 150px;
+  margin: 15px auto 40px;
+  border: none;
+  height: 4px;
+  background: #14b8a6;
+  border-radius: 10px;
 }
 
 /* ───────── TIMELINE STYLE OVERRIDES ───────── */

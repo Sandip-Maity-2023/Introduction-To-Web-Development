@@ -6,9 +6,19 @@ import "./Tech.css";
 const Techstack = () => {
   const [category, setCategory] = useState("All");
 
+  // const categories = [
+  //   "All",
+  //   ...new Set(TechstackList.map((item) => item.category || "Other")),
+  // ];
+
   const categories = [
     "All",
-    ...new Set(TechstackList.map((item) => item.category || "Other")),
+    "Frontend",
+    "Backend",
+    "Database",
+    "Mobile",
+    "Tools",
+    "DevOps"
   ];
 
   const filteredList =
