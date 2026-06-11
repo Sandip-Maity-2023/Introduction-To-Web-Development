@@ -4,6 +4,8 @@ import axios from "axios";
 import "./Contact.css";
 import { motion } from "framer-motion";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
+import env from "dotenv";
+env.config();
 
 const Contact = () => {
   const [name, setname] = useState("");
@@ -19,7 +21,15 @@ const Contact = () => {
         return;
       }
 
-      const res = await axios.post("http://localhost:5000/api/v1/portfolio/sendEmail", {
+      // const res = await axios.post("http://localhost:5000/api/v1/portfolio/sendEmail", {
+      //   name,
+      //   email,
+      //   msg,
+      // });
+
+
+
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/portfolio/sendEmail`, {
         name,
         email,
         msg,
