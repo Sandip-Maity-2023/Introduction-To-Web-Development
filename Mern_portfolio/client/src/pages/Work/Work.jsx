@@ -35,7 +35,22 @@ const experiences = [
 
 const WorkExp = () => {
   return (
-    <div className="work" id="work">
+  <div className="work" id="work">
+  <video
+    className="work-bg-video"
+    autoPlay
+    loop
+    muted
+    playsInline
+  >
+    <source
+      src="https://res.cloudinary.com/dabmttnpz/video/upload/v1781196560/Transition_through_deep_space_202606112158_a4xj0l.mp4"
+      type="video/mp4"
+    />
+  </video>
+
+  <div className="work-overlay"></div>
+
       <div className="container work-exp">
         <motion.h2
           className="text-center text-uppercase"

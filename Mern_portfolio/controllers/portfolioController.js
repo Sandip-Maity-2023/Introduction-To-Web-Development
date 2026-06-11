@@ -1,40 +1,78 @@
-const nodemailer = require("nodemailer");
-const sendGridTransport = require("nodemailer-sendgrid-transport");
+import dotenv from "dotenv";
+dotenv.config();
+import nodemailer from "nodemailer";
+// const sendGridTransport = require("nodemailer-sendgrid-transport");
 
-//transport
-const transporter = nodemailer.createTransport(
-  sendGridTransport({
-    auth: {
-      api_key: process.env.API_SENDGRID,
-    },
-  })
-);
+// //transport
+// const transporter = nodemailer.createTransport(
+//   sendGridTransport({
+//     auth: {
+//       api_key: process.env.API_SENDGRID,
+//     },
+//   })
+// );
 
-const sendEmailController = async (req, res) => {
+//const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Gmail SMTP Ready");
+  }
+});
+
+export const sendEmailController = async (req, res) => {
   try {
     const { name, email, msg } = req.body;
 
     //validation
-    if (!name || !email || !msg) {
-      return res.status(500).send({
+    if (!name?.trim() || !email?.trim() || !msg?.trim()) {
+      return res.status(400).json({
         success: false,
-        message: "Please Provide All Fields",
+        message: "Please provide all fields",
       });
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid email address",
+      });
+    }
+
     //email matter
     await transporter.sendMail({
-      to: "12sandip125@gmail.com",
-      from: "12sandip125@gmail.com",
-      subject: "Regarding Mern Portfolio App",
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: `Portfolio Contact Form - ${name}`,
       html: `
-        <h5>Detail Information</h5>
-        <ul>
-          <li><p>Name : ${name}</p></li>
-          <li><p>Email : ${email}</p></li>
-          <li><p>Message : ${msg}</p></li>
-        </ul>
-      `,
+    <h2>New Portfolio Contact</h2>
+
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+
+    <h3>Message</h3>
+    <p>${msg}</p>
+  `,
     });
+
+    // await transporter.sendMail({
+    //   from: process.env.EMAIL_USER,
+    //   to: process.env.EMAIL_USER,
+    //   replyTo: email,
+    //   subject: `Portfolio Contact Form - ${name}`,
+    //   html: `...`,
+    // });
 
     return res.status(200).send({
       success: true,
@@ -50,4 +88,4 @@ const sendEmailController = async (req, res) => {
   }
 };
 
-module.exports = { sendEmailController };
+// module.exports = { sendEmailController };

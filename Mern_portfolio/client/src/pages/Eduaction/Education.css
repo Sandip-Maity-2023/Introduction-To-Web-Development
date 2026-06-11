@@ -1,9 +1,33 @@
+.education-bg-video {
+  object-fit: contain;
+}
+
 .course-name {
-  font-size: 2rem;
-  color: #94a3b8;
+  font-size: 1.1rem;
   font-style: italic;
   margin-bottom: 15px;
+
+  background: linear-gradient(
+    90deg,
+    #00f5d4,
+    #4cc9f0,
+    #113bf5,
+    #00f5d4
+  );
+  background-size: 300% auto;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientMove 5s linear infinite;
 }
+/* 
+.course-name {
+  font-size: 2rem;
+  color: #dfe4eb;
+  font-style: italic;
+  margin-bottom: 15px;
+} */
 
 /* Timeline Typography */
 
@@ -18,18 +42,19 @@
 .timeline-subtitle {
   font-size: 1rem;
   font-weight: 500;
-  color: #38bdf8;
+  color: #04aff8;
   margin-bottom: 12px;
+
 }
 
 .education-meta {
   margin-bottom: 16px;
-  color: #083e8a;
+  color: #0067f8;
 }
 
 .education-meta p {
   margin-bottom: 8px;
-  color: #0a65ef;
+  color: #0259dc;
   font-size: 1rem;
 }
 
@@ -56,7 +81,7 @@
   position: relative;
   padding-left: 22px;
   margin-bottom: 8px;
-  color: #d1d5db;
+  color: #e6ecf4;
   line-height: 1.6;
   font-size: 0.95rem;
 }
@@ -72,31 +97,34 @@
 /* Section */
 
 .education-section {
+  position: relative;
+  overflow: hidden;
   padding: 80px 20px;
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-  color: #eb0b0b;
   width: 100%;
-  overflow-x: hidden;
 }
 
-.education-container {
-  max-width: 1000px;
-  margin: 0 auto;
+.education-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills section without zooming manually */
+  z-index: -2;
+  pointer-events: none;
 }
 
-.education-section h2 {
-  font-weight: 800;
-  letter-spacing: 1px;
-  background: linear-gradient(90deg, #0cebcd, #0a52c7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.education-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(54, 78, 134, 0.65); /* optional dark overlay */
+  z-index: -1;
 }
 
+.education-container,
+.education-section h2,
 .education-section hr {
-  border: none;
-  height: 4px;
-  border-radius: 10px;
-  background: linear-gradient(to right, #00bfa6, #0077ff);
+  position: relative;
+  z-index: 1;
 }
 
 /* Timeline Cards */
