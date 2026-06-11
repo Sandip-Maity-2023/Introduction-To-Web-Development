@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 999;
 }
 
 .mobile-nav-header {
@@ -11,6 +11,10 @@
   width: 100%;
   background-color: #1e1e1e;
   padding: 8px;
+  margin-top: 35px;
+  border-radius:25px;
+  display: flex;
+
 }
 
 .mobile-nav-header .mobile-nav-icon {
@@ -20,8 +24,8 @@
 
 .mobile-nav-title {
   margin-left: 20px;
-  color: #f29f67;
-  font-weight: bold;
+  color: #1bef18;
+  font-weight: italic;
   text-transform: capitalize;
   vertical-align: middle;
   font-size: 20px;
@@ -31,9 +35,12 @@
   height: auto;
   width: 200px;
   background-color: #1e1e1e;
-  padding: 10px;
-  padding-bottom: 20px;
+  padding: 20px 15px 20px 10px;
   border-bottom-right-radius: 10px;
+  margin: 20px;
+  border-radius: 25px;
+  display: flex;
+  
 }
 
 @media (min-width: 600px) {

@@ -3,8 +3,7 @@ CONTACT SECTION
 ========================= */
 
 .contact {
-  margin-left: 0;
-  padding: 80px 5%;
+  padding: 80px 1%;
   min-height: 100vh;
   background: linear-gradient(
     150deg,
@@ -13,7 +12,10 @@ CONTACT SECTION
     #000308 100%
   );
   color: #ffffff;
+  width : 100%;
+  
 }
+
 
 .card0 {
   background: transparent;
@@ -31,7 +33,7 @@ IMAGE
 .image {
   width: 100%;
   max-width: 500px;
-  border-radius: 20px;
+  border-radius: 30px;
   box-shadow: 0 10px 30px rgba(0, 255, 255, 0.15);
 }
 
@@ -41,8 +43,8 @@ FORM CONTAINER
 
 .card2 {
   background: rgba(237, 226, 226, 0.06) !important;
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
+  /* backdrop-filter: blur(12px); */
+  border-radius: 30px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
@@ -139,14 +141,29 @@ BUTTON
   box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
 }
 
+.contact {
+  margin-left: 100px;
+  padding: 80px 40px;
+}
+
 /* =========================
-RESPONSIVE
+DEFAULT (Desktop)
+========================= */
+
+.contact {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+/* =========================
+Laptop / Tablet
 ========================= */
 
 @media (max-width: 992px) {
   .contact {
-    margin-left: 0;
-    padding: 60px 20px;
+    padding: 60px 30px;
   }
 
   .image {
@@ -154,9 +171,13 @@ RESPONSIVE
   }
 }
 
+/* =========================
+Tablet
+========================= */
+
 @media (max-width: 768px) {
   .contact {
-    padding: 40px 15px;
+    padding: 50px 20px;
   }
 
   .card2 {
@@ -168,12 +189,20 @@ RESPONSIVE
   }
 }
 
-.contact{
-    margin-left: 100px;
-}
+/* =========================
+Mobile
+========================= */
 
-@media(max-width:768px){
-   .contact{
-      margin-left:0;
-   }
+@media (max-width: 576px) {
+  .contact {
+    padding: 40px 15px;
+  }
+
+  .card2 {
+    padding: 20px !important;
+  }
+
+  .card2 h6 {
+    font-size: 1rem;
+  }
 }

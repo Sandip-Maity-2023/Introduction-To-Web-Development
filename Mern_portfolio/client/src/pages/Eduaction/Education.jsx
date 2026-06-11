@@ -36,13 +36,27 @@ const educationData = [
 const Education = () => {
   return (
     <section className="education-section" id="education">
+  <video
+    className="education-bg-video"
+    autoPlay
+    loop
+    muted
+    playsInline
+  >
+    <source
+      src="https://res.cloudinary.com/dabmttnpz/video/upload/v1779742386/kling_20260526_Image_to_Video__956_0_efm61s.mp4"
+      type="video/mp4"
+    />
+  </video>
+
+  <div className="education-overlay"></div>
       <motion.h2
         className="text-3xl font-bold text-center text-teal-500 uppercase mb-2"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-      >
-        Education
+      style={{ color: "white" }}>
+        EDUCATION
       </motion.h2>
 
       <motion.hr

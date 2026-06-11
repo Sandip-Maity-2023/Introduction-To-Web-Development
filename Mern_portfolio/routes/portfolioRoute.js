@@ -1,11 +1,12 @@
-const express=require("express");
-const {sendEmailController}=require("../controllers/portfolioController");
+import express from "express";
+import { sendEmailController } from "../controllers/portfolioController.js";
 
-//router object
-const router =express.Router();
+const router = express.Router();
 
 //routes
 router.post("/sendEmail",sendEmailController);
 
 //export
-module.exports=router;
+//module.exports=router;
+
+export default router;

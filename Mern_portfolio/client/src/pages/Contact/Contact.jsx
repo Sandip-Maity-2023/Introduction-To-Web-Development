@@ -19,11 +19,13 @@ const Contact = () => {
         return;
       }
 
-      const res = await axios.post("/api/v1/portfolio/sendEmail", {
+      const res = await axios.post("http://localhost:5000/api/v1/portfolio/sendEmail", {
         name,
         email,
         msg,
       });
+
+      // it is running on http not https because we are using localhost and not deployed server
 
       if (res.data.success) {
         toast.success(res.data.message);
@@ -40,7 +42,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact" id="contact">
+    <div className="contact" id="contact" >
       <div className="card card0 border-0">
         <div className="row">
           {/* Left Image Section */}

@@ -1,6 +1,6 @@
 {
   "name": "mern_portfolio",
-  "proxy":"http://localhost:5000",
+  "proxy": "http://localhost:5000",
   "version": "1.0.0",
   "description": "server",
   "main": "server.js",
@@ -12,7 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "nodemailer": "^7.0.10",
     "nodemailer-sendgrid-transport": "^0.2.0"
   }
