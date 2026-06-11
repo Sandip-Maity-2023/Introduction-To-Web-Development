@@ -3,13 +3,14 @@
   display: flex;
   height: 100vh;
 
+
   /* overflow: hidden;   */
   background-color: black;
 }
 .sidebar {
   height: 100vh;
   background-color: #1e1e2c;
-  width: 90px;
+  width: 70px;
   top: 0;
   left: 0;
   z-index: 1000;
