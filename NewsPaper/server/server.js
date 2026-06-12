@@ -72,7 +72,7 @@ const getCollection = async () => {
       console.log(`✅ Connected to MongoDB database "${MONGODB_DB}"`);
     } catch (err) {
       mongoConnected = false;
-      console.warn("⚠️ MongoDB connection failed:", err.message);
+     console.error("MongoDB full error:", err);
       mongoClient = null;
       postsCollection = null;
     }
