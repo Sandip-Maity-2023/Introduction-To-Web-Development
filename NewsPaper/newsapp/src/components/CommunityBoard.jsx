@@ -124,7 +124,7 @@ const CommunityBoard = ({ user }) => {
     }
   };
 
-  const fetchWithTimeout = async (url, options = {}, timeout = 10000) => {
+  const fetchWithTimeout = async (url, options = {}, timeout = 20000) => {
     const controller = new AbortController();
 
     const timeoutId = setTimeout(() => {
