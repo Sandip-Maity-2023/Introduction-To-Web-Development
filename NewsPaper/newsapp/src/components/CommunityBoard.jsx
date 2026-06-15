@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-const rawApiBase = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const rawApiBase = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const normalizeBase = (raw) => {
   if (!raw) return "http://localhost:5000";
@@ -25,7 +25,7 @@ const emptyComposer = {
 
 const formatDate = (value) => {
   if (!value) return "Just now";
-  const date = new Date(value);
+  const date = new Date(String(value));
   return Number.isNaN(date.getTime())
     ? "Just now"
     : date.toLocaleString(undefined, {
@@ -47,28 +47,25 @@ const CommunityBoard = ({ user }) => {
 
   const authorName = useMemo(
     () => user?.displayName || user?.email?.split("@")[0] || "Anonymous",
-    [user]
+    [user],
   );
 
-  const loadPosts = async () => {
-    setLoading(true);
-    setError("");
 
-    try {
-      const response = await fetch(`${API_BASE}/api/posts`);
-      if (!response.ok) throw new Error("Unable to load community posts.");
-
-      const data = await response.json();
-      setPosts(Array.isArray(data) ? data : []);
-    } catch (fetchError) {
-      setError(fetchError.message || "Unable to load community posts.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    loadPosts();
+    let mounted = true;
+
+    const init = async () => {
+      if (mounted) {
+        await loadPosts();
+      }
+    };
+
+    init();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const setField = (field, value) => {
@@ -76,20 +73,39 @@ const CommunityBoard = ({ user }) => {
   };
 
   const handleFileChange = async (event) => {
+    setError("");
     const file = event.target.files?.[0];
+
     if (!file) {
       setField("mediaUrl", "");
       setField("mediaName", "");
       return;
     }
 
+    const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+    if (file.size > MAX_FILE_SIZE) {
+      setError("File size must be under 5 MB.");
+      return;
+    }
+
+    if (!file.type.startsWith("image/") && !file.type.startsWith("video/")) {
+      setError("Only image and video files are allowed.");
+      return;
+    }
+
     setFileUploading(true);
+
     try {
       const mediaType = file.type.startsWith("video/") ? "video" : "image";
+
       const mediaUrl = await new Promise((resolve, reject) => {
         const reader = new FileReader();
+
         reader.onload = () => resolve(String(reader.result || ""));
+
         reader.onerror = () => reject(new Error("Unable to read media file."));
+
         reader.readAsDataURL(file);
       });
 
@@ -99,6 +115,8 @@ const CommunityBoard = ({ user }) => {
         mediaUrl,
         mediaName: file.name,
       }));
+
+      setError("");
     } catch (readError) {
       setError(readError.message || "Unable to read media file.");
     } finally {
@@ -106,10 +124,56 @@ const CommunityBoard = ({ user }) => {
     }
   };
 
+  const fetchWithTimeout = async (url, options = {}, timeout = 10000) => {
+    const controller = new AbortController();
+
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+    }, timeout);
+
+    try {
+      return await fetch(url, {
+        ...options,
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
+  };
+
+  const loadPosts = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetchWithTimeout(`${API_BASE}/api/posts`);
+
+      if (!response.ok) {
+        throw new Error("Unable to load community posts.");
+      }
+
+      const data = await response.json();
+      setPosts(Array.isArray(data) ? data : []);
+    } catch (fetchError) {
+      if (fetchError.name === "AbortError") {
+        setError("Request timed out. Please try again.");
+        return;
+      }
+
+      setError(fetchError.message || "Unable to load community posts.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const submitPost = async (event) => {
     event.preventDefault();
 
-    if (!composer.title.trim() && !composer.content.trim() && !composer.mediaUrl) {
+    if (
+      !composer.title.trim() &&
+      !composer.content.trim() &&
+      !composer.mediaUrl
+    ) {
       setError("Add a confession, image, or video before posting.");
       return;
     }
@@ -118,7 +182,7 @@ const CommunityBoard = ({ user }) => {
     setError("");
 
     try {
-      const response = await fetch(`${API_BASE}/api/posts`, {
+      const response = await fetchWithTimeout(`${API_BASE}/api/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,7 +202,13 @@ const CommunityBoard = ({ user }) => {
       }
 
       setPosts((current) => [data, ...current]);
-      setComposer(emptyComposer);
+      setComposer({
+        title: "",
+        content: "",
+        mediaType: "text",
+        mediaUrl: "",
+        mediaName: "",
+      });
       setComposerOpen(false);
     } catch (submitError) {
       setError(submitError.message || "Unable to create post.");
@@ -149,15 +219,20 @@ const CommunityBoard = ({ user }) => {
 
   const likePost = async (postId) => {
     try {
-      const response = await fetch(`${API_BASE}/api/posts/${postId}/like`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetchWithTimeout(
+        `${API_BASE}/api/posts/${postId}/like`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        },
+      );
       const data = await response.json();
 
       if (!response.ok) throw new Error(data.error || "Unable to like post.");
 
-      setPosts((current) => current.map((post) => (post.id === postId ? data : post)));
+      setPosts((current) =>
+        current.map((post) => (post._id === postId ? data : post)),
+      );
     } catch (likeError) {
       setError(likeError.message || "Unable to like post.");
     }
@@ -168,21 +243,26 @@ const CommunityBoard = ({ user }) => {
     if (!commentText) return;
 
     try {
-      const response = await fetch(`${API_BASE}/api/posts/${postId}/comments`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetchWithTimeout(
+        `${API_BASE}/api/posts/${postId}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: authorName,
+            text: commentText,
+          }),
         },
-        body: JSON.stringify({
-          name: authorName,
-          text: commentText,
-        }),
-      });
+      );
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Unable to add comment.");
 
-      setPosts((current) => current.map((post) => (post.id === postId ? data : post)));
+      setPosts((current) =>
+        current.map((post) => (post._id === postId ? data : post)),
+      );
       setCommentDrafts((current) => ({ ...current, [postId]: "" }));
     } catch (commentError) {
       setError(commentError.message || "Unable to add comment.");
@@ -194,24 +274,33 @@ const CommunityBoard = ({ user }) => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`${API_BASE}/api/posts/${post.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetchWithTimeout(
+        `${API_BASE}/api/posts/${post._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ authorId: user?.uid || "" }),
         },
-        body: JSON.stringify({ authorId: user?.uid || "" }),
-      });
+      );
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Unable to delete post.");
 
-      setPosts((current) => current.filter((item) => item.id !== post.id));
+      setPosts((current) => current.filter((item) => item._id !== post._id));
     } catch (deleteError) {
+      if (deleteError.name === "AbortError") {
+        setError("Request timed out. Please try again.");
+        return;
+      }
+
       setError(deleteError.message || "Unable to delete post.");
     }
   };
 
-  const userOwnsPost = (post) => Boolean(user?.uid && post.authorId && user.uid === post.authorId);
+  const userOwnsPost = (post) =>
+    Boolean(user?.uid && post.authorId && user.uid === post.authorId);
 
   return (
     <div
@@ -245,10 +334,17 @@ const CommunityBoard = ({ user }) => {
           <h1 style={{ margin: "8px 0 10px", fontSize: "2.3rem" }}>
             Share confessions, photos, and video posts
           </h1>
-          <p style={{ margin: 0, maxWidth: "720px", lineHeight: 1.6, opacity: 0.9 }}>
-            Posts are stored in MongoDB. Everyone can browse the feed, like posts,
-            comment, and remove their own content while the third-party news feed
-            stays separate.
+          <p
+            style={{
+              margin: 0,
+              maxWidth: "720px",
+              lineHeight: 1.6,
+              opacity: 0.9,
+            }}
+          >
+            Posts are stored in MongoDB. Everyone can browse the feed, like
+            posts, comment, and remove their own content while the third-party
+            news feed stays separate.
           </p>
 
           <div style={{ marginTop: "18px" }}>
@@ -301,7 +397,9 @@ const CommunityBoard = ({ user }) => {
                 <label style={labelStyle}>Media type</label>
                 <select
                   value={composer.mediaType}
-                  onChange={(event) => setField("mediaType", event.target.value)}
+                  onChange={(event) =>
+                    setField("mediaType", event.target.value)
+                  }
                   style={selectStyle}
                 >
                   <option value="text">Text confession</option>
@@ -329,20 +427,36 @@ const CommunityBoard = ({ user }) => {
                     <video
                       src={composer.mediaUrl}
                       controls
-                      style={{ width: "100%", borderRadius: "18px", maxHeight: "360px" }}
+                      style={{
+                        width: "100%",
+                        borderRadius: "18px",
+                        maxHeight: "360px",
+                      }}
                     />
                   ) : (
                     <img
                       src={composer.mediaUrl}
                       alt={composer.mediaName || "preview"}
-                      style={{ width: "100%", borderRadius: "18px", objectFit: "cover" }}
+                      style={{
+                        width: "100%",
+                        borderRadius: "18px",
+                        objectFit: "cover",
+                      }}
                     />
                   )}
                 </div>
               )}
 
-              <button type="submit" style={submitButtonStyle}>
-                Publish Post
+              <button
+                type="submit"
+                disabled={loading || fileUploading}
+                style={{
+                  ...submitButtonStyle,
+                  opacity: loading || fileUploading ? 0.7 : 1,
+                  cursor: loading || fileUploading ? "not-allowed" : "pointer",
+                }}
+              >
+                {loading ? "Publishing..." : "Publish Post"}
               </button>
             </div>
           </form>
@@ -366,11 +480,13 @@ const CommunityBoard = ({ user }) => {
         {loading && posts.length === 0 ? (
           <div style={stateCardStyle}>Loading community posts...</div>
         ) : posts.length === 0 ? (
-          <div style={stateCardStyle}>No community posts yet. Be the first one.</div>
+          <div style={stateCardStyle}>
+            No community posts yet. Be the first one.
+          </div>
         ) : (
           <div style={feedGridStyle}>
             {posts.map((post) => (
-              <article key={post.id} style={postCardStyle}>
+              <article key={post._id} style={postCardStyle}>
                 <div style={postHeaderStyle}>
                   <div>
                     <p style={metaStyle}>{post.authorName || "Anonymous"}</p>
@@ -392,7 +508,11 @@ const CommunityBoard = ({ user }) => {
                 {post.content && <p style={contentStyle}>{post.content}</p>}
 
                 {post.mediaUrl && post.mediaType === "image" && (
-                  <img src={post.mediaUrl} alt={post.title || "post media"} style={mediaImageStyle} />
+                  <img
+                    src={post.mediaUrl}
+                    alt={post.title || "post media"}
+                    style={mediaImageStyle}
+                  />
                 )}
 
                 {post.mediaUrl && post.mediaType === "video" && (
@@ -400,8 +520,12 @@ const CommunityBoard = ({ user }) => {
                 )}
 
                 <div style={actionsRowStyle}>
-                  <button onClick={() => likePost(post.id)} style={actionButtonStyle}>
-                    Like · {post.likes || 0}
+                  <button
+                    type="button"
+                    onClick={() => likePost(post._id)}
+                    style={actionButtonStyle}
+                  >
+                    👍 Like · {post.likes || 0}
                   </button>
                   <span style={metaStyle}>{formatDate(post.createdAt)}</span>
                 </div>
@@ -409,8 +533,9 @@ const CommunityBoard = ({ user }) => {
                 <div style={commentBoxStyle}>
                   <div style={commentListStyle}>
                     {(post.comments || []).map((comment) => (
-                      <div key={comment.id} style={commentItemStyle}>
-                        <strong>{comment.name}:</strong> <span>{comment.text}</span>
+                      <div key={comment._id} style={commentItemStyle}>
+                        <strong>{comment.name}:</strong>{" "}
+                        <span>{comment.text}</span>
                       </div>
                     ))}
                   </div>
@@ -418,18 +543,24 @@ const CommunityBoard = ({ user }) => {
                   <div style={commentFormStyle}>
                     <input
                       placeholder="Add a comment"
-                      value={commentDrafts[post.id] || ""}
+                      value={commentDrafts[post._id] || ""}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          submitComment(post._id);
+                        }
+                      }}
                       onChange={(event) =>
                         setCommentDrafts((current) => ({
                           ...current,
-                          [post.id]: event.target.value,
+                          [post._id]: event.target.value,
                         }))
                       }
                       style={commentInputStyle}
                     />
                     <button
                       type="button"
-                      onClick={() => submitComment(post.id)}
+                      onClick={() => submitComment(post._id)}
                       style={commentButtonStyle}
                     >
                       Comment
