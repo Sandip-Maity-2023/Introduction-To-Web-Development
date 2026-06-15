@@ -10,7 +10,15 @@ import { randomUUID } from "crypto";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.set("trust proxy", 1);
+//app.use(cors());
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  }),
+);
 // Allow larger payloads for base64 image/video uploads from the frontend
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ limit: "100mb", extended: true }));
@@ -62,7 +70,11 @@ const getCollection = async () => {
 
   if (!mongoClient) {
     try {
-      mongoClient = new MongoClient(MONGODB_URI);
+      // mongoClient = new MongoClient(MONGODB_URI);
+      mongoClient = new MongoClient(MONGODB_URI, {
+        maxPoolSize: 10,
+      });
+
       await mongoClient.connect();
       mongoConnected = true;
       const db = mongoClient.db(MONGODB_DB);
@@ -72,7 +84,7 @@ const getCollection = async () => {
       console.log(`✅ Connected to MongoDB database "${MONGODB_DB}"`);
     } catch (err) {
       mongoConnected = false;
-     console.error("MongoDB full error:", err);
+      console.error("MongoDB full error:", err);
       mongoClient = null;
       postsCollection = null;
     }
@@ -86,7 +98,7 @@ const listPosts = async () => {
 
   if (!collection) {
     return [...memoryPosts].sort(
-      (left, right) => new Date(right.createdAt) - new Date(left.createdAt)
+      (left, right) => new Date(right.createdAt) - new Date(left.createdAt),
     );
   }
 
@@ -114,7 +126,9 @@ const findPostById = async (id) => {
   const collection = await getCollection();
 
   if (!collection) {
-    return memoryPosts.find((post) => post.id === id || post._id === id) || null;
+    return (
+      memoryPosts.find((post) => post.id === id || post._id === id) || null
+    );
   }
 
   if (!isValidObjectId(id)) return null;
@@ -125,7 +139,9 @@ const updatePostById = async (id, update) => {
   const collection = await getCollection();
 
   if (!collection) {
-    const index = memoryPosts.findIndex((post) => post.id === id || post._id === id);
+    const index = memoryPosts.findIndex(
+      (post) => post.id === id || post._id === id,
+    );
     if (index === -1) return null;
 
     if (update.$set) {
@@ -145,7 +161,9 @@ const removePostById = async (id) => {
   const collection = await getCollection();
 
   if (!collection) {
-    const index = memoryPosts.findIndex((post) => post.id === id || post._id === id);
+    const index = memoryPosts.findIndex(
+      (post) => post.id === id || post._id === id,
+    );
     if (index === -1) return false;
 
     memoryPosts.splice(index, 1);
@@ -171,7 +189,7 @@ const groqSummary = async (text) => {
           Authorization: `Bearer ${process.env.GROQ_KEY}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return response.data.choices[0].message.content;
@@ -191,7 +209,7 @@ const buildNewsletterHTML = (articles) => `
           <a href="${article.url}" target="_blank" rel="noreferrer">Read Full Article</a>
           <hr/>
         </div>
-      `
+      `,
     )
     .join("")}
   <p style="opacity:0.6">— Sent by NewsSphere</p>
@@ -206,7 +224,7 @@ const sendDailyEmail = async (email) => {
 
   for (const category of prefs.categories) {
     const response = await axios.get(
-      `https://newsapi.org/v2/everything?q=${category}&pageSize=3&apiKey=${API_KEY}`
+      `https://newsapi.org/v2/everything?q=${category}&pageSize=3&apiKey=${API_KEY}`,
     );
 
     for (const article of response.data.articles) {
@@ -261,7 +279,9 @@ app.post("/api/posts", async (req, res) => {
     const trimmedContent = String(content).trim();
 
     if (!trimmedTitle && !trimmedContent && !mediaUrl) {
-      return res.status(400).json({ error: "Add text, image, or video before posting." });
+      return res
+        .status(400)
+        .json({ error: "Add text, image, or video before posting." });
     }
 
     if (MONGODB_URI && !mongoConnected) {
@@ -285,7 +305,10 @@ app.post("/api/posts", async (req, res) => {
     };
 
     const saved = await savePost(post);
-    console.log("Post saved →", (saved && (saved._id || saved.id)) || "(no id)");
+    console.log(
+      "Post saved →",
+      (saved && (saved._id || saved.id)) || "(no id)",
+    );
     res.status(201).json(toPublicPost(saved));
   } catch (error) {
     res.status(500).json({ error: "Unable to create post." });
@@ -304,7 +327,9 @@ app.post("/api/posts/:id/like", async (req, res) => {
       },
     });
 
-    res.json(toPublicPost(updated || { ...post, likes: Number(post.likes || 0) + 1 }));
+    res.json(
+      toPublicPost(updated || { ...post, likes: Number(post.likes || 0) + 1 }),
+    );
   } catch (error) {
     res.status(500).json({ error: "Unable to like post." });
   }
@@ -350,7 +375,9 @@ app.delete("/api/posts/:id", async (req, res) => {
 
     const actorId = req.body?.authorId || req.query?.authorId || "";
     if (post.authorId && actorId && post.authorId !== actorId) {
-      return res.status(403).json({ error: "You can only delete your own post." });
+      return res
+        .status(403)
+        .json({ error: "You can only delete your own post." });
     }
 
     const removed = await removePostById(req.params.id);
@@ -400,7 +427,7 @@ app.listen(PORT, async () => {
 
   if (!MONGODB_URI) {
     console.warn(
-      "MongoDB URI missing. Community posts will fall back to in-memory storage until MONGODB_URI is set."
+      "MongoDB URI missing. Community posts will fall back to in-memory storage until MONGODB_URI is set.",
     );
     return;
   }
@@ -408,7 +435,9 @@ app.listen(PORT, async () => {
   try {
     await getCollection();
     if (!mongoConnected) {
-      console.warn("MongoDB URI provided but initial connection failed. Server will continue with in-memory storage.");
+      console.warn(
+        "MongoDB URI provided but initial connection failed. Server will continue with in-memory storage.",
+      );
     }
   } catch (err) {
     console.warn("Mongo startup connect failed:", err.message);
