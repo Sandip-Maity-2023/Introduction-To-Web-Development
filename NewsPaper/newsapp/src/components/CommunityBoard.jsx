@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 
-const rawApiBase = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+const rawApiBase = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const normalizeBase = (raw) => {
-  if (!raw) return "http://localhost:4000";
+  if (!raw) return "http://localhost:5000";
   const trimmed = String(raw).trim();
   // If it's like ":5000" (missing host), assume localhost
   if (trimmed.startsWith(":")) return `http://localhost${trimmed}`;
