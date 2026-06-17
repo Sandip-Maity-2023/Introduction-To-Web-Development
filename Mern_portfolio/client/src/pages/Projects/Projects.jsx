@@ -12,7 +12,7 @@ const projects = [
     image:
       "https://res.cloudinary.com/dabmttnpz/image/upload/v1781027335/i3_io5mke.jpg",
     github: "https://github.com/Sandip-Maity-2023/Advanced_Development/tree/main/multiAgent",
-    live: "https://advanceddevelopment-qez9ahhxagjtfjdh9wvjev.streamlit.app/",
+    live: "https://advanceddevelopment-5yzkdbhpswjca4zvggebhn.streamlit.app/",
   },
   {
     id: 2,

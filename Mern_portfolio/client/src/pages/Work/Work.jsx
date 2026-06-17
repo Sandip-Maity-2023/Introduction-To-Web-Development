@@ -15,7 +15,7 @@ const experiences = [
     company: "Cycoders' Club",
     period: "May 2025 - July 2025",
     description:
-      "Leading development of scalable full-stack web applications. Working with React, Node.js, and MongoDB to deliver end-to-end solutions.",
+      "Developed a scalable university management system using the MERN stack, supporting 200+ student records, with secure JWT authentication and modular REST APIs. • Optimized React components, reducing page load time by 25% and improving UI responsiveness across devices.",
     tech: ["React", "Node.js", "MongoDB", "Express"],
     icon: <SiReact />,
     link: "https://www.cycoders.in/",
@@ -23,13 +23,14 @@ const experiences = [
   {
     id: 2,
     role: "Machine Learning Intern",
-    company:"Worked on building and optimizing machine learning models for various projects, including natural language processing and computer vision applications. Collaborated with cross-functional teams to integrate ML solutions into production environments.",
+    company:"Codsoft Technologies",
     period: "2026",
     description:
-      "Developed responsive, user-centric UIs using React and Material UI. Collaborated with designers and backend developers for seamless integration.",
+      " Worked on Machine Learning and Deep Learning projects involving NLP, preprocessing, feature engineering, model training and evaluation using Python, Scikit-learn, TensorFlow, and Keras. • Built and deployed ML applications using Flask, FastAPI, Streamlit, Docker and Google Colab for real-time prediction and interactive visualization.",
     tech: ["Python", "Flask", "fastAPI", "TensorFlow","PyTorch","scikit-learn"],
     icon: <SiNodedotjs />,
     link: "https://www.codsoft.in/",
+    certificate: "https://drive.google.com/file/d/1Pv5DZWbkY2sGzEHjm5MWG3i3ZvYSbNf_/preview",
   }
 ];
 
@@ -90,7 +91,9 @@ const WorkExp = () => {
               >
                 <h3 className="vertical-timeline-element-title">{exp.role}</h3>
                 <h4 className="vertical-timeline-element-subtitle">
-                  {exp.company}
+                  <a href={exp.link} target="_blank" rel="noreferrer" style={{color: "sky", textDecoration: "none"}}>
+                    {exp.company}
+                  </a>
                 </h4>
                 <p>{exp.description}</p>
                 <div className="tech-tags">
@@ -101,7 +104,7 @@ const WorkExp = () => {
                   ))}
                 </div>
                 <a
-                  href={exp.link}
+                  href={exp.certificate}
                   target="_blank"
                   rel="noreferrer"
                   className="exp-btn"
